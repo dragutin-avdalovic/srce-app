@@ -1,19 +1,24 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div class="content">
-      <h2>content</h2>
-    </div>
+      <Table/>
+
   </div>
 </template>
 
 <script>
+import About from '@/components/About'
+import Table from '@/components/Table'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Srce za djecu'
     }
+  },
+  components: {
+    About,
+    Table
   }
 }
 </script>

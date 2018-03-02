@@ -13,7 +13,7 @@ export default {
   name: 'Header',
   data () {
     return {
-      logo: 'LOGO'
+      logo: 'LOGO',
     }
   }
 }
