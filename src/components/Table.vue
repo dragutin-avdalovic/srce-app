@@ -58,4 +58,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
+  table {
+    box-shadow: 0 5px 5px gray;
+    border-collapse: collapse;
+  }
+  td{
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
+
 </style>
