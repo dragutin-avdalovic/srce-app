@@ -1,13 +1,15 @@
 <template>
   <div class="hello">
-      <Table/>
+    <Header></Header>
+
+    <Table></Table>
 
   </div>
 </template>
 
 <script>
-import About from '@/components/About'
 import Table from '@/components/Table'
+import Header from '@/components/Header'
 
 export default {
   name: 'HelloWorld',
@@ -17,8 +19,8 @@ export default {
     }
   },
   components: {
-    About,
-    Table
+    Table,
+    Header
   }
 }
 </script>
