@@ -6,23 +6,31 @@
         <thead>
         <tr>
           <th></th>
-          <th>Osnovni podaci</th>
-          <th>Adresa</th>
-          <th>Naziv kompanije</th>
-          <th>Datum</th>
-          <th>Svrha</th>
-          <th>Iznos</th>
+          <th>OSNOVNI PODACI</th>
+          <th>ADRESA</th>
+          <th>NAZIV KOMPANIJE</th>
+          <th>DATUM</th>
+          <th>SVRHA</th>
+          <th>IZNOS</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="item of items" v-bind:key="item">
-          <th scope="row">1</th>
-          <td>{{item.info}}</td>
-          <td>{{item.address}}</td>
+          <td scope="row">1</td>
+          <td>
+            <span class="fix">{{item.info}}</span>
+            <span class="color-fix">{{item.email}}</span>
+          </td>
+          <td>
+          <span class="fix">{{item.info}}</span>
+          <span class="color-fix">{{item.email}}</span>
+          </td>
           <td>{{item.company}}</td>
           <td>{{item.date}}</td>
           <td>{{item.type}}</td>
-          <td>{{item.amount}}</td>
+          <td>
+            <span class="red">{{item.amount}}</span>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -38,18 +46,14 @@ export default {
   data () {
     return {
       items: [
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 300 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 300 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 3500 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 300 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 6600 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 300 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 4400 },
-        { info: 'John Doe', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 3010 }
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 },
+        { info: 'John Doe', email: 'email@gmail.com', city: 'Sarajevo', address: 'Paromlinska', company: 'Walter', date: '20.01.2018', type: 'svrha', amount: 100 }
       ]
     }
   }
@@ -59,12 +63,31 @@ export default {
 <style lang="scss" scoped>
 
   table {
-    box-shadow: 0 5px 5px gray;
-    border-collapse: collapse;
+    font-family: Open Sans;
+    font-weight: bold;
+    thead{
+      color: #A2A1A1;
+      th{
+        border: none;
+        vertical-align: middle;
+      }
+    }
+    tbody{
+      box-shadow: 0 2px 5px gray;
+      border-collapse: collapse;
+    }
+    td{
+      vertical-align: middle;
+    }
   }
-  td{
-    margin-top: .5em;
-    margin-bottom: .5em;
+  .fix{
+    display: flex;
+    color: #333333;
   }
-
+  .color-fix {
+    color: #A2A1A1;
+  }
+  .red{
+    color: #EB2D3C;
+  }
 </style>
