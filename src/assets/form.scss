@@ -1,0 +1,30 @@
+@import "mixins";
+
+.heartForm {
+  .form-control {
+    @include border(1px, solid, gray);
+    box-shadow: none;
+    border-radius: 0.2em;
+    &:focus{
+      border-color: blue;
+    }
+  }
+  .help-block
+  {
+    @include font(0.8,500,gray);
+  }
+  .has-error
+  {
+    .control-label
+    {
+      color: red;
+    }
+    .help-block {
+      color: red;
+    }
+    .form-control {
+      border-color: red;
+    }
+  }
+}
+

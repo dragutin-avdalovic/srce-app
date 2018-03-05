@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import "assets/mixins";
+@import "assets/mixins.scss";
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

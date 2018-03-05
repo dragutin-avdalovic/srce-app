@@ -1,58 +1,71 @@
 <template>
-  <form class="needs-validation" novalidate>
-    <div class="form-row">
-      <div class="col-md-4 mb-3">
-        <label for="validationTooltip01">First name</label>
-        <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Mark" required>
-        <div class="valid-tooltip">
-          Looks good!
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationTooltip02">Last name</label>
-        <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="Otto" required>
-        <div class="valid-tooltip">
-          Looks good!
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <label for="validationTooltipUsername">Username</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
-          </div>
-          <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
-          <div class="invalid-tooltip">
-            Please choose a unique and valid username.
+    <form class="newEntryForm heartForm">
+      <h3 class="form-header">Novi unos</h3>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label class="control-label" for="typeOfDonation">Vrsta donatora</label>
+          <select class="form-control" id="typeOfDonation" required="">
+            <option value="Institucija">Institucija</option>
+            <option value="Fizičko lice">Fizičko lice</option>
+            <option value="Pravno lice">Pravno lice</option>
+          </select>
+          <i class="fa fa-chevron-down"></i>
+          <div class="help-block">
+            Molimo unesite validan tip donacije.
           </div>
         </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="col-md-6 mb-3">
-        <label for="validationTooltip03">City</label>
-        <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
-        <div class="invalid-tooltip">
-          Please provide a valid city.
+        <div class="col-md-6 form-group">
+          <label class="control-label" for="ime">Ime i prezime*</label>
+          <input type="text" class="form-control" id="ime" placeholder="">
+          <div class="help-block">
+            Ime i prezime je obavezno.
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label" for="email">Email*</label>
+          <input type="text" class="form-control" id="email" placeholder="">
+          <div class="help-block">
+            Email je obavezan.
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label" for="adresa">Adresa*</label>
+          <input type="text" class="form-control" id="adresa" placeholder="">
+          <div class="help-block">
+            Adresa je obavezna.
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label" for="grad">Grad*</label>
+          <input type="text" class="form-control" id="grad" placeholder="">
+          <div class="help-block">
+            Grad je obavezan.
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label" for="iznos_donacije">Iznos donacije*</label>
+          <input type="number" class="form-control iznos_donacije" id="iznos_donacije" placeholder="00">
+          <div class="help-block">
+           Iznos donacije je obavezan.
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="control-label" for="datum">Datum*</label>
+          <input type="date" class="form-control" id="datum" placeholder="">
+          <div class="help-block">
+            Datum je obavezan.
+          </div>
+        </div>
+        <div class="col-md-12 form-group">
+          <label class="control-label" for="svrha_donacije">Svrha donacije*</label>
+          <input type="text" class="form-control" id="svrha_donacije" placeholder="">
+          <div class="help-block">
+            Svrha donacije je obavezna.
+          </div>
         </div>
       </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationTooltip04">State</label>
-        <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
-        <div class="invalid-tooltip">
-          Please provide a valid state.
-        </div>
-      </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationTooltip05">Zip</label>
-        <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required>
-        <div class="invalid-tooltip">
-          Please provide a valid zip.
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-primary" type="submit">Submit form</button>
-  </form>
+      <button class="btn" type="submit">Spremi</button>
+    </form>
 </template>
 
 <script>
@@ -64,10 +77,38 @@ export default{
   }
 }
 </script>
-<style>
-  .needs-validation
-  {
-    width: 720px;
-    min-width: 640px;
+<style lang="scss">
+  @import "../assets/mixins.scss";
+  @import "../assets/form.scss";
+
+  .newEntryForm {
+    min-width: 200px;
+    max-width: 640px;
+    @include spacing-lr(m, auto, '');
+    @include spacing-lr(p, 3, em);
+    @include spacing-tb(p, 1, em);
+    .form-header {
+      @include font(1.5, 600, red);
+      @include spacing-tb(m, 0.5, em);
+    }
+    /* remove the original arrow */
+    select.input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    select + i.fa {
+      float: right;
+      margin-top: -30px;
+      margin-right: 5px;
+      pointer-events: none;
+      background-color: #fff;
+      padding-right: 5px;
+      @include font(1.2, 500, red);
+    }
+    .iznos_donacije
+    {
+      text-align: center;
+    }
   }
 </style>
