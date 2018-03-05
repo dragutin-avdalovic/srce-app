@@ -1,9 +1,11 @@
 <template>
   <div class="hello">
     <Header></Header>
-    <Form></Form>
+    <button v-on:click="show()">open</button>
+    <modal name="modal_entry" height="auto" :scrollable="true">
+      <Form></Form>
+    </modal>
     <Table></Table>
-
   </div>
 </template>
 
@@ -17,6 +19,14 @@ export default {
   data () {
     return {
       msg: 'Srce za djecu'
+    }
+  },
+  methods: {
+    show () {
+      this.$modal.show('modal_entry')
+    },
+    hide () {
+      this.$modal.hide('modal_entry')
     }
   },
   components: {

@@ -1,8 +1,13 @@
 <template>
     <form class="newEntryForm heartForm">
+      <div slot="top-right">
+        <button @click="$modal.hide('modal_entry')" class="modal-close">
+          ❌
+        </button>
+      </div>
       <h3 class="form-header">Novi unos</h3>
       <div class="row">
-        <div class="col-md-12 form-group">
+        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
           <label class="control-label" for="typeOfDonation">Vrsta donatora</label>
           <select class="form-control" id="typeOfDonation" required="">
             <option value="Institucija">Institucija</option>
@@ -14,57 +19,59 @@
             Molimo unesite validan tip donacije.
           </div>
         </div>
-        <div class="col-md-6 form-group">
-          <label class="control-label" for="ime">Ime i prezime*</label>
-          <input type="text" class="form-control" id="ime" placeholder="">
+        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+          <label class="control-label" for="name">Ime i prezime*</label>
+          <input type="text" class="form-control" id="name" placeholder="">
           <div class="help-block">
             Ime i prezime je obavezno.
           </div>
         </div>
-        <div class="col-md-6 form-group">
+        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
           <label class="control-label" for="email">Email*</label>
           <input type="text" class="form-control" id="email" placeholder="">
           <div class="help-block">
             Email je obavezan.
           </div>
         </div>
-        <div class="col-md-6 form-group">
-          <label class="control-label" for="adresa">Adresa*</label>
-          <input type="text" class="form-control" id="adresa" placeholder="">
+        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+          <label class="control-label" for="address">Adresa*</label>
+          <input type="text" class="form-control" id="address" placeholder="">
           <div class="help-block">
             Adresa je obavezna.
           </div>
         </div>
-        <div class="col-md-6 form-group">
-          <label class="control-label" for="grad">Grad*</label>
-          <input type="text" class="form-control" id="grad" placeholder="">
+        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+          <label class="control-label" for="city">Grad*</label>
+          <input type="text" class="form-control" id="city" placeholder="">
           <div class="help-block">
             Grad je obavezan.
           </div>
         </div>
-        <div class="col-md-6 form-group">
-          <label class="control-label" for="iznos_donacije">Iznos donacije*</label>
-          <input type="number" class="form-control iznos_donacije" id="iznos_donacije" placeholder="00">
+        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+          <label class="control-label" for="donation_amount">Iznos donacije*</label>
+          <input type="number" class="form-control donation_amount" id="donation_amount" placeholder="00">
           <div class="help-block">
            Iznos donacije je obavezan.
           </div>
         </div>
-        <div class="col-md-6 form-group">
-          <label class="control-label" for="datum">Datum*</label>
-          <input type="date" class="form-control" id="datum" placeholder="">
+        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+          <label class="control-label" for="date">Datum*</label>
+          <input type="date" class="form-control" id="date" placeholder="">
           <div class="help-block">
             Datum je obavezan.
           </div>
         </div>
-        <div class="col-md-12 form-group">
-          <label class="control-label" for="svrha_donacije">Svrha donacije*</label>
-          <input type="text" class="form-control" id="svrha_donacije" placeholder="">
+        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+          <label class="control-label" for="purposeOfDonation">Svrha donacije*</label>
+          <input type="text" class="form-control" id="purposeOfDonation" placeholder="">
           <div class="help-block">
             Svrha donacije je obavezna.
           </div>
         </div>
+        <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+          <button class="button_save" type="submit">Spremi</button>
+        </div>
       </div>
-      <button class="btn" type="submit">Spremi</button>
     </form>
 </template>
 
@@ -80,16 +87,15 @@ export default{
 <style lang="scss">
   @import "../assets/mixins.scss";
   @import "../assets/form.scss";
+  @import "../assets/general.scss";
 
   .newEntryForm {
-    min-width: 200px;
-    max-width: 640px;
     @include spacing-lr(m, auto, '');
     @include spacing-lr(p, 3, em);
     @include spacing-tb(p, 1, em);
     .form-header {
-      @include font(1.5, 600, red);
-      @include spacing-tb(m, 0.5, em);
+      @include font(1.5, 600, $red);
+      @include spacing-tb(m, 1, em);
     }
     /* remove the original arrow */
     select.input {
@@ -104,11 +110,30 @@ export default{
       pointer-events: none;
       background-color: #fff;
       padding-right: 5px;
-      @include font(1.2, 500, red);
+      @include font(1.2, 500, $red);
     }
-    .iznos_donacije
+    .donation_amount
     {
       text-align: center;
+    }
+    .button_save
+    {
+      @extend .heart-button;
+      float: right;
+    }
+    .modal-close
+    {
+      background: transparent;
+      float: right;
+      border: none;
+      @include font(2, 500, $red);
+      margin-right: -1em;
+      margin-top: -0.3em;
+      &:focus
+      {
+        border: none;
+        outline: none;
+      }
     }
   }
 </style>
