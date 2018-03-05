@@ -1,0 +1,10 @@
+@mixin spacing-lr($type, $size, $varible) {
+  @if $type == "m"
+  {
+    margin-left: $size + "" + $varible;
+    margin-right: $size + "" + $varible;
+  } @else {
+    padding-left: $size + "" + $varible;
+    padding-right: $size + "" + $varible;
+  }
+}

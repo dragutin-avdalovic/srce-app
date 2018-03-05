@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <Header></Header>
-
+    <Form></Form>
     <Table></Table>
 
   </div>
@@ -10,6 +10,7 @@
 <script>
 import Table from '@/components/Table'
 import Header from '@/components/Header'
+import Form from '@/components/Form'
 
 export default {
   name: 'HelloWorld',
@@ -20,7 +21,8 @@ export default {
   },
   components: {
     Table,
-    Header
+    Header,
+    Form
   }
 }
 </script>
