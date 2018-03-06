@@ -16,6 +16,34 @@
     padding-bottom: $size + $varible;
   }
 }
+@mixin spacing-l($type, $size, $varible) {
+  @if $type == m {
+    margin-left: $size + $varible;
+  } @else {
+    padding-left: $size + $varible;
+  }
+}
+@mixin spacing-r($type, $size, $varible) {
+  @if $type == m {
+    margin-right: $size + $varible;
+  } @else {
+    padding-right: $size + $varible;
+  }
+}
+@mixin spacing-t($type, $size, $varible) {
+  @if $type == m {
+    margin-top: $size + $varible;
+  } @else {
+    padding-top: $size + $varible;
+  }
+}
+@mixin spacing-b($type, $size, $varible) {
+  @if $type == m {
+    margin-bottom: $size + $varible;
+  } @else {
+    padding-bottom: $size + $varible;
+  }
+}
 @mixin font($size,$weight, $color) {
   font-size: $size + em;
   font-weight: $weight;

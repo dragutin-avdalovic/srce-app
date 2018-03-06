@@ -16,7 +16,7 @@
     <button v-on:click="show()">open</button>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form></Form>
-    </modal>
+    </modal>>
   </div>
 </template>
 
@@ -24,12 +24,14 @@
 import Table from '@/components/Table'
 import Header from '@/components/Header'
 import Form from '@/components/Form'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Srce za djecu'
+      msg: 'Srce za djecu',
+      title: 'Lalala'
     }
   },
   methods: {
@@ -43,7 +45,8 @@ export default {
   components: {
     Table,
     Header,
-    Form
+    Form,
+    Footer
   }
 }
 </script>
@@ -71,4 +74,7 @@ h3{
     width: 200px;
   }
   @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+  .v--modal-overlay {
+    background: rgba(255, 255, 255, 0.6);
+  }
 </style>
