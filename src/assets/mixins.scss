@@ -1,0 +1,26 @@
+@mixin spacing-lr($type, $size, $varible) {
+  @if $type == m {
+    margin-left: $size + $varible;
+    margin-right: $size + $varible;
+  } @else {
+    padding-left: $size + $varible;
+    padding-right: $size + $varible;
+  }
+}
+@mixin spacing-tb($type, $size, $varible) {
+  @if $type == m {
+    margin-top: $size + $varible;
+    margin-bottom: $size + $varible;
+  } @else {
+    padding-top: $size + $varible;
+    padding-bottom: $size + $varible;
+  }
+}
+@mixin font($size,$weight, $color) {
+  font-size: $size + em;
+  font-weight: $weight;
+  color: $color;
+}
+@mixin border($size,$type, $color) {
+  border: $size $type $color;
+}

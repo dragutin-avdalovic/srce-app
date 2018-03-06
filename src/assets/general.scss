@@ -1,0 +1,24 @@
+@import "mixins";
+@import "variables";
+.heart-button
+{
+  @include font(1.1,600,$white);
+  @include spacing-tb(p,0.8,em);
+  @include spacing-tb(p,0.8,em);
+  @include spacing-lr(p,4,em);
+  border:none;
+  border-radius: 0.5em;
+  background-color: $red;
+  &:focus
+  {
+    border:none;
+    outline: none;
+    background-color: $red_press;
+  }
+  &:hover
+  {
+    border:none;
+    outline: none;
+    background-color: $red_focus;
+  }
+}
