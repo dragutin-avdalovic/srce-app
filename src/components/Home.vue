@@ -7,7 +7,19 @@
         <h3>Donatori</h3>
       </div>
       <div class="col-6 col-fix">
-        <p>Poredaj po:</p>
+        <div>
+          <p>Poredaj po:</p>
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Najnovije
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
         <button>Novi unos</button>
       </div>
     </div>
@@ -51,7 +63,7 @@ export default {
 <style lang="scss" scoped>
 .col-fix{
   display: flex;
-}
+justify-content: space-around}
 h3{
   font-weight: bold;
   color: #EB2D3C;

@@ -2,7 +2,7 @@
     <form class="newEntryForm heartForm">
       <div slot="top-right">
         <button @click="$modal.hide('modal_entry')" class="modal-close">
-          ❌
+          X
         </button>
       </div>
       <h3 class="form-header">Novi unos</h3>
