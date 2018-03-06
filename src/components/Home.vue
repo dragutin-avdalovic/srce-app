@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid">
+  <div>
+    <div class="container">
     <Header></Header>
     <div class="row">
       <div class="col-6">
@@ -27,6 +28,7 @@
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form></Form>
     </modal>
+    </div>
     <Footer></Footer>
 </div>
 </template>

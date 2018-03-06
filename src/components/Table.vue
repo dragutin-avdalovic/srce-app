@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="container">
       <table class="table">
         <thead>
         <tr>
@@ -42,7 +41,7 @@
         </tbody>
       </table>
     </div>
-    </div>
+
 </template>
 <script>
 import Checkbox from '@/components/Checkbox'
