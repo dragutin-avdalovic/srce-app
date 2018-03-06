@@ -20,7 +20,7 @@
             <Checkbox></Checkbox>
           </td>
           <td>
-            <span class="fix">{{item.info}}</span>
+            <span class="fix">{{item.name}}</span>
             <span class="color-fix weight-fix">{{item.email}}</span>
           </td>
           <td>
@@ -29,7 +29,7 @@
           </td>
           <td>{{item.company}}</td>
           <td>{{item.date}}</td>
-          <td>{{item.type}}</td>
+          <td>{{item.cause}}</td>
           <td>
             <span class="red">{{item.amount}}</span>
           </td>
@@ -48,74 +48,9 @@
 import Checkbox from '@/components/Checkbox'
 export default {
   name: 'Table',
+  props: ['items'],
   data () {
     return {
-      items: [
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'},
-        { info: 'John Doe',
-          email: 'email@gmail.com',
-          city: 'Sarajevo',
-          address: 'Paromlinska',
-          company: 'Walter',
-          date: '20.01.2018',
-          type: 'svrha',
-          amount: '100 KM'}
-      ]
     }
   },
   components: {

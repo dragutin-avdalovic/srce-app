@@ -10,9 +10,9 @@
         <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
-    <Table></Table>
+    <Table v-bind:items="items"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form></Form>
+      <Form @onDataEmit="saveData"></Form>
     </modal>
     <Footer></Footer>
 </div>
@@ -29,10 +29,11 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Srce za djecu'
+      msg: 'Srce za djecu',
+      items: []
     }
   },
-  created () {
+  mounted () {
     console.log('created called.')
     this.getData()
   },
@@ -46,6 +47,16 @@ export default {
     getData () {
       // Make a request for a user with a given ID
       axios.get('http://45.76.90.178:3000/api/v1/users')
+        .then((response) => {
+          this.items = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    saveData (event) {
+      console.log(event)
+      axios.post('http://45.76.90.178:3000/api/v1/users', event)
         .then(function (response) {
           console.log(response)
         })
