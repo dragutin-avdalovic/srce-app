@@ -1,6 +1,6 @@
 <template>
   <div>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <div class="container">
       <table class="table">
         <thead>
         <tr>
@@ -43,10 +43,8 @@
       </table>
     </div>
 </template>
-
 <script>
 import Checkbox from '@/components/Checkbox'
-
 export default {
   name: 'Table',
   data () {
