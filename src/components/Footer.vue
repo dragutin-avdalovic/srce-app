@@ -1,8 +1,10 @@
 <template>
   <footer>
-    <div class="logo-container">
-      <img src="../assets/logo-wide-white.png" class="logo-white">
-      <p>{{title}}</p>
+    <div class="container">
+      <div class="logo-container">
+        <img src="../assets/logo-wide-white.png" class="logo-white">
+        <p>{{title}}</p>
+      </div>
     </div>
   </footer>
 </template>

@@ -82,7 +82,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20vh;
+  padding-left: 10vh;
 }
  .donators{
   margin: 0;
