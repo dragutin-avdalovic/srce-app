@@ -6,6 +6,7 @@
       <Form></Form>
     </modal>
     <Table></Table>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -13,12 +14,14 @@
 import Table from '@/components/Table'
 import Header from '@/components/Header'
 import Form from '@/components/Form'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Srce za djecu'
+      msg: 'Srce za djecu',
+      title: 'Lalala'
     }
   },
   methods: {
@@ -32,7 +35,8 @@ export default {
   components: {
     Table,
     Header,
-    Form
+    Form,
+    Footer
   }
 }
 </script>
