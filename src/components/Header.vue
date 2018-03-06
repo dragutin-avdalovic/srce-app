@@ -1,14 +1,14 @@
 <template>
-  <section>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
-    <div class="container nav-bar">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="nav-logo">
-          <img src="@/assets/logo-wide.png" alt="logo" class="nav-logo">
-        </div>
-      </nav>
-    </div>
-  </section>
+    <section>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+      <div class="nav-bar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="nav-logo">
+            <img src="@/assets/logo-wide.png" alt="logo" class="nav-logo">
+          </div>
+        </nav>
+      </div>
+    </section>
 </template>
 
 <script>
@@ -29,7 +29,6 @@ export default {
     padding-top: 10px;
   }
   .nav-bar {
-    padding: 0;
     height: 100px;
   }
 </style>

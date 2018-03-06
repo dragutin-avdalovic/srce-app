@@ -1,12 +1,22 @@
 <template>
+  <div class="container">
   <div class="hello">
     <Header></Header>
+    <div class="row">
+      <div class="col-6">
+        <h3>Donatori</h3>
+      </div>
+      <div class="col-6 col-fix">
+        <p>Poredaj po:</p>
+        <button>Novi unos</button>
+      </div>
+    </div>
+    <Table></Table>
+    </div>
     <button v-on:click="show()">open</button>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form></Form>
-    </modal>
-    <Table></Table>
-    <Footer></Footer>
+    </modal>>
   </div>
 </template>
 
@@ -40,9 +50,29 @@ export default {
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
+.col-fix{
+  display: flex;
+}
+h3{
+  font-weight: bold;
+  color: #EB2D3C;
+  font-family: Open Sans;
+}
+  button{
+    display: flex;
+    justify-content: center;
+    background-color: #EB2D3C;
+    color: #ffffff;
+    width: 100px;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Open Sans;
+    width: 200px;
+  }
   @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
   .v--modal-overlay {
     background: rgba(255, 255, 255, 0.6);
