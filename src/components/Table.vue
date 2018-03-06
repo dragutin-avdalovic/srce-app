@@ -42,7 +42,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+    </div>
 </template>
 <script>
 import Checkbox from '@/components/Checkbox'
