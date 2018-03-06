@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="container">
       <table class="table">
         <thead>
         <tr>
@@ -42,7 +41,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+
 </template>
 <script>
 import Checkbox from '@/components/Checkbox'
@@ -62,6 +61,7 @@ export default {
 <style lang="scss" scoped>
 
   table {
+    margin-top: 5vh;
     width: 100%;
     font-family: Open Sans;
     font-weight: bold;
