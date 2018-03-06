@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-  <div class="hello">
+  <div class="container-fluid">
     <Header></Header>
     <div class="row">
       <div class="col-6">
@@ -20,22 +19,23 @@
             </div>
           </div>
         </div>
-        <button>Novi unos</button>
+        <p>Poredaj po:</p>
+        <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
     <Table></Table>
-    </div>
-    <button v-on:click="show()">open</button>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form></Form>
     </modal>
-  </div>
+    <Footer></Footer>
+</div>
 </template>
 
 <script>
 import Table from '@/components/Table'
 import Header from '@/components/Header'
 import Form from '@/components/Form'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'HelloWorld',
@@ -55,7 +55,8 @@ export default {
   components: {
     Table,
     Header,
-    Form
+    Form,
+    Footer
   }
 }
 </script>
@@ -83,4 +84,7 @@ h3{
     width: 200px;
   }
   @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+  .v--modal-overlay {
+    background: rgba(255, 255, 255, 0.6);
+  }
 </style>
