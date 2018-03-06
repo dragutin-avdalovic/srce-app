@@ -39,16 +39,22 @@ export default {
 .col-fix{
   display: flex;
 }
+h3{
+  font-weight: bold;
+  color: #EB2D3C;
+  font-family: Open Sans;
+}
   button{
     display: flex;
     justify-content: center;
     background-color: #EB2D3C;
     color: #ffffff;
     width: 100px;
-    border-radius: 3%;
+    border-radius: 8px;
     border: none;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     font-family: Open Sans;
+    width: 200px;
   }
 </style>

@@ -164,6 +164,7 @@ export default {
   }
   button{
     background-color: transparent;
+    width: 100px;
   :hover{
     border-color: white;
 }
