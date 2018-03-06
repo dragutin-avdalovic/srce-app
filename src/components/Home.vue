@@ -1,6 +1,5 @@
 <template>
-  <div class="container">
-  <div class="hello">
+  <div class="container-fluid">
     <Header></Header>
     <div class="row">
       <div class="col-6">
@@ -8,16 +7,15 @@
       </div>
       <div class="col-6 col-fix">
         <p>Poredaj po:</p>
-        <button>Novi unos</button>
+        <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
     <Table></Table>
-    </div>
-    <button v-on:click="show()">open</button>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form></Form>
-    </modal>>
-  </div>
+    </modal>
+    <Footer></Footer>
+</div>
 </template>
 
 <script>
@@ -30,8 +28,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Srce za djecu',
-      title: 'Lalala'
+      msg: 'Srce za djecu'
     }
   },
   methods: {

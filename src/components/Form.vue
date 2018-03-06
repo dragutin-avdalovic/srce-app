@@ -97,10 +97,17 @@ export default{
       @include font(1.5, 600, $red);
       @include spacing-tb(m, 1, em);
     }
+    .form-control
+    {
+      height:2.875em !important;
+    }
     /* remove the original arrow */
-    select.input {
-      -webkit-appearance: none;
-      -moz-appearance: none;
+    select
+    {
+      input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
     }
 
     select + i.fa {
