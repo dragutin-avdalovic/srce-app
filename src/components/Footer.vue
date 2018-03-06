@@ -1,8 +1,10 @@
 <template>
   <footer>
-    <div class="logo-container">
-      <img src="../assets/logo-wide-white.png" class="logo-white">
-      <p>{{title}}</p>
+    <div class="container">
+      <div class="logo-container">
+        <img src="../assets/logo-wide-white.png" class="logo-white">
+        <p>{{title}}</p>
+      </div>
     </div>
   </footer>
 </template>
@@ -19,6 +21,8 @@ export default {
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   footer{
+    font-family: Open Sans;
+    margin-top: 5vh;
     background: $red;
     @include spacing-tb('p', 2 , em);
     @include spacing-lr('p', 10 ,%);
