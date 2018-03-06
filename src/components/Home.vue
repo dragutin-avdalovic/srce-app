@@ -80,10 +80,14 @@ export default {
     saveData (event) {
       console.log(event)
       axios.post('http://45.76.90.178:3000/api/v1/users', event)
-        .then(function (response) {
+        .then((response) => {
           console.log(response)
+          if (response.data === 'successfully saved') {
+            this.hide()
+            this.getData()
+          }
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error)
         })
     }
