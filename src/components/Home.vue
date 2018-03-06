@@ -3,14 +3,23 @@
     <div class="container">
     <Header></Header>
     <div class="row">
-      <div class="col-6">
-        <h3>Donatori</h3>
+      <div class="col-6 col-fix">
+        <div class="dropdown donators">
+          <a class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Donatori
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </div>
       </div>
       <div class="col-6 col-fix">
-        <div>
+        <div class="div-fix">
           <p>Poredaj po:</p>
-          <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="dropdown sort">
+            <a class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Najnovije
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -20,7 +29,6 @@
             </div>
           </div>
         </div>
-        <p>Poredaj po:</p>
         <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
@@ -66,11 +74,25 @@ export default {
 <style lang="scss" scoped>
 .col-fix{
   display: flex;
-justify-content: space-around}
-h3{
-  font-weight: bold;
-  color: #EB2D3C;
-  font-family: Open Sans;
+  justify-content: space-between;
+  align-items: center;
+}
+.div-fix{
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20vh;
+}
+ .donators{
+  margin: 0;
+   a{
+     color: #EB2D3C !important;
+     font-size: 1.8em;
+     font-weight: bold;
+     font-family: Open Sans;
+     padding: 0;
+   }
 }
   button{
     display: flex;
@@ -80,11 +102,40 @@ h3{
     width: 100px;
     border-radius: 8px;
     border: none;
-    font-size: 20px;
+    font-size: 1.2em;
     font-weight: bold;
     font-family: Open Sans;
-    width: 200px;
+    width: 170px;
+    height: 50px;
+    :focus {
+      outline: none;
+      box-shadow:none;
+    }
+    :active{
+      outline: none;
+      box-shadow:none;
+    }
   }
+  .sort{
+    border: none;
+    background-color: transparent;
+    a{
+      font-size: 1.2em;
+      font-weight: bold;
+      font-family: Open Sans;
+      padding: 0;
+    }
+  }
+  p{
+    font-size: 1.2em;
+    color: #A2A1A1;
+    font-family: Open Sans;
+    font-weight: bold;
+    padding-right: 5px;
+    margin: 0;
+  }
+
+
   @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
   .v--modal-overlay {
     background: rgba(255, 255, 255, 0.6);

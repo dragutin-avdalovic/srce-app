@@ -19,6 +19,8 @@ export default {
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   footer{
+    font-family: Open Sans;
+    margin-top: 5vh;
     background: $red;
     @include spacing-tb('p', 2 , em);
     @include spacing-lr('p', 10 ,%);

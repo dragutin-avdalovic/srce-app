@@ -126,6 +126,7 @@ export default {
 <style lang="scss" scoped>
 
   table {
+    margin-top: 5vh;
     width: 100%;
     font-family: Open Sans;
     font-weight: bold;
