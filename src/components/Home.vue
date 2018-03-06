@@ -23,6 +23,7 @@ import Table from '@/components/Table'
 import Header from '@/components/Header'
 import Form from '@/components/Form'
 import Footer from '@/components/Footer'
+import axios from 'axios'
 
 export default {
   name: 'HelloWorld',
@@ -31,12 +32,26 @@ export default {
       msg: 'Srce za djecu'
     }
   },
+  created () {
+    console.log('created called.')
+    this.getData()
+  },
   methods: {
     show () {
       this.$modal.show('modal_entry')
     },
     hide () {
       this.$modal.hide('modal_entry')
+    },
+    getData () {
+      // Make a request for a user with a given ID
+      axios.get('http://45.76.90.178:3000/api/v1/users')
+        .then(function (response) {
+          console.log(response)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   },
   components: {
