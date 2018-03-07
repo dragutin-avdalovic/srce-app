@@ -42,7 +42,7 @@
         </tr>
         </tbody>
       </table>
-    <dropdown name="list-dropdown" class="list-dropdown" v-model="selected">
+    <dropdown name="list-dropdown" class="list-dropdown">
       <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
