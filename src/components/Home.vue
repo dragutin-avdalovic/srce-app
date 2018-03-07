@@ -32,7 +32,7 @@
         <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
-    <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem"></Table>
+    <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData" :editData="formDataRow"></Form>
     </modal>
@@ -54,7 +54,8 @@ export default {
     return {
       msg: 'Srce za djecu',
       items: [],
-      formDataRow: {}
+      formDataRow: {},
+      seen: 'true'
     }
   },
   mounted () {
@@ -73,6 +74,7 @@ export default {
       axios.get('http://45.76.90.178:3000/api/v1/users')
         .then((response) => {
           this.items = response.data
+          this.seen = true
         })
         .catch((error) => {
           console.log(error)
@@ -101,7 +103,14 @@ export default {
       this.show()
     },
     deleteItem (event) {
-      console.log(event)
+      axios.delete('http://45.76.90.178:3000/api/v1/users/' + event)
+        .then((response) => {
+          console.log(response)
+          if (response.data === 'successfully removed') {
+            this.seen = false
+            this.getData()
+          }
+        })
     }
   },
   components: {

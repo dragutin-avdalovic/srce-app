@@ -42,7 +42,7 @@
         </tr>
         </tbody>
       </table>
-    <dropdown name="list-dropdown" class="list-dropdown">
+    <dropdown  v-if="seen" name="list-dropdown" class="list-dropdown">
       <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
@@ -59,7 +59,7 @@
 import Checkbox from '@/components/Checkbox'
 export default {
   name: 'Table',
-  props: ['items'],
+  props: ['items', 'seen'],
   data () {
     return {
       id: ''
