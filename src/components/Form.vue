@@ -78,6 +78,7 @@
 <script>
 export default{
   name: 'Form',
+  props: ['formDataRow'],
   data () {
     return {
       formData: {
@@ -95,9 +96,6 @@ export default{
   methods: {
     save: function () {
       this.$emit('onDataEmit', this.formData)
-    },
-    getFormData: function () {
-      this.formData = this.formDataRow
     }
   }
 }

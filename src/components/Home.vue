@@ -53,7 +53,8 @@ export default {
   data () {
     return {
       msg: 'Srce za djecu',
-      items: []
+      items: [],
+      formDataRow: {}
     }
   },
   mounted () {
