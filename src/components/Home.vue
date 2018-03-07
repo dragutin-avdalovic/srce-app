@@ -32,9 +32,9 @@
         <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
-    <Table v-bind:items="items"></Table>
+    <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form v-bind:formDataRow="formDataRow" @onDataEmit="saveData"></Form>
+      <Form @onDataEmit="saveData" :editData="formDataRow"></Form>
     </modal>
     </div>
     <Footer></Footer>
@@ -91,6 +91,17 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    fillFormData (event) {
+      this.items.forEach((obj) => {
+        if (obj._id === event) {
+          this.formDataRow = Object.assign({}, this.formDataRow, obj)
+        }
+      })
+      this.show()
+    },
+    deleteItem (event) {
+      console.log(event)
     }
   },
   components: {
