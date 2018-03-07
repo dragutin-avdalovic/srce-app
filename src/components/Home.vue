@@ -34,7 +34,7 @@
     </div>
     <Table v-bind:items="items"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form @onDataEmit="saveData"></Form>
+      <Form v-bind:formDataRow="formDataRow" @onDataEmit="saveData"></Form>
     </modal>
     </div>
     <Footer></Footer>
