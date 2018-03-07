@@ -60,7 +60,8 @@ export default {
   props: ['items'],
   data () {
     return {
-      id: ''
+      id: '',
+      formDataRow: ''
     }
   },
   methods: {
@@ -68,7 +69,12 @@ export default {
       this.id = id
     },
     edit () {
-      console.log(this.id)
+      let parent = this
+      this.items.forEach(function (obj) {
+        if (obj._id === parent.id) {
+          parent.formDataRow = obj
+        }
+      })
     },
     onDelete () {
       console.log(this.id)
