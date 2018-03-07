@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
   <div>
       <table class="table">
         <thead>
@@ -33,13 +33,23 @@
             <span class="red">{{item.amount}}</span>
           </td>
           <td>
-        <div class="dropdown">
+        <div v-dropdown:list-dropdown.bottom>
           <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
         </div>
       </td>
         </tr>
         </tbody>
       </table>
+    <dropdown name="list-dropdown" class="list-dropdown">
+      <div class="list_row">
+        <i class="fa fa-pencil"></i>
+        <p>Uredi</p>
+      </div>
+      <div class="list_row">
+        <i class="fa fa-trash-o"></i>
+        <p>Izbriši</p>
+      </div>
+    </dropdown>
     </div>
 
 </template>
@@ -60,6 +70,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
+  @import "../assets/mixins";
+  @import "../assets/variables";
   table {
     margin-top: 5vh;
     width: 100%;
@@ -101,6 +113,33 @@ export default {
     width: 100px;
   :hover{
     border-color: white;
-}
+        }
+  }
+  .list-dropdown
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .list_row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      cursor: pointer;
+      @include spacing-tb('p', 0.5, em);
+      @include spacing-l('p', 1.5, em);
+      p {
+        @include spacing-b('m', 0, em);
+        @include spacing-l('p', 1, em);
+        @include font(1.1, em, $text-dark);
+      }
+      i {
+        @include font(1.2, em, $text-dark);
+      }
+      &:hover
+      {
+        background-color: $text-gray;
+      }
+    }
   }
 </style>
