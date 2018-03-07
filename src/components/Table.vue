@@ -33,19 +33,19 @@
             <span class="red">{{item.amount}}</span>
           </td>
           <td>
-        <div v-dropdown:list-dropdown.bottom>
+        <div v-dropdown:list-dropdown.bottom v-on:click="select(item._id)">
           <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
         </div>
       </td>
         </tr>
         </tbody>
       </table>
-    <dropdown name="list-dropdown" class="list-dropdown">
-      <div class="list_row">
+    <dropdown name="list-dropdown" class="list-dropdown" v-model="selected">
+      <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
       </div>
-      <div class="list_row">
+      <div class="list_row" id="delete" v-on:click="onDelete()">
         <i class="fa fa-trash-o"></i>
         <p>Izbriši</p>
       </div>
@@ -60,12 +60,25 @@ export default {
   props: ['items'],
   data () {
     return {
+      id: ''
+    }
+  },
+  methods: {
+    select (id) {
+      this.id = id
+    },
+    edit () {
+      console.log(this.id)
+    },
+    onDelete () {
+      console.log(this.id)
     }
   },
   components: {
     Checkbox
   }
 }
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
