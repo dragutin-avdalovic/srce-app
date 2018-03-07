@@ -3,7 +3,9 @@
       <table class="table">
         <thead>
         <tr>
-          <th></th>
+          <th>
+            <Checkbox></Checkbox>
+          </th>
           <th>OSNOVNI PODACI</th>
           <th>ADRESA</th>
           <th>NAZIV KOMPANIJE</th>
@@ -40,7 +42,7 @@
         </tr>
         </tbody>
       </table>
-    <dropdown name="list-dropdown" class="list-dropdown" v-model="selected">
+    <dropdown name="list-dropdown" class="list-dropdown">
       <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
@@ -88,9 +90,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-
-  @import "../assets/mixins";
-  @import "../assets/variables";
+  @import "../assets/mixins.scss";
+  @import "../assets/variables.scss";
   table {
     margin-top: 5vh;
     width: 100%;
