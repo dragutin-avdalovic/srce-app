@@ -18,6 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import "assets/mixins.scss";
 

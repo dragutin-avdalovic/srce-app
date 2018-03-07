@@ -3,8 +3,8 @@
       <table class="table">
         <thead>
         <tr>
-          <th>
-            <Checkbox></Checkbox>
+          <th style="padding: 0 0 0 10px">
+            <Checkbox @onChecked="selectAll()"></Checkbox>
           </th>
           <th>OSNOVNI PODACI</th>
           <th>ADRESA</th>
@@ -18,7 +18,7 @@
         <tbody>
         <tr v-for="(item, index) of items" :key="index">
           <td scope="row">
-            <Checkbox></Checkbox>
+            <Checkbox :checked="item.checked" @onChecked="onCheckClicked(item._id)"></Checkbox>
           </td>
           <td>
             <span class="fix">{{item.name}}</span>
@@ -28,7 +28,7 @@
           <span class="fix">{{item.city}}</span>
           <span class="color-fix weight-fix">{{item.address}}</span>
           </td>
-          <td>{{item.company}}</td>
+          <td>{{item.checked}}</td>
           <td>{{item.date}}</td>
           <td>{{item.cause}}</td>
           <td>
@@ -67,6 +67,20 @@ export default {
     }
   },
   methods: {
+    selectAll () {
+      this.items.map(item => {
+        item.checked = !item.checked
+        return item
+      })
+    },
+    onCheckClicked (id) {
+      this.items.map(item => {
+        if (item._id === id) {
+          item.checked = true
+        }
+        return item
+      })
+    },
     select (id) {
       this.id = id
     },
