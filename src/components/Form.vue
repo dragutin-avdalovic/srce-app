@@ -97,7 +97,7 @@ export default{
       this.$emit('onDataEmit', this.formData)
     },
     getFormData: function () {
-      this.formData = this.formDataRow;
+      this.formData = this.formDataRow
     }
   }
 }
