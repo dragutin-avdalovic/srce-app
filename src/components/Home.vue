@@ -72,6 +72,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+  @import "../assets/mixins.scss";
+  @import "../assets/variables.scss";
 .col-fix{
   display: flex;
   justify-content: space-between;
@@ -87,7 +89,7 @@ export default {
  .donators{
   margin: 0;
    a{
-     color: #EB2D3C !important;
+     color: $red !important;
      font-size: 1.8em;
      font-weight: bold;
      font-family: Open Sans;
@@ -97,7 +99,7 @@ export default {
   button{
     display: flex;
     justify-content: center;
-    background-color: #EB2D3C;
+    background-color: $red;
     color: #ffffff;
     width: 100px;
     border-radius: 8px;
@@ -134,8 +136,6 @@ export default {
     padding-right: 5px;
     margin: 0;
   }
-
-
   @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
   .v--modal-overlay {
     background: rgba(255, 255, 255, 0.6);

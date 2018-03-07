@@ -3,7 +3,9 @@
       <table class="table">
         <thead>
         <tr>
-          <th></th>
+          <th>
+            <Checkbox></Checkbox>
+          </th>
           <th>OSNOVNI PODACI</th>
           <th>ADRESA</th>
           <th>NAZIV KOMPANIJE</th>
@@ -124,7 +126,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-
+  @import "../assets/mixins.scss";
+  @import "../assets/variables.scss";
   table {
     margin-top: 5vh;
     width: 100%;
