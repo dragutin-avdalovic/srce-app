@@ -50,6 +50,11 @@ export default {
     font-family: "Open Sans";
     color: #ffffff;
     background-color: $red;
+    :hover {
+      color: #ffffff;
+      outline: none;
+      box-shadow:none;
+    }
     :focus {
       outline: none;
       box-shadow:none;

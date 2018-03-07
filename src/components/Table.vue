@@ -3,7 +3,7 @@
       <table class="table">
         <thead>
         <tr>
-          <th style="padding: 0 0 0 10px">
+          <th class="all">
             <Checkbox @onChecked="selectAll()"></Checkbox>
           </th>
           <th>OSNOVNI PODACI</th>
@@ -28,7 +28,7 @@
           <span class="fix">{{item.city}}</span>
           <span class="color-fix weight-fix">{{item.address}}</span>
           </td>
-          <td>{{item.checked}}</td>
+          <td>{{item.company}}</td>
           <td>{{item.date}}</td>
           <td>{{item.cause}}</td>
           <td>
@@ -175,5 +175,8 @@ export default {
         background-color: $text-gray;
       }
     }
+  }
+  .all{
+   padding: 0 0 0 8px;
   }
 </style>
