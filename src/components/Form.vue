@@ -101,7 +101,6 @@ export default{
   },
   methods: {
     save: function () {
-      this.editData = {}
       this.$emit('onDataEmit', this.editData)
     }
   }
