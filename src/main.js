@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import VModal from 'vue-js-modal'
 import Dropdown from 'vue-js-dropdown'
+import VeeValidate from 'vee-validate'
 
+Vue.use(VeeValidate)
 Vue.use(Dropdown)
 Vue.use(VModal)
 
