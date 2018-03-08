@@ -55,9 +55,9 @@
           </p>
         </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('purpose')}">
-          <label class="control-label" for="purposeOfDonation">Svrha donacije*</label>
+          <label class="control-label" for="purpose">Svrha donacije*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('purpose') }" name="purpose" type="text" v-model="editData.purpose" class="form-control" id="purposeOfDonation" placeholder="">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('purpose') }" id="purpose" name="purpose" type="text" v-model="editData.purpose" class="form-control" placeholder="">
             <span v-show="errors.has('purpose')" class="help-block">{{ errors.first('purpose') }}</span>
           </p>
         </div>
@@ -105,8 +105,7 @@ export default{
     validateBeforeSubmit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.save()
-        }
+          this.save() }
         else {
           alert('Correct them errors!')
         }

@@ -54,7 +54,7 @@ export default {
     return {
       msg: 'Srce za djecu',
       items: [],
-      formDataRow: {},
+      formDataRow: { type: 'null' },
       seen: 'true'
     }
   },
