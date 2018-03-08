@@ -3,10 +3,13 @@
     <div class="container">
     <Header></Header>
     <div class="row">
-      <div class="col-6 col-fix">
+      <div class="col-lg-6 col-fix">
         <div class="dropdown donators">
-          <a class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Donatori
+            <i class="fa fa-search"></i>
+            <i class="fa fa-file-pdf"></i>
+            <i class="fa fa-file-excel"></i>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Action</a>
@@ -15,11 +18,11 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-fix">
+      <div class="col-lg-6 col-fix">
         <div class="div-fix">
           <p>Poredaj po:</p>
           <div class="dropdown sort">
-            <a class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="dropdown-toggle" href="#" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Najnovije
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -36,6 +39,20 @@
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData"></Form>
     </modal>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="export">
+            <i class="fa fa-file-pdf-o"></i>
+            <i class="far fa-file-excel"></i>
+          </div>
+        </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="arrows">
+              <i class="far fa-file-pdf"></i>
+              <i class="far fa-file-excel"></i>
+            </div>
+          </div>
+      </div>
     </div>
     <Footer></Footer>
 </div>
@@ -71,6 +88,12 @@ export default {
       // Make a request for a user with a given ID
       axios.get('http://45.76.90.178:3000/api/v1/users')
         .then((response) => {
+          response.data.map(item => {
+            Object.assign(item, {
+              checked: false
+            })
+            return item
+          })
           this.items = response.data
         })
         .catch((error) => {
@@ -104,6 +127,7 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
+  /*@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";*/
 .col-fix{
   display: flex;
   justify-content: space-between;
@@ -124,6 +148,9 @@ export default {
      font-weight: bold;
      font-family: Open Sans;
      padding: 0;
+     &:hover, &:focus {
+       text-decoration: none;
+     }
    }
 }
   button{
@@ -156,6 +183,9 @@ export default {
       font-weight: bold;
       font-family: Open Sans;
       padding: 0;
+      &:hover, &:focus {
+        text-decoration: none;
+      }
     }
   }
   p{
@@ -166,8 +196,22 @@ export default {
     padding-right: 5px;
     margin: 0;
   }
-  @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
   .v--modal-overlay {
     background: rgba(255, 255, 255, 0.6);
+  }
+  .export{
+    width: auto;
+    height: 100%;
+    display: flex;
+    float: left;
+    .export-btn{
+      color: #ffffff;
+    }
+  }
+  .arrows{
+    display: flex;
+    float: right;
+    .arrow-btn{
+    }
   }
 </style>

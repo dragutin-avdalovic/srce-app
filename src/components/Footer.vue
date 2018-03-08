@@ -21,9 +21,11 @@ export default {
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   footer{
+    width: 100%;
     font-family: Open Sans;
     margin-top: 5vh;
     background: $red;
+    bottom:0;
     @include spacing-tb('p', 2 , em);
     @include spacing-lr('p', 10 ,%);
   }

@@ -3,8 +3,8 @@
       <table class="table">
         <thead>
         <tr>
-          <th>
-            <Checkbox></Checkbox>
+          <th class="all">
+            <Checkbox @onChecked="selectAll()"></Checkbox>
           </th>
           <th>OSNOVNI PODACI</th>
           <th>ADRESA</th>
@@ -18,7 +18,7 @@
         <tbody>
         <tr v-for="(item, index) of items" :key="index">
           <td scope="row">
-            <Checkbox></Checkbox>
+            <Checkbox :checked="item.checked" @onChecked="onCheckClicked(item._id)"></Checkbox>
           </td>
           <td>
             <span class="fix">{{item.name}}</span>
@@ -42,7 +42,7 @@
         </tr>
         </tbody>
       </table>
-    <dropdown name="list-dropdown" class="list-dropdown" v-model="selected">
+    <dropdown name="list-dropdown" class="list-dropdown">
       <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
@@ -67,6 +67,20 @@ export default {
     }
   },
   methods: {
+    selectAll () {
+      this.items.map(item => {
+        item.checked = !item.checked
+        return item
+      })
+    },
+    onCheckClicked (id) {
+      this.items.map(item => {
+        if (item._id === id) {
+          item.checked = true
+        }
+        return item
+      })
+    },
     select (id) {
       this.id = id
     },
@@ -161,5 +175,8 @@ export default {
         background-color: $text-gray;
       }
     }
+  }
+  .all{
+   padding: 0 0 0 8px;
   }
 </style>

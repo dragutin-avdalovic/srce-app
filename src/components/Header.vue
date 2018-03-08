@@ -5,7 +5,7 @@
             <img src="@/assets/logo-wide.png" alt="logo" class="logo">
             <form class="search form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn-search btn my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+              <button class="btn-search btn my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
             </form>
           </div>
       </div>
@@ -47,16 +47,21 @@ export default {
 
   }
   .btn-search{
+    margin-left: 10px;
     font-family: "Open Sans";
     color: #ffffff;
     background-color: $red;
-    :focus {
-      outline: none;
-      box-shadow:none;
-    }
-    :active{
-      outline: none;
-      box-shadow:none;
-    }
+    outline: none;
+    /*:hover {*/
+      /*color: #ffffff !important;*/
+      /*outline: none;*/
+      /*box-shadow:none;*/
+    /*}*/
+    /*:focus {*/
+      /*color: #ffffff;*/
+      /*outline: none !important;*/
+      /*box-shadow:none;*/
+      /*border: none !important;*/
+    /*}*/
   }
 </style>
