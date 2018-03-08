@@ -9,56 +9,56 @@
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
           <label class="control-label" >Vrsta donatora</label>
-          <b-form-select v-model="editData.type" :options="type" id="type" name="type"></b-form-select>
+          <b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
           <label class="control-label" for="name">Ime i prezime*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('name') }" name="name" type="text" v-model="editData.name" class="form-control" id="name" placeholder="">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('name') }" name="name" type="text" v-model="formData.name" class="form-control" id="name" placeholder="">
             <span v-show="errors.has('name')" class="help-block">{{ errors.first('name') }}</span>
           </p>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('email')}">
           <label class="control-label" for="email">Email*</label>
           <p :class="{ 'control': true }">
-          <input v-validate="'required|email'" :class="{'input': true, 'has-error': errors.has('email') }" name="email" type="text" v-model="editData.email" class="form-control" id="email" placeholder="">
+          <input v-validate="'required|email'" :class="{'input': true, 'has-error': errors.has('email') }" name="email" type="text" v-model="formData.email" class="form-control" id="email" placeholder="">
           <span v-show="errors.has('email')" class="help-block">{{ errors.first('email') }}</span>
           </p>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('address')}">
           <label class="control-label" for="address">Adresa*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('address') }" name="address" type="text" v-model="editData.address" class="form-control" id="address" placeholder="">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('address') }" name="address" type="text" v-model="formData.address" class="form-control" id="address" placeholder="">
             <span v-show="errors.has('address')" class="help-block">{{ errors.first('address') }}</span>
           </p>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('city')}">
           <label class="control-label" for="address">Grad*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('city') }" name="city" type="text" v-model="editData.city" class="form-control" id="city" placeholder="">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('city') }" name="city" type="text" v-model="formData.city" class="form-control" id="city" placeholder="">
             <span v-show="errors.has('city')" class="help-block">{{ errors.first('city') }}</span>
           </p>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('amount')}">
           <label class="control-label" for="amount">Iznos donacije*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('amount') }" name="amount" type="number" v-model="editData.amount" class="form-control donation_amount" id="amount" placeholder="00">
+            <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('amount') }" name="amount" type="number" v-model="formData.amount" class="form-control donation_amount" id="amount" placeholder="00">
             <span v-show="errors.has('amount')" class="help-block">{{ errors.first('amount') }}</span>
           </p>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('date')}">
           <label class="control-label" for="date">Datum*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('date') }" name="date" type="date" v-model="editData.date" class="form-control" id="date" placeholder="">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('date') }" name="date" type="date" v-model="formData.date" class="form-control" id="date" placeholder="">
             <span v-show="errors.has('date')" class="help-block">{{ errors.first('date') }}</span>
           </p>
         </div>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('purpose')}">
-          <label class="control-label" for="purpose">Svrha donacije*</label>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('cause')}">
+          <label class="control-label" for="cause">Svrha donacije*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('purpose') }" id="purpose" name="purpose" type="text" v-model="editData.purpose" class="form-control" placeholder="">
-            <span v-show="errors.has('purpose')" class="help-block">{{ errors.first('purpose') }}</span>
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('cause') }" id="cause" name="cause" type="text" v-model="formData.cause" class="form-control" placeholder="">
+            <span v-show="errors.has('cause')" class="help-block">{{ errors.first('cause') }}</span>
           </p>
         </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
@@ -71,19 +71,9 @@
 <script>
 export default{
   name: 'Form',
-  props: ['editData'],
+  props: ['formData'],
   data () {
     return {
-      formData: {
-        type: '',
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        amount: '',
-        date: '',
-        purpose: ''
-      },
       type: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 'Institucija', text: 'Institucija' },
@@ -93,21 +83,17 @@ export default{
       selected: null
     }
   },
-  watch: {
-    formData: function (newVal) {
-      console.log(newVal)
-    }
-  },
   methods: {
     save: function () {
-      this.$emit('onDataEmit', this.editData)
+      this.$emit('onDataEmit', this.formData)
+      console.log(this.formData)
     },
     validateBeforeSubmit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.save() }
+          this.save()
+        }
         else {
-          alert('Correct them errors!')
         }
       })
     }

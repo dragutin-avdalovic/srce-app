@@ -34,7 +34,7 @@
     </div>
     <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form @onDataEmit="saveData" :editData="formDataRow"></Form>
+      <Form @onDataEmit="saveData" :formData="formData"></Form>
     </modal>
     </div>
     <Footer></Footer>
@@ -54,8 +54,17 @@ export default {
     return {
       msg: 'Srce za djecu',
       items: [],
-      formDataRow: { type: 'null' },
-      seen: 'true'
+      seen: 'true',
+      formData: {
+        type: '',
+        name: '',
+        email: '',
+        address: '',
+        city: '',
+        amount: '',
+        date: '',
+        cause: ''
+      }
     }
   },
   mounted () {
@@ -88,23 +97,37 @@ export default {
     },
     saveData (event) {
       console.log(event)
-      console.log(this.$validator.errorBag)
-      axios.post('http://45.76.90.178:3000/api/v1/users', event)
-        .then((response) => {
-          console.log(response)
-          if (response.data === 'successfully saved') {
-            this.hide()
-            this.getData()
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      if (event._id != null) {
+        axios.put('http://45.76.90.178:3000/api/v1/users/' + event._id, event)
+          .then((response) => {
+            console.log(response)
+            if (response.data === 'successfully saved') {
+              this.hide()
+              this.getData()
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+      else {
+        axios.post('http://45.76.90.178:3000/api/v1/users', event)
+          .then((response) => {
+            console.log(response)
+            if (response.data === 'successfully saved') {
+              this.hide()
+              this.getData()
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
         if (obj._id === event) {
-          this.formDataRow = Object.assign({}, this.formDataRow, obj)
+          this.formData = Object.assign({}, this.formData, obj)
         }
       })
       this.show()
