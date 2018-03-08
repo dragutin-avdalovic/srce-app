@@ -8,12 +8,8 @@
       <h3 class="form-header">Novi unos</h3>
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-          <label class="control-label" for="typeOfDonation">Vrsta donatora</label>
-          <select  class="form-control" v-model="editData.type" id="typeOfDonation" name="type">
-            <option value="Institucija">Institucija</option>
-            <option value="Fizičko lice">Fizičko lice</option>
-            <option value="Pravno lice">Pravno lice</option>
-          </select>
+          <label class="control-label" >Vrsta donatora</label>
+          <b-form-select v-model="editData.type" :options="type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
@@ -87,7 +83,14 @@ export default{
         amount: '',
         date: '',
         purpose: ''
-      }
+      },
+      type: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 'Institucija', text: 'Institucija' },
+        { value: 'Fizičko lice', text: 'Fizičko lice' },
+        { value: 'Pravno lice', text: 'Pravno lice' }
+      ],
+      selected: null
     }
   },
   watch: {
