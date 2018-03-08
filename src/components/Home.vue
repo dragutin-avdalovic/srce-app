@@ -57,13 +57,14 @@ export default {
       seen: 'true',
       formData: {
         type: '',
+        company: '',
         name: '',
         email: '',
         address: '',
         city: '',
         amount: '',
         date: '',
-        cause: ''
+        cause: '',
       }
     }
   },
@@ -101,7 +102,7 @@ export default {
         axios.put('http://45.76.90.178:3000/api/v1/users/' + event._id, event)
           .then((response) => {
             console.log(response)
-            if (response.data === 'successfully saved') {
+            if (response.data === 'successfully edited') {
               this.hide()
               this.getData()
             }

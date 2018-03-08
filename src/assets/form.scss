@@ -4,7 +4,7 @@
 .heartForm {
   .form-group
   {
-    @include spacing-b(m, 1, em);
+    @include spacing-tb(m, 0.2, em);
     .form-control {
       @include border(1px, solid, $text-gray);
       box-shadow: none;

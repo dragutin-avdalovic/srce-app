@@ -7,10 +7,17 @@
       </div>
       <h3 class="form-header">Novi unos</h3>
       <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
           <label class="control-label" >Vrsta donatora</label>
           <b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('company')}">
+          <label class="control-label" for="company">Naziv kompanije*</label>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('company') }" id="company" name="cause" type="text" v-model="formData.company" class="form-control" placeholder="">
+            <span v-show="errors.has('company')" class="help-block">{{ errors.first('company') }}</span>
+          </p>
         </div>
         <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
           <label class="control-label" for="name">Ime i prezime*</label>
