@@ -32,9 +32,9 @@
         <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
-    <Table v-bind:items="items"></Table>
+    <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form @onDataEmit="saveData"></Form>
+      <Form @onDataEmit="saveData" :editData="formDataRow"></Form>
     </modal>
     </div>
     <Footer></Footer>
@@ -53,7 +53,9 @@ export default {
   data () {
     return {
       msg: 'Srce za djecu',
-      items: []
+      items: [],
+      formDataRow: {},
+      seen: 'true'
     }
   },
   mounted () {
@@ -78,6 +80,7 @@ export default {
             return item
           })
           this.items = response.data
+          this.seen = true
         })
         .catch((error) => {
           console.log(error)
@@ -85,6 +88,7 @@ export default {
     },
     saveData (event) {
       console.log(event)
+      console.log(this.$validator.errorBag)
       axios.post('http://45.76.90.178:3000/api/v1/users', event)
         .then((response) => {
           console.log(response)
@@ -95,6 +99,24 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+        })
+    },
+    fillFormData (event) {
+      this.items.forEach((obj) => {
+        if (obj._id === event) {
+          this.formDataRow = Object.assign({}, this.formDataRow, obj)
+        }
+      })
+      this.show()
+    },
+    deleteItem (event) {
+      axios.delete('http://45.76.90.178:3000/api/v1/users/' + event)
+        .then((response) => {
+          console.log(response)
+          if (response.data === 'successfully removed') {
+            this.seen = false
+            this.getData()
+          }
         })
     }
   },

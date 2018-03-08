@@ -16,6 +16,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
+    "bootstrap-vue": "^2.0.0-rc.2",
+    "vee-validate": "^2.0.5",
     "vue": "^2.5.2",
     "vue-awesome": "^2.3.5",
     "vue-form": "^4.7.1",
