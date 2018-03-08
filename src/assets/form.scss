@@ -2,17 +2,21 @@
 @import "variables";
 
 .heartForm {
-  .form-control {
-    @include border(1px, solid, $text-gray);
-    box-shadow: none;
-    border-radius: 0.2em;
-    &:focus{
-      border-color: $blue;
-    }
-  }
-  .help-block
+  .form-group
   {
-    @include font(0.8,500,$text-gray);
+    @include spacing-tb(m, 0.2, em);
+    .form-control {
+      @include border(1px, solid, $text-gray);
+      box-shadow: none;
+      border-radius: 0.2em;
+      &:focus{
+        border-color: $blue;
+      }
+    }
+    .help-block
+    {
+      @include font(0.8,500,$text-gray);
+    }
   }
   .has-error
   {
@@ -26,6 +30,12 @@
     .form-control {
       border-color: $red;
     }
+  }
+  .min-row-height
+  {
+    max-height: 6em;
+    height: 6em;
+    min-height: 6em;
   }
 }
 
