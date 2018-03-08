@@ -1,5 +1,5 @@
 <template>
-    <form class="newEntryForm heartForm">
+    <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
       <div slot="top-right">
         <button @click="$modal.hide('modal_entry')" class="modal-close">
           X
@@ -8,68 +8,61 @@
       <h3 class="form-header">Novi unos</h3>
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-          <label class="control-label" for="typeOfDonation">Vrsta donatora</label>
-          <select class="form-control"  v-model="formData.type" id="typeOfDonation">
-            <option value="Institucija">Institucija</option>
-            <option value="Fizičko lice">Fizičko lice</option>
-            <option value="Pravno lice">Pravno lice</option>
-          </select>
+          <label class="control-label" >Vrsta donatora</label>
+          <b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
-          <div class="help-block">
-            Molimo unesite validan tip donacije.
-          </div>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
           <label class="control-label" for="name">Ime i prezime*</label>
-          <input type="text" v-model="formData.name" class="form-control" id="name" placeholder="">
-          <div class="help-block">
-            Ime i prezime je obavezno.
-          </div>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('name') }" name="name" type="text" v-model="formData.name" class="form-control" id="name" placeholder="">
+            <span v-show="errors.has('name')" class="help-block">{{ errors.first('name') }}</span>
+          </p>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('email')}">
           <label class="control-label" for="email">Email*</label>
-          <input type="text" v-model="formData.email" class="form-control" id="email" placeholder="">
-          <div class="help-block">
-            Email je obavezan.
-          </div>
+          <p :class="{ 'control': true }">
+          <input v-validate="'required|email'" :class="{'input': true, 'has-error': errors.has('email') }" name="email" type="text" v-model="formData.email" class="form-control" id="email" placeholder="">
+          <span v-show="errors.has('email')" class="help-block">{{ errors.first('email') }}</span>
+          </p>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('address')}">
           <label class="control-label" for="address">Adresa*</label>
-          <input type="text" v-model="formData.address" class="form-control" id="address" placeholder="">
-          <div class="help-block">
-            Adresa je obavezna.
-          </div>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('address') }" name="address" type="text" v-model="formData.address" class="form-control" id="address" placeholder="">
+            <span v-show="errors.has('address')" class="help-block">{{ errors.first('address') }}</span>
+          </p>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
-          <label class="control-label" for="city">Grad*</label>
-          <input type="text" v-model="formData.city" class="form-control" id="city" placeholder="">
-          <div class="help-block">
-            Grad je obavezan.
-          </div>
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('city')}">
+          <label class="control-label" for="address">Grad*</label>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('city') }" name="city" type="text" v-model="formData.city" class="form-control" id="city" placeholder="">
+            <span v-show="errors.has('city')" class="help-block">{{ errors.first('city') }}</span>
+          </p>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
-          <label class="control-label" for="donation_amount">Iznos donacije*</label>
-          <input type="number" v-model="formData.amount" class="form-control donation_amount" id="donation_amount" placeholder="00">
-          <div class="help-block">
-           Iznos donacije je obavezan.
-          </div>
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('amount')}">
+          <label class="control-label" for="amount">Iznos donacije*</label>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('amount') }" name="amount" type="number" v-model="formData.amount" class="form-control donation_amount" id="amount" placeholder="00">
+            <span v-show="errors.has('amount')" class="help-block">{{ errors.first('amount') }}</span>
+          </p>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 form-group">
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('date')}">
           <label class="control-label" for="date">Datum*</label>
-          <input type="date" v-model="formData.date" class="form-control" id="date" placeholder="">
-          <div class="help-block">
-            Datum je obavezan.
-          </div>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('date') }" name="date" type="date" v-model="formData.date" class="form-control" id="date" placeholder="">
+            <span v-show="errors.has('date')" class="help-block">{{ errors.first('date') }}</span>
+          </p>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('cause')}">
+          <label class="control-label" for="cause">Svrha donacije*</label>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('cause') }" id="cause" name="cause" type="text" v-model="formData.cause" class="form-control" placeholder="">
+            <span v-show="errors.has('cause')" class="help-block">{{ errors.first('cause') }}</span>
+          </p>
         </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-          <label class="control-label" for="purposeOfDonation">Svrha donacije*</label>
-          <input type="text" v-model="formData.purpose" class="form-control" id="purposeOfDonation" placeholder="">
-          <div class="help-block">
-            Svrha donacije je obavezna.
-          </div>
-        </div>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-          <button class="button_save" v-on:click="save" >Spremi</button>
+          <button class="button_save" type="submit">Spremi</button>
         </div>
       </div>
     </form>
@@ -78,23 +71,31 @@
 <script>
 export default{
   name: 'Form',
+  props: ['formData'],
   data () {
     return {
-      formData: {
-        type: '',
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        amount: '',
-        date: '',
-        purpose: ''
-      }
+      type: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 'Institucija', text: 'Institucija' },
+        { value: 'Fizičko lice', text: 'Fizičko lice' },
+        { value: 'Pravno lice', text: 'Pravno lice' }
+      ],
+      selected: null
     }
   },
   methods: {
     save: function () {
       this.$emit('onDataEmit', this.formData)
+      console.log(this.formData)
+    },
+    validateBeforeSubmit: function () {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.save()
+        }
+        else {
+        }
+      })
     }
   }
 }
@@ -110,7 +111,7 @@ export default{
     @include spacing-tb(p, 1, em);
     .form-header {
       @include font(1.5, 600, $red);
-      @include spacing-tb(m, 1, em);
+      @include spacing-tb(m, 1.5, em);
     }
     .form-control
     {

@@ -35,9 +35,9 @@
         <button v-on:click="show()">Novi unos</button>
       </div>
     </div>
-    <Table v-bind:items="items"></Table>
+    <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
     <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form @onDataEmit="saveData"></Form>
+      <Form @onDataEmit="saveData" :formData="formData"></Form>
     </modal>
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -70,7 +70,18 @@ export default {
   data () {
     return {
       msg: 'Srce za djecu',
-      items: []
+      items: [],
+      seen: 'true',
+      formData: {
+        type: '',
+        name: '',
+        email: '',
+        address: '',
+        city: '',
+        amount: '',
+        date: '',
+        cause: ''
+      }
     }
   },
   mounted () {
@@ -95,6 +106,7 @@ export default {
             return item
           })
           this.items = response.data
+          this.seen = true
         })
         .catch((error) => {
           console.log(error)
@@ -102,16 +114,49 @@ export default {
     },
     saveData (event) {
       console.log(event)
-      axios.post('http://45.76.90.178:3000/api/v1/users', event)
+      if (event._id != null) {
+        axios.put('http://45.76.90.178:3000/api/v1/users/' + event._id, event)
+          .then((response) => {
+            console.log(response)
+            if (response.data === 'successfully saved') {
+              this.hide()
+              this.getData()
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+      else {
+        axios.post('http://45.76.90.178:3000/api/v1/users', event)
+          .then((response) => {
+            console.log(response)
+            if (response.data === 'successfully saved') {
+              this.hide()
+              this.getData()
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+    },
+    fillFormData (event) {
+      this.items.forEach((obj) => {
+        if (obj._id === event) {
+          this.formData = Object.assign({}, this.formData, obj)
+        }
+      })
+      this.show()
+    },
+    deleteItem (event) {
+      axios.delete('http://45.76.90.178:3000/api/v1/users/' + event)
         .then((response) => {
           console.log(response)
-          if (response.data === 'successfully saved') {
-            this.hide()
+          if (response.data === 'successfully removed') {
+            this.seen = false
             this.getData()
           }
-        })
-        .catch((error) => {
-          console.log(error)
         })
     }
   },
