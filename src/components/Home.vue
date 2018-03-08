@@ -7,6 +7,9 @@
         <div class="dropdown donators">
           <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Donatori
+            <i class="fa fa-search"></i>
+            <i class="fa fa-file-pdf"></i>
+            <i class="fa fa-file-excel"></i>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#">Action</a>
@@ -36,6 +39,20 @@
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData"></Form>
     </modal>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="export">
+            <i class="fa fa-file-pdf-o"></i>
+            <i class="far fa-file-excel"></i>
+          </div>
+        </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="arrows">
+              <i class="far fa-file-pdf"></i>
+              <i class="far fa-file-excel"></i>
+            </div>
+          </div>
+      </div>
     </div>
     <Footer></Footer>
 </div>
@@ -110,6 +127,7 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
+  /*@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";*/
 .col-fix{
   display: flex;
   justify-content: space-between;
@@ -180,5 +198,20 @@ export default {
   }
   .v--modal-overlay {
     background: rgba(255, 255, 255, 0.6);
+  }
+  .export{
+    width: auto;
+    height: 100%;
+    display: flex;
+    float: left;
+    .export-btn{
+      color: #ffffff;
+    }
+  }
+  .arrows{
+    display: flex;
+    float: right;
+    .arrow-btn{
+    }
   }
 </style>
