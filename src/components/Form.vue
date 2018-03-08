@@ -15,7 +15,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('company')}">
           <label class="control-label" for="company">Naziv kompanije*</label>
           <p :class="{ 'control': true }">
-            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('company') }" id="company" name="cause" type="text" v-model="formData.company" class="form-control" placeholder="">
+            <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('company') }" id="company" name="company" type="text" v-model="formData.company" class="form-control" placeholder="">
             <span v-show="errors.has('company')" class="help-block">{{ errors.first('company') }}</span>
           </p>
         </div>

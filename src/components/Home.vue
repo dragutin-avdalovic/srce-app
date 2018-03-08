@@ -36,34 +36,35 @@
       </div>
     </div>
     <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
+    <TableSortable :items="items" :fields="fields" :stacked="stacked"></TableSortable>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData" :formData="formData"></Form>
     </modal>
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
-          <div class="export">
-            <i class="fa fa-file-pdf-o"></i>
-            <i class="far fa-file-excel"></i>
-          </div>
-        </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="arrows">
-              <i class="far fa-file-pdf"></i>
-              <i class="far fa-file-excel"></i>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+        <b-button>
+          <i class="far fa-file-excel" style="color: white"></i>
+        </b-button>
       </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+          <b-button>
+            <i class="far fa-file-pdf"></i>
+          </b-button>
+        </div>
+    </div>
     </div>
     <Footer></Footer>
 </div>
 </template>
 
 <script>
+import TableSortable from '@/components/TableSortable'
 import Table from '@/components/Table'
 import Header from '@/components/Header'
 import Form from '@/components/Form'
 import Footer from '@/components/Footer'
 import axios from 'axios'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'HelloWorld',
@@ -72,8 +73,9 @@ export default {
       msg: 'Srce za djecu',
       items: [],
       seen: 'true',
+      stacked: 'md',
       formData: {
-        type: '',
+        type: null,
         company: '',
         name: '',
         email: '',
@@ -81,8 +83,45 @@ export default {
         city: '',
         amount: '',
         date: '',
-        cause: '',
-      }
+        cause: ''
+      },
+      fields: [
+        {
+          key: 'name',
+          label: 'OSNOVNI PODACI',
+          sortable: true
+        },
+        {
+          key: 'address',
+          label: 'ADRESA',
+          sortable: true
+        },
+        {
+          key: 'company',
+          label: 'NAZIV KOMPANIJE',
+          sortable: true,
+          variant: 'danger'
+        },
+        {
+          key: 'date',
+          label: 'DATUM',
+          sortable: true
+        },
+        {
+          key: 'address',
+          label: 'ADRESA',
+          sortable: true
+        },
+        {
+          key: 'cause',
+          label: 'SVRHA',
+          sortable: true
+        },
+        {
+          key: 'amount',
+          label: 'IZNOS',
+          sortable: true
+        }]
     }
   },
   mounted () {
@@ -90,6 +129,19 @@ export default {
     this.getData()
   },
   methods: {
+    clearData () {
+      this.formData = Object.assign({}, this.formData, {
+        type: null,
+        company: '',
+        name: '',
+        email: '',
+        address: '',
+        city: '',
+        amount: '',
+        date: '',
+        cause: ''
+      })
+    },
     show () {
       this.$modal.show('modal_entry')
     },
@@ -127,8 +179,7 @@ export default {
           .catch((error) => {
             console.log(error)
           })
-      }
-      else {
+      } else {
         axios.post('http://45.76.90.178:3000/api/v1/users', event)
           .then((response) => {
             console.log(response)
@@ -141,6 +192,7 @@ export default {
             console.log(error)
           })
       }
+      this.clearData()
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -165,7 +217,9 @@ export default {
     Table,
     Header,
     Form,
-    Footer
+    Footer,
+    TableSortable,
+    FontAwesomeIcon
   }
 }
 </script>
@@ -173,7 +227,7 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
-  /*@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";*/
+  @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css";
 .col-fix{
   display: flex;
   justify-content: space-between;
