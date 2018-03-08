@@ -1,24 +1,38 @@
 <template>
-  <div>
+  <div class="center">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-  <div class="btn-group btn-group-vertical" data-toggle="buttons">
-    <label class="btn">
-      <input type="checkbox">
-      <i class="fa fa-square-o fa-2x"></i>
-      <i class="fa fa-check-square-o fa-2x"></i>
-    </label>
-  </div>
+    <div class="btn-group btn-group-vertical" data-toggle="buttons">
+      <label class="btn center">
+        <input type="checkbox" v-on:click="onChecked()" v-bind:checked="checked">
+        <i class="fa fa-square-o fa-2x"></i>
+        <i class="fa fa-check-square-o fa-2x"></i>
+      </label>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'checkbox'
+  name: 'checkbox',
+  props: {
+    checked: {
+      default: false
+    }
+  },
+  methods: {
+    onChecked () {
+      this.$emit('onChecked', true)
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+  .center {
+    display: flex;
+    align-items: center;
+  }
 
   div[data-toggle="buttons"] label {
     display: flex;

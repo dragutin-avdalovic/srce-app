@@ -3,9 +3,9 @@
     <div class="container">
     <Header></Header>
     <div class="row">
-      <div class="col-6 col-fix">
+      <div class="col-lg-6 col-fix">
         <div class="dropdown donators">
-          <a class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Donatori
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -15,11 +15,11 @@
           </div>
         </div>
       </div>
-      <div class="col-6 col-fix">
+      <div class="col-lg-6 col-fix">
         <div class="div-fix">
           <p>Poredaj po:</p>
           <div class="dropdown sort">
-            <a class="btn btn-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="dropdown-toggle" href="#" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Najnovije
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -73,6 +73,12 @@ export default {
       // Make a request for a user with a given ID
       axios.get('http://45.76.90.178:3000/api/v1/users')
         .then((response) => {
+          response.data.map(item => {
+            Object.assign(item, {
+              checked: false
+            })
+            return item
+          })
           this.items = response.data
           this.seen = true
         })
@@ -146,6 +152,9 @@ export default {
      font-weight: bold;
      font-family: Open Sans;
      padding: 0;
+     &:hover, &:focus {
+       text-decoration: none;
+     }
    }
 }
   button{
@@ -178,6 +187,9 @@ export default {
       font-weight: bold;
       font-family: Open Sans;
       padding: 0;
+      &:hover, &:focus {
+        text-decoration: none;
+      }
     }
   }
   p{
@@ -188,7 +200,6 @@ export default {
     padding-right: 5px;
     margin: 0;
   }
-  @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
   .v--modal-overlay {
     background: rgba(255, 255, 255, 0.6);
   }
