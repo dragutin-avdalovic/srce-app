@@ -1,18 +1,6 @@
 <template>
-  <b-container fluid>
-    <!-- User Interface controls -->
-    <b-row>
-      <b-col col cols="6" md="6" lg="6" xl="6" class="my-1">
-        <b-form-group horizontal label="Filter" class="mb-0">
-          <b-input-group>
-            <b-form-input v-model="filter" placeholder="Type to Search" />
-            <b-input-group-append>
-              <b-btn :disabled="!filter" @click="filter = ''">Clear</b-btn>
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
-      </b-col>
-      <b-col col cols="6" md="6" lg="6" xl="6" class="my-1">
+  <div>
+      <div>
         <b-form-group horizontal label="Sort" class="mb-0">
           <b-input-group>
             <b-form-select v-model="sortBy" :options="sortOptions">
@@ -24,16 +12,21 @@
             </b-form-select>
           </b-input-group>
         </b-form-group>
-      </b-col>
-      <b-col col cols="6" md="6" lg="6" xl="6" class="my-1">
+      </div>
+      <div>
         <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
-      </b-col>
-      <b-col col cols="6" md="6" lg="6" xl="6" class="my-1">
+      </div>
+      <div>
         <b-form-group horizontal label="Per page" class="mb-0">
           <b-form-select :options="pageOptions" v-model="perPage" />
         </b-form-group>
-      </b-col>
-    </b-row>
+      </div>
+      <div class="search">
+        <div>
+          <b-form-inputv-model="filter" placeholder="Type to Search" />
+        </div>
+          <b-button :disabled="!filter" @click="filter = ''" variant="danger" class="search-right">Clear</b-button>
+      </div>
     <b-table @update="onChildUpdate" show-empty :sort-by.sync="sortBy"
              :sort-desc.sync="sortDesc"
              :items="items"
@@ -77,11 +70,7 @@
         </b-card>
       </template>
     </b-table>
-    <!-- Info modal -->
-    <b-modal id="modalInfo" @hide="resetModal" :title="modalInfo.title" ok-only>
-      <pre>{{ modalInfo.content }}</pre>
-    </b-modal>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -94,8 +83,7 @@ export default {
       totalRows: this.items.length,
       pageOptions: [ 5, 10, 15 ],
       sortDesc: false,
-      filter: null,
-      modalInfo: { title: '', content: '' }
+      filter: null
     }
   },
   computed: {
@@ -118,6 +106,18 @@ export default {
   }
 }
 </script>
-<style>
-
+<style scoped="scss">
+  .search
+  {
+    display:flex;
+    flex-direction:row;
+    .search_left
+    {
+      display: flex;
+    }
+    .search_right
+    {
+      display: flex;
+    }
+  }
 </style>
