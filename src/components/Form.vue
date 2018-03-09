@@ -99,8 +99,7 @@ export default{
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.save()
-        }
-        else {
+        } else {
         }
       })
     }

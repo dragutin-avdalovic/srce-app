@@ -36,7 +36,7 @@
       </div>
     </div>
     <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
-    <TableSortable :items="items" :fields="fields" :stacked="stacked"></TableSortable>
+    <TableSortable :items="items" :fieldsA="fields" :stacked="stacked"></TableSortable>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData" :formData="formData"></Form>
     </modal>
@@ -87,13 +87,15 @@ export default {
       },
       fields: [
         {
-          key: 'name',
+          key: 'namemail',
           label: 'OSNOVNI PODACI',
+          formatter: 'nameMail',
           sortable: true
         },
         {
-          key: 'address',
+          key: 'cityaddress',
           label: 'ADRESA',
+          formatter: 'cityAddress',
           sortable: true
         },
         {
@@ -121,7 +123,9 @@ export default {
           key: 'amount',
           label: 'IZNOS',
           sortable: true
-        }]
+        },
+        { key: 'actions', label: 'Actions' }
+      ]
     }
   },
   mounted () {
@@ -129,6 +133,12 @@ export default {
     this.getData()
   },
   methods: {
+    nameMail (value) {
+      return `${value.name} ${value.email}`
+    },
+    cityAddress (value) {
+      return `${value.city} ${value.address}`
+    },
     clearData () {
       this.formData = Object.assign({}, this.formData, {
         type: null,
