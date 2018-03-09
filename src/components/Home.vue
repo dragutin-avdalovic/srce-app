@@ -126,8 +126,7 @@ export default {
           .catch((error) => {
             console.log(error)
           })
-      }
-      else {
+      } else {
         axios.post('http://45.76.90.178:3000/api/v1/users', event)
           .then((response) => {
             console.log(response)
