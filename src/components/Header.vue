@@ -25,10 +25,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+  @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+  @import '../../node_modules/bootstrap/scss/bootstrap.scss';
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   .nav-bar{
-    padding-bottom: 10vh;
+    padding-bottom: 8vh;
   }
   .nav-logo{
     padding-top: 3vh;
@@ -52,16 +54,5 @@ export default {
     color: #ffffff;
     background-color: $red;
     outline: none;
-    /*:hover {*/
-      /*color: #ffffff !important;*/
-      /*outline: none;*/
-      /*box-shadow:none;*/
-    /*}*/
-    /*:focus {*/
-      /*color: #ffffff;*/
-      /*outline: none !important;*/
-      /*box-shadow:none;*/
-      /*border: none !important;*/
-    /*}*/
   }
 </style>

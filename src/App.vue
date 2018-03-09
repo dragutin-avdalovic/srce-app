@@ -17,10 +17,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import "assets/mixins.scss";
+@import "assets/variables.scss";
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
