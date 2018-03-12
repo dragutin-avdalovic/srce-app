@@ -22,9 +22,6 @@
         </p>
       </template>
       <!-- A virtual composite column -->
-      <template slot="check" slot-scope="data">
-        <Checkbox ></Checkbox>
-      </template>
       <template slot="namemail" slot-scope="data">
         <div class="top-cell-part">{{data.item.name}}</div>
         <div class="bottom-cell-part">{{data.item.email}}</div>
@@ -34,7 +31,7 @@
         <div class="bottom-cell-part">{{data.item.address}}</div>
       </template>
       <template slot="actions" slot-scope="row">
-        <div v-dropdown:list-dropdown.bottom @click.stop="select(item._id)">
+        <div v-dropdown:list-dropdown.bottom @click.stop="select(data.item._id)">
           <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
         </div>
       </template>
@@ -49,7 +46,7 @@
 import Checkbox from '@/components/Checkbox'
 import Form from './Form'
 export default {
-  components: {Form},
+  components: {Form, Checkbox},
   props: ['items', 'fieldsA', 'stacked'],
   data () {
     return {
