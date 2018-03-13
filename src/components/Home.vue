@@ -1,73 +1,36 @@
 <template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
-  <div>
+  <div class="">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
     <div class="container">
     <Header></Header>
-    <div class="row">
-      <div class="col-lg-6 col-fix">
-        <div class="dropdown donators">
-          <a class="dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Donatori
-            <i class="fa fa-search"></i>
-            <i class="fa fa-file-pdf"></i>
-            <i class="fa fa-file-excel"></i>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-fix">
-        <div class="div-fix">
-          <p>Poredaj po:</p>
-          <div class="dropdown sort">
-            <a class="dropdown-toggle" href="#" id="dropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Najnovije
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-        </div>
-        <button v-on:click="show()">Novi unos</button>
-      </div>
-    </div>
-    <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
+    <!--<Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>-->
     <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData" :formData="formData"></Form>
     </modal>
-    <div class="row">
-      <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">-->
-        <!--<b-button>-->
-          <!--<i class="far fa-file-excel" style="color: white"></i>-->
-        <!--</b-button>-->
-      <!--</div>-->
-        <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">-->
-          <!--<b-button>-->
-            <!--<i class="far fa-file-pdf"></i>-->
-          <!--</b-button>-->
-        <!--</div>-->
-    </div>
     </div>
     <Footer></Footer>
-</div>
+  </div>
 </template>
 
 <script>
 import TableSortable from '@/components/TableSortable'
-import Table from '@/components/Table'
 import Header from '@/components/Header'
 import Form from '@/components/Form'
 import Footer from '@/components/Footer'
+import Table from '@/components/Table'
 import axios from 'axios'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+
 
 export default {
   name: 'HelloWorld',
+  components: {
+    TableSortable,
+    Table,
+    Header,
+    Form,
+    Footer
+  },
   data () {
     return {
       msg: 'Srce za djecu',
@@ -222,27 +185,19 @@ export default {
           }
         })
     }
-  },
-  components: {
-    Table,
-    Header,
-    Form,
-    Footer,
-    TableSortable,
-    FontAwesomeIcon
   }
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css";
-.col-fix{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
+  .col-fix{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 .div-fix{
   width: auto;
   display: flex;
@@ -323,5 +278,56 @@ export default {
     float: right;
     .arrow-btn{
     }
+  }
+  .fix{
+    display: flex;
+    color: #333333;
+  }
+  .color-fix {
+    color: #A2A1A1;
+  }
+  .weight-fix{
+    font-weight: normal;
+    font-size: 14px;
+  }
+  .red{
+    color: #EB2D3C;
+  }
+  button{
+    background-color: transparent;
+    width: 100px;
+    :hover{
+      border-color: white;
+    }
+  }
+  .list-dropdown
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .list_row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      cursor: pointer;
+      @include spacing-tb('p', 0.5, em);
+      @include spacing-l('p', 1.5, em);
+      p {
+        @include spacing-b('m', 0, em);
+        @include spacing-l('p', 1, em);
+        @include font(1.1, em, $text-dark);
+      }
+      i {
+        @include font(1.2, em, $text-dark);
+      }
+      &:hover
+      {
+        background-color: $text-gray;
+      }
+    }
+  }
+  .all{
+    padding: 0 0 0 8px;
   }
 </style>

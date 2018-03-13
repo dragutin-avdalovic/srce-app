@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
     <div class="content">
       <router-view/>
     </div>
@@ -7,19 +8,13 @@
 </template>
 
 <script>
-import Header from '@/components/Header'
 
 export default {
-  name: 'App',
-  components: {
-    Header
-  }
+  name: 'App'
 }
 </script>
 
 <style lang="scss" scoped>
-@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
 @import "assets/mixins.scss";
 
 #app {

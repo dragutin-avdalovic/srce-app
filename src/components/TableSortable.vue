@@ -1,71 +1,110 @@
 <template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
-  <div class="container">
-    <div class="search">
-      <input v-model="filter" placeholder="Type to Search" />
-      <button :disabled="!filter" @click="filter = ''">Clear</button>
-    </div>
-    <b-table @update="onChildUpdate" show-empty :sort-by.sync="sortBy"
-             :sort-desc.sync="sortDesc"
-             :items="items"
-             :fields="fieldsA"
-             :stacked="stacked"
-             :current-page="currentPage"
-             :per-page="perPage"
-             :filter="filter"
-             @filtered="onFiltered">
-      <template slot="table-caption">
-        <p>
-          {{totalRows}}
-          Sorting By: <b>{{ sortBy }}</b>,
-          Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
-        </p>
-      </template>
-      <!-- A virtual composite column -->
-      <template slot="namemail" slot-scope="data">
-        <div class="top-cell-part">{{data.item.name}}</div>
-        <div class="bottom-cell-part">{{data.item.email}}</div>
-      </template>
-      <template slot="cityaddress" slot-scope="data">
-        <div class="top-cell-part">{{data.item.city}}</div>
-        <div class="bottom-cell-part">{{data.item.address}}</div>
-      </template>
-      <template slot="actions" slot-scope="row">
-        <div v-dropdown:list-dropdown.bottom @click.stop="select(data.item._id)">
-          <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
+  <div class="row">
+    <div class="col-lg-6">
+      <button v-dropdown:list-dropdown-2.right v-on:click="" class="donators-btn">
+        <div class="donators-label">Donatori</div>
+        <i class="fa fa-chevron-down donators-chevron"></i>
+      </button>
+      <dropdown  v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
+        <div class="list_row" id="edit"  v-on:click="">
+          <p>Institucija</p>
         </div>
-      </template>
-    </b-table>
-    <div class="pagination">
-      <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
+        <div class="list_row" id="delete" v-on:click="">
+          <p>Fizičko lice</p>
+        </div>
+        <div class="list_row" id="delete" v-on:click="">
+          <p>Pravno lice</p>
+        </div>
+      </dropdown>
     </div>
+    <div class="col-lg-6">
+      <form class="search form-inline my-2 my-lg-0">
+        <input v-model="filter" class="form-control mr-sm-2" type="search" placeholder="Type to Search" aria-label="Search">
+        <button class="btn-search btn my-2 my-sm-0" :disabled="!filter" @click="filter = ''" ><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="col-lg-12">
+      <b-table  show-empty :sort-by.sync="sortBy"
+                :sort-desc.sync="sortDesc"
+                :items="items"
+                :fields="fieldsA"
+                :stacked="stacked"
+                :current-page="currentPage"
+                :per-page="perPage"
+                :filter="filter"
+                @filtered="onFiltered">
+        <!--<template slot="table-caption">-->
+          <!--<p>-->
+            <!--{{totalRows}}-->
+            <!--Sorting By: <b>{{ sortBy }}</b>,-->
+            <!--Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>-->
+          <!--</p>-->
+        <!--</template>-->
+        <!-- A virtual composite column -->
+        <template slot="namemail" slot-scope="data">
+          <div class="top-cell-part">{{data.item.name}}</div>
+          <div class="bottom-cell-part">{{data.item.email}}</div>
+        </template>
+        <template slot="cityaddress" slot-scope="data">
+          <div class="top-cell-part">{{data.item.city}}</div>
+          <div class="bottom-cell-part">{{data.item.address}}</div>
+        </template>
+        <template slot="actions" slot-scope="data">
+          <div v-dropdown:list-dropdown.bottom v-on:click="select(data.item._id)">
+            <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
+          </div>
+        </template>
+      </b-table>
+    </div>
+    <div class="col-lg-12 col-xs-12 col-md-12 col-12 pagination_parent">
+      <div class="pagination">
+        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
+      </div>
+    </div>
+    <dropdown  v-if="seen" name="list-dropdown" class="list-dropdown">
+      <div class="list_row" id="edit"  v-on:click="edit()">
+        <i class="fa fa-pencil"></i>
+        <p>Uredi</p>
+      </div>
+      <div class="list_row" id="delete" v-on:click="onDelete()">
+        <i class="fa fa-trash-o"></i>
+        <p>Izbriši</p>
+      </div>
+    </dropdown>
   </div>
 </template>
 
 <script>
 import Checkbox from '@/components/Checkbox'
-import Form from './Form'
+
 export default {
-  components: {Form, Checkbox},
-  props: ['items', 'fieldsA', 'stacked'],
+  components: {Checkbox},
+  props: ['items', 'fieldsA', 'stacked', 'seen'],
   data () {
     return {
       currentPage: 1,
       perPage: 5,
       totalRows: this.items.length,
       sortDesc: false,
-      filter: null
+      filter: null,
+      sortBy: 'amount',
+      id: ''
     }
   },
-  computed: {
-  },
   methods: {
-    onChildUpdate (items) {
-      this.data = items
-    },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+    select (id) {
+      this.id = id
+    },
+    edit () {
+      this.$emit('clicked', this.id)
+    },
+    onDelete () {
+      this.$emit('delete', this.id)
     }
   }
 }
@@ -73,7 +112,6 @@ export default {
 <style lang="scss">
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
-
   td[data-label="IZNOS (KM)"] {
     color: $red;
   }
@@ -109,10 +147,111 @@ export default {
   {
     float:right;
   }
-  .pagination
+  .fix{
+    display: flex;
+    color: #333333;
+  }
+  .color-fix {
+    color: #A2A1A1;
+  }
+  .weight-fix{
+    font-weight: normal;
+    font-size: 14px;
+  }
+  .red{
+    color: #EB2D3C;
+  }
+  button{
+    background-color: transparent;
+    width: 100px;
+    :hover{
+      border-color: white;
+    }
+  }
+  .list-dropdown
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .list_row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      cursor: pointer;
+      @include spacing-tb('p', 0.5, em);
+      @include spacing-l('p', 1.5, em);
+      p {
+        @include spacing-b('m', 0, em);
+        @include spacing-l('p', 1, em);
+        @include font(1.1, em, $text-dark);
+      }
+      i {
+        @include font(1.2, em, $text-dark);
+      }
+      &:hover
+      {
+        background-color: $text-gray;
+      }
+    }
+  }
+  .all{
+    padding: 0 0 0 8px;
+  }
+  .pagination_parent
   {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .list-dropdown-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .list_row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      cursor: pointer;
+      @include spacing-tb('p', 0.5, em);
+      @include spacing-l('p', 1.5, em);
+      p {
+        @include spacing-b('m', 0, em);
+        @include spacing-l('p', 1, em);
+        @include font(1.1, em, $text-dark);
+      }
+      i {
+        @include font(1.2, em, $text-dark);
+      }
+      &:hover {
+        background-color: $text-gray;
+      }
+    }
+  }
+  .donators-btn
+  {
+    color: $red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    @include font(1.7,600,$red);
+    width: 6em;
+    outline: none;
+    border: none;
+    .donators-label
+    {
+      @include spacing-r(p,0.5,em);
+    }
+    .donators-chevron
+    {
+      display: flex;
+    }
+    &:focus
+    {
+      outline: none;
+      border: none;
+    }
   }
 </style>

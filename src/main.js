@@ -7,13 +7,11 @@ import VModal from 'vue-js-modal'
 import Dropdown from 'vue-js-dropdown'
 import VeeValidate from 'vee-validate'
 import BootstrapVue from 'bootstrap-vue'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
-Vue.use(BootstrapVue)
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
 Vue.use(Dropdown)
 Vue.use(VModal)
-Vue.use(FontAwesomeIcon)
+Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
 
