@@ -12,8 +12,7 @@
              :current-page="currentPage"
              :per-page="perPage"
              :filter="filter"
-             @filtered="onFiltered"
-             hover outlined>
+             @filtered="onFiltered">
       <template slot="table-caption">
         <p>
           {{totalRows}}
@@ -71,7 +70,41 @@ export default {
   }
 }
 </script>
-<style scoped="scss">
+<style lang="scss">
+  @import "../assets/mixins.scss";
+  @import "../assets/variables.scss";
+
+  td[data-label="IZNOS (KM)"] {
+    color: $red;
+  }
+  table {
+    margin-top: 5vh;
+    width: 100%;
+    font-family: Open Sans;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: $text-dark;
+    thead{
+      th{
+        border: none;
+        color: $text-gray;
+      }
+    }
+    tbody{
+      box-shadow: 0 2px 5px $text-gray;
+      border-collapse: collapse;
+      td{
+        text-align: left;
+        vertical-align: center !important;
+        .bottom-cell-part
+        {
+          font-size: 1em;
+          color: $text-gray;
+          font-weight:500;
+        }
+      }
+      }
+  }
   .search
   {
     float:right;

@@ -121,10 +121,10 @@ export default {
         },
         {
           key: 'amount',
-          label: 'IZNOS',
+          label: 'IZNOS (KM)',
           sortable: true
         },
-        { key: 'actions', label: 'Actions' }
+        { key: 'actions', label: '' }
       ]
     }
   },
