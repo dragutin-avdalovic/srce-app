@@ -218,6 +218,17 @@ export default {
     .pagination
     {
       margin: 5px 0;
+      li>a, li>span
+      {
+        color: #d9534f;
+      }
+      >.active>a, >.active>span, >.active>a:hover, >.active>span:hover, >.active>a:focus, >.active>span:focus
+      {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d9534f;
+        outline: none;
+      }
     }
   }
   .list-dropdown-2 {
