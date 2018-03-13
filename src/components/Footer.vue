@@ -23,11 +23,9 @@ export default {
   footer{
     width: 100%;
     font-family: Open Sans;
-    margin-top: 5vh;
+    margin-top: 1vh;
     background: $red;
     bottom: 0px;
-    left: 0px;
-    right: 0px;
     @include spacing-tb('p', 2 , em);
     @include spacing-lr('p', 10 ,%);
   }

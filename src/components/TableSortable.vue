@@ -1,29 +1,34 @@
 <template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
-  <div class="row">
-    <div class="col-lg-6">
-      <button v-dropdown:list-dropdown-2.right v-on:click="" class="donators-btn">
+  <div>
+    <div class="row row_interactive">
+      <div class="left-filter">
+      <button v-dropdown:list-dropdown-2.bottom class="donators-btn">
         <div class="donators-label">Donatori</div>
         <i class="fa fa-chevron-down donators-chevron"></i>
       </button>
       <dropdown  v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
-        <div class="list_row" id="edit"  v-on:click="">
+        <div class="list_row">
           <p>Institucija</p>
         </div>
-        <div class="list_row" id="delete" v-on:click="">
+        <div class="list_row">
           <p>Fizičko lice</p>
         </div>
-        <div class="list_row" id="delete" v-on:click="">
+        <div class="list_row">
           <p>Pravno lice</p>
         </div>
       </dropdown>
+      </div>
+      <div class="right-button">
+        <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+      </div>
     </div>
-    <div class="col-lg-6">
+    <div class="row">
       <form class="search form-inline my-2 my-lg-0">
         <input v-model="filter" class="form-control mr-sm-2" type="search" placeholder="Type to Search" aria-label="Search">
-        <button class="btn-search btn my-2 my-sm-0" :disabled="!filter" @click="filter = ''" ><i class="fa fa-search"></i></button>
+        <button class="btn-search btn my-2 my-sm-0" :disabled="!filter" @click="filter = ''" ><i class="fa fa-trash-o"></i></button>
       </form>
     </div>
-    <div class="col-lg-12">
+    <div class="row">
       <b-table  show-empty :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 :items="items"
@@ -56,7 +61,7 @@
         </template>
       </b-table>
     </div>
-    <div class="col-lg-12 col-xs-12 col-md-12 col-12 pagination_parent">
+    <div class="row pagination_parent">
       <div class="pagination">
         <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
       </div>
@@ -92,6 +97,12 @@ export default {
     }
   },
   methods: {
+    show () {
+      this.$modal.show('modal_entry')
+    },
+    hide () {
+      this.$modal.hide('modal_entry')
+    },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
@@ -112,6 +123,7 @@ export default {
 <style lang="scss">
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
+  @import "../assets/general.scss";
   td[data-label="IZNOS (KM)"] {
     color: $red;
   }
@@ -203,6 +215,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    .pagination
+    {
+      margin: 5px 0;
+    }
   }
   .list-dropdown-2 {
     display: flex;
@@ -252,6 +268,45 @@ export default {
     {
       outline: none;
       border: none;
+    }
+  }
+  .btn-search
+  {
+    background-color: $red;
+    i{
+      font-size: 1.2em;
+      color: $white;
+    }
+  }
+  .row_interactive
+  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 1em 15px !important;
+    .left-filter
+    {
+      display: flex;
+      flex: 1;
+      justify-content: flex-start;
+    }
+    .right-button
+    {
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+      .heart-button-new
+      {
+        @extend .heart-button;
+        width: 10em;
+        @include spacing-tb('p',1, em);
+        @include spacing-lr('p',0, em);
+        .new-text
+        {
+          width: 100%;
+        }
+      }
     }
   }
 </style>

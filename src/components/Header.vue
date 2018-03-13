@@ -24,40 +24,17 @@ export default {
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   .nav-bar{
-    padding-bottom: 10vh;
+    padding-bottom: 5vh;
   }
   .nav-logo{
     padding-top: 3vh;
     display: block;
     justify-content: space-between;
     vertical-align: middle;
+    @include spacing-lr('p', 10 ,%);
   }
   .logo {
     width: 200px;
     padding-top: 10px;
-  }
-  .search{
-    display: flex;
-    float: right;
-    padding-top: 15px;
-
-  }
-  .btn-search{
-    margin-left: 10px;
-    font-family: "Open Sans";
-    color: #ffffff;
-    background-color: $red;
-    outline: none;
-    /*:hover {*/
-      /*color: #ffffff !important;*/
-      /*outline: none;*/
-      /*box-shadow:none;*/
-    /*}*/
-    /*:focus {*/
-      /*color: #ffffff;*/
-      /*outline: none !important;*/
-      /*box-shadow:none;*/
-      /*border: none !important;*/
-    /*}*/
   }
 </style>

@@ -1,8 +1,8 @@
 <template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
-  <div class="">
+  <div>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <div class="container">
     <Header></Header>
+    <div class="content container">
     <!--<Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>-->
     <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
     <modal name="modal_entry" height="auto" :scrollable="true">
@@ -20,7 +20,6 @@ import Form from '@/components/Form'
 import Footer from '@/components/Footer'
 import Table from '@/components/Table'
 import axios from 'axios'
-
 
 export default {
   name: 'HelloWorld',
@@ -329,5 +328,9 @@ export default {
   }
   .all{
     padding: 0 0 0 8px;
+  }
+  .content
+  {
+    min-height: 66vh;
   }
 </style>

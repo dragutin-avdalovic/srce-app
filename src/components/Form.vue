@@ -69,7 +69,7 @@
           </p>
         </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-          <button class="button_save" type="submit">Spremi</button>
+          <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
         </div>
       </div>
     </form>
@@ -149,6 +149,13 @@ export default{
     {
       @extend .heart-button;
       float: right;
+      display: flex;
+      justify-content: center;
+      .save-text
+      {
+        font-size: 1em;
+        @include spacing-tb(m, 0, em);
+      }
     }
     .modal-close
     {
@@ -156,7 +163,7 @@ export default{
       float: right;
       border: none;
       @include font(2, 500, $red);
-      margin-right: -1em;
+      margin-right: -2.5em;
       margin-top: -0.3em;
       &:focus
       {
