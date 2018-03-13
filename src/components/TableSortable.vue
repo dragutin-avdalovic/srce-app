@@ -7,13 +7,13 @@
         <i class="fa fa-chevron-down donators-chevron"></i>
       </button>
       <dropdown  v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
-        <div class="list_row">
+        <div class="list_row" id="Institucija"  v-on:click="filterItems(id)">
           <p>Institucija</p>
         </div>
-        <div class="list_row">
+        <div class="list_row" id="Fizicko lice"  v-on:click="filterItems(id)">
           <p>Fizičko lice</p>
         </div>
-        <div class="list_row">
+        <div class="list_row" id="Pravno lice"  v-on:click="filterItems(id)">
           <p>Pravno lice</p>
         </div>
       </dropdown>
@@ -116,6 +116,9 @@ export default {
     },
     onDelete () {
       this.$emit('delete', this.id)
+    },
+    filterItems (id) {
+      console.log(id)
     }
   }
 }
@@ -263,8 +266,9 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     @include font(1.7,600,$red);
-    width: 6em;
+    width: 7em;
     outline: none;
     border: none;
     .donators-label
