@@ -188,6 +188,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+  @import '../../node_modules/bootstrap/scss/bootstrap.scss';
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css";

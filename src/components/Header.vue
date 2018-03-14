@@ -21,6 +21,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+  @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+  @import '../../node_modules/bootstrap/scss/bootstrap.scss';
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
   .nav-bar{
@@ -36,5 +38,18 @@ export default {
   .logo {
     width: 200px;
     padding-top: 10px;
+  }
+  .search{
+    display: flex;
+    float: right;
+    padding-top: 15px;
+
+  }
+  .btn-search{
+    margin-left: 10px;
+    font-family: "Open Sans";
+    color: #ffffff;
+    background-color: $red;
+    outline: none;
   }
 </style>
