@@ -6,7 +6,7 @@
         <div class="donators-label">Donatori</div>
         <i class="fa fa-chevron-down donators-chevron"></i>
       </button>
-      <dropdown v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
+      <dropdown name="list-dropdown-2" class="list-dropdown-2">
           <div  v-bind:key="index" v-bind:item="item" v-for="(item, index) in limits"  class="list_row" v-on:click.prevent="filterItems">
             <p>{{item}}</p>
           </div>
@@ -146,17 +146,18 @@ export default {
     tbody{
       box-shadow: 0 2px 5px $text-gray;
       border-collapse: collapse;
-      td{
-        text-align: left;
-        vertical-align: center !important;
-        .bottom-cell-part
-        {
-          font-size: 1em;
-          color: $text-gray;
-          font-weight:500;
+      tr{
+          td{
+            text-align: left;
+            .bottom-cell-part
+            {
+              font-size: 1em;
+              color: $text-gray;
+              font-weight:500;
+            }
+            }
         }
-      }
-      }
+    }
   }
   .search
   {
