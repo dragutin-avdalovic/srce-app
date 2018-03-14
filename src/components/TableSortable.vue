@@ -2,20 +2,14 @@
   <div>
     <div class="row row_interactive">
       <div class="left-filter">
-      <button v-dropdown:list-dropdown-2.bottom class="donators-btn" @change="filterItems()">
+      <button v-dropdown:list-dropdown-2.bottom class="donators-btn">
         <div class="donators-label">Donatori</div>
         <i class="fa fa-chevron-down donators-chevron"></i>
       </button>
-      <dropdown  v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
-        <div class="list_row" id="Institucija">
-          <p>Institucija</p>
-        </div>
-        <div class="list_row" id="Fizicko lice">
-          <p>Fizičko lice</p>
-        </div>
-        <div class="list_row" id="Pravno lice">
-          <p>Pravno lice</p>
-        </div>
+      <dropdown v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
+          <div  v-bind:key="index" v-bind:item="item" v-for="(item, index) in limits"  class="list_row" v-on:click.prevent="filterItems">
+            <p>{{item}}</p>
+          </div>
       </dropdown>
       </div>
       <div class="right-button">
@@ -94,7 +88,8 @@ export default {
       filter: null,
       sortBy: 'amount',
       id: '',
-      option: ''
+      selectItems: [1, 2, 3],
+      limits: ['Institucija', 'Pravno lice', 'Fizičko lice']
     }
   },
   methods: {
@@ -118,7 +113,12 @@ export default {
     onDelete () {
       this.$emit('delete', this.id)
     },
-    filterItems () {
+    filterItems: function (event) {
+      var element = event.currentTarget
+      console.log(element)
+      this.filter = element.getAttribute('item')
+      console.log(this.filter)
+      this.$emit('filterByType', this.filter)
     }
   }
 }
