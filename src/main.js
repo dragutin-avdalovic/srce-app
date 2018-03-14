@@ -9,7 +9,7 @@ import VeeValidate from 'vee-validate'
 import BootstrapVue from 'bootstrap-vue'
 
 Vue.use(BootstrapVue)
-Vue.use(VeeValidate)
+Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
 Vue.use(Dropdown)
 Vue.use(VModal)
 
