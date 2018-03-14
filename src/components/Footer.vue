@@ -25,7 +25,8 @@ export default {
     font-family: Open Sans;
     margin-top: 5vh;
     background: $red;
-    bottom:0;
+    margin-bottom: 0;
+    padding-top: 0;
     @include spacing-tb('p', 2 , em);
     @include spacing-lr('p', 10 ,%);
   }
