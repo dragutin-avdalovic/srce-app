@@ -16,6 +16,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/srce',
+      name: 'Srce',
+      component: About
     }
   ]
 })
