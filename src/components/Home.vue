@@ -239,10 +239,7 @@ export default {
   @import '../../node_modules/bootstrap/scss/bootstrap.scss';
   @import "../assets/mixins.scss";
   @import "../assets/variables.scss";
-<<<<<<< HEAD
-=======
   @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css";
->>>>>>> remotes/origin/srce_dragutin
 .col-fix{
   display: flex;
   justify-content: space-between;
