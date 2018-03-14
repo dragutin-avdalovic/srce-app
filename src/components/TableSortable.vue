@@ -2,18 +2,18 @@
   <div>
     <div class="row row_interactive">
       <div class="left-filter">
-      <button v-dropdown:list-dropdown-2.bottom class="donators-btn">
+      <button v-dropdown:list-dropdown-2.bottom class="donators-btn" @change="filterItems()">
         <div class="donators-label">Donatori</div>
         <i class="fa fa-chevron-down donators-chevron"></i>
       </button>
       <dropdown  v-if="seen" name="list-dropdown-2" class="list-dropdown-2">
-        <div class="list_row" id="Institucija"  v-on:click="filterItems(id)">
+        <div class="list_row" id="Institucija">
           <p>Institucija</p>
         </div>
-        <div class="list_row" id="Fizicko lice"  v-on:click="filterItems(id)">
+        <div class="list_row" id="Fizicko lice">
           <p>Fizičko lice</p>
         </div>
-        <div class="list_row" id="Pravno lice"  v-on:click="filterItems(id)">
+        <div class="list_row" id="Pravno lice">
           <p>Pravno lice</p>
         </div>
       </dropdown>
@@ -93,7 +93,8 @@ export default {
       sortDesc: false,
       filter: null,
       sortBy: 'amount',
-      id: ''
+      id: '',
+      option: ''
     }
   },
   methods: {
@@ -117,8 +118,7 @@ export default {
     onDelete () {
       this.$emit('delete', this.id)
     },
-    filterItems (id) {
-      console.log(id)
+    filterItems () {
     }
   }
 }
