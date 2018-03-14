@@ -36,21 +36,21 @@
       </div>
     </div>
     <Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>
-    <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
+    <TableSortable :items="items" :fieldsA="fields" :stacked="stacked"></TableSortable>
     <modal name="modal_entry" height="auto" :scrollable="true">
       <Form @onDataEmit="saveData" :formData="formData"></Form>
     </modal>
     <div class="row">
-      <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">-->
-        <!--<b-button>-->
-          <!--<i class="far fa-file-excel" style="color: white"></i>-->
-        <!--</b-button>-->
-      <!--</div>-->
-        <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">-->
-          <!--<b-button>-->
-            <!--<i class="far fa-file-pdf"></i>-->
-          <!--</b-button>-->
-        <!--</div>-->
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+        <b-button>
+          <i class="far fa-file-excel" style="color: white"></i>
+        </b-button>
+      </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
+          <b-button>
+            <i class="far fa-file-pdf"></i>
+          </b-button>
+        </div>
     </div>
     </div>
     <Footer></Footer>
@@ -64,7 +64,6 @@ import Header from '@/components/Header'
 import Form from '@/components/Form'
 import Footer from '@/components/Footer'
 import axios from 'axios'
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'HelloWorld',
