@@ -1,338 +1,123 @@
-<template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
+<template>
   <div>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <Header></Header>
-    <div class="content container">
-    <!--<Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>-->
-    <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
-    <modal name="modal_entry" height="auto" :scrollable="true">
-      <Form @onDataEmit="saveData" :formData="formData"></Form>
-    </modal>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-6">
+          <div class="heart">
+            <div class="top">
+              <a href=""><img class="note" src="../assets/images/paper-note.svg" alt=""></a>
+            </div>
+            <div class="bottom">
+              <p class="text ">Pristupnica za članove</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-6">
+          <div class="heart">
+            <div class="top">
+              <a href=""><img class="note" src="../assets/images/blank-rounded-speech-balloon.svg" alt=""></a>
+            </div>
+            <div class="bottom">
+              <p class="text">Socijalna karta</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+          <div class="heart">
+            <div class="top">
+              <a href=""><img class="note" src="../assets/images/hands-holding-heart-1.svg" alt=""></a>
+            </div>
+            <div class="bottom">
+              <p class="text">Aplikacija za volontiranje</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+          <div class="heart">
+            <div class="top">
+              <a href=""><img class="note" src="../assets/images/hands-holding-heart.svg" alt=""></a>
+            </div>
+            <div class="bottom">
+              <p class="text">Pristupnica za donatore</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import TableSortable from '@/components/TableSortable'
-import Header from '@/components/Header'
-import Form from '@/components/Form'
-import Footer from '@/components/Footer'
-import Table from '@/components/Table'
-import axios from 'axios'
-
 export default {
-  name: 'HelloWorld',
-  components: {
-    TableSortable,
-    Table,
-    Header,
-    Form,
-    Footer
-  },
-  data () {
-    return {
-      msg: 'Srce za djecu',
-      items: [],
-      seen: 'true',
-      stacked: 'md',
-      formData: {
-        type: null,
-        company: '',
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        amount: '',
-        date: '',
-        cause: ''
-      },
-      fields: [
-        {
-          key: 'namemail',
-          label: 'OSNOVNI PODACI',
-          formatter: 'nameMail',
-          sortable: true
-        },
-        {
-          key: 'cityaddress',
-          label: 'ADRESA',
-          formatter: 'cityAddress',
-          sortable: true
-        },
-        {
-          key: 'company',
-          label: 'NAZIV KOMPANIJE',
-          sortable: true,
-          variant: 'danger'
-        },
-        {
-          key: 'date',
-          label: 'DATUM',
-          sortable: true
-        },
-        {
-          key: 'address',
-          label: 'ADRESA',
-          sortable: true
-        },
-        {
-          key: 'cause',
-          label: 'SVRHA',
-          sortable: true
-        },
-        {
-          key: 'amount',
-          label: 'IZNOS (KM)',
-          sortable: true
-        },
-        { key: 'actions', label: '' }
-      ]
-    }
-  },
-  mounted () {
-    console.log('created called.')
-    this.getData()
-  },
-  methods: {
-    nameMail (value) {
-      return `${value.name} ${value.email}`
-    },
-    cityAddress (value) {
-      return `${value.city} ${value.address}`
-    },
-    clearData () {
-      this.formData = Object.assign({}, this.formData, {
-        type: null,
-        company: '',
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        amount: '',
-        date: '',
-        cause: ''
-      })
-    },
-    show () {
-      this.$modal.show('modal_entry')
-    },
-    hide () {
-      this.$modal.hide('modal_entry')
-    },
-    getData () {
-      // Make a request for a user with a given ID
-      axios.get('http://45.76.90.178:3000/api/v1/users')
-        .then((response) => {
-          response.data.map(item => {
-            Object.assign(item, {
-              checked: false
-            })
-            return item
-          })
-          this.items = response.data
-          this.seen = true
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
-    saveData (event) {
-      console.log(event)
-      if (event._id != null) {
-        axios.put('http://45.76.90.178:3000/api/v1/users/' + event._id, event)
-          .then((response) => {
-            console.log(response)
-            if (response.data === 'successfully edited') {
-              this.hide()
-              this.getData()
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      } else {
-        axios.post('http://45.76.90.178:3000/api/v1/users', event)
-          .then((response) => {
-            console.log(response)
-            if (response.data === 'successfully saved') {
-              this.hide()
-              this.getData()
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      }
-      this.clearData()
-    },
-    fillFormData (event) {
-      this.items.forEach((obj) => {
-        if (obj._id === event) {
-          this.formData = Object.assign({}, this.formData, obj)
-        }
-      })
-      this.show()
-    },
-    deleteItem (event) {
-      axios.delete('http://45.76.90.178:3000/api/v1/users/' + event)
-        .then((response) => {
-          console.log(response)
-          if (response.data === 'successfully removed') {
-            this.seen = false
-            this.getData()
-          }
-        })
-    }
-  }
+  name: 'Srce'
 }
 </script>
-<style lang="scss" scoped>
-  @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-  @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-  @import "../assets/mixins.scss";
-  @import "../assets/variables.scss";
-  @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css";
 
-  .col-fix{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-.div-fix{
-  width: auto;
+<style lang="scss" scoped>
+@import "../assets/styles/mixins";
+@import "../assets/styles/variables";
+
+.search {
+  display: flex;
+  float: right;
+  padding-top: 15px;
+}
+
+.btn-search {
+  margin-left: 10px;
+  font-family: "Open Sans";
+  color: #ffffff;
+  background-color: $red;
+  outline: none;
+}
+
+.heart {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10vh;
-}
- .donators{
-  margin: 0;
-   a{
-     color: $red !important;
-     font-size: 1.8em;
-     font-weight: bold;
-     font-family: Open Sans;
-     padding: 0;
-     &:hover, &:focus {
-       text-decoration: none;
-     }
-   }
-}
-  button{
-    display: flex;
+  flex-direction: column;
+  width: auto;
+  min-height: 200px;
+  min-width: 100px;
+  background-image: url('../assets/images/heart-02.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  .top
+  {
+    padding-top: 1em;
+    flex-grow: 3;
     justify-content: center;
-    background-color: $red;
-    color: #ffffff;
-    width: 100px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1.2em;
-    font-weight: bold;
-    font-family: Open Sans;
-    width: 170px;
-    height: 50px;
-    :focus {
-      outline: none;
-      box-shadow:none;
-    }
-    :active{
-      outline: none;
-      box-shadow:none;
-    }
-  }
-  .sort{
-    border: none;
-    background-color: transparent;
-    a{
-      font-size: 1.2em;
-      font-weight: bold;
-      font-family: Open Sans;
-      padding: 0;
-      &:hover, &:focus {
-        text-decoration: none;
-      }
-    }
-  }
-  p{
-    font-size: 1.2em;
-    color: #A2A1A1;
-    font-family: Open Sans;
-    font-weight: bold;
-    padding-right: 5px;
-    margin: 0;
-  }
-  .v--modal-overlay {
-    background: rgba(255, 255, 255, 0.6);
-  }
-  .export{
-    width: auto;
-    height: 100%;
-    display: flex;
-    float: left;
-    .export-btn{
-      color: #ffffff;
-    }
-  }
-  .arrows{
-    display: flex;
-    float: right;
-    .arrow-btn{
-    }
-  }
-  .fix{
-    display: flex;
-    color: #333333;
-  }
-  .color-fix {
-    color: #A2A1A1;
-  }
-  .weight-fix{
-    font-weight: normal;
-    font-size: 14px;
-  }
-  .red{
-    color: #EB2D3C;
-  }
-  button{
-    background-color: transparent;
-    width: 100px;
-    :hover{
-      border-color: white;
-    }
-  }
-  .list-dropdown
-  {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    .list_row {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      align-items: center;
-      cursor: pointer;
-      @include spacing-tb('p', 0.5, em);
-      @include spacing-l('p', 1.5, em);
-      p {
-        @include spacing-b('m', 0, em);
-        @include spacing-l('p', 1, em);
-        @include font(1.1, em, $text-dark);
-      }
-      i {
-        @include font(1.2, em, $text-dark);
-      }
-      &:hover
-      {
-        background-color: $text-gray;
-      }
+    display: flex;
+    .note{
+      /*position: absolute;*/
+      width: auto;
+      height: 50px;
     }
   }
-  .all{
-    padding: 0 0 0 8px;
-  }
-  .content
+  .bottom
   {
-    min-height: 66vh;
+    flex-grow: 0  ;
+    .text{
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      font-size: 1.2em;
+      font-family: "Open Sans";
+      font-weight: bold;
+      margin-bottom: 0px;
+    }
   }
+  h5{
+    bottom: 0;
+  }
+}
+.text{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 1.2em;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
 </style>

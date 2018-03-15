@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import Checkbox from '@/components/Checkbox'
+import Checkbox from '@/components/partials/Checkbox'
 
 export default {
   components: {Checkbox},
@@ -124,9 +124,10 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import "../assets/mixins.scss";
-  @import "../assets/variables.scss";
-  @import "../assets/general.scss";
+  @import "../../assets/styles/mixins";
+  @import "../../assets/styles/variables";
+  @import "../../assets/styles/general";
+
   td[data-label="IZNOS (KM)"] {
     color: $red;
   }

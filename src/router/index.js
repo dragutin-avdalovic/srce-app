@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import About from '@/components/About'
-import Srce from '@/components/Srce'
+import Main from '@/components/Main'
 
 Vue.use(Router)
 
@@ -19,9 +19,9 @@ export default new Router({
       component: About
     },
     {
-      path: '/Srce',
-      name: 'Srce',
-      component: Srce
+      path: '/main',
+      name: 'Main',
+      component: Main
     }
   ]
 })
