@@ -3,24 +3,26 @@
     <div class="row row_interactive">
       <div class="left-filter">
       <button v-dropdown:list-dropdown-2.bottom class="donators-btn">
-        <div class="donators-label">Donatori</div>
-        <i class="fa fa-chevron-down donators-chevron"></i>
+        <div class="donators-label">Socijalna karta</div>
+        <!--<i class="fa fa-chevron-down donators-chevron"></i>-->
       </button>
-      <dropdown name="list-dropdown-2" class="list-dropdown-2">
-          <div  v-bind:key="index" v-bind:item="item" v-for="(item, index) in limits"  class="list_row" v-on:click.prevent="filterItems">
-            <p>{{item}}</p>
-          </div>
-      </dropdown>
       </div>
-      <div class="right-button">
-        <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+      <div class="right-filter">
+        <div class="search-container">
+          <div class="input-group search">
+            <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+            <span class="input-group-btn">
+              <button class="btn btn-search" :disabled="!filter" @click="filter = ''" ><i class="fa fa-times"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="new">
+          <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+        </div>
       </div>
     </div>
     <div class="row">
-      <form class="search form-inline my-2 my-lg-0">
-        <input v-model="filter" class="form-control mr-sm-2" type="search" placeholder="Type to Search" aria-label="Search">
-        <button class="btn-search btn my-2 my-sm-0" :disabled="!filter" @click="filter = ''" ><i class="fa fa-trash-o"></i></button>
-      </form>
+
     </div>
     <div class="row">
       <b-table  show-empty :sort-by.sync="sortBy"
@@ -160,10 +162,6 @@ export default {
         }
     }
   }
-  .search
-  {
-    float:right;
-  }
   .fix{
     display: flex;
     color: #333333;
@@ -266,11 +264,12 @@ export default {
     color: $red;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-wrap: wrap;
     @include font(1.7,600,$red);
-    width: 7em;
+    @include spacing-lr(p,0,em);
+    width: 12em;
     outline: none;
     border: none;
     .donators-label
@@ -287,41 +286,59 @@ export default {
       border: none;
     }
   }
-  .btn-search
-  {
-    background-color: $red;
-    i{
-      font-size: 1.2em;
-      color: $white;
-    }
-  }
   .row_interactive
   {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
-    margin: 1em 15px !important;
+    margin: 1em 0px !important;
     .left-filter
     {
       display: flex;
       flex: 1;
       justify-content: flex-start;
     }
-    .right-button
+    .right-filter
     {
       display: flex;
       flex: 1;
+      align-items: center;
       justify-content: flex-end;
-      .heart-button-new
+      min-width: 25em;
+      .search-container
       {
-        @extend .heart-button;
-        width: 10em;
-        @include spacing-tb('p',1, em);
-        @include spacing-lr('p',0, em);
-        .new-text
+        padding-right: 2em;
+        .search
         {
-          width: 100%;
+          max-width: 20em;
+          min-width: 15em;
+          .btn-search
+          {
+            max-width: 3.5em;
+            min-width: 3em;
+            background-color: $red;
+            i{
+              text-align: center;
+              font-size: 1em;
+              color:$white;
+
+            }
+          }
+        }
+      }
+      .new
+      {
+        .heart-button-new
+        {
+          @extend .heart-button;
+          width: 10em;
+          @include spacing-tb('p',1, em);
+          @include spacing-lr('p',0, em);
+          .new-text
+          {
+            width: 100%;
+          }
         }
       }
     }
