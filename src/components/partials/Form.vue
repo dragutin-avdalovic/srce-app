@@ -72,7 +72,7 @@
                 </p>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-                <button @click.prevent="next()" class="" type="submit"><p class="save-text">Next</p></button>
+                <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
               </div>
             </div>
         </div>
@@ -141,8 +141,12 @@
               </p>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
-              <button @click.prevent="prev()" class="" type="submit"><p class="save-text">Previous</p></button>
-              <button @click.prevent="next()" class="" type="submit"><p class="save-text">Next</p></button>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
+                <button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
+                <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
+              </div>
             </div>
           </div>
         </div>
@@ -217,6 +221,7 @@
           </div>
         </div>
       </div>
+
       <div v-if="step === 4">
         <div class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
           <div slot="top-right">
@@ -305,7 +310,7 @@ export default{
       ],
       selected: null,
       step: 1,
-      registration:{
+      registration: {
         name: null,
         email: null,
         street: null,
@@ -391,6 +396,11 @@ export default{
       font-size: 1em;
       @include spacing-tb(m, 0, em);
     }
+  }
+  .button_save_left
+  {
+    @extend .button_save;
+    float: left;
   }
   .modal-close
   {
