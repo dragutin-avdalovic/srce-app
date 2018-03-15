@@ -1,11 +1,10 @@
 <template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
-  <div>
+  <div class="container">
     <div class="row row_interactive">
       <div class="left-filter">
-      <button v-dropdown:list-dropdown-2.bottom class="donators-btn">
-        <div class="donators-label">Socijalna karta</div>
-        <!--<i class="fa fa-chevron-down donators-chevron"></i>-->
-      </button>
+        <div class="donators-title">
+          <div class="donators-label">Socijalna karta</div>
+        </div>
       </div>
       <div class="right-filter">
         <div class="search-container">
@@ -22,9 +21,6 @@
       </div>
     </div>
     <div class="row">
-
-    </div>
-    <div class="row">
       <b-table  show-empty :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 :items="items"
@@ -34,13 +30,6 @@
                 :per-page="perPage"
                 :filter="filter"
                 @filtered="onFiltered">
-        <!--<template slot="table-caption">-->
-          <!--<p>-->
-            <!--{{totalRows}}-->
-            <!--Sorting By: <b>{{ sortBy }}</b>,-->
-            <!--Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>-->
-          <!--</p>-->
-        <!--</template>-->
         <!-- A virtual composite column -->
         <template slot="namemail" slot-scope="data">
           <div class="top-cell-part">{{data.item.name}}</div>
@@ -291,13 +280,17 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100%;
-    margin: 1em 0px !important;
+    @include spacing-tb(m,1,em);
     .left-filter
     {
       display: flex;
       flex: 1;
       justify-content: flex-start;
+      .donators-title
+      {
+        color: $red;
+        @include font(1.7,600,$red);
+      }
     }
     .right-filter
     {
@@ -342,5 +335,8 @@ export default {
         }
       }
     }
+  }
+  .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td
+  {  vertical-align: middle !important;
   }
 </style>
