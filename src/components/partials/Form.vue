@@ -387,7 +387,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">PODACI O PORODICI</p>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
                 <label class="control-label" for="note">Bračni status roditelja</label>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
@@ -408,24 +408,24 @@
                     <div class="right"><label>Ostalo</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
                     <div class="right"><label>Ostalo</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
                     <div class="right"><label>Ostalo</label></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
-                <button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
-                <button @click.prevent="submit()" class="button_save" type="submit"><p class="save-text">Save</p></button>
-              </div>
-            </div>
+            <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">-->
+              <!--<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">-->
+                <!--<button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>-->
+              <!--</div>-->
+              <!--<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">-->
+                <!--<button @click.prevent="submit()" class="button_save" type="submit"><p class="save-text">Save</p></button>-->
+              <!--</div>-->
+            <!--</div>-->
           </div>
         </form>
       </div>
