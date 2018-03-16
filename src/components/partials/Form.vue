@@ -390,35 +390,33 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height">
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
                 <label class="control-label" for="note">Bračni status roditelja</label>
-              </div>
-              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                  <div class="left"><Checkbox :checked="true" @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                  <div class="right"><label>Izliječeno</label></div>
-                </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                  <div class="left"><Checkbox @onChecked="setCheckbox($event,2)"></Checkbox></div>
-                  <div class="right"><label>Na održavanju</label></div>
-                </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                  <div class="left"><Checkbox @onChecked="setCheckbox($event,3)"></Checkbox></div>
-                  <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
-                </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                  <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
-                  <div class="right"><label>Ostalo</label></div>
-                </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                  <div class="left"><Checkbox :checked="true" @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                  <div class="right"><label>Izliječeno</label>
-                </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
                     <div class="left"><Checkbox :checked="true" @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Izliječeno</label>
+                    <div class="right"><label>Izliječeno</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,2)"></Checkbox></div>
+                    <div class="right"><label>Na održavanju</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,3)"></Checkbox></div>
+                    <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Ostalo</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Ostalo</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Ostalo</label></div>
+                  </div>
                 </div>
               </div>
-              </div>
-            </div>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
