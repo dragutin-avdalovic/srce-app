@@ -51,20 +51,6 @@
         @include font(1,600,$text-gray);
       }
     }
-    .toggle-btn
-    {
-      color: $text-gray;
-      background: $white;
-      border: 1px solid $text-gray;
-      min-height: 2.5em;
-      max-width: 6.7em;
-      min-width: 6.7em;
-      &:focus
-      {
-        border: 1px solid $red;
-        color: $red;
-      }
-    }
   }
   .has-error
   {
