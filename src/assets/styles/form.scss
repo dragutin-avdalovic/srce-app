@@ -17,6 +17,26 @@
     {
       @include font(0.8,500,$text-gray);
     }
+    .large_head
+    {
+      @include font(1.5,600,$text-dark);
+      @include spacing-b(m,0,em);
+    }
+    .large_head_label
+    {
+      @include font(1,600,$text-gray);
+    }
+    .grey
+    {
+      color: $text-gray;
+    }
+    .horizontal_line
+    {
+      background: $red;
+      height: 1px;
+      @include spacing-tb(m,1,em);
+      width: 100%;
+    }
   }
   .has-error
   {
@@ -26,6 +46,7 @@
     }
     .help-block {
       color: $red;
+      @include spacing-t(m,0,em);
     }
     .form-control {
       border-color: $red;
