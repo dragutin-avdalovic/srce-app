@@ -69,6 +69,17 @@
                   <span v-show="errors.has('postNumber')" class="help-block">{{ errors.first('postNumber') }}</span>
                 </p>
               </div>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('postNumber')}">
+                <label class="control-label" for="amount">Dijete ide u školu</label>
+                <b-button-group size="lg">
+                  <b-button variant="outline-success lg" class="toggle-btn">
+                    Da
+                  </b-button>
+                  <b-button variant="outline-success lg" class="toggle-btn">
+                    Ne
+                  </b-button>
+                </b-button-group>
+              </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
                 <div class="horizontal_line"></div>
               </div>
@@ -93,7 +104,30 @@
                   <span v-show="errors.has('note')" class="help-block">{{ errors.first('note') }}</span>
                 </p>
               </div>
-              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group-btns">
+              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height">
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
+                  <label class="control-label" for="note">Zdravsteno stanje djeteta<span class="grey">(trenutno)</span></label>
+                </div>
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
+                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                      <div class="left"><Checkbox :checked="true"></Checkbox></div>
+                      <div class="right"><label>Izliječeno</label></div>
+                    </div>
+                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                      <div class="left"><Checkbox></Checkbox></div>
+                      <div class="right"><label>Na održavanju</label></div>
+                    </div>
+                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                      <div class="left"><Checkbox></Checkbox></div>
+                      <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
+                    </div>
+                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                      <div class="left"><Checkbox></Checkbox></div>
+                      <div class="right"><label>Ostalo</label></div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group-btns form-group">
                 <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
               </div>
             </div>
@@ -325,8 +359,12 @@
 </template>
 
 <script>
+import Checkbox from '@/components/partials/Checkbox'
 export default{
   name: 'Form',
+  components: {
+    Checkbox
+  },
   props: ['formData'],
   data () {
     return {
