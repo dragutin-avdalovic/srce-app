@@ -41,14 +41,15 @@ export default {
   {
     @include spacing-b(m,1,em);
     input {
-      @include spacing-l(m,4,em);
+      @include spacing-l(m, 4, em);
       width: 13em;
       outline: 0;
       border-width: 0 0 1px 0;
-      border-color:$text-gray
-    }
-    input:focus {
-      border-color:$red
+      border-color: $text-gray;
+      &:focus
+      {
+        border-color:$red
+      }
     }
   }
 </style>

@@ -415,6 +415,27 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check" for="note">Da li neko od članova porodice boluje od</label>
+              <table class="table table-bordered ">
+                <thead>
+                <tr>
+                  <th scope="col">R.b.</th>
+                  <th scope="col">Ime i prezime</th>
+                  <th scope="col">JMBG</th>
+                  <th scope="col">Srodstvo sa oboljelim</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <label class="control-label label-check" for="note">Da li neko od članova porodice boluje od</label>
               <div class="row no-padding">
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
