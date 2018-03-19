@@ -439,6 +439,10 @@
                 </tr>
                 </tbody>
               </table>
+              <div class="new-btn">
+                <i class="fa fa-plus"></i>
+                <label>Novi unos</label>
+              </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check" for="note">Da li neko od članova porodice boluje od</label>
@@ -749,6 +753,12 @@ export default{
         outline: none;
       }
     }
+  }
+  .new-btn
+  {
+    @include spacing-tb(m,0.5,em);
+    float: right;
+    @include font(1.2,600,$red);
   }
 }
 
