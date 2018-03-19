@@ -414,8 +414,8 @@
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-              <label class="control-label label-check" for="note">Da li neko od članova porodice boluje od</label>
-              <table class="table table-bordered ">
+              <label class="control-label label-check" for="note">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
+              <table class="table table-bordered editable-table">
                 <thead>
                 <tr>
                   <th scope="col">R.b.</th>
@@ -426,10 +426,16 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <th scope="row">1</th>
+                  <th scope="row">{{i}}</th>
                   <td>Mark</td>
                   <td>Otto</td>
                   <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">{{i+1}}</th>
+                  <td><input type="text" class="inline-input"></td>
+                  <td><input type="text" class="inline-input"></td>
+                  <td><input type="text" class="inline-input"></td>
                 </tr>
                 </tbody>
               </table>
@@ -602,6 +608,7 @@ export default{
         numtickets: 0,
         shirtsize: 'XL'
       },
+      i: 1,
       text: 'Ostalo',
       textSecond: 'hroničnih bolesti <span class=grey>(navesti bolest)</span>',
       textThird: 'ima potvrđen stepen invalidnosti <span class=grey>(%)</span>',
@@ -718,6 +725,30 @@ export default{
   .form-group-btns
   {
     @include spacing-t(p,2,em);
+  }
+  .inline-input
+  {
+   width: 100%;
+  }
+  .editable-table
+  {
+    @include spacing-tb(m,0.5,em);
+    th{
+      @include font(0.8,700,$text-dark);
+    }
+    td {
+      @include font(0.8,500,$text-dark);
+    }
+    input
+    {
+      border: none;
+      outline: none;
+      &:focus
+      {
+        border: none;
+        outline: none;
+      }
+    }
   }
 }
 

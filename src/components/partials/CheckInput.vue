@@ -48,6 +48,7 @@ export default {
       border-color: $text-gray;
       &:focus
       {
+        border-width: 0 0 1px 0;
         border-color:$red
       }
     }
