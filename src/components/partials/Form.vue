@@ -95,34 +95,32 @@
                 </p>
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('note')}">
-                <label class="control-label" for="note">Napomena<span class="grey">(ukoliko dijete ima posebne potrebe ili ograničenja, upisati iste)</span></label>
+                <label class="control-label" for="note">Napomena <span class="grey">(ukoliko dijete ima posebne potrebe ili ograničenja, upisati iste)</span></label>
                 <p :class="{ 'control': true }">
                   <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('note') }" name="note" type="text" v-model="formData.note" class="form-control" id="note" placeholder="">
                   <span v-show="errors.has('note')" class="help-block">{{ errors.first('note') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height">
-                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
-                  <label class="control-label" for="note">Zdravsteno stanje djeteta<span class="grey">(trenutno)</span></label>
-                </div>
-                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
-                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                      <div class="left"><Checkbox :checked="true" @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                      <div class="right"><label>Izliječeno</label></div>
-                    </div>
-                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                      <div class="left"><Checkbox @onChecked="setCheckbox($event,2)"></Checkbox></div>
-                      <div class="right"><label>Na održavanju</label></div>
-                    </div>
-                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                      <div class="left"><Checkbox @onChecked="setCheckbox($event,3)"></Checkbox></div>
-                      <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
-                    </div>
-                    <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                      <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
-                      <div class="right"><label>Ostalo</label></div>
-                    </div>
+              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+                <label class="control-label" for="note">Zdravstveno stanje djeteta<span class="grey"> (trenutno)</span> </label>
+                <div class="row no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
+                    <div class="right"><label>Izliječeno</label></div>
                   </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,6)"></Checkbox></div>
+                    <div class="right"><label>Na održavanju</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,7)"></Checkbox></div>
+                    <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,7)"></Checkbox></div>
+                    <div class="right"><label>Ostalo</label></div>
+                  </div>
+                </div>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group-btns form-group">
                 <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
@@ -482,8 +480,8 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <div class="row no-padding">
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
-                  <label class="control-label label-check" for="note">Porodica stanuje u</label>
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                  <label class="control-label label-check left-bs-padding" for="note">Porodica stanuje u</label>
                   <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                     <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
                     <div class="right"><label>Kući</label></div>
@@ -497,8 +495,8 @@
                     <div class="right"><label>Ostalo</label></div>
                   </div>
                 </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
-                  <label class="control-label label-check" for="note">Uslovi stanovanja</label>
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                  <label class="control-label label-check left-bs-padding" for="note">Uslovi stanovanja</label>
                   <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                     <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
                     <div class="right"><label>Dobri</label></div>
