@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="composite">
     <div class="check-box">
       <div class="left"><Checkbox @onChecked="setCheckboxInput($event)"></Checkbox></div>
-      <div class="right"><label>{{ text }}</label></div>
+      <div class="right" v-html="this.text"><label></label></div>
     </div>
     <div class="input"><input v-if="this.disabled" @blur="sendInput($event)" type="text" class="check-input" v-model="checkInput"/></div>
   </div>
@@ -37,14 +37,18 @@ export default {
 <style lang="scss" scoped>
   @import "../../assets/styles/variables";
   @import "../../assets/styles/general";
-  input {
-    @include spacing-l(m,30,%);
-    width: 130%;
-    outline: 0;
-    border-width: 0 0 1px 0;
-    border-color:$text-gray
-  }
-  input:focus {
-    border-color:$red
+  .composite
+  {
+    @include spacing-b(m,1,em);
+    input {
+      @include spacing-l(m,4,em);
+      width: 13em;
+      outline: 0;
+      border-width: 0 0 1px 0;
+      border-color:$text-gray
+    }
+    input:focus {
+      border-color:$red
+    }
   }
 </style>

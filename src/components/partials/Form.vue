@@ -387,40 +387,165 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">PODACI O PORODICI</p>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
-              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
-                <label class="control-label" for="note">Bračni status roditelja</label>
-                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 px-0 no-padding">
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox :checked="true" @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Izliječeno</label></div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+                <label class="control-label label-check" for="note">Bračni status roditelja</label>
+                <div class="row no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>Neoženjen/Neudata</label></div>
                   </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,2)"></Checkbox></div>
-                    <div class="right"><label>Na održavanju</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,3)"></Checkbox></div>
-                    <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                     <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Oženjen/Udata</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Udovac/ica</label></div>
+                  </div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                    <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                      <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                      <div class="right"><label>Razveden/a</label></div>
+                    </div>
+                    <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                      <CheckInput :text="this.text" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <label class="control-label label-check" for="note">Da li neko od članova porodice boluje od</label>
+              <div class="row no-padding">
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                    <CheckInput :text='this.textSecond' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <CheckInput :text="this.textThird" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>ima status osobe sa posebnim potrebama</label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <label class="control-label label-check" for="note">Odnosi u porodici</label>
+              <div class="row no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
+                    <div class="right"><label>Dobri</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,6)"></Checkbox></div>
+                    <div class="right"><label>Odlični</label></div>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,7)"></Checkbox></div>
+                    <div class="right"><label>Problematični</label></div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <label class="control-label label-check" for="note">Mjesečni prihodi porodice <span class="grey">(odabrati vrstu i navesti iznos)</span></label>
+              <div class="row no-padding">
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                    <CheckInput :text='this.textForth' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <CheckInput :text="this.textFive" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                    <CheckInput :text='this.textSix' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <CheckInput :text="this.textSeven" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                    <CheckInput :text='this.textEight' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                    <CheckInput :text="this.textNine" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <div class="row no-padding">
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
+                  <label class="control-label label-check" for="note">Porodica stanuje u</label>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>Kući</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>Stanu</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
                     <div class="right"><label>Ostalo</label></div>
                   </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
+                </div>
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
+                  <label class="control-label label-check" for="note">Uslovi stanovanja</label>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>Dobri</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>Odlični</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="right"><label>Zadovoljavajući</label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <label class="control-label label-check" for="note">Stambeni objekat je</label>
+              <div class="row no-padding">
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>U sopstvenom vlasništvu</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Iznajmljen</label></div>
+                  </div>
+                </div>
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
+                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
+                    <div class="right"><label>Vlasništvu roditelja/srodnika</label></div>
+                  </div>
+                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                     <CheckInput :text="this.text" :disabled="true" @sendInputToParent="readInput"></CheckInput>
                   </div>
                 </div>
               </div>
             </div>
-            <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">-->
-              <!--<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">-->
-                <!--<button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>-->
-              <!--</div>-->
-              <!--<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">-->
-                <!--<button @click.prevent="submit()" class="button_save" type="submit"><p class="save-text">Save</p></button>-->
-              <!--</div>-->
-            <!--</div>-->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
+                <button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
+                <button @click.prevent="submit()" class="button_save" type="submit"><p class="save-text">Save</p></button>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -458,7 +583,15 @@ export default{
         numtickets: 0,
         shirtsize: 'XL'
       },
-      text: 'Ostalo'
+      text: 'Ostalo',
+      textSecond: 'hroničnih bolesti <span class=grey>(navesti bolest)</span>',
+      textThird: 'ima potvrđen stepen invalidnosti <span class=grey>(%)</span>',
+      textForth: 'Zarada po osnovu plate',
+      textFive: 'Porodična penzija',
+      textSix: 'Naknada za slučaj nezaposlenosti',
+      textSeven: 'Naknada po osnovu invalidnosti',
+      textEight: 'Naknada iz sistema socijalne zaštite',
+      textNine: 'Ostali prihodi'
     }
   },
   methods: {

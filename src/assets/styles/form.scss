@@ -48,7 +48,9 @@
       align-items: center;
       .right
       {
-        @include font(1,600,$text-gray);
+        label{
+          @include font(1,500,$text-dark);
+        }
       }
     }
   }
@@ -72,5 +74,10 @@
     height: 6em;
     min-height: 6em;
   }
+  .label-check
+  {
+    @include font(1.2,600,$text-dark)
+  }
+
 }
 
