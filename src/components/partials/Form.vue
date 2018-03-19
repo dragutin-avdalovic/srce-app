@@ -408,12 +408,7 @@
                     <div class="right"><label>Ostalo</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
-                    <div class="right"><label>Ostalo</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
-                    <div class="right"><label>Ostalo</label></div>
+                    <CheckInput :text="this.text" :disabled="true" @sendInputToParent="readInput"></CheckInput>
                   </div>
                 </div>
               </div>
@@ -435,11 +430,13 @@
 <script>
 import Checkbox from '@/components/partials/Checkbox'
 import CompositeButton from '@/components/partials/CompositeButton'
+import CheckInput from '@/components/partials/CheckInput'
 export default{
   name: 'Form',
   components: {
     Checkbox,
-    CompositeButton
+    CompositeButton,
+    CheckInput
   },
   props: ['formData'],
   data () {
@@ -460,7 +457,8 @@ export default{
         state: null,
         numtickets: 0,
         shirtsize: 'XL'
-      }
+      },
+      text: 'Ostalo'
     }
   },
   methods: {
@@ -487,6 +485,9 @@ export default{
     },
     setCheckbox (event, number) {
       console.log(number)
+      console.log(event)
+    },
+    readInput (event) {
       console.log(event)
     }
   }
