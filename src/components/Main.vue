@@ -42,41 +42,33 @@ export default {
       },
       fields: [
         {
-          key: 'namemail',
-          label: 'OSNOVNI PODACI',
-          formatter: 'nameMail',
+          key: 'child[name]',
+          label: 'IME I PREZIME',
           sortable: true
         },
         {
-          key: 'cityaddress',
-          label: 'ADRESA',
-          formatter: 'cityAddress',
+          key: 'child[jmbg]',
+          label: 'JMBG',
           sortable: true
         },
         {
-          key: 'company',
-          label: 'NAZIV KOMPANIJE',
-          sortable: true,
-          variant: 'danger'
-        },
-        {
-          key: 'date',
-          label: 'DATUM',
+          key: 'child[dateOfBirth]',
+          label: 'DATUM ROĐENJA',
           sortable: true
         },
         {
-          key: 'address',
-          label: 'ADRESA',
+          key: 'father[name]',
+          label: 'OTAC DJETETA',
           sortable: true
         },
         {
-          key: 'cause',
-          label: 'SVRHA',
+          key: 'mother[name]',
+          label: 'MAJKA DJETETA',
           sortable: true
         },
         {
-          key: 'amount',
-          label: 'IZNOS (KM)',
+          key: 'father[tel]',
+          label: 'KONTAKT TELEFON',
           sortable: true
         },
         { key: 'actions', label: '' }
@@ -88,12 +80,6 @@ export default {
     this.getData()
   },
   methods: {
-    nameMail (value) {
-      return `${value.name} ${value.email}`
-    },
-    cityAddress (value) {
-      return `${value.city} ${value.address}`
-    },
     clearData () {
       this.formData = Object.assign({}, this.formData, {
         type: null,
@@ -115,7 +101,7 @@ export default {
     },
     getData () {
       // Make a request for a user with a given ID
-      axios.get('http://45.76.90.178:3000/api/v1/users').then((response) => {
+      axios.get('http://45.76.90.178:3000/api/v1/social-card').then((response) => {
         response.data.map(item => {
           Object.assign(item, {
             checked: false
@@ -123,6 +109,7 @@ export default {
           return item
         })
         this.items = response.data
+        console.log(this.items)
         this.seen = true
       }).catch((error) => {
         console.log(error)
