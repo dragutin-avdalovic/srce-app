@@ -414,7 +414,7 @@
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-              <label class="control-label label-check" for="note">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
+              <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
               <table class="table table-bordered editable-table">
                 <thead>
                 <tr>
@@ -445,37 +445,37 @@
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-              <label class="control-label label-check" for="note">Da li neko od članova porodice boluje od</label>
+              <label class="control-label label-check">Da li neko od članova porodice boluje od</label>
               <div class="row no-padding">
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textSecond' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text='this.textSecond' :disabled="true" @sendInputToParent="setCheckboxChronicalDecease($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textThird" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text="this.textThird" :disabled="true" @sendInputToParent="setCheckboxDisability($event)"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckboxSpecialNeeds($event)"></Checkbox></div>
                     <div class="right"><label>ima status osobe sa posebnim potrebama</label></div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-              <label class="control-label label-check" for="note">Odnosi u porodici</label>
+              <label class="control-label label-check">Odnosi u porodici</label>
               <div class="row no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setFieldFamilyRelations(1)"></Checkbox></div>
                     <div class="right"><label>Dobri</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,6)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setFieldFamilyRelations(2)"></Checkbox></div>
                     <div class="right"><label>Odlični</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,7)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setFieldFamilyRelations(3)"></Checkbox></div>
                     <div class="right"><label>Problematični</label></div>
                   </div>
               </div>
@@ -485,26 +485,26 @@
               <div class="row no-padding">
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textForth' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text='this.textForth' :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textFive" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text="this.textFive" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textSix' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text='this.textSix' :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textSeven" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text="this.textSeven" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textEight' :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text='this.textEight' :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textNine" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text="this.textNine" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                 </div>
               </div>
@@ -544,7 +544,7 @@
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-              <label class="control-label label-check" for="note">Stambeni objekat je</label>
+              <label class="control-label label-check">Stambeni objekat je</label>
               <div class="row no-padding">
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
                   <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
@@ -562,7 +562,7 @@
                     <div class="right"><label>Vlasništvu roditelja/srodnika</label></div>
                   </div>
                   <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <CheckInput :text="this.text" :disabled="true" @sendInputToParent="readInput"></CheckInput>
+                    <CheckInput :text="this.text" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                 </div>
               </div>
@@ -616,7 +616,7 @@ export default{
     }
   },
   methods: {
-    save: function () {
+    submit () {
       this.$emit('onDataEmit', this.formData)
       console.log(this.formData)
     },
@@ -627,6 +627,10 @@ export default{
         } else {
         }
       })
+    },
+    setFieldFamilyRelations (event) {
+      this.formData.family.familyRelations = event
+      console.log(event)
     },
     setFieldGoingToSchool (event) {
       this.formData.child.goingToSchool = event
@@ -639,6 +643,9 @@ export default{
     },
     setFieldWorkingMother (event) {
       this.formData.mother.working = event
+    },
+    setCheckbox (event) {
+      console.log(event)
     },
     setCheckboxHealthState (event) {
       this.formData.child.healthState = event
@@ -661,20 +668,29 @@ export default{
       console.log(event)
     },
     setCheckboxOther (data) {
-      if (data === true || data === false) { this.formData.family.other = data
-    }
-      else {
+      if (data === true || data === false) {
+        this.formData.family.other = data
+      } else {
         // string data implement
       }
+    },
+    setCheckboxChronicalDecease (event) {
+      this.formData.family.chronicalDecease = event
+      console.log(event)
+    },
+    setCheckboxDisability (event) {
+      this.formData.family.disability = event
+      console.log(event)
+    },
+    setCheckboxSpecialNeeds (event) {
+      this.formData.family.specialNeeds = event
+      console.log(event)
     },
     prev () {
       this.step--
     },
     next () {
       this.step++
-    },
-    submit () {
-      alert('Submit to blah and show blah and etc.')
     }
   }
 }

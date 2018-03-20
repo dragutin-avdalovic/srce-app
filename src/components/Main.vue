@@ -174,7 +174,7 @@ export default {
     saveData (event) {
       console.log(event)
       if (event._id != null) {
-        axios.put('http://45.76.90.178:3000/api/v1/users/' + event._id, event).then((response) => {
+        axios.put('http://45.76.90.178:3000/api/v1/social-card/' + event._id, event).then((response) => {
           console.log(response)
           if (response.data === 'successfully edited') {
             this.hide()
@@ -184,7 +184,7 @@ export default {
           console.log(error)
         })
       } else {
-        axios.post('http://45.76.90.178:3000/api/v1/users', event).then((response) => {
+        axios.post('http://45.76.90.178:3000/api/v1/social-card', event).then((response) => {
           console.log(response)
           if (response.data === 'successfully saved') {
             this.hide()
@@ -205,7 +205,7 @@ export default {
       this.show()
     },
     deleteItem (event) {
-      axios.delete('http://45.76.90.178:3000/api/v1/users/' + event).then((response) => {
+      axios.delete('http://45.76.90.178:3000/api/v1/social-card/' + event).then((response) => {
         console.log(response)
         if (response.data === 'successfully removed') {
           this.seen = false
