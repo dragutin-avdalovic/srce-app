@@ -34,90 +34,90 @@
                   <span v-show="errors.has('childDateOfBirth')" class="help-block">{{ errors.first('childDateOfBirth') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('placeOfBirth')}">
-                <label class="control-label" for="address">Mjesto rođenja</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childPlaceOfBirth')}">
+                <label class="control-label" for="childPlaceOfBirth">Mjesto rođenja</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('placeOfBirth') }" name="placeOfBirth" type="text" v-model="formData.placeOfBirth" class="form-control" id="placeOfBirth" placeholder="">
-                  <span v-show="errors.has('placeOfBirth')" class="help-block">{{ errors.first('placeOfBirth') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childPlaceOfBirth') }" name="childPlaceOfBirth" type="text" v-model="formData.child.placeOfBirth" class="form-control" id="childPlaceOfBirth" placeholder="">
+                  <span v-show="errors.has('childPlaceOfBirth')" class="help-block">{{ errors.first('childPlaceOfBirth') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('address')}">
-                <label class="control-label" for="amount">Adresa</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childAddress')}">
+                <label class="control-label" for="childAddress">Adresa</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('address') }" name="address" type="text" v-model="formData.address" class="form-control" id="address">
-                  <span v-show="errors.has('address')" class="help-block">{{ errors.first('address') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childAddress') }" name="childAddress" type="text" v-model="formData.child.address" class="form-control" id="childAddress">
+                  <span v-show="errors.has('childAddress')" class="help-block">{{ errors.first('childAddress') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('city')}">
-                <label class="control-label" for="address">Općina</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childCity')}">
+                <label class="control-label" for="childCity">Općina</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('city') }" name="city" type="text" v-model="formData.city" class="form-control" id="city" placeholder="">
-                  <span v-show="errors.has('city')" class="help-block">{{ errors.first('city') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childCity') }" name="childCity" type="text" v-model="formData.child.city" class="form-control" id="childCity" placeholder="">
+                  <span v-show="errors.has('childCity')" class="help-block">{{ errors.first('childCity') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('municipality')}">
-                <label class="control-label" for="address">Mjesto</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childMunicipality')}">
+                <label class="control-label" for="childMunicipality">Mjesto</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('municipality') }" name="municipality" type="text" v-model="formData.municipality" class="form-control" id="municipality" placeholder="">
-                  <span v-show="errors.has('municipality')" class="help-block">{{ errors.first('municipality') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childMunicipality') }" name="childMunicipality" type="text" v-model="formData.child.municipality" class="form-control" id="childMunicipality" placeholder="">
+                  <span v-show="errors.has('childMunicipality')" class="help-block">{{ errors.first('childMunicipality') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('postNumber')}">
-                <label class="control-label" for="postNumber">Poštanski broj</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childPostNumber')}">
+                <label class="control-label" for="childPostNumber">Poštanski broj</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('postNumber') }" name="postNumber" type="text" v-model="formData.postNumber" class="form-control" id="postNumber">
-                  <span v-show="errors.has('postNumber')" class="help-block">{{ errors.first('postNumber') }}</span>
+                  <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('childPostNumber') }" name="childPostNumber" type="text" v-model="formData.child.postNumber" class="form-control" id="childPostNumber">
+                  <span v-show="errors.has('childPostNumber')" class="help-block">{{ errors.first('childPostNumber') }}</span>
                 </p>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
                 <label class="control-label">Dijete ide u školu</label>
-                <CompositeButton></CompositeButton>
+                <CompositeButton @onCheckedComposite="setFieldGoingToSchool($event)"></CompositeButton>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
                 <label class="control-label">Dijete ide u vrtić</label>
-                <CompositeButton></CompositeButton>
+                <CompositeButton @onCheckedComposite="setFieldGoingToGarden($event)"></CompositeButton>
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
                 <div class="horizontal_line"></div>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('diagnose')}">
-                <label class="control-label" for="diagnose">Dijagnoza</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childDiagnose')}">
+                <label class="control-label" for="childDiagnose">Dijagnoza</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('diagnose') }" name="diagnose" type="text" v-model="formData.diagnose" class="form-control" id="diagnose" placeholder="">
-                  <span v-show="errors.has('diagnose')" class="help-block">{{ errors.first('diagnose') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childDiagnose') }" name="childDiagnose" type="text" v-model="formData.child.diagnose" class="form-control" id="childDiagnose" placeholder="">
+                  <span v-show="errors.has('childDiagnose')" class="help-block">{{ errors.first('childDiagnose') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('dateOfDiagnose')}">
-                <label class="control-label" for="dateOfDiagnose">Datum dijagnoze</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childDateOfDiagnose')}">
+                <label class="control-label" for="childDateOfDiagnose">Datum dijagnoze</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required|date'" :class="{'input': true, 'has-error': errors.has('dateOfDiagnose') }" name="dateOfDiagnose" type="date" v-model="formData.dateOfDiagnose" class="form-control" id="dateOfDiagnose" placeholder="">
-                  <span v-show="errors.has('dateOfDiagnose')" class="help-block">{{ errors.first('dateOfDiagnose') }}</span>
+                  <input v-validate="'required|date'" :class="{'input': true, 'has-error': errors.has('childDateOfDiagnose') }" name="childDateOfDiagnose" type="date" v-model="formData.child.dateOfDiagnose" class="form-control" id="childDateOfDiagnose" placeholder="">
+                  <span v-show="errors.has('childDateOfDiagnose')" class="help-block">{{ errors.first('childDateOfDiagnose') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('note')}">
-                <label class="control-label" for="note">Napomena <span class="grey">(ukoliko dijete ima posebne potrebe ili ograničenja, upisati iste)</span></label>
+              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('childNote')}">
+                <label class="control-label" for="childNote">Napomena <span class="grey">(ukoliko dijete ima posebne potrebe ili ograničenja, upisati iste)</span></label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('note') }" name="note" type="text" v-model="formData.note" class="form-control" id="note" placeholder="">
-                  <span v-show="errors.has('note')" class="help-block">{{ errors.first('note') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childNote') }" name="childNote" type="text" v-model="formData.child.note" class="form-control" id="childNote" placeholder="">
+                  <span v-show="errors.has('childNote')" class="help-block">{{ errors.first('childNote') }}</span>
                 </p>
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-                <label class="control-label" for="note">Zdravstveno stanje djeteta<span class="grey"> (trenutno)</span> </label>
+                <label class="control-label">Zdravstveno stanje djeteta<span class="grey"> (trenutno)</span> </label>
                 <div class="row no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,5)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(1)"></Checkbox></div>
                     <div class="right"><label>Izliječeno</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,6)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(2)"></Checkbox></div>
                     <div class="right"><label>Na održavanju</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,7)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(3)"></Checkbox></div>
                     <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,7)"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(4)"></Checkbox></div>
                     <div class="right"><label>Ostalo</label></div>
                   </div>
                 </div>
@@ -627,6 +627,16 @@ export default{
         } else {
         }
       })
+    },
+    setFieldGoingToSchool (event) {
+      this.formData.child.goingToSchool = event
+    },
+    setFieldGoingToGarden (event) {
+      // this.formData.child.goingToGarden = event
+    },
+    setCheckboxHealthState (event) {
+      this.formData.child.healthState = event
+      console.log(event)
     },
     prev () {
       this.step--

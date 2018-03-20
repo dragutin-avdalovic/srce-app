@@ -27,13 +27,15 @@ export default {
       if (event === 1) {
         this.activeFirst = true
         this.activeSecond = false
+        this.$emit('onCheckedComposite', true)
       } else if (event === 0) {
         this.activeSecond = true
         this.activeFirst = false
+        this.$emit('onCheckedComposite', false)
       } else {
         this.activeFirst = this.activeSecond = false
+        this.$emit('onCheckedComposite', null)
       }
-      this.$emit('onChecked', true)
     }
   }
 }
