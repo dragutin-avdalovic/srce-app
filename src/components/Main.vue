@@ -3,7 +3,7 @@
     <div class="content container">
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData" :formData="formData" :types="types" :marriageStatus="marriageStatus"></Form>
       </modal>
     </div>
   </div>
@@ -26,6 +26,14 @@ export default {
       items: [],
       seen: 'true',
       stacked: 'md',
+      marriageStatus: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Neoženjen/Neudata' },
+        { value: 1, text: 'Oženjen/Udata' },
+        { value: 2, text: 'Udovac/ica' },
+        { value: 3, text: 'Razveden/a' },
+        { value: 4, text: 'Ostalo' }
+      ],
       types: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Dobri' },

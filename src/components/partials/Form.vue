@@ -388,6 +388,8 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
                 <label class="control-label label-check">Bračni status roditelja</label>
                 <div class="row no-padding">
+                  <b-form-select v-model="formData.family.married" :options="this.marriageStatus" id="marriageStatus" name="marriageStatus"></b-form-select>
+
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
                   <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                     <div class="left"><Checkbox @onChecked="setCheckboxUnmarried($event)"></Checkbox></div>
@@ -405,7 +407,7 @@
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
                     <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                       <div class="left"><Checkbox @onChecked="setCheckboxDivorced($event)"></Checkbox></div>
-                      <div class="right"><label>Razveden/a</label></div>
+                        <div class="right"><label>Razveden/a</label></div>
                     </div>
                     <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
                       <CheckInput :text="this.text" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
@@ -581,7 +583,7 @@ export default{
     CompositeButton,
     CheckInput
   },
-  props: ['formData', 'types'],
+  props: ['formData', 'types', 'marriageStatus'],
   data () {
     return {
       selected: null,

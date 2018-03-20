@@ -21,8 +21,12 @@
       </div>
     </div>
     <div class="row">
-      <b-table  show-empty :sort-by="sortBy"
-                :sort-desc="sortDesc"
+      <p>
+        Sorting By: <b>{{ sortBy }}</b>,
+        Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+      </p>
+      <b-table  show-empty :sort-by.sync="sortBy"
+                :sort-desc.sync="sortDesc"
                 :items="items"
                 :fields="fieldsA"
                 :stacked="stacked"
@@ -67,9 +71,9 @@ export default {
       currentPage: 1,
       perPage: 5,
       totalRows: this.items.length,
-      sortDesc: false,
+      sortDesc: true,
       filter: null,
-      sortBy: 'amount',
+      sortBy: 'child[name]',
       id: '',
       selectItems: [1, 2, 3],
       limits: ['Institucija', 'Pravno lice', 'Fizičko lice']
