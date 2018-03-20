@@ -26,6 +26,7 @@ export default {
   methods: {
     setCheckboxInput ($event) {
       this.disabled = $event
+      this.$emit('sendInputToParent', this.disabled)
     },
     sendInput () {
       this.$emit('sendInputToParent', this.checkInput)
