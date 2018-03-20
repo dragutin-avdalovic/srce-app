@@ -1,7 +1,6 @@
 <template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
   <div>
     <div class="content container">
-      <!--<Table v-bind:items="items" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></Table>-->
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" :formData="formData"></Form>
@@ -13,14 +12,12 @@
 <script>
 import TableSortable from '@/components/partials/TableSortable'
 import Form from '@/components/partials/Form'
-import Table from '@/components/partials/Table'
 import axios from 'axios'
 
 export default {
   name: 'HelloWorld',
   components: {
     TableSortable,
-    Table,
     Form
   },
   data () {
@@ -30,15 +27,77 @@ export default {
       seen: 'true',
       stacked: 'md',
       formData: {
-        type: null,
-        company: '',
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        amount: '',
-        date: '',
-        cause: ''
+        child: {
+          name: '',
+          jmbg: null,
+          dateOfBirth: '',
+          placeOfBirth: '',
+          municipality: '',
+          city: '',
+          address: '',
+          postNumber: '',
+          goingToSchool: null,
+          diagnosed: null,
+          diagnose: '',
+          dateOfDiagnose: '',
+          note: '',
+          healthState: null,
+          '_id': ''
+        },
+        mother: {
+          name: '',
+          jmbg: null,
+          citizenId: '',
+          issuedBy: '',
+          municipality: '',
+          city: '',
+          address: '',
+          postNumber: '',
+          tel: '',
+          mob: '',
+          working: null,
+          position: '',
+          qualifications: '',
+          nameOfEmployer: '',
+          _id: ''
+        },
+        father: {
+          name: '',
+          jmbg: null,
+          citizenId: '',
+          issuedBy: '',
+          municipality: '',
+          city: '',
+          address: '',
+          postNumber: '',
+          tel: '',
+          mob: '',
+          working: null,
+          position: '',
+          qualifications: '',
+          nameOfEmployer: '',
+          _id: ''
+        },
+        family: {
+          unmarried: null,
+          married: null,
+          divorced: null,
+          widow: null,
+          other: null,
+          chronicalDecease: null,
+          disability: null,
+          specialNeeds: null,
+          familyRelations: null,
+          _id: "5ab0d023cd4c341a6b0f92d1",
+          familyMembers: [
+            {
+              name: '',
+              jmbg: null,
+              relationToChild: '',
+              _id: ''
+            }
+          ]
+        }
       },
       fields: [
         {
@@ -103,14 +162,11 @@ export default {
       // Make a request for a user with a given ID
       axios.get('http://45.76.90.178:3000/api/v1/social-card').then((response) => {
         response.data.map(item => {
-          Object.assign(item, {
-            checked: false
-          })
+          Object.assign(item)
           return item
         })
         this.items = response.data
         console.log(this.items)
-        this.seen = true
       }).catch((error) => {
         console.log(error)
       })

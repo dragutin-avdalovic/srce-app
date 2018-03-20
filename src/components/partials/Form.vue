@@ -13,25 +13,25 @@
                 <p class="large_head">DIJETE</p>
                 <label class="large_head_label">Liječeno na Hematoonkološkom odjelu Pedijatrijske klinike KCUS</label>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
-                <label class="control-label" for="name">Ime i prezime</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childName')}">
+                <label class="control-label" for="childName">Ime i prezime</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('name') }" name="name" type="text" v-model="formData.name" class="form-control" id="name" placeholder="">
-                  <span v-show="errors.has('name')" class="help-block">{{ errors.first('name') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childName') }" name="childName" type="text" v-model="formData.child.name" class="form-control" id="childName" placeholder="">
+                  <span v-show="errors.has('childName')" class="help-block">{{ errors.first('childName') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('jmbg')}">
-                <label class="control-label" for="jmbg">JMBG</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childJmbg')}">
+                <label class="control-label" for="childJmbg">JMBG</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('jmbg') }" name="jmbg" type="text" v-model="formData.jmbg" class="form-control" id="jmbg" placeholder="">
-                  <span v-show="errors.has('jmbg')" class="help-block">{{ errors.first('jmbg') }}</span>
+                  <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('childJmbg') }" name="childJmbg" type="text" v-model="formData.child.jmbg" class="form-control" id="childJmbg" placeholder="">
+                  <span v-show="errors.has('childJmbg')" class="help-block">{{ errors.first('childJmbg') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('dateOfBirth')}">
-                <label class="control-label" for="dateOfBirth">Datum rođenja</label>
+              <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childDateOfBirth')}">
+                <label class="control-label" for="childDateOfBirth">Datum rođenja</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('dateOfBirth') }" name="dateOfBirth" type="date" v-model="formData.dateOfBirth" class="form-control" id="dateOfBirth" placeholder="">
-                  <span v-show="errors.has('dateOfBirth')" class="help-block">{{ errors.first('dateOfBirth') }}</span>
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childDateOfBirth') }" name="childDateOfBirth" type="date" v-model="formData.child.dateOfBirth" class="form-control" id="childDateOfBirth" placeholder="">
+                  <span v-show="errors.has('childDateOfBirth')" class="help-block">{{ errors.first('childDateOfBirth') }}</span>
                 </p>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('placeOfBirth')}">
@@ -70,11 +70,11 @@
                 </p>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
-                <label class="control-label" for="amount">Dijete ide u školu</label>
+                <label class="control-label">Dijete ide u školu</label>
                 <CompositeButton></CompositeButton>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
-                <label class="control-label" for="amount">Dijete ide u vrtić</label>
+                <label class="control-label">Dijete ide u vrtić</label>
                 <CompositeButton></CompositeButton>
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
@@ -603,15 +603,6 @@ export default{
       ],
       selected: null,
       step: 1,
-      registration: {
-        name: null,
-        email: null,
-        street: null,
-        city: null,
-        state: null,
-        numtickets: 0,
-        shirtsize: 'XL'
-      },
       i: 1,
       text: 'Ostalo',
       textSecond: 'hroničnih bolesti <span class=grey>(navesti bolest)</span>',
