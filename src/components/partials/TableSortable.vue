@@ -21,8 +21,8 @@
       </div>
     </div>
     <div class="row">
-      <b-table  show-empty :sort-by.sync="sortBy"
-                :sort-desc.sync="sortDesc"
+      <b-table  show-empty :sort-by="sortBy"
+                :sort-desc="sortDesc"
                 :items="items"
                 :fields="fieldsA"
                 :stacked="stacked"

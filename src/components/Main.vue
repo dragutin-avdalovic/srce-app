@@ -3,7 +3,7 @@
     <div class="content container">
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData"></Form>
+        <Form @onDataEmit="saveData" :formData="formData" :types="types"></Form>
       </modal>
     </div>
   </div>
@@ -26,6 +26,12 @@ export default {
       items: [],
       seen: 'true',
       stacked: 'md',
+      types: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Dobri' },
+        { value: 1, text: 'Odlicni' },
+        { value: 2, text: 'Problematicni' }
+      ],
       formData: {
         child: {
           name: '',
@@ -135,7 +141,7 @@ export default {
     }
   },
   mounted () {
-    console.log('created called.')
+    console.log('mounted called.')
     this.getData()
   },
   methods: {

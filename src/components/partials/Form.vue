@@ -466,18 +466,7 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Odnosi u porodici</label>
               <div class="row no-padding">
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setFieldFamilyRelations(1)"></Checkbox></div>
-                    <div class="right"><label>Dobri</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setFieldFamilyRelations(2)"></Checkbox></div>
-                    <div class="right"><label>Odlični</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setFieldFamilyRelations(3)"></Checkbox></div>
-                    <div class="right"><label>Problematični</label></div>
-                  </div>
+                <b-form-select v-model="formData.family.familyRelations" :options="types" id="types" name="types"></b-form-select>
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
@@ -592,15 +581,9 @@ export default{
     CompositeButton,
     CheckInput
   },
-  props: ['formData'],
+  props: ['formData', 'types'],
   data () {
     return {
-      type: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 'Institucija', text: 'Institucija' },
-        { value: 'Fizičko lice', text: 'Fizičko lice' },
-        { value: 'Pravno lice', text: 'Pravno lice' }
-      ],
       selected: null,
       step: 1,
       i: 1,
