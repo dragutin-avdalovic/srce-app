@@ -3,7 +3,7 @@
     <div class="content container">
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData" :types="types" :marriageStatus="marriageStatus"></Form>
+        <Form @onDataEmit="saveData" :formData="formData" :types="types" :marriageStatus="marriageStatus" :accomodation="accomodation" :livingConditions="livingConditions" :property="property"></Form>
       </modal>
     </div>
   </div>
@@ -39,6 +39,25 @@ export default {
         { value: 0, text: 'Dobri' },
         { value: 1, text: 'Odlicni' },
         { value: 2, text: 'Problematicni' }
+      ],
+      accomodation: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Kući' },
+        { value: 1, text: 'Stanu' },
+        { value: 2, text: 'Ostalo' }
+      ],
+      livingConditions: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Dobri' },
+        { value: 1, text: 'Odlični' },
+        { value: 2, text: 'Zadovoljavajući' }
+      ],
+      property: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'U sopstvenom vlasništvu' },
+        { value: 1, text: 'Iznajmljen' },
+        { value: 2, text: 'Vlasništvu roditelja/srodnika' },
+        { value: 2, text: 'Ostalo' }
       ],
       formData: {
         child: {
@@ -110,7 +129,10 @@ export default {
               relationToChild: '',
               _id: ''
             }
-          ]
+          ],
+          accomodation: null,
+          livingConditions: null,
+          property: null
         }
       },
       fields: [

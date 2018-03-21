@@ -385,35 +385,9 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">PODACI O PORODICI</p>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
                 <label class="control-label label-check">Bračni status roditelja</label>
-                <div class="row no-padding">
-                  <b-form-select v-model="formData.family.married" :options="this.marriageStatus" id="marriageStatus" name="marriageStatus"></b-form-select>
-
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxUnmarried($event)"></Checkbox></div>
-                    <div class="right"><label>Neoženjen/Neudata</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxMarried($event)"></Checkbox></div>
-                    <div class="right"><label>Oženjen/Udata</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxLonely($event)"></Checkbox></div>
-                    <div class="right"><label>Udovac/ica</label></div>
-                  </div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                      <div class="left"><Checkbox @onChecked="setCheckboxDivorced($event)"></Checkbox></div>
-                        <div class="right"><label>Razveden/a</label></div>
-                    </div>
-                    <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                      <CheckInput :text="this.text" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
-                    </div>
-                  </div>
-              </div>
+                <b-form-select v-model="formData.family.married" :options="this.marriageStatus" id="marriageStatus" name="marriageStatus"></b-form-select>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
@@ -465,11 +439,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
               <label class="control-label label-check">Odnosi u porodici</label>
-              <div class="row no-padding">
-                <b-form-select v-model="formData.family.familyRelations" :options="types" id="types" name="types"></b-form-select>
-              </div>
+              <b-form-select v-model="formData.family.familyRelations" :options="types" id="types" name="types"></b-form-select>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check" for="note">Mjesečni prihodi porodice <span class="grey">(odabrati vrstu i navesti iznos)</span></label>
@@ -502,61 +474,19 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <div class="row no-padding">
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
                   <label class="control-label label-check left-bs-padding" for="note">Porodica stanuje u</label>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Kući</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Stanu</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Ostalo</label></div>
-                  </div>
+                  <b-form-select v-model="formData.family.accomodation" :options="this.accomodation" id="accomodation" name="accomodation"></b-form-select>
                 </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
                   <label class="control-label label-check left-bs-padding" for="note">Uslovi stanovanja</label>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Dobri</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Odlični</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,1)"></Checkbox></div>
-                    <div class="right"><label>Zadovoljavajući</label></div>
-                  </div>
+                  <b-form-select v-model="formData.family.livingConditions" :options="this.livingConditions" id="livingConditions" name="livingConditions"></b-form-select>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
               <label class="control-label label-check">Stambeni objekat je</label>
-              <div class="row no-padding">
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
-                    <div class="right"><label>U sopstvenom vlasništvu</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
-                    <div class="right"><label>Iznajmljen</label></div>
-                  </div>
-                </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckbox($event,4)"></Checkbox></div>
-                    <div class="right"><label>Vlasništvu roditelja/srodnika</label></div>
-                  </div>
-                  <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding check-box">
-                    <CheckInput :text="this.text" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
-                  </div>
-                </div>
-              </div>
+              <b-form-select v-model="formData.family.property" :options="this.property" id="property" name="property"></b-form-select>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
@@ -583,7 +513,7 @@ export default{
     CompositeButton,
     CheckInput
   },
-  props: ['formData', 'types', 'marriageStatus'],
+  props: ['formData', 'types', 'marriageStatus', 'accomodation', 'livingConditions', 'property'],
   data () {
     return {
       selected: null,
