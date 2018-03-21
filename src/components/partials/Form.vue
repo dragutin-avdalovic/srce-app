@@ -450,7 +450,7 @@
                     <CheckInput :text='this.textEight' :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textNine" :disabled="true" @sendInputToParent="setCheckboxOther($event)"></CheckInput>
+                    <CheckInput :text="this.textNine" :disabled="true" @sendInputToParent="setCheckboxOther($event)" :checked="this.formData.family.specialNeeds"></CheckInput>
                   </div>
                 </div>
               </div>
@@ -527,18 +527,36 @@ export default{
       })
     },
     setFieldGoingToSchool (event) {
+        console.log(event)
       this.formData.child.goingToSchool = event
     },
     setFieldGoingToGarden (event) {
       this.formData.child.goingToKindergarden = event
     },
     setFieldWorkingFather (event) {
-      console.log(event)
+      console.log('father')
       this.formData.father.working = event
     },
     setFieldWorkingMother (event) {
-      console.log(event)
+      console.log('mother')
       this.formData.mother.working = event
+    },
+    setCheckboxChronicalDecease (event) {
+      if (event === true || event === false) {
+        this.formData.family.chronicalDecease = event
+      } else {
+        this.formData.family.chronicalDeceaseText = event
+      }
+    },
+    setCheckboxDisability (event) {
+      if (event === true || event === false) {
+        this.formData.family.disability = event
+      } else {
+        this.formData.family.disabilityText = event
+      }
+    },
+    setCheckboxSpecialNeeds (event) {
+      this.formData.family.specialNeeds = event
     },
     prev () {
       this.step--

@@ -1,9 +1,9 @@
 <template>
   <b-button-group size="lg">
-    <b-button  v-on:click="onChecked(1)" v-bind:class="{ active: activeFirst }"  variant="outline-success lg" class="toggle-btn">
+    <b-button  v-on:click="onChecked(true)" v-bind:class="{ active: active }"  variant="outline-success lg" class="toggle-btn">
       Da
     </b-button>
-    <b-button v-on:click="onChecked(0)" v-bind:class="{ active: activeSecond }"  variant="outline-success lg" class="toggle-btn">
+    <b-button v-on:click="onChecked(false)" v-bind:class="{ active: !active }"  variant="outline-success lg" class="toggle-btn">
       Ne
     </b-button>
   </b-button-group>
@@ -12,35 +12,9 @@
 export default {
   name: 'composite-button',
   props: ['active'],
-  data () {
-    return {
-      activeFirst: this.activeOne,
-      activeSecond: this.activeTwo
-    }
-  },
-  mounted () {
-    if (this.active === true) {
-      this.activeFirst = true
-    } else if (this.active === false) {
-      this.activeSecond = true
-    } else {
-      this.activeSecond = this.activeFirst = false
-    }
-  },
   methods: {
     onChecked (event) {
-      if (event === 1) {
-        this.activeFirst = true
-        this.activeSecond = false
-        this.$emit('onCheckedComposite', true)
-      } else if (event === 0) {
-        this.activeSecond = true
-        this.activeFirst = false
-        this.$emit('onCheckedComposite', false)
-      } else {
-        this.activeFirst = this.activeSecond = false
-        this.$emit('onCheckedComposite', null)
-      }
+      this.$emit('onCheckedComposite', event)
     }
   }
 }
