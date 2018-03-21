@@ -3,7 +3,7 @@
     <div class="content container">
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData" :types="types" :marriageStatus="marriageStatus" :accomodation="accomodation" :livingConditions="livingConditions" :property="property" :healthState="healthState"></Form>
+        <Form @onDataEmit="saveData" :formData="formData" :meritalStatus="meritalStatus" :familyRelations="familyRelations" :familyResidence="familyResidence" :housingConditions="housingConditions" :residentialBuilding="residentialBuilding" :healthState="healthState"></Form>
       </modal>
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
       items: [],
       seen: 'true',
       stacked: 'md',
-      marriageStatus: [
+      meritalStatus: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Neoženjen/Neudata' },
         { value: 1, text: 'Oženjen/Udata' },
@@ -34,37 +34,37 @@ export default {
         { value: 3, text: 'Razveden/a' },
         { value: 4, text: 'Ostalo' }
       ],
-      types: [
+      familyRelations: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Dobri' },
         { value: 1, text: 'Odlicni' },
         { value: 2, text: 'Problematicni' }
       ],
-      accomodation: [
+      familyResidence: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Kući' },
         { value: 1, text: 'Stanu' },
         { value: 2, text: 'Ostalo' }
       ],
-      livingConditions: [
+      housingConditions: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Dobri' },
         { value: 1, text: 'Odlični' },
         { value: 2, text: 'Zadovoljavajući' }
       ],
-      property: [
+      residentialBuilding: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'U sopstvenom vlasništvu' },
         { value: 1, text: 'Iznajmljen' },
         { value: 2, text: 'Vlasništvu roditelja/srodnika' },
-        { value: 2, text: 'Ostalo' }
+        { value: 3, text: 'Ostalo' }
       ],
       healthState: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Izliječeno' },
         { value: 1, text: 'Završilo sa liječenjem i održavanjem' },
         { value: 2, text: 'Na održavanju' },
-        { value: 2, text: 'Ostalo' }
+        { value: 3, text: 'Ostalo' }
       ],
       formData: {
         child: {
@@ -82,7 +82,7 @@ export default {
           diagnose: '',
           dateOfDiagnose: '',
           note: '',
-          healthState: 0,
+          healthState: null,
           _id: ''
         },
         mother: {
@@ -120,7 +120,7 @@ export default {
           _id: ''
         },
         family: {
-          meritalStatus: 0,
+          meritalStatus: null,
           familyMembers: [
             {
               name: '',
@@ -134,7 +134,7 @@ export default {
           disability: null,
           disabilityText: '',
           specialNeeds: null,
-          familyRelations: 1,
+          familyRelations: null,
           incomeBySalary: null,
           incomeBySalaryText: '',
           familyPension: null,
@@ -147,9 +147,9 @@ export default {
           compensationForTheSocialProtectionSystemText: '',
           otherIncome: null,
           otherIncomeText: '',
-          familyResidence: 0,
-          housingConditions: 0,
-          residentialBuilding: 0
+          familyResidence: null,
+          housingConditions: null,
+          residentialBuilding: null
         }
       },
       fields: [

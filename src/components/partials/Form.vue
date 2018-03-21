@@ -370,7 +370,7 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
                 <label class="control-label label-check">Bračni status roditelja</label>
-                <b-form-select v-model="formData.family.married" :options="this.marriageStatus" id="marriageStatus" name="marriageStatus"></b-form-select>
+                <b-form-select v-model="formData.family.meritalStatus" :options="this.meritalStatus" id="meritalStatus" name="meritalStatus"></b-form-select>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
@@ -424,7 +424,7 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
               <label class="control-label label-check">Odnosi u porodici</label>
-              <b-form-select v-model="formData.family.familyRelations" :options="types" id="types" name="types"></b-form-select>
+              <b-form-select v-model="formData.family.familyRelations" :options="familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Mjesečni prihodi porodice <span class="grey">(odabrati vrstu i navesti iznos)</span></label>
@@ -459,17 +459,17 @@
               <div class="row no-padding">
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
                   <label class="control-label label-check">Porodica stanuje u</label>
-                  <b-form-select v-model="formData.family.accomodation" :options="this.accomodation" id="accomodation" name="accomodation"></b-form-select>
+                  <b-form-select v-model="formData.family.familyResidence" :options="this.familyResidence" id="familyResidence" name="familyResidence"></b-form-select>
                 </div>
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
                   <label class="control-label label-check">Uslovi stanovanja</label>
-                  <b-form-select v-model="formData.family.livingConditions" :options="this.livingConditions" id="livingConditions" name="livingConditions"></b-form-select>
+                  <b-form-select v-model="formData.family.housingConditions" :options="this.housingConditions" id="housingConditions" name="housingConditions"></b-form-select>
                 </div>
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
               <label class="control-label label-check">Stambeni objekat je</label>
-              <b-form-select v-model="formData.family.property" :options="this.property" id="property" name="property"></b-form-select>
+              <b-form-select v-model="formData.family.residentialBuilding" :options="this.residentialBuilding" id="residentialBuilding" name="residentialBuilding"></b-form-select>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
@@ -496,7 +496,7 @@ export default{
     CompositeButton,
     CheckInput
   },
-  props: ['formData', 'types', 'marriageStatus', 'accomodation', 'livingConditions', 'property', 'healthState'],
+  props: ['formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState'],
   data () {
     return {
       selected: null,
@@ -533,9 +533,11 @@ export default{
       this.formData.child.goingToKindergarden = event
     },
     setFieldWorkingFather (event) {
-      this.formData.father.working= event
+      console.log(event)
+      this.formData.father.working = event
     },
     setFieldWorkingMother (event) {
+      console.log(event)
       this.formData.mother.working = event
     },
     prev () {
