@@ -21,11 +21,9 @@ export default {
   mounted () {
     if (this.active === true) {
       this.activeFirst = this.active
-    }
-    else if (this.active === false) {
+    } else if (this.active === false) {
       this.activeSecond = this.active
-    }
-    else {
+    } else {
       this.activeSecond = this.activeSecond = false
     }
   },

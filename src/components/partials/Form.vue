@@ -213,7 +213,7 @@
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
               <label class="control-label">U radnom odnosu</label>
-              <CompositeButton @onCheckedComposite="setFieldWorkingFather($event)"></CompositeButton>
+              <CompositeButton @onCheckedComposite="setFieldWorkingFather($event)" :active="this.formData.father.working"></CompositeButton>
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('fatherNameOfEmployer')}">
               <label class="control-label" for="fatherNameOfEmployer">Naziv poslodavca</label>
@@ -335,7 +335,7 @@
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
               <label class="control-label">U radnom odnosu</label>
-              <CompositeButton @onCheckedComposite="setFieldWorkingMother($event)"></CompositeButton>
+              <CompositeButton @onCheckedComposite="setFieldWorkingMother($event)" :active="this.formData.mother.working"></CompositeButton>
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('MotherNameOfEmployer')}">
               <label class="control-label" for="MotherNameOfEmployer">Naziv poslodavca</label>
@@ -525,10 +525,6 @@ export default{
         } else {
         }
       })
-    },
-    setFieldFamilyRelations (event) {
-      this.formData.family.familyRelations = event
-      console.log(event)
     },
     setFieldGoingToSchool (event) {
       this.formData.child.goingToSchool = event
