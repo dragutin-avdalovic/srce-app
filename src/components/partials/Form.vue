@@ -533,7 +533,7 @@ export default{
       this.formData.child.goingToKindergarden = event
     },
     setFieldWorkingFather (event) {
-      this.formData.father.working = event
+      this.formData.father.working= event
     },
     setFieldWorkingMother (event) {
       this.formData.mother.working = event
