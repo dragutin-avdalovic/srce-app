@@ -11,15 +11,22 @@
 <script>
 export default {
   name: 'composite-button',
+  props: ['active'],
   data () {
     return {
-      activeFirst: false,
-      activeSecond: false
+      activeFirst: this.activeOne,
+      activeSecond: this.activeTwo
     }
   },
-  props: {
-    checked: {
-      default: false
+  mounted () {
+    if (this.active === true) {
+      this.activeFirst = this.active
+    }
+    else if (this.active === false) {
+      this.activeSecond = this.active
+    }
+    else {
+      this.activeSecond = this.activeSecond = false
     }
   },
   methods: {

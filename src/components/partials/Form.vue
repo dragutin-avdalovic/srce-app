@@ -71,11 +71,11 @@
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
                 <label class="control-label">Dijete ide u školu</label>
-                <CompositeButton @onCheckedComposite="setFieldGoingToSchool($event)"></CompositeButton>
+                <CompositeButton @onCheckedComposite="setFieldGoingToSchool($event)" :active="this.formData.child.goingToSchool"></CompositeButton>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
                 <label class="control-label">Dijete ide u vrtić</label>
-                <CompositeButton @onCheckedComposite="setFieldGoingToGarden($event)"></CompositeButton>
+                <CompositeButton @onCheckedComposite="setFieldGoingToGarden($event)" :active="this.formData.child.goingToKindergarden"></CompositeButton>
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
                 <div class="horizontal_line"></div>
@@ -103,24 +103,7 @@
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
                 <label class="control-label">Zdravstveno stanje djeteta<span class="grey"> (trenutno)</span> </label>
-                <div class="row no-padding">
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(1)"></Checkbox></div>
-                    <div class="right"><label>Izliječeno</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(2)"></Checkbox></div>
-                    <div class="right"><label>Na održavanju</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(3)"></Checkbox></div>
-                    <div class="right"><label>Završilo sa liječenjem i održavanjem</label></div>
-                  </div>
-                  <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxHealthState(4)"></Checkbox></div>
-                    <div class="right"><label>Ostalo</label></div>
-                  </div>
-                </div>
+                <b-form-select v-model="formData.child.healthState" :options="healthState" id="healthState" name="healthState"></b-form-select>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group-btns form-group">
                 <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
@@ -444,7 +427,7 @@
               <b-form-select v-model="formData.family.familyRelations" :options="types" id="types" name="types"></b-form-select>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
-              <label class="control-label label-check" for="note">Mjesečni prihodi porodice <span class="grey">(odabrati vrstu i navesti iznos)</span></label>
+              <label class="control-label label-check">Mjesečni prihodi porodice <span class="grey">(odabrati vrstu i navesti iznos)</span></label>
               <div class="row no-padding">
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
@@ -475,11 +458,11 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <div class="row no-padding">
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
-                  <label class="control-label label-check left-bs-padding" for="note">Porodica stanuje u</label>
+                  <label class="control-label label-check">Porodica stanuje u</label>
                   <b-form-select v-model="formData.family.accomodation" :options="this.accomodation" id="accomodation" name="accomodation"></b-form-select>
                 </div>
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
-                  <label class="control-label label-check left-bs-padding" for="note">Uslovi stanovanja</label>
+                  <label class="control-label label-check">Uslovi stanovanja</label>
                   <b-form-select v-model="formData.family.livingConditions" :options="this.livingConditions" id="livingConditions" name="livingConditions"></b-form-select>
                 </div>
               </div>
@@ -513,7 +496,7 @@ export default{
     CompositeButton,
     CheckInput
   },
-  props: ['formData', 'types', 'marriageStatus', 'accomodation', 'livingConditions', 'property'],
+  props: ['formData', 'types', 'marriageStatus', 'accomodation', 'livingConditions', 'property', 'healthState'],
   data () {
     return {
       selected: null,
@@ -538,7 +521,7 @@ export default{
     validateBeforeSubmit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.save()
+          this.submit()
         } else {
         }
       })
@@ -551,55 +534,13 @@ export default{
       this.formData.child.goingToSchool = event
     },
     setFieldGoingToGarden (event) {
-      // this.formData.child.goingToGarden = event
+      this.formData.child.goingToKindergarden = event
     },
     setFieldWorkingFather (event) {
       this.formData.father.working = event
     },
     setFieldWorkingMother (event) {
       this.formData.mother.working = event
-    },
-    setCheckbox (event) {
-      console.log(event)
-    },
-    setCheckboxHealthState (event) {
-      this.formData.child.healthState = event
-      console.log(event)
-    },
-    setCheckboxUnmarried (event) {
-      this.formData.family.unmarried = event
-      console.log(event)
-    },
-    setCheckboxMarried (event) {
-      this.formData.family.married = event
-      console.log(event)
-    },
-    setCheckboxLonely (event) {
-      this.formData.family.widow = event
-      console.log(event)
-    },
-    setCheckboxDivorced (event) {
-      this.formData.family.divorced = event
-      console.log(event)
-    },
-    setCheckboxOther (data) {
-      if (data === true || data === false) {
-        this.formData.family.other = data
-      } else {
-        // string data implement
-      }
-    },
-    setCheckboxChronicalDecease (event) {
-      this.formData.family.chronicalDecease = event
-      console.log(event)
-    },
-    setCheckboxDisability (event) {
-      this.formData.family.disability = event
-      console.log(event)
-    },
-    setCheckboxSpecialNeeds (event) {
-      this.formData.family.specialNeeds = event
-      console.log(event)
     },
     prev () {
       this.step--
