@@ -82,8 +82,8 @@ export default {
           diagnose: '',
           dateOfDiagnose: '',
           note: '',
-          healthState: null,
-          '_id': ''
+          healthState: 0,
+          _id: ''
         },
         mother: {
           name: '',
@@ -120,16 +120,7 @@ export default {
           _id: ''
         },
         family: {
-          unmarried: null,
-          married: null,
-          divorced: null,
-          widow: null,
-          other: null,
-          chronicalDecease: null,
-          disability: null,
-          specialNeeds: null,
-          familyRelations: null,
-          _id: '',
+          meritalStatus: 0,
           familyMembers: [
             {
               name: '',
@@ -138,9 +129,27 @@ export default {
               _id: ''
             }
           ],
-          accomodation: null,
-          livingConditions: null,
-          property: null
+          chronicalDecease: null,
+          chronicalDeceaseText: '',
+          disability: null,
+          disabilityText: '',
+          specialNeeds: null,
+          familyRelations: 1,
+          incomeBySalary: null,
+          incomeBySalaryText: '',
+          familyPension: null,
+          familyPensionText: '',
+          unemploymentBenefit: null,
+          unemploymentBenefitText: '',
+          disabilityCompensation: null,
+          disabilityCompensationText: '',
+          compensationForTheSocialProtectionSystem: null,
+          compensationForTheSocialProtectionSystemText: '',
+          otherIncome: null,
+          otherIncomeText: '',
+          familyResidence: 0,
+          housingConditions: 0,
+          residentialBuilding: 0
         }
       },
       fields: [

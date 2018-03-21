@@ -20,11 +20,11 @@ export default {
   },
   mounted () {
     if (this.active === true) {
-      this.activeFirst = this.active
+      this.activeFirst = true
     } else if (this.active === false) {
-      this.activeSecond = this.active
+      this.activeSecond = true
     } else {
-      this.activeSecond = this.activeSecond = false
+      this.activeSecond = this.activeFirst = false
     }
   },
   methods: {
