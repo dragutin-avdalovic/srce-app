@@ -2,7 +2,7 @@
   <div class="center">
     <div class="btn-group btn-group-vertical" data-toggle="buttons">
       <label class="btn center">
-        <input type="checkbox" v-on:click="onChecked()" v-bind:checked="this.checked">
+        <input type="checkbox" v-on:click="onChecked()" v-bind:checked="checked">
         <i class="fa fa-square-o fa-2x"></i>
         <i class="fa fa-check-square-o fa-2x"></i>
       </label>
@@ -13,11 +13,7 @@
 <script>
 export default {
   name: 'checkbox',
-  props: {
-    checked: {
-      default: false
-    }
-  },
+  props: ['checked'],
   methods: {
     onChecked () {
       this.$emit('onChecked', true)

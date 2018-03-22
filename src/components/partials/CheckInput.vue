@@ -1,10 +1,10 @@
 <template>
   <div class="composite">
     <div class="check-box">
-      <div class="left"><Checkbox @onChecked="setCheckboxInput($event)" :checked="this.checked"></Checkbox></div>
-      <div class="right" v-html="this.text"><label></label></div>
+      <div class="left"><Checkbox @onChecked="setCheckboxInput($event)" :checked="checked"></Checkbox></div>
+      <div class="right" v-html="text"><label></label></div>
     </div>
-    <div class="input"><input v-if="this.checked" @blur="sendInput(this.textInput)" type="text" class="check-input" v-model="this.textInput"/></div>
+    <div class="input"><input v-show="checked" @blur="sendInput(compText)" type="text" class="check-input" v-model="compText"/></div>
   </div>
 </template>
 
@@ -13,17 +13,20 @@ import Checkbox from '@/components/partials/Checkbox'
 export default {
   name: 'check-input',
   props: ['checked', 'text', 'textInput'],
+  data: function () {
+    return {
+      compText: this.textInput
+    }
+  },
   components: {
     Checkbox
   },
   methods: {
-    setCheckboxInput ($event) {
-      this.checked = $event
-      this.$emit('sendInputToParent', this.checked)
+    setCheckboxInput (event) {
+      this.$emit('onSetCheckBox', event)
     },
     sendInput (event) {
-      this.textInput = event
-      this.$emit('sendInputToParent', this.textInput)
+      this.$emit('onSetInput', event)
     }
   }
 }

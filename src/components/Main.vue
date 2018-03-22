@@ -3,7 +3,16 @@
     <div class="content container">
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData" :meritalStatus="meritalStatus" :familyRelations="familyRelations" :familyResidence="familyResidence" :housingConditions="housingConditions" :residentialBuilding="residentialBuilding" :healthState="healthState"></Form>
+        <Form @onDataEmit="saveData"
+              @onSetCheckBox="setCheckBox($event)"
+              @onSetInput="setInput($event)"
+              :formData="formData"
+              :meritalStatus="meritalStatus"
+              :familyRelations="familyRelations"
+              :familyResidence="familyResidence"
+              :housingConditions="housingConditions"
+              :residentialBuilding="residentialBuilding"
+              :healthState="healthState"></Form>
       </modal>
     </div>
   </div>
@@ -76,13 +85,13 @@ export default {
           city: '',
           address: '',
           postNumber: '',
-          goingToSchool: null,
-          goingToKindergarden: null,
-          diagnosed: null,
+          goingToSchool: false,
+          goingToKindergarden: false,
+          diagnosed: false,
           diagnose: '',
           dateOfDiagnose: '',
           note: '',
-          healthState: null,
+          healthState: false,
           _id: ''
         },
         mother: {
@@ -96,7 +105,7 @@ export default {
           postNumber: '',
           tel: '',
           mob: '',
-          working: null,
+          working: false,
           position: '',
           qualifications: '',
           nameOfEmployer: '',
@@ -113,7 +122,7 @@ export default {
           postNumber: '',
           tel: '',
           mob: '',
-          working: null,
+          working: false,
           position: '',
           qualifications: '',
           nameOfEmployer: '',
@@ -129,23 +138,23 @@ export default {
               _id: ''
             }
           ],
-          chronicalDecease: null,
+          chronicalDecease: false,
           chronicalDeceaseText: '',
-          disability: null,
+          disability: false,
           disabilityText: '',
-          specialNeeds: null,
-          familyRelations: null,
-          incomeBySalary: null,
+          specialNeeds: false,
+          familyRelations: false,
+          incomeBySalary: false,
           incomeBySalaryText: '',
-          familyPension: null,
+          familyPension: false,
           familyPensionText: '',
-          unemploymentBenefit: null,
+          unemploymentBenefit: false,
           unemploymentBenefitText: '',
-          disabilityCompensation: null,
+          disabilityCompensation: false,
           disabilityCompensationText: '',
-          compensationForTheSocialProtectionSystem: null,
+          compensationForTheSocialProtectionSystem: false,
           compensationForTheSocialProtectionSystemText: '',
-          otherIncome: null,
+          otherIncome: false,
           otherIncomeText: '',
           familyResidence: null,
           housingConditions: null,
@@ -192,6 +201,30 @@ export default {
     this.getData()
   },
   methods: {
+    setCheckBox (event) {
+      switch (event.field) {
+        case 'chronicalDecease':
+          this.formData.family.chronicalDecease = !this.formData.family.chronicalDecease
+          break
+        case 'goingToSchool':
+          this.formData.child.goingToSchool = !this.formData.child.goingToSchool
+          break
+        case 'goingToKindergarden':
+          this.formData.child.goingToKindergarden = !this.formData.child.goingToKindergarden
+          break
+        default:
+          console.log('no such field')
+      }
+    },
+    setInput (event) {
+      switch (event.field) {
+        case 'chronicalDeceaseText':
+          this.formData.family.chronicalDeceaseText = event.event
+          break
+        default:
+          console.log('no such field')
+      }
+    },
     clearData () {
       this.formData = Object.assign({}, this.formData, {
         type: null,

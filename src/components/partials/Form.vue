@@ -71,11 +71,11 @@
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
                 <label class="control-label">Dijete ide u školu</label>
-                <CompositeButton @onCheckedComposite="setFieldGoingToSchool($event)" :active="this.formData.child.goingToSchool"></CompositeButton>
+                <CompositeButton @onCheckedComposite="setCheckBox($event, 'goingToSchool')" :active="formData.child.goingToSchool"></CompositeButton>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
                 <label class="control-label">Dijete ide u vrtić</label>
-                <CompositeButton @onCheckedComposite="setFieldGoingToGarden($event)" :active="this.formData.child.goingToKindergarden"></CompositeButton>
+                <CompositeButton @onCheckedComposite="setCheckBox($event, 'goingToKindergarden')" :active="formData.child.goingToKindergarden"></CompositeButton>
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
                 <div class="horizontal_line"></div>
@@ -213,7 +213,7 @@
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
               <label class="control-label">U radnom odnosu</label>
-              <CompositeButton @onCheckedComposite="setFieldWorkingFather($event)" :active="this.formData.father.working"></CompositeButton>
+              <CompositeButton @onCheckedComposite="setCheckBox($event, 'fatherWorking')" :active="formData.father.working"></CompositeButton>
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('fatherNameOfEmployer')}">
               <label class="control-label" for="fatherNameOfEmployer">Naziv poslodavca</label>
@@ -335,7 +335,7 @@
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height">
               <label class="control-label">U radnom odnosu</label>
-              <CompositeButton @onCheckedComposite="setFieldWorkingMother($event)" :active="this.formData.mother.working"></CompositeButton>
+              <CompositeButton @onCheckedComposite="setCheckBox($event, 'motherWorking')" :active="formData.mother.working"></CompositeButton>
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('MotherNameOfEmployer')}">
               <label class="control-label" for="MotherNameOfEmployer">Naziv poslodavca</label>
@@ -408,15 +408,23 @@
               <div class="row no-padding">
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textSecond' :textInput="this.formData.family.chronicalDeceaseText" :checked="this.formData.family.chronicalDecease" :disabled="true" @sendInputToParent="setCheckboxChronicalDecease($event)"></CheckInput>
+                    <CheckInput :text='textSecond'
+                                :textInput="formData.family.chronicalDeceaseText"
+                                v-bind:checked="formData.family.chronicalDecease"
+                                @onSetCheckBox="setCheckBox($event, 'chronicalDecease')"
+                                @onSetInput="setInput($event, 'chronicalDeceaseText')"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textThird" :textInput="this.formData.family.disabilityText" :checked="this.formData.family.disability" :disabled="true" @sendInputToParent="setCheckboxDisability($event)"></CheckInput>
+                    <CheckInput :text="this.textThird"
+                                :textInput="formData.family.disabilityText"
+                                :checked="formData.family.disability"
+                                @onSetCheckBox="setCheckBox($event, 'disability')"
+                                @onSetInput="setInput($event, 'disabilityText')"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxSpecialNeeds($event)" :checked="this.formData.family.specialNeeds"></Checkbox></div>
+                    <div class="left"><Checkbox @onChecked="setCheckboxSpecialNeeds($event)" :checked="formData.family.specialNeeds"></Checkbox></div>
                     <div class="right"><label>ima status osobe sa posebnim potrebama</label></div>
                   </div>
                 </div>
@@ -431,26 +439,36 @@
               <div class="row no-padding">
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textForth' :textInput="this.formData.family.incomeBySalaryText" :checked="this.formData.family.incomeBySalary" :disabled="true" @sendInputToParent="setCheckInputIncomeBySalary($event)"></CheckInput>
+                    <CheckInput :text='this.textForth'
+                                :textInput="formData.family.incomeBySalaryText"
+                                :checked="formData.family.incomeBySalary"
+                                :disabled="true"
+                                @onSetCheckBox="setCheckBox($event, 'incomeBySalary')"
+                                @onSetInput="setInput($event, 'incomeBySalaryText')"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textFive"  :textInput="this.formData.family.familyPensionText" :checked="this.formData.family.familyPension" :disabled="true" @sendInputToParent="setCheckInputFamilyPension($event)"></CheckInput>
+                    <CheckInput :text="this.textFive"
+                                :textInput="formData.family.familyPensionText"
+                                :checked="formData.family.familyPension"
+                                :disabled="true"
+                                @onSetCheckBox="setCheckBox($event, 'familyPension')"
+                                @onSetInput="setInput($event, 'familyPensionText')"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textSix' :textInput="this.formData.family.unemploymentBenefitText" :checked="this.formData.family.unemploymentBenefit" :disabled="true" @sendInputToParent="setCheckInputUnemploymentBenefit($event)"></CheckInput>
+                    <CheckInput :text='this.textSix' :textInput="formData.family.unemploymentBenefitText" :checked="formData.family.unemploymentBenefit" :disabled="true" @sendInputToParent="setCheckInputUnemploymentBenefit($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textSeven" :textInput="this.formData.family.disabilityCompensationText" :checked="this.formData.family.disabilityCompensation" :disabled="true" @sendInputToParent="setCheckInputDisabilityCompensation($event)"></CheckInput>
+                    <CheckInput :text="this.textSeven" :textInput="formData.family.disabilityCompensationText" :checked="formData.family.disabilityCompensation" :disabled="true" @sendInputToParent="setCheckInputDisabilityCompensation($event)"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textEight' :textInput="this.formData.family.compensationForTheSocialProtectionSystemText" :checked="this.formData.family.compensationForTheSocialProtectionSystem" :disabled="true" @sendInputToParent="setCheckInputCompensationForTheSocialProtectionSystem($event)"></CheckInput>
+                    <CheckInput :text='this.textEight' :textInput="formData.family.compensationForTheSocialProtectionSystemText" :checked="formData.family.compensationForTheSocialProtectionSystem" :disabled="true" @sendInputToParent="setCheckInputCompensationForTheSocialProtectionSystem($event)"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textNine" :textInput="this.formData.family.otherIncomeText" :checked="this.formData.family.otherIncome" :disabled="true" @sendInputToParent="setCheckInputOtherIncome($event)"></CheckInput>
+                    <CheckInput :text="this.textNine" :textInput="formData.family.otherIncomeText" :checked="formData.family.otherIncome" :disabled="true" @sendInputToParent="setCheckInputOtherIncome($event)"></CheckInput>
                   </div>
                 </div>
               </div>
@@ -526,81 +544,11 @@ export default{
         }
       })
     },
-    setFieldGoingToSchool (event) {
-      console.log(event)
-      this.formData.child.goingToSchool = event
+    setCheckBox (event, field) {
+      this.$emit('onSetCheckBox', { event: event, field: field })
     },
-    setFieldGoingToGarden (event) {
-      this.formData.child.goingToKindergarden = event
-    },
-    setFieldWorkingFather (event) {
-      console.log('father')
-      this.formData.father.working = event
-    },
-    setFieldWorkingMother (event) {
-      console.log('mother')
-      this.formData.mother.working = event
-    },
-    setCheckboxChronicalDecease (event) {
-      if (event === true || event === false) {
-        console.log(event)
-        this.formData.family.chronicalDecease = event
-      } else {
-        console.log(event)
-        this.formData.family.chronicalDeceaseText = event
-      }
-    },
-    setCheckboxDisability (event) {
-      if (event === true || event === false) {
-        this.formData.family.disability = event
-      } else {
-        this.formData.family.disabilityText = event
-      }
-    },
-    setCheckInputIncomeBySalary (event) {
-      if (event === true || event === false) {
-        this.formData.family.incomeBySalary = event
-      } else {
-        this.formData.family.incomeBySalaryText = event
-      }
-    },
-    setCheckInputFamilyPension (event) {
-      if (event === true || event === false) {
-        this.formData.family.familyPension = event
-      } else {
-        this.formData.family.familyPensionText = event
-      }
-    },
-    setCheckInputUnemploymentBenefit (event) {
-      if (event === true || event === false) {
-        this.formData.family.unemploymentBenefit = event
-      } else {
-        this.formData.family.unemploymentBenefitText = event
-      }
-    },
-    setCheckInputDisabilityCompensation (event) {
-      if (event === true || event === false) {
-        this.formData.family.disabilityCompensation = event
-      } else {
-        this.formData.family.disabilityCompensationText = event
-      }
-    },
-    setCheckInputCompensationForTheSocialProtectionSystem (event) {
-      if (event === true || event === false) {
-        this.formData.family.compensationForTheSocialProtectionSystem = event
-      } else {
-        this.formData.family.compensationForTheSocialProtectionSystemText = event
-      }
-    },
-    setCheckInputOtherIncome (event) {
-      if (event === true || event === false) {
-        this.formData.family.otherIncome = event
-      } else {
-        this.formData.family.otherIncomeText = event
-      }
-    },
-    setCheckboxSpecialNeeds (event) {
-      this.formData.family.specialNeeds = event
+    setInput (event, field) {
+      this.$emit('onSetInput', { event: event, field: field })
     },
     prev () {
       this.step--
