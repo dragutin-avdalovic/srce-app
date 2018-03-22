@@ -217,30 +217,54 @@ export default {
           break
         case 'chronicalDecease':
           this.formData.family.chronicalDecease = !this.formData.family.chronicalDecease
+          if (this.formData.family.chronicalDecease === false) {
+            this.formData.family.chronicalDeceaseText = ''
+          }
           break
         case 'disability':
           this.formData.family.disability = !this.formData.family.disability
+          if (this.formData.family.disability === false) {
+            this.formData.family.disabilityText = ''
+          }
           break
         case 'specialNeeds':
           this.formData.family.specialNeeds = !this.formData.family.specialNeeds
           break
         case 'incomeBySalary':
           this.formData.family.incomeBySalary = !this.formData.family.incomeBySalary
+          if (this.formData.family.incomeBySalary === false) {
+            this.formData.family.incomeBySalaryText = ''
+          }
           break
         case 'familyPension':
           this.formData.family.familyPension = !this.formData.family.familyPension
+          if (this.formData.family.familyPension === false) {
+            this.formData.family.familyPensionText = ''
+          }
           break
         case 'unemploymentBenefit':
           this.formData.family.unemploymentBenefit = !this.formData.family.unemploymentBenefit
+          if (this.formData.family.unemploymentBenefit === false) {
+            this.formData.family.unemploymentBenefitText = ''
+          }
           break
         case 'disabilityCompensation':
           this.formData.family.disabilityCompensation = !this.formData.family.disabilityCompensation
+          if (this.formData.family.disabilityCompensation === false) {
+            this.formData.family.disabilityCompensationText = ''
+          }
           break
         case 'compensationForTheSocialProtectionSystem':
           this.formData.family.compensationForTheSocialProtectionSystem = !this.formData.family.compensationForTheSocialProtectionSystem
+          if (this.formData.family.compensationForTheSocialProtectionSystem === false) {
+            this.formData.family.compensationForTheSocialProtectionSystemText = ''
+          }
           break
         case 'otherIncome':
           this.formData.family.otherIncome = !this.formData.family.otherIncome
+          if (this.formData.family.otherIncome === false) {
+            this.formData.family.otherIncomeText = ''
+          }
           break
         default:
           console.log('no such field')
