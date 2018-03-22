@@ -278,15 +278,90 @@ export default {
     },
     clearData () {
       this.formData = Object.assign({}, this.formData, {
-        type: null,
-        company: '',
-        name: '',
-        email: '',
-        address: '',
-        city: '',
-        amount: '',
-        date: '',
-        cause: ''
+        child: {
+          name: '',
+          jmbg: null,
+          dateOfBirth: '',
+          placeOfBirth: '',
+          municipality: '',
+          city: '',
+          address: '',
+          postNumber: '',
+          goingToSchool: false,
+          goingToKindergarden: false,
+          diagnosed: false,
+          diagnose: '',
+          dateOfDiagnose: '',
+          note: '',
+          healthState: null,
+          _id: ''
+        },
+        mother: {
+          name: '',
+          jmbg: null,
+          citizenId: '',
+          issuedBy: '',
+          municipality: '',
+          city: '',
+          address: '',
+          postNumber: '',
+          tel: '',
+          mob: '',
+          working: false,
+          position: '',
+          qualifications: '',
+          nameOfEmployer: '',
+          _id: ''
+        },
+        father: {
+          name: '',
+          jmbg: null,
+          citizenId: '',
+          issuedBy: '',
+          municipality: '',
+          city: '',
+          address: '',
+          postNumber: '',
+          tel: '',
+          mob: '',
+          working: false,
+          position: '',
+          qualifications: '',
+          nameOfEmployer: '',
+          _id: ''
+        },
+        family: {
+          meritalStatus: null,
+          familyMembers: [
+            {
+              name: '',
+              jmbg: null,
+              relationToChild: '',
+              _id: ''
+            }
+          ],
+          chronicalDecease: false,
+          chronicalDeceaseText: '',
+          disability: false,
+          disabilityText: '',
+          specialNeeds: false,
+          familyRelations: null,
+          incomeBySalary: false,
+          incomeBySalaryText: '',
+          familyPension: false,
+          familyPensionText: '',
+          unemploymentBenefit: false,
+          unemploymentBenefitText: '',
+          disabilityCompensation: false,
+          disabilityCompensationText: '',
+          compensationForTheSocialProtectionSystem: false,
+          compensationForTheSocialProtectionSystemText: '',
+          otherIncome: false,
+          otherIncomeText: '',
+          familyResidence: null,
+          housingConditions: null,
+          residentialBuilding: null
+        }
       })
     },
     show () {
@@ -309,7 +384,10 @@ export default {
       })
     },
     saveData (event) {
+      console.log(event)
       event.child.dateOfDiagnose = event.child.dateOfDiagnose.split('T')[0]
+      event.child.dateOfBirth = event.child.dateOfBirth.split('T')[0]
+      console.log(event)
       if (event._id != null) {
         axios.put('http://45.76.90.178:3000/api/v1/social-card/' + event._id, event).then((response) => {
           console.log(response)
@@ -338,6 +416,7 @@ export default {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
           this.formData.child.dateOfDiagnose = this.formData.child.dateOfDiagnose.split('T')[0]
+          this.formData.child.dateOfBirth = this.formData.child.dateOfBirth.split('T')[0]
         }
       })
       this.show()
