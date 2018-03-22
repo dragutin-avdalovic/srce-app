@@ -1,7 +1,7 @@
 <template>
   <div>
-      <div v-if="step === 1">
-        <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
+      <div v-show="step === 1">
+        <form class="newEntryForm heartForm">
             <div slot="top-right">
               <button @click="$modal.hide('modal_entry')" class="modal-close">
                 X
@@ -101,9 +101,12 @@
                   <span v-show="errors.has('childNote')" class="help-block">{{ errors.first('childNote') }}</span>
                 </p>
               </div>
-              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
+              <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding" v-bind:class="{'has-error':errors.has('healthState')}">
                 <label class="control-label">Zdravstveno stanje djeteta<span class="grey"> (trenutno)</span> </label>
-                <b-form-select v-model="formData.child.healthState" :options="healthState" id="healthState" name="healthState"></b-form-select>
+                <p :class="{ 'control': true }">
+                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('healthState') }" v-model="formData.child.healthState" :options="healthState" id="healthState" name="healthState"></b-form-select>
+                  <span v-show="errors.has('healthState')" class="help-block">{{ errors.first('healthState') }}</span>
+                </p>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group-btns form-group">
                 <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
@@ -112,8 +115,8 @@
         </form>
       </div>
 
-      <div v-if="step === 2">
-        <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
+      <div v-show="step === 2">
+        <form class="newEntryForm heartForm">
           <div slot="top-right">
             <button @click="$modal.hide('modal_entry')" class="modal-close">
               X
@@ -234,8 +237,8 @@
         </form>
       </div>
 
-      <div v-if="step === 3">
-        <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
+      <div v-show="step === 3">
+        <form class="newEntryForm heartForm">
           <div slot="top-right">
             <button @click="$modal.hide('modal_entry')" class="modal-close">
               X
@@ -356,7 +359,7 @@
         </form>
       </div>
 
-      <div v-if="step === 4">
+      <div v-show="step === 4">
         <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
           <div slot="top-right">
             <button @click="$modal.hide('modal_entry')" class="modal-close">
@@ -368,9 +371,12 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">PODACI O PORODICI</p>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('meritalStatus')}">
                 <label class="control-label label-check">Bračni status roditelja</label>
-                <b-form-select v-model="formData.family.meritalStatus" :options="this.meritalStatus" id="meritalStatus" name="meritalStatus"></b-form-select>
+                <p :class="{ 'control': true }">
+                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }"  v-model="formData.family.meritalStatus" :options="this.meritalStatus" id="meritalStatus" name="meritalStatus"></b-form-select>
+                  <span v-show="errors.has('meritalStatus')" class="help-block">{{ errors.first('meritalStatus') }}</span>
+                </p>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
@@ -431,9 +437,12 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('familyRelations')}">
               <label class="control-label label-check">Odnosi u porodici</label>
-              <b-form-select v-model="formData.family.familyRelations" :options="familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
+              <p :class="{ 'control': true }">
+                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }" v-model="formData.family.familyRelations" :options="familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
+                <span v-show="errors.has('familyRelations')" class="help-block">{{ errors.first('familyRelations') }}</span>
+              </p>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Mjesečni prihodi porodice <span class="grey">(odabrati vrstu i navesti iznos)</span></label>
@@ -492,26 +501,35 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <div class="row no-padding">
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group" v-bind:class="{'has-error':errors.has('familyResidence')}">
                   <label class="control-label label-check">Porodica stanuje u</label>
-                  <b-form-select v-model="formData.family.familyResidence" :options="this.familyResidence" id="familyResidence" name="familyResidence"></b-form-select>
+                  <p :class="{ 'control': true }">
+                    <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('familyResidence') }" v-model="formData.family.familyResidence" :options="this.familyResidence" id="familyResidence" name="familyResidence"></b-form-select>
+                    <span v-show="errors.has('familyResidence')" class="help-block">{{ errors.first('familyResidence') }}</span>
+                  </p>
                 </div>
-                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6">
+                <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group" v-bind:class="{'has-error':errors.has('housingConditions')}">
                   <label class="control-label label-check">Uslovi stanovanja</label>
-                  <b-form-select v-model="formData.family.housingConditions" :options="this.housingConditions" id="housingConditions" name="housingConditions"></b-form-select>
+                  <p :class="{ 'control': true }">
+                    <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('housingConditions') }" v-model="formData.family.housingConditions" :options="this.housingConditions" id="housingConditions" name="housingConditions"></b-form-select>
+                    <span v-show="errors.has('housingConditions')" class="help-block">{{ errors.first('housingConditions') }}</span>
+                  </p>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
+            <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('residentialBuilding')}">
               <label class="control-label label-check">Stambeni objekat je</label>
-              <b-form-select v-model="formData.family.residentialBuilding" :options="this.residentialBuilding" id="residentialBuilding" name="residentialBuilding"></b-form-select>
+              <p :class="{ 'control': true }">
+                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('residentialBuilding') }" v-model="formData.family.residentialBuilding" :options="this.residentialBuilding" id="residentialBuilding" name="residentialBuilding"></b-form-select>
+                <span v-show="errors.has('residentialBuilding')" class="help-block">{{ errors.first('residentialBuilding') }}</span>
+              </p>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
                 <button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
-                <button @click.prevent="submit()" class="button_save" type="submit"><p class="save-text">Save</p></button>
+                <button class="button_save" type="submit"><p class="save-text">Save</p></button>
               </div>
             </div>
           </div>
@@ -549,14 +567,13 @@ export default{
     }
   },
   methods: {
-    submit () {
+    save () {
       this.$emit('onDataEmit', this.formData)
-      console.log(this.formData)
     },
     validateBeforeSubmit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.submit()
+          this.save()
         } else {
         }
       })
