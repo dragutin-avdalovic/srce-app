@@ -12,7 +12,8 @@
               :familyResidence="familyResidence"
               :housingConditions="housingConditions"
               :residentialBuilding="residentialBuilding"
-              :healthState="healthState"></Form>
+              :healthState="healthState"
+              :familyMembers="familyMembersEditable"></Form>
       </modal>
     </div>
   </div>
@@ -35,6 +36,7 @@ export default {
       items: [],
       seen: 'true',
       stacked: 'md',
+      familyMembersEditable: null,
       meritalStatus: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Neoženjen/Neudata' },
@@ -441,6 +443,7 @@ export default {
           this.formData = Object.assign({}, this.formData, obj)
           this.formData.child.dateOfDiagnose = this.formData.child.dateOfDiagnose.split('T')[0]
           this.formData.child.dateOfBirth = this.formData.child.dateOfBirth.split('T')[0]
+          this.familyMembersEditable = this.formData.family.familyMembers
         }
       })
       this.show()

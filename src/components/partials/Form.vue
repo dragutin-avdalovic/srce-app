@@ -390,23 +390,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th scope="row">{{i}}</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
+                <template v-for="member in familyMembersArray">
+                  <tr :key="member.jmbg">
+                    <th scope="row">{{i}}</th>
+                    <td> {{member.name}} </td>
+                    <td> {{member.jmbg}}</td>
+                    <td> {{member.relationToChild}}</td>
+                  </tr>
+                </template>
                 <tr>
                   <th scope="row">{{i+1}}</th>
-                  <td><input type="text" class="inline-input"></td>
-                  <td><input type="text" class="inline-input"></td>
-                  <td><input type="text" class="inline-input"></td>
+                  <td><input type="text" v-model = "this.familyMember.name" class="inline-input"></td>
+                  <td><input type="text" v-model = "this.familyMember.jmbg" class="inline-input"></td>
+                  <td><input type="text" v-model = "this.familyMember.relationToChild" class="inline-input"></td>
                 </tr>
                 </tbody>
               </table>
               <div class="new-btn">
                 <i class="fa fa-plus"></i>
-                <label>Novi unos</label>
+                <label @click="saveFamilyMember">Novi unos</label>
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
@@ -549,7 +551,7 @@ export default{
     CompositeButton,
     CheckInput
   },
-  props: ['formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState'],
+  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState'],
   data () {
     return {
       selected: null,
@@ -563,7 +565,14 @@ export default{
       textSix: 'Naknada za slučaj nezaposlenosti',
       textSeven: 'Naknada po osnovu invalidnosti',
       textEight: 'Naknada iz sistema socijalne zaštite',
-      textNine: 'Ostali prihodi'
+      textNine: 'Ostali prihodi',
+      familyMembersArray: this.familyMembers,
+      familyMember:
+        {
+          name: this.name,
+          jmbg: this.jmbg,
+          relationToChild: this.relationToChild
+        }
     }
   },
   methods: {
@@ -589,6 +598,9 @@ export default{
     },
     next () {
       this.step++
+    },
+    saveFamilyMember () {
+      this.familyMembersArray.push(this.familyMember)
     }
   }
 }
