@@ -425,7 +425,7 @@
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
                     <div class="left"><Checkbox :checked="formData.family.specialNeeds"
-                                                @onSetCheckBox="setCheckBox($event, 'specialNeeds')"></Checkbox></div>
+                                                @onChecked="setCheckBox($event, 'specialNeeds')"></Checkbox></div>
                     <div class="right"><label>ima status osobe sa posebnim potrebama</label></div>
                   </div>
                 </div>

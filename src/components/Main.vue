@@ -309,7 +309,7 @@ export default {
       })
     },
     saveData (event) {
-      console.log(event)
+      event.child.dateOfDiagnose = event.child.dateOfDiagnose.split('T')[0]
       if (event._id != null) {
         axios.put('http://45.76.90.178:3000/api/v1/social-card/' + event._id, event).then((response) => {
           console.log(response)
@@ -337,6 +337,7 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
+          this.formData.child.dateOfDiagnose = this.formData.child.dateOfDiagnose.split('T')[0]
         }
       })
       this.show()
