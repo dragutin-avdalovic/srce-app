@@ -91,7 +91,7 @@ export default {
           diagnose: '',
           dateOfDiagnose: '',
           note: '',
-          healthState: false,
+          healthState: null,
           _id: ''
         },
         mother: {
@@ -143,7 +143,7 @@ export default {
           disability: false,
           disabilityText: '',
           specialNeeds: false,
-          familyRelations: false,
+          familyRelations: null,
           incomeBySalary: false,
           incomeBySalaryText: '',
           familyPension: false,
@@ -203,14 +203,44 @@ export default {
   methods: {
     setCheckBox (event) {
       switch (event.field) {
-        case 'chronicalDecease':
-          this.formData.family.chronicalDecease = !this.formData.family.chronicalDecease
-          break
         case 'goingToSchool':
           this.formData.child.goingToSchool = !this.formData.child.goingToSchool
           break
         case 'goingToKindergarden':
           this.formData.child.goingToKindergarden = !this.formData.child.goingToKindergarden
+          break
+        case 'fatherWorking':
+          this.formData.father.working = !this.formData.father.working
+          break
+        case 'motherWorking':
+          this.formData.mother.working = !this.formData.mother.working
+          break
+        case 'chronicalDecease':
+          this.formData.family.chronicalDecease = !this.formData.family.chronicalDecease
+          break
+        case 'disability':
+          this.formData.family.disability = !this.formData.family.disability
+          break
+        case 'specialNeeds':
+          this.formData.family.specialNeeds = !this.formData.family.specialNeeds
+          break
+        case 'incomeBySalary':
+          this.formData.family.incomeBySalary = !this.formData.family.incomeBySalary
+          break
+        case 'familyPension':
+          this.formData.family.familyPension = !this.formData.family.familyPension
+          break
+        case 'unemploymentBenefit':
+          this.formData.family.unemploymentBenefit = !this.formData.family.unemploymentBenefit
+          break
+        case 'disabilityCompensation':
+          this.formData.family.disabilityCompensation = !this.formData.family.disabilityCompensation
+          break
+        case 'compensationForTheSocialProtectionSystem':
+          this.formData.family.compensationForTheSocialProtectionSystem = !this.formData.family.compensationForTheSocialProtectionSystem
+          break
+        case 'otherIncome':
+          this.formData.family.otherIncome = !this.formData.family.otherIncome
           break
         default:
           console.log('no such field')
@@ -220,6 +250,27 @@ export default {
       switch (event.field) {
         case 'chronicalDeceaseText':
           this.formData.family.chronicalDeceaseText = event.event
+          break
+        case 'disabilityText':
+          this.formData.family.disabilityText = event.event
+          break
+        case 'incomeBySalaryText':
+          this.formData.family.incomeBySalaryText = event.event
+          break
+        case 'familyPensionText':
+          this.formData.family.familyPensionText = event.event
+          break
+        case 'unemploymentBenefitText':
+          this.formData.family.unemploymentBenefitText = event.event
+          break
+        case 'disabilityCompensationText':
+          this.formData.family.disabilityCompensationText = event.event
+          break
+        case 'compensationForTheSocialProtectionSystemText':
+          this.formData.family.compensationForTheSocialProtectionSystemText = event.event
+          break
+        case 'otherIncomeText':
+          this.formData.family.otherIncomeText = event.event
           break
         default:
           console.log('no such field')

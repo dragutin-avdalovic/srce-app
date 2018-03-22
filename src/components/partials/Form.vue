@@ -424,7 +424,8 @@
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <div class="left"><Checkbox @onChecked="setCheckboxSpecialNeeds($event)" :checked="formData.family.specialNeeds"></Checkbox></div>
+                    <div class="left"><Checkbox :checked="formData.family.specialNeeds"
+                                                @onSetCheckBox="setCheckBox($event, 'specialNeeds')"></Checkbox></div>
                     <div class="right"><label>ima status osobe sa posebnim potrebama</label></div>
                   </div>
                 </div>
@@ -442,33 +443,49 @@
                     <CheckInput :text='this.textForth'
                                 :textInput="formData.family.incomeBySalaryText"
                                 :checked="formData.family.incomeBySalary"
-                                :disabled="true"
                                 @onSetCheckBox="setCheckBox($event, 'incomeBySalary')"
-                                @onSetInput="setInput($event, 'incomeBySalaryText')"></CheckInput>
+                                @onSetInput="setInput($event, 'incomeBySalaryText')">
+                    </CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
                     <CheckInput :text="this.textFive"
                                 :textInput="formData.family.familyPensionText"
                                 :checked="formData.family.familyPension"
-                                :disabled="true"
                                 @onSetCheckBox="setCheckBox($event, 'familyPension')"
-                                @onSetInput="setInput($event, 'familyPensionText')"></CheckInput>
+                                @onSetInput="setInput($event, 'familyPensionText')">
+                    </CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textSix' :textInput="formData.family.unemploymentBenefitText" :checked="formData.family.unemploymentBenefit" :disabled="true" @sendInputToParent="setCheckInputUnemploymentBenefit($event)"></CheckInput>
+                    <CheckInput :text="this.textSix"
+                                :textInput="formData.family.unemploymentBenefitText"
+                                :checked="formData.family.unemploymentBenefit"
+                                @onSetCheckBox="setCheckBox($event, 'unemploymentBenefit')"
+                                @onSetInput="setInput($event, 'unemploymentBenefitText')"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textSeven" :textInput="formData.family.disabilityCompensationText" :checked="formData.family.disabilityCompensation" :disabled="true" @sendInputToParent="setCheckInputDisabilityCompensation($event)"></CheckInput>
+                    <CheckInput :text="this.textSeven"
+                                :textInput="formData.family.disabilityCompensationText"
+                                :checked="formData.family.disabilityCompensation"
+                                @onSetCheckBox="setCheckBox($event, 'disabilityCompensation')"
+                                @onSetInput="setInput($event, 'disabilityCompensationText')"></CheckInput>
                   </div>
                 </div>
                 <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 no-padding">
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding">
-                    <CheckInput :text='this.textEight' :textInput="formData.family.compensationForTheSocialProtectionSystemText" :checked="formData.family.compensationForTheSocialProtectionSystem" :disabled="true" @sendInputToParent="setCheckInputCompensationForTheSocialProtectionSystem($event)"></CheckInput>
+                    <CheckInput :text='this.textEight'
+                                :textInput="formData.family.compensationForTheSocialProtectionSystemText"
+                                :checked="formData.family.compensationForTheSocialProtectionSystem"
+                                @onSetCheckBox="setCheckBox($event, 'compensationForTheSocialProtectionSystem')"
+                                @onSetInput="setInput($event, 'compensationForTheSocialProtectionSystemText')"></CheckInput>
                   </div>
                   <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 no-padding check-box">
-                    <CheckInput :text="this.textNine" :textInput="formData.family.otherIncomeText" :checked="formData.family.otherIncome" :disabled="true" @sendInputToParent="setCheckInputOtherIncome($event)"></CheckInput>
+                    <CheckInput :text="this.textNine"
+                                :textInput="formData.family.otherIncomeText"
+                                :checked="formData.family.otherIncome"
+                                @onSetCheckBox="setCheckBox($event, 'otherIncome')"
+                                @onSetInput="setInput($event, 'otherIncomeText')"></CheckInput>
                   </div>
                 </div>
               </div>
