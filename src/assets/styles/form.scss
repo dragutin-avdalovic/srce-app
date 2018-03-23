@@ -74,14 +74,13 @@
   }
   .min-row-height
   {
-    max-height: 6em;
-    height: 6em;
-    min-height: 6em;
+    max-height: 6.5em;
+    height: 6.5em;
+    min-height: 6.5em;
   }
   .label-check
   {
     @include font(1.2,600,$text-dark)
   }
-
 }
 
