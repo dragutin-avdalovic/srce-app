@@ -1,7 +1,7 @@
-<template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
+<template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div>
     <div class="content container">
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @delete="deleteItem"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onSetCheckBox="setCheckBox($event)"
@@ -25,7 +25,6 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from '@/components/partials/Form'
 import axios from 'axios'
-
 export default {
   name: 'HelloWorld',
   components: {
@@ -36,8 +35,9 @@ export default {
     return {
       msg: 'Srce za djecu',
       items: [],
-      seen: 'true',
+      flatItems: [],
       stacked: 'md',
+      seen: 'true',
       familyMembersEditable: null,
       meritalStatus: [
         { value: null, text: 'Selektujte opciju', selected: true },
@@ -398,13 +398,10 @@ export default {
       })
     },
     saveData (event) {
-      console.log(event)
       event.child.dateOfDiagnose = event.child.dateOfDiagnose.split('T')[0]
       event.child.dateOfBirth = event.child.dateOfBirth.split('T')[0]
-      console.log(event)
       if (event._id != null) {
         axios.put('http://45.76.90.178:3000/api/v1/social-card/' + event._id, event).then((response) => {
-          console.log(response)
           if (response.data === 'successfully edited') {
             this.hide()
             this.getData()
@@ -440,7 +437,6 @@ export default {
       axios.delete('http://45.76.90.178:3000/api/v1/social-card/' + event).then((response) => {
         console.log(response)
         if (response.data === 'successfully removed') {
-          this.seen = false
           this.getData()
         }
       })

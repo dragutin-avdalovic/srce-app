@@ -4,12 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VModal from 'vue-js-modal'
-import Dropdown from 'vue-js-dropdown'
 import VeeValidate from 'vee-validate'
 import BootstrapVue from 'bootstrap-vue'
+import Popover from 'vue-js-popover'
 
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
-Vue.use(Dropdown)
+Vue.use(Popover)
 Vue.use(VModal)
 Vue.use(BootstrapVue)
 

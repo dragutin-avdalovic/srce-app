@@ -1,4 +1,4 @@
-<template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
+<template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div class="container">
     <div class="row row_interactive">
       <div class="left-filter">
@@ -36,7 +36,7 @@
                 @filtered="onFiltered">
         <!-- A virtual composite column -->
         <template slot="actions" slot-scope="data">
-          <div v-dropdown:list-dropdown.bottom v-on:click="select(data.item._id)">
+          <div v-popover:list-dropdown.bottom v-on:click="select(data.item._id)">
             <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
           </div>
         </template>
@@ -47,7 +47,7 @@
         <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
       </div>
     </div>
-    <dropdown  v-if="seen" name="list-dropdown" class="list-dropdown">
+    <popover ref="popoverRef" name="list-dropdown" class="list-dropdown">
       <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
@@ -56,15 +56,15 @@
         <i class="fa fa-trash-o"></i>
         <p>Izbriši</p>
       </div>
-    </dropdown>
+    </popover>
   </div>
 </template>
 
 <script>
 import Checkbox from '@/components/partials/Checkbox'
-
 export default {
-  components: {Checkbox},
+  components: {
+    Checkbox},
   props: ['items', 'fieldsA', 'stacked', 'seen'],
   data () {
     return {
@@ -99,6 +99,7 @@ export default {
     },
     onDelete () {
       this.$emit('delete', this.id)
+      this.$refs.popoverRef.visible = false
     },
     filterItems: function (event) {
       var element = event.currentTarget
