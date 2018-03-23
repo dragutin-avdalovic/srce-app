@@ -388,7 +388,7 @@
                   <th scope="col">Ime i prezime</th>
                   <th scope="col">JMBG</th>
                   <th scope="col">Srodstvo sa oboljelim</th>
-                  <th scope="col">Izbrisi člana</th>
+                  <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -398,7 +398,7 @@
                     <td> {{member.name}} </td>
                     <td> {{member.jmbg}}</td>
                     <td> {{member.relationToChild}}</td>
-                    <td><button class="deleteMember"><i class="fa fa-trash-o"></i></button></td>
+                    <td><button class="deleteMember"  v-on:click="getClickedResult(i)"><i class="fa fa-trash-o"></i></button></td>
                   </tr>
                 </template>
                 <tr>
@@ -609,6 +609,9 @@ export default{
         jmbg: null,
         relationToChild: ''
       })
+    },
+    getClickedResult (event) {
+      this.$emit('onSliceFamilyMember', event)
     }
   }
 }
@@ -722,6 +725,7 @@ export default{
     @include font(1.2,600,$red);
     outline:none;
     border:none;
+    width: 50%;
   }
 }
 

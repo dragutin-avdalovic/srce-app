@@ -7,6 +7,7 @@
               @onSetCheckBox="setCheckBox($event)"
               @onSetInput="setInput($event)"
               @onSaveFamilyMember="saveFamilyMember($event)"
+              @onSliceFamilyMember="sliceFamilyMember($event)"
               :formData="formData"
               :meritalStatus="meritalStatus"
               :familyRelations="familyRelations"
@@ -445,8 +446,10 @@ export default {
       })
     },
     saveFamilyMember (event) {
-      console.log(event)
       this.formData.family.familyMembers.push(event)
+    },
+    sliceFamilyMember (event) {
+      this.formData.family.familyMembers.splice(event, 1)
     }
   }
 }
