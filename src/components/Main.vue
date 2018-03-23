@@ -6,6 +6,7 @@
         <Form @onDataEmit="saveData"
               @onSetCheckBox="setCheckBox($event)"
               @onSetInput="setInput($event)"
+              @onSaveFamilyMember="saveFamilyMember($event)"
               :formData="formData"
               :meritalStatus="meritalStatus"
               :familyRelations="familyRelations"
@@ -132,14 +133,7 @@ export default {
         },
         family: {
           meritalStatus: null,
-          familyMembers: [
-            {
-              name: '',
-              jmbg: null,
-              relationToChild: '',
-              _id: ''
-            }
-          ],
+          familyMembers: [],
           chronicalDecease: false,
           chronicalDeceaseText: '',
           disability: false,
@@ -358,14 +352,7 @@ export default {
         },
         family: {
           meritalStatus: null,
-          familyMembers: [
-            {
-              name: '',
-              jmbg: null,
-              relationToChild: '',
-              _id: ''
-            }
-          ],
+          familyMembers: [],
           chronicalDecease: false,
           chronicalDeceaseText: '',
           disability: false,
@@ -456,6 +443,10 @@ export default {
           this.getData()
         }
       })
+    },
+    saveFamilyMember (event) {
+      console.log(event)
+      this.formData.family.familyMembers.push(event)
     }
   }
 }

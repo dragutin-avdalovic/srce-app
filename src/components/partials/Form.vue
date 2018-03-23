@@ -380,6 +380,7 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
+              {{formData.family.familyMembers}}
               <table class="table table-bordered editable-table">
                 <thead>
                 <tr>
@@ -387,28 +388,30 @@
                   <th scope="col">Ime i prezime</th>
                   <th scope="col">JMBG</th>
                   <th scope="col">Srodstvo sa oboljelim</th>
+                  <th scope="col">Izbrisi člana</th>
                 </tr>
                 </thead>
                 <tbody>
-                <template v-for="member in familyMembersArray">
-                  <tr :key="member.jmbg">
-                    <th scope="row">{{i}}</th>
+                <template v-for="(member, i) in formData.family.familyMembers">
+                  <tr :key="i">
+                    <td>{{i+1}}</td>
                     <td> {{member.name}} </td>
                     <td> {{member.jmbg}}</td>
                     <td> {{member.relationToChild}}</td>
+                    <td><button class="deleteMember"><i class="fa fa-trash-o"></i></button></td>
                   </tr>
                 </template>
                 <tr>
-                  <th scope="row">{{i+1}}</th>
-                  <td><input type="text" v-model = "this.familyMember.name" class="inline-input"></td>
-                  <td><input type="text" v-model = "this.familyMember.jmbg" class="inline-input"></td>
-                  <td><input type="text" v-model = "this.familyMember.relationToChild" class="inline-input"></td>
+                  <td scope="row"></td>
+                  <td><input type="text" v-model="familyMember.name" class="inline-input"></td>
+                  <td><input type="text" v-model="familyMember.jmbg" class="inline-input"></td>
+                  <td><input type="text" v-model="familyMember.relationToChild" class="inline-input"></td>
                 </tr>
                 </tbody>
               </table>
               <div class="new-btn">
                 <i class="fa fa-plus"></i>
-                <label @click="saveFamilyMember">Novi unos</label>
+                <label v-on:click="saveFamilyMember">Novi unos</label>
               </div>
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
@@ -544,6 +547,7 @@
 import Checkbox from '@/components/partials/Checkbox'
 import CompositeButton from '@/components/partials/CompositeButton'
 import CheckInput from '@/components/partials/CheckInput'
+import * as _ from 'lodash'
 export default{
   name: 'Form',
   components: {
@@ -566,12 +570,11 @@ export default{
       textSeven: 'Naknada po osnovu invalidnosti',
       textEight: 'Naknada iz sistema socijalne zaštite',
       textNine: 'Ostali prihodi',
-      familyMembersArray: this.familyMembers,
       familyMember:
         {
-          name: this.name,
-          jmbg: this.jmbg,
-          relationToChild: this.relationToChild
+          name: '',
+          jmbg: null,
+          relationToChild: ''
         }
     }
   },
@@ -600,7 +603,12 @@ export default{
       this.step++
     },
     saveFamilyMember () {
-      this.familyMembersArray.push(this.familyMember)
+      this.$emit('onSaveFamilyMember', _.cloneDeep(this.familyMember))
+      this.familyMember = Object.assign({}, this.familyMember, {
+        name: '',
+        jmbg: null,
+        relationToChild: ''
+      })
     }
   }
 }
@@ -708,6 +716,12 @@ export default{
     @include spacing-tb(m,0.5,em);
     float: right;
     @include font(1.2,600,$red);
+  }
+  .deleteMember
+  {
+    @include font(1.2,600,$red);
+    outline:none;
+    border:none;
   }
 }
 
