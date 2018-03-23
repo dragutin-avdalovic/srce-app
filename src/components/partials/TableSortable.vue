@@ -69,7 +69,7 @@ export default {
   data () {
     return {
       currentPage: 1,
-      perPage: 5,
+      perPage: 10,
       totalRows: this.items.length,
       sortDesc: true,
       filter: null,

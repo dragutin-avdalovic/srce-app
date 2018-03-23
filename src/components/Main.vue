@@ -25,6 +25,7 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from '@/components/partials/Form'
 import axios from 'axios'
+const flatten = require('flat')
 export default {
   name: 'HelloWorld',
   components: {
@@ -387,10 +388,6 @@ export default {
     getData () {
       // Make a request for a user with a given ID
       axios.get('http://45.76.90.178:3000/api/v1/social-card').then((response) => {
-        response.data.map(item => {
-          Object.assign(item)
-          return item
-        })
         this.items = response.data
         console.log(this.items)
       }).catch((error) => {
