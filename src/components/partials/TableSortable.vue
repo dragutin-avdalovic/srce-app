@@ -1,25 +1,5 @@
 <template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div class="container">
-    <div class="row row_interactive">
-      <div class="left-filter">
-        <div class="donators-title">
-          <div class="donators-label">Socijalna karta</div>
-        </div>
-      </div>
-      <div class="right-filter">
-        <div class="search-container">
-          <div class="input-group search">
-            <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
-            <span class="input-group-btn">
-              <button class="btn btn-search" :disabled="!filter" @click="filter = ''" ><i class="fa fa-times"></i></button>
-            </span>
-          </div>
-        </div>
-        <div class="new">
-          <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
-        </div>
-      </div>
-    </div>
     <div class="row">
       <p>
         Sorting By: <b>{{ sortBy }}</b>,
@@ -65,15 +45,14 @@ import Checkbox from '@/components/partials/Checkbox'
 export default {
   components: {
     Checkbox},
-  props: ['items', 'fieldsA', 'stacked', 'seen'],
+  props: ['items', 'fieldsA', 'stacked', 'seen', 'filter'],
   data () {
     return {
       currentPage: 1,
       perPage: 10,
       totalRows: this.items.length,
       sortDesc: true,
-      filter: null,
-      sortBy: 'child[name]',
+      sortBy: 'name',
       id: '',
       selectItems: [1, 2, 3],
       limits: ['Institucija', 'Pravno lice', 'Fizičko lice']
@@ -100,13 +79,6 @@ export default {
     onDelete () {
       this.$emit('delete', this.id)
       this.$refs.popoverRef.visible = false
-    },
-    filterItems: function (event) {
-      var element = event.currentTarget
-      console.log(element)
-      this.filter = element.getAttribute('item')
-      console.log(this.filter)
-      this.$emit('filterByType', this.filter)
     }
   }
 }

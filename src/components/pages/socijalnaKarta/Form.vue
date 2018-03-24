@@ -617,9 +617,9 @@ export default{
 }
 </script>
 <style lang="scss">
-@import "../../assets/styles/mixins";
-@import "../../assets/styles/form";
-@import "../../assets/styles/general";
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/form";
+@import "../../../assets/styles/general";
 
 .newEntryForm {
   @include spacing-lr(m, auto, '');

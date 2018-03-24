@@ -1,12 +1,33 @@
-<template xmlns:v-dropdown="http://www.w3.org/1999/xhtml">
+<template>
   <div>
     <div class="content container">
+      <div class="row row_interactive">
+        <div class="left-filter">
+          <div class="donators-title">
+            <div class="donators-label">Pristupnica</div>
+          </div>
+        </div>
+        <div class="right-filter">
+          <div class="search-container">
+            <div class="input-group search">
+              <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+              <span class="input-group-btn">
+                <button class="btn btn-search" :disabled="!filter" @click="filter = ''" ><i class="fa fa-times"></i></button>
+              </span>
+            </div>
+          </div>
+          <div class="new">
+            <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+          </div>
+        </div>
+      </div>
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
                      @clicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
-                     :seen="seen"></TableSortable>
+                     :seen="seen"
+                     :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
@@ -21,7 +42,7 @@
 
 <script>
 import TableSortable from '@/components/partials/TableSortable'
-import Form from '@/components/partials/Form'
+import Form from './Form'
 import Main from '@/services/Main'
 
 export default {
@@ -34,6 +55,7 @@ export default {
     return {
       delitionId: null,
       msg: 'Srce za djecu',
+      filter: '',
       items: [{
         name: '',
         id: '',

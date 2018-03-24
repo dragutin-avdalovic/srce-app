@@ -1,0 +1,194 @@
+<template>
+  <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
+    <div slot="top-right">
+      <button @click="$modal.hide('modal_entry')" class="modal-close">
+        X
+      </button>
+    </div>
+    <h3 class="form-header">Novi unos</h3>
+    <div class="row">
+      <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">-->
+        <!--<label class="control-label" >Vrsta donatora</label>-->
+        <!--<b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>-->
+        <!--<i class="fa fa-chevron-down"></i>-->
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
+        <label class="control-label" for="name">Ime i prezime*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('name') }" id="name" name="name" type="text" v-model="formData.name" class="form-control" placeholder="">
+          <span v-show="errors.has('name')" class="help-block">{{ errors.first('name') }}</span>
+        </p>
+      </div>
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('dateOfBirth')}">
+        <label class="control-label" for="dateOfBirth">Datum rodjenja*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('dateOfBirth') }" name="dateOfBirth" type="date" v-model="formData.dateOfBirth" class="form-control" id="dateOfBirth" placeholder="">
+          <span v-show="errors.has('dateOfBirth')" class="help-block">{{ errors.first('dateOfBirth') }}</span>
+        </p>
+      </div>
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('address')}">
+        <label class="control-label" for="address">Adresa*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('address') }" name="address" type="text" v-model="formData.address" class="form-control" id="address" placeholder="">
+          <span v-show="errors.has('address')" class="help-block">{{ errors.first('address') }}</span>
+        </p>
+      </div>
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('phone')}">
+        <label class="control-label" for="phone">Kontakt telefon*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('phone') }" name="phone" type="text" v-model="formData.phone" class="form-control" id="phone" placeholder="">
+          <span v-show="errors.has('phone')" class="help-block">{{ errors.first('phone') }}</span>
+        </p>
+      </div>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12">
+        <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height padding" v-bind:class="{'has-error':errors.has('email')}">
+          <label class="control-label" for="email">Email*</label>
+          <p :class="{ 'control': true }">
+            <input v-validate="'required|email'" :class="{'input': true, 'has-error': errors.has('email') }" name="email" type="text" v-model="formData.email" class="form-control" id="email" placeholder="">
+            <span v-show="errors.has('email')" class="help-block">{{ errors.first('email') }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
+        <div class="horizontal_line"></div>
+      </div>
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('qualification')}">
+        <label class="control-label" for="qualification">Strucna sprema*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('qualification') }" name="qualification" type="text" v-model="formData.qualification" class="form-control" id="qualification" placeholder="">
+          <span v-show="errors.has('qualification')" class="help-block">{{ errors.first('qualification') }}</span>
+        </p>
+      </div>
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('profession')}">
+        <label class="control-label" for="profession">Zanimanje*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('profession') }" name="profession" type="text" v-model="formData.profession" class="form-control" id="profession" placeholder="">
+          <span v-show="errors.has('profession')" class="help-block">{{ errors.first('profession') }}</span>
+        </p>
+      </div>
+      <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-6 form-group min-row-height">
+        <label class="control-label" for="hours">Prethodno volontersko iskustvo?*</label>
+        <CompositeButton @onChecked="onCheckClicked($event)"></CompositeButton>
+      </div>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('hours')}">
+        <label class="control-label" for="hours">Navedite broj sati koji ste u mogucnosti mjesecno posvetiti radu Udruzenja:*</label>
+        <p :class="{ 'control': true }">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('hours') }" name="profession" type="text" v-model="formData.hours" class="form-control" id="hours" placeholder="">
+          <span v-show="errors.has('hours')" class="help-block">{{ errors.first('hours') }}</span>
+        </p>
+      </div>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('type')}">
+        <label class="control-label" for="type">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
+        <b-form-select v-model="formData.type" :options="types" id="type" name="type"></b-form-select>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+        <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
+      </div>
+    </div>
+  </form>
+</template>
+
+<script>
+import CompositeButton from '@/components/partials/CompositeButton.vue'
+export default{
+  components: {CompositeButton},
+  name: 'Form',
+  props: ['formData', 'types'],
+  data () {
+    return {
+      selected: null
+    }
+  },
+  methods: {
+    save: function () {
+      this.$emit('onDataEmit', this.formData)
+    },
+    validateBeforeSubmit: function () {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.save()
+        } else {
+        }
+      })
+    },
+    onCheckClicked: function (event) {
+      this.formData.volunteeredBefore = event
+    }
+  }
+}
+</script>
+<style lang="scss">
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/form";
+@import "../../../assets/styles/general";
+
+.newEntryForm {
+  @include spacing-lr(m, auto, '');
+  @include spacing-lr(p, 3, em);
+  @include spacing-tb(p, 1, em);
+  .form-header {
+    @include font(1.5, 600, $red);
+    @include spacing-tb(m, 1.5, em);
+  }
+  .form-control
+  {
+    height:2.875em !important;
+  }
+  /* remove the original arrow */
+  select
+  {
+    input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+  }
+
+  select + i.fa {
+    float: right;
+    margin-top: -30px;
+    margin-right: 5px;
+    pointer-events: none;
+    background-color: #fff;
+    padding-right: 5px;
+    @include font(1.2, 500, $red);
+  }
+  .donation_amount
+  {
+    text-align: center;
+  }
+  .button_save
+  {
+    @extend .heart-button;
+    float: right;
+    display: flex;
+    justify-content: center;
+    .save-text
+    {
+      font-size: 1em;
+      @include spacing-tb(m, 0, em);
+    }
+  }
+  .modal-close
+  {
+    background: transparent;
+    float: right;
+    border: none;
+    @include font(2, 500, $red);
+    margin-right: -2.5em;
+    margin-top: -0.3em;
+    &:focus
+    {
+      border: none;
+      outline: none;
+    }
+  }
+}
+.padding{
+  padding: 0px!important;
+}
+.horizontal_line{
+  background: $red;
+  height: 1px;
+  @include spacing-tb(m,1,em);
+  width: 100%;
+}
+</style>
