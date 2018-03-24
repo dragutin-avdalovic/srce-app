@@ -2,7 +2,9 @@
   <section>
     <div class="nav-bar">
       <div class="nav-logo">
-        <img src="@/assets/images/logo-wide.png" alt="logo" class="logo">
+        <router-link :to="{ name: 'Home', params: {} }">
+          <img src="@/assets/images/logo-wide.png" alt="logo" class="logo">
+        </router-link>
       </div>
     </div>
   </section>

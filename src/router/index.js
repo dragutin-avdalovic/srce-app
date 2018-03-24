@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import About from '@/components/About'
-import Main from '@/components/Main'
+import Home from '@/components/Home'
+import SocijalnaKarta from '@/components/pages/socijalnaKarta/SocijalnaKarta'
+import Pristupnica from '@/components/pages/pristupnica/Pristupnica'
+import Volontiranje from '@/components/pages/volontiranje/Volontiranje'
+import Donacije from '@/components/pages/donacije/Donacije'
 
 Vue.use(Router)
 
@@ -9,13 +12,28 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Main',
-      component: Main
+      name: 'Home',
+      component: Home
     },
     {
-      path: '/about',
-      name: 'About',
-      component: About
+      path: '/social-card',
+      name: 'SocijalnaKarta',
+      component: SocijalnaKarta
+    },
+    {
+      path: '/access-card',
+      name: 'Pristupnica',
+      component: Pristupnica
+    },
+    {
+      path: '/volunteering',
+      name: 'Volontiranje',
+      component: Volontiranje
+    },
+    {
+      path: '/donations',
+      name: 'Donacije',
+      component: Donacije
     }
   ]
 })

@@ -2,6 +2,7 @@
   <div id="app">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
     <Header></Header>
     <div class="content">
       <router-view/>
@@ -11,8 +12,13 @@
 </template>
 
 <script>
+// import Vue from 'vue'
 import Header from '@/components/partials/Header'
 import Footer from '@/components/partials/Footer'
+// import Element from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
+
+// Vue.use(Element)
 
 export default {
   name: 'App',

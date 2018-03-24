@@ -21,6 +21,7 @@
     "bootstrap": "^4.0.0",
     "bootstrap-vue": "^2.0.0-rc.2",
     "dataobject-parser": "^1.2.1",
+    "element-ui": "^2.2.2",
     "flat": "^4.0.0",
     "vee-validate": "^2.0.5",
     "vue": "^2.5.2",

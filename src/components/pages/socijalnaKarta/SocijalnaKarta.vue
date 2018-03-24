@@ -24,8 +24,8 @@
 <script>
 import TableSortable from '@/components/partials/TableSortable'
 import Form from '@/components/partials/Form'
-import axios from 'axios'
-const flatten = require('flat')
+import Main from '@/services/Main'
+
 export default {
   name: 'HelloWorld',
   components: {
@@ -36,7 +36,6 @@ export default {
     return {
       msg: 'Srce za djecu',
       items: [],
-      flatItems: [],
       stacked: 'md',
       seen: 'true',
       familyMembersEditable: null,
@@ -385,40 +384,6 @@ export default {
     hide () {
       this.$modal.hide('modal_entry')
     },
-    getData () {
-      // Make a request for a user with a given ID
-      axios.get('http://45.76.90.178:3000/api/v1/social-card').then((response) => {
-        this.items = response.data
-        console.log(this.items)
-      }).catch((error) => {
-        console.log(error)
-      })
-    },
-    saveData (event) {
-      event.child.dateOfDiagnose = event.child.dateOfDiagnose.split('T')[0]
-      event.child.dateOfBirth = event.child.dateOfBirth.split('T')[0]
-      if (event._id != null) {
-        axios.put('http://45.76.90.178:3000/api/v1/social-card/' + event._id, event).then((response) => {
-          if (response.data === 'successfully edited') {
-            this.hide()
-            this.getData()
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
-      } else {
-        axios.post('http://45.76.90.178:3000/api/v1/social-card', event).then((response) => {
-          console.log(response)
-          if (response.data === 'successfully saved') {
-            this.hide()
-            this.getData()
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
-      }
-      this.clearData()
-    },
     fillFormData (event) {
       this.items.forEach((obj) => {
         if (obj._id === event) {
@@ -430,166 +395,51 @@ export default {
       })
       this.show()
     },
-    deleteItem (event) {
-      axios.delete('http://45.76.90.178:3000/api/v1/social-card/' + event).then((response) => {
-        console.log(response)
-        if (response.data === 'successfully removed') {
-          this.getData()
-        }
-      })
-    },
     saveFamilyMember (event) {
       this.formData.family.familyMembers.push(event)
     },
     sliceFamilyMember (event) {
       this.formData.family.familyMembers.splice(event, 1)
+    },
+    getData () {
+      Main.methods.getModule(Main.data().socialCard, (data) => {
+        console.log(data)
+        this.items = data
+      })
+    },
+    saveData (event) {
+      console.log(event)
+      if (event._id != null) {
+        Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
+          console.log(data)
+          if (data.data === 'successfully saved') {
+            this.hide()
+            this.getData()
+          }
+        })
+      } else {
+        Main.methods.postModule(Main.data().socialCard, event, (data) => {
+          console.log(data)
+          if (data.data === 'successfully edited') {
+            this.hide()
+            this.getData()
+          }
+        })
+      }
+      this.clearData()
+    },
+    deleteItem (event) {
+      Main.methods.deleteModule(Main.data().socialCard + event._id, event, (data) => {
+        console.log(data)
+        if (data.data === 'successfully removed') {
+          this.seen = false
+          this.getData()
+        }
+      })
     }
   }
 }
 </script>
-<style lang="scss" scoped>
-@import "../assets/styles/mixins";
-@import "../assets/styles/variables";
+<style lang="scss">
 
-.col-fix{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.div-fix{
-  width: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 10vh;
-}
-.donators{
-  margin: 0;
-  a{
-    color: $red !important;
-    font-size: 1.8em;
-    font-weight: bold;
-    font-family: Open Sans;
-    padding: 0;
-    &:hover, &:focus {
-      text-decoration: none;
-    }
-  }
-}
-button{
-  display: flex;
-  justify-content: center;
-  background-color: $red;
-  color: #ffffff;
-  width: 100px;
-  border-radius: 8px;
-  border: none;
-  font-size: 1.2em;
-  font-weight: bold;
-  font-family: Open Sans;
-  width: 170px;
-  height: 50px;
-  :focus {
-    outline: none;
-    box-shadow:none;
-  }
-  :active{
-    outline: none;
-    box-shadow:none;
-  }
-}
-.sort{
-  border: none;
-  background-color: transparent;
-  a{
-    font-size: 1.2em;
-    font-weight: bold;
-    font-family: Open Sans;
-    padding: 0;
-    &:hover, &:focus {
-      text-decoration: none;
-    }
-  }
-}
-p{
-  font-size: 1.2em;
-  color: #A2A1A1;
-  font-family: Open Sans;
-  font-weight: bold;
-  padding-right: 5px;
-  margin: 0;
-}
-.v--modal-overlay {
-  background: rgba(255, 255, 255, 0.6);
-}
-.export{
-  width: auto;
-  height: 100%;
-  display: flex;
-  float: left;
-  .export-btn{
-    color: #ffffff;
-  }
-}
-.arrows{
-  display: flex;
-  float: right;
-  .arrow-btn{
-  }
-}
-.fix{
-  display: flex;
-  color: #333333;
-}
-.color-fix {
-  color: #A2A1A1;
-}
-.weight-fix{
-  font-weight: normal;
-  font-size: 14px;
-}
-.red{
-  color: #EB2D3C;
-}
-button{
-  background-color: transparent;
-  width: 100px;
-  :hover{
-    border-color: white;
-  }
-}
-.list-dropdown
-{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .list_row {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    cursor: pointer;
-    @include spacing-tb('p', 0.5, em);
-    @include spacing-l('p', 1.5, em);
-    p {
-      @include spacing-b('m', 0, em);
-      @include spacing-l('p', 1, em);
-      @include font(1.1, em, $text-dark);
-    }
-    i {
-      @include font(1.2, em, $text-dark);
-    }
-    &:hover
-    {
-      background-color: $text-gray;
-    }
-  }
-}
-.all{
-  padding: 0 0 0 8px;
-}
-.content
-{
-  min-height: 66vh;
-}
 </style>
