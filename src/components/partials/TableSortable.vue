@@ -74,7 +74,7 @@ export default {
       this.id = id
     },
     edit () {
-      this.$emit('clicked', this.id)
+      this.$emit('onEditClicked', this.id)
     },
     onDelete () {
       this.$emit('onConfirmDelete', this.id)

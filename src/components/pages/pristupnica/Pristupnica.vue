@@ -30,10 +30,11 @@
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
-                     @clicked="fillFormData"
+                     @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :seen="seen"
-                     :filter="filter"></TableSortable>
+                     :filter="filter">
+      </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
@@ -177,7 +178,7 @@ export default {
           this.formData = Object.assign({}, this.formData, obj)
         }
       })
-      this.show()
+      this.show('modal_entry')
     },
     getData () {
       Main.methods.getModule(Main.data().accessCard, (data) => {
@@ -190,7 +191,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().accessCard + event._id, event, (data) => {
           console.log(data)
-          if (data === 'successfully saved') {
+          if (data === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -199,7 +200,7 @@ export default {
       } else {
         Main.methods.postModule(Main.data().accessCard, event, (data) => {
           console.log(data)
-          if (data === 'successfully edited') {
+          if (data === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()

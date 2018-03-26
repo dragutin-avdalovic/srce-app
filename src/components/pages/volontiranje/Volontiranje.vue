@@ -27,9 +27,19 @@
         </div>
       </div>
       <!-- <el-button type="primary">Primary</el-button> -->
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen" :filter="filter"></TableSortable>
+      <TableSortable :items="items"
+                     :fieldsA="fields"
+                     :stacked="stacked"
+                     @onEditClicked="fillFormData"
+                     @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
+                     :seen="seen"
+                     :filter="filter">
+      </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
+      </modal>
+      <modal name="confirm_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -39,12 +49,14 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
 import Main from '@/services/Main'
+import Confirmation from '@/components/partials/Confirmation'
 
 export default {
   name: 'HelloWorld',
   components: {
     TableSortable,
-    Form
+    Form,
+    Confirmation
   },
   data () {
     return {
@@ -137,11 +149,21 @@ export default {
         cause: ''
       })
     },
-    show () {
-      this.$modal.show('modal_entry')
+    show (modalId) {
+      this.$modal.show(modalId)
     },
-    hide () {
-      this.$modal.hide('modal_entry')
+    hide (modalId) {
+      this.$modal.hide(modalId)
+    },
+    showDeleteModal (event, modalId) {
+      this.show(modalId)
+      this.delitionId = event
+    },
+    confirmDelete (event) {
+      if (event) {
+        this.deleteItem(this.delitionId)
+      }
+      this.hide('confirm_delete')
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -149,7 +171,7 @@ export default {
           this.formData = Object.assign({}, this.formData, obj)
         }
       })
-      this.show()
+      this.show('modal_entry')
     },
     getData () {
       Main.methods.getModule(Main.data().volunteers, (data) => {
@@ -162,26 +184,28 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().volunteers + event._id, event, (data) => {
           console.log(data)
-          if (data.data === 'successfully saved') {
-            this.hide()
+          if (data === 'successfully edited') {
+            this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       } else {
         Main.methods.postModule(Main.data().volunteers, event, (data) => {
           console.log(data)
-          if (data.data === 'successfully edited') {
-            this.hide()
+          if (data === 'successfully saved') {
+            this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       }
       this.clearData()
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().volunteers + event._id, event, (data) => {
+      Main.methods.deleteModule(Main.data().volunteers + event, (data) => {
         console.log(data)
-        if (data.data === 'successfully removed') {
+        if (data === 'successfully removed') {
           this.seen = false
           this.getData()
         }
