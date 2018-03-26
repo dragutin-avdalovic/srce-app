@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../assets/styles/mixins";
 @import "../assets/styles/variables";
 
@@ -68,12 +68,6 @@ export default {
 }
 
 /*content*/
-.search {
-  display: flex;
-  float: right;
-  padding-top: 15px;
-}
-
 .btn-search {
   margin-left: 10px;
   color: #ffffff;

@@ -44,7 +44,11 @@
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('types')}">
         <label class="control-label" for="address">Vrsta clana*</label>
-        <b-form-select v-validate="'required|'" :class="{'input': true, 'has-error': errors.has('types') }" v-model="formData.type" :options="types" id="types" name="types"></b-form-select>
+        <b-form-select v-validate="'required|'"
+                       :class="{'input': true, 'has-error': errors.has('types') }"
+                       v-model="formData.type"
+                       :options="types" id="types" name="types">
+        </b-form-select>
         <span v-show="errors.has('types')" class="help-block">{{ errors.first('types') }}</span>
       </div>
       <span v-if="formData.type == 0">

@@ -2,39 +2,43 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="left-filter">
-          <div class="donators-title">
-            <div class="donators-label">Pristupnica</div>
-          </div>
-        </div>
-        <div class="right-filter">
-          <div class="search-container">
-            <div class="input-group search">
-              <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
-              <span class="input-group-btn">
-                <button class="btn btn-search" :disabled="!filter" @click="filter = ''" ><i class="fa fa-times"></i></button>
-              </span>
+        <div class="col-lg-6 col-md-6 col-6">
+          <div class="left-filter">
+            <div class="donators-title">
+              <div class="donators-label">Pristupnica</div>
             </div>
           </div>
-          <div class="new">
-            <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+        </div>
+        <div class="col-lg-6 col-md-6 col-6">
+          <div class="right-filter">
+            <div class="search-container">
+              <div class="input-group search">
+                <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+                <span class="input-group-btn">
+                <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
+                  class="fa fa-times"></i></button>
+              </span>
+              </div>
+            </div>
+            <div class="new">
+              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
-                     @clicked="fillFormData"
+                     @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :seen="seen"
                      :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
-      <modal class="confirmation" name="confirm_delete" height="auto">
-        <p>Da li ste sigurni da zelite izbrisati?</p>
-        <button v-on:click="hide('confirm_delete')">Nazad</button>
-        <button v-on:click="confirmDelete('confirm_delete')">Izbrisati</button>
+      <modal name="confirm_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -44,10 +48,12 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
 import Main from '@/services/Main'
+import Confirmation from '@/components/partials/Confirmation'
 
 export default {
   name: 'HelloWorld',
   components: {
+    Confirmation,
     TableSortable,
     Form
   },
@@ -159,17 +165,21 @@ export default {
       this.show(modalId)
       this.delitionId = event
     },
-    confirmDelete (modalId) {
-      this.deleteItem(this.delitionId)
-      this.hide(modalId)
+    confirmDelete (event) {
+      if (event) {
+        this.deleteItem(this.delitionId)
+      }
+      this.hide('confirm_delete')
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
+          this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          this.formData.dateOfDiagnose = this.formData.dateOfDiagnose.split('T')[0]
         }
       })
-      this.show()
+      this.show('modal_entry')
     },
     getData () {
       Main.methods.getModule(Main.data().accessCard, (data) => {
@@ -182,24 +192,25 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().accessCard + event._id, event, (data) => {
           console.log(data)
-          if (data === 'successfully saved') {
+          if (data === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       } else {
         Main.methods.postModule(Main.data().accessCard, event, (data) => {
           console.log(data)
-          if (data === 'successfully edited') {
+          if (data === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       }
-      this.clearData()
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
+      Main.methods.deleteModule(Main.data().accessCard + event._id, (data) => {
         console.log(data)
         if (data === 'successfully removed') {
           this.seen = false
@@ -210,6 +221,25 @@ export default {
   }
 }
 </script>
-<style lang="scss">
 
+<style lang="scss">
+  @import "../../../assets/styles/mixins";
+  @import "../../../assets/styles/form";
+  @import "../../../assets/styles/general";
+  .confirmation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .confirmation-title{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  .confirmation-button{
+    @extend .heart-button;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
 </style>

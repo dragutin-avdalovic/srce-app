@@ -35,7 +35,7 @@ export default {
     },
     putModule: function (route, data, cb) {
       axios.put(route, data).then(response => {
-        cb(response)
+        cb(response.data)
       }).catch(e => {
         console.log(e)
       })

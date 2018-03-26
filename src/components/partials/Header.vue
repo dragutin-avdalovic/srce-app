@@ -1,10 +1,12 @@
 <template>
   <section>
-    <div class="nav-bar">
-      <div class="nav-logo">
-        <router-link :to="{ name: 'Home', params: {} }">
-          <img src="@/assets/images/logo-wide.png" alt="logo" class="logo">
-        </router-link>
+    <div class="container">
+      <div class="nav-bar">
+        <div class="nav-logo">
+          <router-link :to="{ name: 'Home', params: {} }">
+            <img src="@/assets/images/logo-wide.png" alt="logo" class="logo">
+          </router-link>
+        </div>
       </div>
     </div>
   </section>
@@ -34,7 +36,6 @@ export default {
   display: block;
   justify-content: space-between;
   vertical-align: middle;
-  @include spacing-lr('p', 10 ,%);
 }
 .logo {
   width: 200px;
