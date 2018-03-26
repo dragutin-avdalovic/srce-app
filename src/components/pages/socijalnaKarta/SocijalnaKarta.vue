@@ -2,11 +2,14 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
+        <div class="col-lg-6 col-md-6 col-6">
         <div class="left-filter">
           <div class="donators-title">
             <div class="donators-label">Socijalna Karta</div>
           </div>
         </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-6">
         <div class="right-filter">
           <div class="search-container">
             <div class="input-group search">
@@ -20,6 +23,7 @@
             <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
           </div>
         </div>
+      </div>
       </div>
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @delete="deleteItem" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
