@@ -3,27 +3,28 @@
     <div class="content container">
       <div class="row row_interactive">
         <div class="col-lg-6 col-md-6 col-6">
-        <div class="left-filter">
-          <div class="donators-title">
-            <div class="donators-label">Donacije</div>
-          </div>
-        </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-6">
-        <div class="right-filter">
-          <div class="search-container">
-            <div class="input-group search">
-              <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
-              <span class="input-group-btn">
-                <button class="btn btn-search" :disabled="!filter" @click="filter = ''" ><i class="fa fa-times"></i></button>
-              </span>
+          <div class="left-filter">
+            <div class="donators-title">
+              <div class="donators-label">Donacije</div>
             </div>
           </div>
-          <div class="new">
-            <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+        </div>
+        <div class="col-lg-6 col-md-6 col-6">
+          <div class="right-filter">
+            <div class="search-container">
+              <div class="input-group search">
+                <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+                <span class="input-group-btn">
+                <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
+                  class="fa fa-times"></i></button>
+              </span>
+              </div>
+            </div>
+            <div class="new">
+              <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+            </div>
           </div>
         </div>
-      </div>
       </div>
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">

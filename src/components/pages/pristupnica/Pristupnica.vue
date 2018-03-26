@@ -15,16 +15,18 @@
               <div class="input-group search">
                 <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
                 <span class="input-group-btn">
-                <button class="btn btn-search" :disabled="!filter" @click="filter = ''" ><i class="fa fa-times"></i></button>
+                <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
+                  class="fa fa-times"></i></button>
               </span>
               </div>
             </div>
             <div class="new">
-              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
+              </button>
             </div>
           </div>
         </div>
-        </div>
+      </div>
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
