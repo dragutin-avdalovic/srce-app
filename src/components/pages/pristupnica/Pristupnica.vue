@@ -33,8 +33,7 @@
                      @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :seen="seen"
-                     :filter="filter">
-      </TableSortable>
+                     :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
@@ -176,6 +175,8 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
+          this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          this.formData.dateOfDiagnose = this.formData.dateOfDiagnose.split('T')[0]
         }
       })
       this.show('modal_entry')
@@ -209,7 +210,7 @@ export default {
       }
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
+      Main.methods.deleteModule(Main.data().accessCard + event._id, (data) => {
         console.log(data)
         if (data === 'successfully removed') {
           this.seen = false

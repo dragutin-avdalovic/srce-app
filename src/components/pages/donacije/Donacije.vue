@@ -163,6 +163,7 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
+          this.formData.date = this.formData.date.split('T')[0]
         }
       })
       this.show('modal_entry')

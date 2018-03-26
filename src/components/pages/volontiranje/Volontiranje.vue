@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="new">
-              <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
           </div>
         </div>
@@ -169,6 +169,7 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
+          this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
         }
       })
       this.show('modal_entry')
@@ -202,7 +203,7 @@ export default {
       }
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().volunteers + event, (data) => {
+      Main.methods.deleteModule(Main.data().volunteers + event._id, (data) => {
         console.log(data)
         if (data === 'successfully removed') {
           this.seen = false

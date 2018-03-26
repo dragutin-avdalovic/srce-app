@@ -19,9 +19,9 @@
         </p>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('dateOfBirth')}">
-        <label class="control-label" for="dateOfBirth">Datum rodjenja*</label>
+        <label class="control-label" >Datum rodenja*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('dateOfBirth') }" name="dateOfBirth" type="date" v-model="formData.dateOfBirth" class="form-control" id="dateOfBirth" placeholder="">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('dateOfBirth') }" max="3000-01-01" min="2000-01-01" id="dateOfBirth" name="dateOfBirth" type="date" v-model="formData.dateOfBirth" class="form-control" placeholder="">
           <span v-show="errors.has('dateOfBirth')" class="help-block">{{ errors.first('dateOfBirth') }}</span>
         </p>
       </div>
@@ -35,7 +35,7 @@
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('phone')}">
         <label class="control-label" for="phone">Kontakt telefon*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('phone') }" name="phone" type="text" v-model="formData.phone" class="form-control" id="phone" placeholder="">
+          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('phone') }" name="phone" type="text" v-model="formData.phone" class="form-control" id="phone" placeholder="">
           <span v-show="errors.has('phone')" class="help-block">{{ errors.first('phone') }}</span>
         </p>
       </div>
@@ -67,18 +67,21 @@
       </div>
       <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-6 form-group min-row-height">
         <label class="control-label" for="hours">Prethodno volontersko iskustvo?*</label>
-        <CompositeButton @onChecked="onCheckClicked($event)"></CompositeButton>
+        <CompositeButton v-validate="'required'" @onChecked="onCheckClicked($event)"></CompositeButton>
       </div>
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('hours')}">
         <label class="control-label" for="hours">Navedite broj sati koji ste u mogucnosti mjesecno posvetiti radu Udruzenja:*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('hours') }" name="profession" type="text" v-model="formData.hours" class="form-control" id="hours" placeholder="">
+          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('hours') }" name="hours" type="text" v-model="formData.hours" class="form-control" id="hours" placeholder="">
           <span v-show="errors.has('hours')" class="help-block">{{ errors.first('hours') }}</span>
         </p>
       </div>
-      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('type')}">
-        <label class="control-label" for="type">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
-        <b-form-select v-model="formData.type" :options="types" id="type" name="type"></b-form-select>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('types')}">
+        <label class="control-label" for="types">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
+        <b-form-select v-validate="'required|'"
+                       :class="{'input': true, 'has-error': errors.has('types') }"
+                       v-model="formData.type"
+                       :options="types" id="types" name="types"></b-form-select>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
@@ -95,8 +98,24 @@ export default{
   props: ['formData', 'types'],
   data () {
     return {
-      selected: null
+      selected: null,
+      dict: {
+        custom: {
+          childName: {
+            required: 'The child name field is required.' // messages can be strings as well.
+          },
+          dateOfBirth: {
+            required: 'The date of birth field is required.' // messages can be strings as well.
+          },
+          dateOfDiagnose: {
+            required: 'The date of diagnose field is required.' // messages can be strings as well.
+          }
+        }
+      }
     }
+  },
+  mounted: function () {
+    this.$validator.localize('en', this.dict)
   },
   methods: {
     save: function () {
