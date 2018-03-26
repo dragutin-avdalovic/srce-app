@@ -26,9 +26,19 @@
           </div>
         </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" @clicked="fillFormData" @delete="deleteItem" :seen="seen" :filter="filter"></TableSortable>
+      <TableSortable :items="items"
+                     :fieldsA="fields"
+                     :stacked="stacked"
+                     @onEditClicked="fillFormData"
+                     @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
+                     :seen="seen"
+                     :filter="filter">
+      </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" :formData="formData"></Form>
+      </modal>
+      <modal name="confirm_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -38,12 +48,14 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
 import Main from '@/services/Main'
+import Confirmation from '@/components/partials/Confirmation'
 
 export default {
   name: 'HelloWorld',
   components: {
     TableSortable,
-    Form
+    Form,
+    Confirmation
   },
   data () {
     return {
@@ -130,11 +142,22 @@ export default {
         cause: ''
       })
     },
-    show () {
-      this.$modal.show('modal_entry')
+    show (modalId) {
+      this.$modal.show(modalId)
     },
-    hide () {
-      this.$modal.hide('modal_entry')
+    hide (modalId) {
+      this.$modal.hide(modalId)
+      this.clearData()
+    },
+    showDeleteModal (event, modalId) {
+      this.show(modalId)
+      this.delitionId = event
+    },
+    confirmDelete (event) {
+      if (event) {
+        this.deleteItem(this.delitionId)
+      }
+      this.hide('confirm_delete')
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -142,7 +165,7 @@ export default {
           this.formData = Object.assign({}, this.formData, obj)
         }
       })
-      this.show()
+      this.show('modal_entry')
     },
     getData () {
       Main.methods.getModule(Main.data().donations, (data) => {
@@ -153,28 +176,29 @@ export default {
     saveData (event) {
       console.log(event)
       if (event._id != null) {
-        Main.methods.putModule(Main.data().donations + event._id, event, (data) => {
+        Main.methods.putModule(Main.data().donations + event, (data) => {
           console.log(data)
-          if (data.data === 'successfully saved') {
-            this.hide()
+          if (data === 'successfully edited') {
+            this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       } else {
         Main.methods.postModule(Main.data().donations, event, (data) => {
           console.log(data)
-          if (data.data === 'successfully edited') {
-            this.hide()
+          if (data === 'successfully saved') {
+            this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       }
-      this.clearData()
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().donations + event._id, event, (data) => {
+      Main.methods.deleteModule(Main.data().donations + event, (data) => {
         console.log(data)
-        if (data.data === 'successfully removed') {
+        if (data === 'successfully removed') {
           this.seen = false
           this.getData()
         }

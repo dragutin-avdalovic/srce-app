@@ -200,7 +200,6 @@ export default {
           }
         })
       }
-      this.clearData()
     },
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().volunteers + event, (data) => {
