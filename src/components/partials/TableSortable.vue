@@ -77,7 +77,7 @@ export default {
       this.$emit('clicked', this.id)
     },
     onDelete () {
-      this.$emit('delete', this.id)
+      this.$emit('onConfirmDelete', this.id)
       this.$refs.popoverRef.visible = false
     }
   }

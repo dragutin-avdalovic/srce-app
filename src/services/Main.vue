@@ -7,10 +7,10 @@ export default {
   data () {
     return {
       errors: [],
-      volunteers: `${api}/volunteers`,
-      socialCard: `${api}/social-card`,
-      donations: `${api}/donations`,
-      accessCard: `${api}/access-card`
+      volunteers: `${api}/volunteers/`,
+      socialCard: `${api}/social-card/`,
+      donations: `${api}/donations/`,
+      accessCard: `${api}/access-card/`
     }
   },
   methods: {
