@@ -139,7 +139,7 @@ export default{
     pointer-events: none;
     background-color: #fff;
     padding-right: 5px;
-    @include font(1.2, 500, $red);
+    @include font(1.2, 500, blue);
   }
   .donation_amount
   {
