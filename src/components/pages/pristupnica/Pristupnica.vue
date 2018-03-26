@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="new">
-            <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+            <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
           </div>
         </div>
       </div>
@@ -182,16 +182,16 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().accessCard + event._id, event, (data) => {
           console.log(data)
-          if (data.data === 'successfully saved') {
-            this.hide()
+          if (data === 'successfully saved') {
+            this.hide('modal_entry')
             this.getData()
           }
         })
       } else {
         Main.methods.postModule(Main.data().accessCard, event, (data) => {
           console.log(data)
-          if (data.data === 'successfully edited') {
-            this.hide()
+          if (data === 'successfully edited') {
+            this.hide('modal_entry')
             this.getData()
           }
         })
@@ -199,9 +199,9 @@ export default {
       this.clearData()
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().accessCard + event._id, event, (data) => {
+      Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
         console.log(data)
-        if (data.data === 'successfully removed') {
+        if (data === 'successfully removed') {
           this.seen = false
           this.getData()
         }
