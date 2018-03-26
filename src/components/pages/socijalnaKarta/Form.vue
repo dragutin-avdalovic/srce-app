@@ -610,7 +610,6 @@ export default{
       })
     },
     getClickedResult (event) {
-      console.log(event)
       this.$emit('onSliceFamilyMember', event)
     }
   }

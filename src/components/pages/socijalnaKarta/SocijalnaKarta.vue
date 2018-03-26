@@ -21,13 +21,13 @@
           </div>
         </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @delete="deleteItem" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onSetCheckBox="setCheckBox($event)"
               @onSetInput="setInput($event)"
               @onSaveFamilyMember="saveFamilyMember($event)"
-              @onSliceFamilyMember="sliceFamilyMember($event, formData)"
+              @onSliceFamilyMember="sliceFamilyMember($event)"
               :formData="formData"
               :meritalStatus="meritalStatus"
               :familyRelations="familyRelations"
@@ -36,6 +36,11 @@
               :residentialBuilding="residentialBuilding"
               :healthState="healthState"
               :familyMembers="familyMembersEditable"></Form>
+      </modal>
+      <modal class="confirmation" name="confirm_delete" height="auto">
+        <p>Da li ste sigurni da zelite izbrisati?</p>
+        <button v-on:click="hide('confirm_delete')">Nazad</button>
+        <button v-on:click="confirmDelete('confirm_delete')">Izbrisati</button>
       </modal>
     </div>
   </div>
@@ -55,6 +60,7 @@ export default {
   },
   data () {
     return {
+      deletionId: null,
       msg: 'Srce za djecu',
       filter: '',
       items: [],
@@ -400,11 +406,19 @@ export default {
         }
       })
     },
-    show () {
-      this.$modal.show('modal_entry')
+    show (modal) {
+      if (modal === 'confirm_delete') {
+        this.$modal.show('confirm_delete')
+      } else {
+        this.$modal.show('modal_entry')
+      }
     },
-    hide () {
-      this.$modal.hide('modal_entry')
+    hide (modal) {
+      if (modal === 'confirm_delete') {
+        this.$modal.hide('confirm_delete')
+      } else {
+        this.$modal.hide('modal_entry')
+      }
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -420,15 +434,13 @@ export default {
     saveFamilyMember (event) {
       this.formData.family.familyMembers.push(event)
     },
-    sliceFamilyMember (event, event2) {
+    sliceFamilyMember (event) {
       console.log(event)
-      console.log(event2)
       console.log('prije')
-      console.log(event2.family.familyMembers)
-      event2.family.familyMembers.splice(event, 1)
+      console.log(this.formData.family.familyMembers)
       console.log('posle')
-      console.log(event2.family.familyMembers)
-      this.formData = Object.assign({}, this.formData, event2)
+      this.formData.family.familyMembers.splice(event, 1)
+      console.log(this.formData.family.familyMembers)
     },
     getData () {
       Main.methods.getModule(Main.data().socialCard, (data) => {
@@ -457,14 +469,24 @@ export default {
       }
       this.clearData()
     },
+    showDeleteModal (event) {
+      this.show(event.type)
+      console.log(event.type)
+      this.deletionId = event.id
+    },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().socialCard + event._id, event, (data) => {
+      Main.methods.deleteModule(Main.data().socialCard + event, event, (data) => {
         console.log(data)
         if (data.data === 'successfully removed') {
           this.seen = false
-          this.getData()
         }
       })
+    },
+    confirmDelete (modalId) {
+      this.deleteItem(this.deletionId)
+      console.log(this.deletionId)
+      this.hide(modalId)
+      this.getData()
     },
     sort (event) {
       if (event.sortDesc) {

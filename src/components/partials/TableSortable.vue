@@ -1,5 +1,5 @@
 <template xmlns:v-popover="http://www.w3.org/1999/xhtml">
-  <div class="container">
+  <div>
     <div class="row">
       <b-table  show-empty :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
@@ -74,7 +74,7 @@ export default {
       this.$emit('clicked', this.id)
     },
     onDelete () {
-      this.$emit('onConfirmDelete', this.id)
+      this.$emit('onConfirmDelete', { id: this.id, type: 'confirm_delete' })
       this.$refs.popoverRef.visible = false
     },
     sortRoutine (ctx) {
@@ -250,6 +250,7 @@ export default {
     flex-direction: row;
     align-items: center;
     @include spacing-tb(m,1,em);
+    @include spacing-lr(m,0,em);
     .left-filter
     {
       display: flex;
