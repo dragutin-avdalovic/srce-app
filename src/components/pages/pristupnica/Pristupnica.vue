@@ -37,10 +37,14 @@
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
-      <modal class="confirmation" name="confirm_delete" height="auto">
-        <p>Da li ste sigurni da zelite izbrisati?</p>
-        <button v-on:click="hide('confirm_delete')">Nazad</button>
-        <button v-on:click="confirmDelete('confirm_delete')">Izbrisati</button>
+      <modal name="confirm_delete" height="auto">
+        <div class="confirmation-title">
+        <h4>Da li ste sigurni da zelite izbrisati?</h4>
+        </div>
+        <div class="confirmation">
+          <button class="confirmation-button heart-button" v-on:click="hide('confirm_delete')"><span class="new-text">Nazad</span></button>
+          <button class="confirmation-button heart-button" v-on:click="confirmDelete('confirm_delete')"><span class="new-text">Izbrisati</span></button>
+        </div>
       </modal>
     </div>
   </div>
@@ -216,6 +220,25 @@ export default {
   }
 }
 </script>
-<style lang="scss">
 
+<style lang="scss">
+  @import "../../../assets/styles/mixins";
+  @import "../../../assets/styles/form";
+  @import "../../../assets/styles/general";
+  .confirmation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .confirmation-title{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  .confirmation-button{
+    @extend .heart-button;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
 </style>
