@@ -38,13 +38,7 @@
         <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
-        <div class="confirmation-title">
-        <h4>Da li ste sigurni da zelite izbrisati?</h4>
-        </div>
-        <div class="confirmation">
-          <button class="confirmation-button heart-button" v-on:click="hide('confirm_delete')"><span class="new-text">Nazad</span></button>
-          <button class="confirmation-button heart-button" v-on:click="confirmDelete('confirm_delete')"><span class="new-text">Izbrisati</span></button>
-        </div>
+        <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -54,10 +48,12 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
 import Main from '@/services/Main'
+import Confirmation from '@/components/partials/Confirmation'
 
 export default {
   name: 'HelloWorld',
   components: {
+    Confirmation,
     TableSortable,
     Form
   },
@@ -169,9 +165,11 @@ export default {
       this.show(modalId)
       this.delitionId = event
     },
-    confirmDelete (modalId) {
-      this.deleteItem(this.delitionId)
-      this.hide(modalId)
+    confirmDelete (event) {
+      if (event) {
+        this.deleteItem(this.delitionId)
+      }
+      this.hide('confirm_delete')
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -195,6 +193,7 @@ export default {
           if (data === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       } else {
@@ -203,10 +202,10 @@ export default {
           if (data === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       }
-      this.clearData()
     },
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
