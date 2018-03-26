@@ -380,7 +380,6 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
-              {{formData.family.familyMembers}}
               <table class="table table-bordered editable-table">
                 <thead>
                 <tr>
@@ -398,7 +397,7 @@
                     <td> {{member.name}} </td>
                     <td> {{member.jmbg}}</td>
                     <td> {{member.relationToChild}}</td>
-                    <td><button class="deleteMember"  v-on:click="getClickedResult(i)"><i class="fa fa-trash-o"></i></button></td>
+                    <td><button class="deleteMember"  v-on:click.prevent="getClickedResult(i)"><i class="fa fa-trash-o"></i></button></td>
                   </tr>
                 </template>
                 <tr>
@@ -611,6 +610,7 @@ export default{
       })
     },
     getClickedResult (event) {
+      console.log(event)
       this.$emit('onSliceFamilyMember', event)
     }
   }

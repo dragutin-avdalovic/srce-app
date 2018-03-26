@@ -21,13 +21,13 @@
           </div>
         </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @delete="deleteItem" :filter="filter"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @delete="deleteItem" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onSetCheckBox="setCheckBox($event)"
               @onSetInput="setInput($event)"
               @onSaveFamilyMember="saveFamilyMember($event)"
-              @onSliceFamilyMember="sliceFamilyMember($event)"
+              @onSliceFamilyMember="sliceFamilyMember($event, formData)"
               :formData="formData"
               :meritalStatus="meritalStatus"
               :familyRelations="familyRelations"
@@ -45,7 +45,8 @@
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
 import Main from '@/services/Main'
-
+import * as _ from 'lodash'
+// Load the full build.
 export default {
   name: 'HelloWorld',
   components: {
@@ -419,8 +420,15 @@ export default {
     saveFamilyMember (event) {
       this.formData.family.familyMembers.push(event)
     },
-    sliceFamilyMember (event) {
-      this.formData.family.familyMembers.splice(event, 1)
+    sliceFamilyMember (event, event2) {
+      console.log(event)
+      console.log(event2)
+      console.log('prije')
+      console.log(event2.family.familyMembers)
+      event2.family.familyMembers.splice(event, 1)
+      console.log('posle')
+      console.log(event2.family.familyMembers)
+      this.formData = Object.assign({}, this.formData, event2)
     },
     getData () {
       Main.methods.getModule(Main.data().socialCard, (data) => {
@@ -457,6 +465,13 @@ export default {
           this.getData()
         }
       })
+    },
+    sort (event) {
+      if (event.sortDesc) {
+        this.items = _.sortBy(this.items, [event.sortBy]).reverse()
+      } else {
+        this.items = _.sortBy(this.items, [event.sortBy])
+      }
     }
   }
 }
