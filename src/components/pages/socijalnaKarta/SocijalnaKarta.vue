@@ -493,7 +493,7 @@ export default {
     },
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().socialCard + event, (data) => {
-        if (data === 'successfully removed') {
+        if (data.message === 'successfully removed') {
           this.getData()
           this.seen = false
         }
