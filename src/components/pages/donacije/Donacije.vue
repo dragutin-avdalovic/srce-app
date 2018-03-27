@@ -159,7 +159,7 @@ export default {
     },
     showDeleteModal (event, modalId) {
       this.show(modalId)
-      this.delitionId = event
+      this.delitionId = event.id
     },
     confirmDelete (event) {
       if (event) {
