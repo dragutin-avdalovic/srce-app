@@ -403,7 +403,7 @@
                 <tr>
                   <td scope="row"></td>
                   <td><input type="text" v-model="familyMember.name" class="inline-input"></td>
-                  <td><input type="text" v-model="familyMember.jmbg" class="inline-input"></td>
+                  <td><input type="number" v-model="familyMember.jmbg" class="inline-input"></td>
                   <td><input type="text" v-model="familyMember.relationToChild" class="inline-input"></td>
                 </tr>
                 </tbody>

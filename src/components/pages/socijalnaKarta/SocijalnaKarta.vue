@@ -437,6 +437,7 @@ export default {
       this.show('modal_entry')
     },
     saveFamilyMember (event) {
+      console.log(event)
       this.formData.family.familyMembers.push(event)
     },
     sliceFamilyMember (event) {
@@ -458,7 +459,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
           console.log(data)
-          if (data === 'successfully edited') {
+          if (data.message === 'successfully edited') {
             console.log('editovo sam')
             this.hide('modal_entry')
             this.getData()
@@ -467,16 +468,14 @@ export default {
       } else {
         Main.methods.postModule(Main.data().socialCard, event, (data) => {
           console.log(data)
-          if (data === 'successfully saved') {
+          if (data.message === 'successfully saved') {
             console.log('sacuvao sam')
             this.hide('modal_entry')
             this.getData()
           }
         })
       }
-      /*
       this.clearData()
-      */
     },
     showDeleteModal (event) {
       this.show(event.type)
