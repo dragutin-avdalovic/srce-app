@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="new">
-              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
+              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
               </button>
             </div>
           </div>
@@ -33,9 +33,10 @@
                      @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :seen="seen"
-                     :filter="filter"></TableSortable>
+                     :filter="filter">
+      </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -85,7 +86,7 @@ export default {
         name: '',
         email: '',
         address: '',
-        jmbg: '',
+        jmbg: null,
         phone: '',
         childName: '',
         dateOfBirth: '',
@@ -140,25 +141,32 @@ export default {
       return `${value.city} ${value.address}`
     },
     clearData () {
-      this.formData = Object.assign({}, this.formData, {
+      this.formData = {
         type: null,
         name: '',
         email: '',
         address: '',
-        jmbg: '',
+        jmbg: null,
         member: '',
         phone: '',
         childName: '',
         dateOfBirth: '',
         diagnose: '',
         dateOfDiagnose: ''
-      })
+      }
     },
     show (modalId) {
       this.$modal.show(modalId)
     },
     hide (modalId) {
       this.$modal.hide(modalId)
+    },
+    openModal (modalId) {
+      this.show(modalId)
+      this.clearData()
+    },
+    closeModal (modalId) {
+      this.hide(modalId)
       this.clearData()
     },
     showDeleteModal (event, modalId) {
@@ -175,15 +183,19 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
-          this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
-          this.formData.dateOfDiagnose = this.formData.dateOfDiagnose.split('T')[0]
+          console.log(this.formData)
+          if (this.formData.dateOfBirth !== null) {
+            this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          }
+          if (this.formData.dateOfDiagnose !== null) {
+            this.formData.dateOfDiagnose = this.formData.dateOfDiagnose.split('T')[0]
+          }
         }
       })
       this.show('modal_entry')
     },
     getData () {
       Main.methods.getModule(Main.data().accessCard, (data) => {
-        console.log(data)
         this.items = data
       })
     },
@@ -192,7 +204,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().accessCard + event._id, event, (data) => {
           console.log(data)
-          if (data === 'successfully edited') {
+          if (data.message === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -201,7 +213,7 @@ export default {
       } else {
         Main.methods.postModule(Main.data().accessCard, event, (data) => {
           console.log(data)
-          if (data === 'successfully saved') {
+          if (data.message === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -210,11 +222,12 @@ export default {
       }
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().accessCard + event._id, (data) => {
+      Main.methods.deleteModule(Main.data().accessCard + this.delitionId, (data) => {
         console.log(data)
-        if (data === 'successfully removed') {
+        if (data.message === 'successfully removed') {
           this.seen = false
           this.getData()
+          this.clearData()
         }
       })
     }

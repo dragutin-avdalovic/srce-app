@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="new">
-              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData($event)" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -60,6 +60,7 @@ export default {
   },
   data () {
     return {
+      delitionId: null,
       msg: 'Srce za djecu',
       filter: '',
       items: [],
@@ -83,12 +84,14 @@ export default {
         type: null,
         name: '',
         address: '',
+        email: '',
         dateOfBirth: '',
         qualification: '',
         profession: '',
         phone: '',
-        volunteeredBefore: '',
-        hours: ''
+        volunteeredBefore: false,
+        numberOfHours: null,
+        jobsToVolunteer: null
       },
       fields: [
         {
@@ -137,23 +140,33 @@ export default {
       return `${value.city} ${value.address}`
     },
     clearData () {
-      this.formData = Object.assign({}, this.formData, {
+      this.formData = {
         type: null,
-        company: '',
         name: '',
-        email: '',
         address: '',
-        city: '',
-        amount: '',
-        date: '',
-        cause: ''
-      })
+        email: '',
+        dateOfBirth: '',
+        qualification: '',
+        profession: '',
+        phone: '',
+        volunteeredBefore: false,
+        numberOfHours: null,
+        jobsToVolunteer: null
+      }
     },
     show (modalId) {
       this.$modal.show(modalId)
     },
     hide (modalId) {
       this.$modal.hide(modalId)
+    },
+    openModal (modalId) {
+      this.show(modalId)
+      this.clearData()
+    },
+    closeModal (modalId) {
+      this.hide(modalId)
+      this.clearData()
     },
     showDeleteModal (event, modalId) {
       this.show(modalId)
@@ -169,14 +182,16 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
-          this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          console.log(this.formData)
+          if (this.formData.dateOfBirth !== null) {
+            this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          }
         }
       })
       this.show('modal_entry')
     },
     getData () {
       Main.methods.getModule(Main.data().volunteers, (data) => {
-        console.log(data)
         this.items = data
       })
     },
@@ -185,7 +200,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().volunteers + event._id, event, (data) => {
           console.log(data)
-          if (data === 'successfully edited') {
+          if (data.message === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -194,7 +209,7 @@ export default {
       } else {
         Main.methods.postModule(Main.data().volunteers, event, (data) => {
           console.log(data)
-          if (data === 'successfully saved') {
+          if (data.message === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -203,11 +218,12 @@ export default {
       }
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().volunteers + event._id, (data) => {
+      Main.methods.deleteModule(Main.data().volunteers + this.delitionId, (data) => {
         console.log(data)
-        if (data === 'successfully removed') {
+        if (data.message === 'successfully removed') {
           this.seen = false
           this.getData()
+          this.clearData()
         }
       })
     }

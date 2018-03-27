@@ -1,13 +1,13 @@
 <template>
   <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
     <div slot="top-right">
-      <button @click="$modal.hide('modal_entry')" class="modal-close">
-        X
-      </button>
+      <div v-on:click="closeModal" class="modal-close">
+        x
+      </div>
     </div>
     <h3 class="form-header">Novi unos</h3>
     <div class="row">
-      <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">-->
+        <!--<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">-->
         <!--<label class="control-label" >Vrsta donatora</label>-->
         <!--<b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>-->
         <!--<i class="fa fa-chevron-down"></i>-->
@@ -48,9 +48,6 @@
           </p>
         </div>
       </div>
-      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group">
-        <div class="horizontal_line"></div>
-      </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('qualification')}">
         <label class="control-label" for="qualification">Strucna sprema*</label>
         <p :class="{ 'control': true }">
@@ -66,22 +63,22 @@
         </p>
       </div>
       <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-6 form-group min-row-height">
-        <label class="control-label" for="hours">Prethodno volontersko iskustvo?*</label>
-        <CompositeButton v-validate="'required'" @onChecked="onCheckClicked($event)"></CompositeButton>
+        <label class="control-label">Prethodno volontersko iskustvo?*</label>
+        <CompositeButton @onCheckedComposite="onCheckClicked($event)" :active="formData.volunteeredBefore"></CompositeButton>
       </div>
-      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('hours')}">
-        <label class="control-label" for="hours">Navedite broj sati koji ste u mogucnosti mjesecno posvetiti radu Udruzenja:*</label>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('numberOfHours')}">
+        <label class="control-label" for="numberOfHours">Navedite broj sati koji ste u mogucnosti mjesecno posvetiti radu Udruzenja:*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('hours') }" name="hours" type="text" v-model="formData.hours" class="form-control" id="hours" placeholder="">
-          <span v-show="errors.has('hours')" class="help-block">{{ errors.first('hours') }}</span>
+          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('numberOfHours') }" name="numberOfHours" type="number" v-model="formData.numberOfHours" class="form-control" id="numberOfHours" placeholder="">
+          <span v-show="errors.has('numberOfHours')" class="help-block">{{ errors.first('numberOfHours') }}</span>
         </p>
       </div>
-      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('types')}">
-        <label class="control-label" for="types">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
-        <b-form-select v-validate="'required|'"
-                       :class="{'input': true, 'has-error': errors.has('types') }"
-                       v-model="formData.type"
-                       :options="types" id="types" name="types"></b-form-select>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('jobsToVolunteer')}">
+        <label class="control-label" for="jobsToVolunteer">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
+        <b-form-select v-validate="'required'"
+                       :class="{'input': true, 'has-error': errors.has('jobsToVolunteer') }"
+                       v-model="formData.jobsToVolunteer"
+                       :options="types" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
@@ -109,6 +106,9 @@ export default{
           },
           dateOfDiagnose: {
             required: 'The date of diagnose field is required.' // messages can be strings as well.
+          },
+          numberOfHours: {
+            required: 'The number of hours field is required.' // messages can be strings as well.
           }
         }
       }
@@ -119,6 +119,7 @@ export default{
   },
   methods: {
     save: function () {
+      console.log(this.formData)
       this.$emit('onDataEmit', this.formData)
     },
     validateBeforeSubmit: function () {
@@ -126,11 +127,15 @@ export default{
         if (result) {
           this.save()
         } else {
+          this.$emit('clearForm', this.formData)
         }
       })
     },
     onCheckClicked: function (event) {
       this.formData.volunteeredBefore = event
+    },
+    closeModal: function () {
+      this.$emit('onModalClose', this.formData)
     }
   }
 }
@@ -192,8 +197,8 @@ export default{
     float: right;
     border: none;
     @include font(2, 500, $red);
-    margin-right: -2.5em;
     margin-top: -0.3em;
+    cursor: pointer;
     &:focus
     {
       border: none;
