@@ -227,7 +227,6 @@ export default {
     }
   },
   mounted () {
-    console.log('mounted called.')
     this.getData()
   },
   methods: {
@@ -437,20 +436,13 @@ export default {
       this.show('modal_entry')
     },
     saveFamilyMember (event) {
-      console.log(event)
       this.formData.family.familyMembers.push(event)
     },
     sliceFamilyMember (event) {
-      console.log(event)
-      console.log('prije')
-      console.log(this.formData.family.familyMembers)
-      console.log('posle')
       this.formData.family.familyMembers.splice(event, 1)
-      console.log(this.formData.family.familyMembers)
     },
     getData () {
       Main.methods.getModule(Main.data().socialCard, (data) => {
-        console.log(data)
         data.forEach((item) => {
           item.child.dateOfDiagnose = item.child.dateOfDiagnose.split('T')[0]
           item.child.dateOfBirth = item.child.dateOfBirth.split('T')[0]
@@ -459,21 +451,16 @@ export default {
       })
     },
     saveData (event) {
-      console.log(event)
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
-          console.log(data)
           if (data.message === 'successfully edited') {
-            console.log('editovo sam')
             this.hide('modal_entry')
             this.getData()
           }
         })
       } else {
         Main.methods.postModule(Main.data().socialCard, event, (data) => {
-          console.log(data)
           if (data.message === 'successfully saved') {
-            console.log('sacuvao sam')
             this.hide('modal_entry')
             this.getData()
           }
