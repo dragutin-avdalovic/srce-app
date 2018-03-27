@@ -193,8 +193,8 @@ export default{
     float: right;
     border: none;
     @include font(2, 500, $red);
-    margin-right: -2.5em;
     margin-top: -0.3em;
+    cursor: pointer;
     &:focus
     {
       border: none;
