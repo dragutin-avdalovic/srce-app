@@ -2,14 +2,14 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="col-lg-6 col-md-6 col-12">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Socijalna Karta</div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="col-lg-6 col-md-6 col-12">
           <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @delete="deleteItem" :filter="filter"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onSetCheckBox="setCheckBox($event)"
@@ -42,23 +42,30 @@
               :healthState="healthState"
               :familyMembers="familyMembersEditable"></Form>
       </modal>
+      <modal name="confirm_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmDeletion($event)"></Confirmation>
+      </modal>
     </div>
   </div>
 </template>
 
 <script>
 import TableSortable from '@/components/partials/TableSortable'
+import Confirmation from '@/components/partials/Confirmation'
 import Form from './Form'
 import Main from '@/services/Main'
-
+import * as _ from 'lodash'
+// Load the full build.
 export default {
   name: 'HelloWorld',
   components: {
     TableSortable,
-    Form
+    Form,
+    Confirmation
   },
   data () {
     return {
+      deletionId: null,
       msg: 'Srce za djecu',
       filter: '',
       items: [],
@@ -220,7 +227,6 @@ export default {
     }
   },
   mounted () {
-    console.log('mounted called.')
     this.getData()
   },
   methods: {
@@ -404,11 +410,19 @@ export default {
         }
       })
     },
-    show () {
-      this.$modal.show('modal_entry')
+    show (modal) {
+      if (modal === 'confirm_delete') {
+        this.$modal.show('confirm_delete')
+      } else {
+        this.$modal.show('modal_entry')
+      }
     },
-    hide () {
-      this.$modal.hide('modal_entry')
+    hide (modal) {
+      if (modal === 'confirm_delete') {
+        this.$modal.hide('confirm_delete')
+      } else {
+        this.$modal.hide('modal_entry')
+      }
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -419,7 +433,7 @@ export default {
           this.familyMembersEditable = this.formData.family.familyMembers
         }
       })
-      this.show()
+      this.show('modal_entry')
     },
     saveFamilyMember (event) {
       this.formData.family.familyMembers.push(event)
@@ -429,39 +443,59 @@ export default {
     },
     getData () {
       Main.methods.getModule(Main.data().socialCard, (data) => {
-        console.log(data)
+        data.forEach((item) => {
+          item.child.dateOfDiagnose = item.child.dateOfDiagnose.split('T')[0]
+          item.child.dateOfBirth = item.child.dateOfBirth.split('T')[0]
+        })
         this.items = data
       })
     },
     saveData (event) {
-      console.log(event)
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
-          console.log(data)
-          if (data.data === 'successfully saved') {
-            this.hide()
+          if (data.message === 'successfully edited') {
+            this.hide('modal_entry')
             this.getData()
           }
         })
       } else {
         Main.methods.postModule(Main.data().socialCard, event, (data) => {
-          console.log(data)
-          if (data.data === 'successfully edited') {
-            this.hide()
+          if (data.message === 'successfully saved') {
+            this.hide('modal_entry')
             this.getData()
           }
         })
       }
       this.clearData()
     },
+    showDeleteModal (event) {
+      this.show(event.type)
+      this.deletionId = event.id
+    },
+    confirmDeletion (event) {
+      if (event) {
+        this.deleteItem(this.deletionId)
+      }
+      this.hide('confirm_delete')
+    },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().socialCard + event._id, event, (data) => {
-        console.log(data)
-        if (data.data === 'successfully removed') {
-          this.seen = false
+      Main.methods.deleteModule(Main.data().socialCard + event, (data) => {
+        if (data.message === 'successfully removed') {
           this.getData()
+          this.seen = false
         }
       })
+    },
+    confirmDelete (modalId) {
+      this.deleteItem(this.deletionId)
+      this.hide(modalId)
+    },
+    sort (event) {
+      if (event.sortDesc) {
+        this.items = _.sortBy(this.items, [event.sortBy]).reverse()
+      } else {
+        this.items = _.sortBy(this.items, [event.sortBy])
+      }
     }
   }
 }

@@ -137,7 +137,7 @@
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('jmbgFather')}">
               <label class="control-label" for="jmbgFather">JMBG</label>
               <p :class="{ 'control': true }">
-                <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('jmbgFather') }" name="jmbgFather" type="text" v-model="formData.father.jmbg" class="form-control" id="jmbgFather" placeholder="">
+                <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('jmbgFather') }" name="jmbgFather" type="text" v-model="formData.father.jmbg" class="form-control" id="jmbgFather" placeholder="">
                 <span v-show="errors.has('jmbgFather')" class="help-block">{{ errors.first('jmbgFather') }}</span>
               </p>
             </div>
@@ -259,7 +259,7 @@
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('jmbgMother')}">
               <label class="control-label" for="jmbgMother">JMBG</label>
               <p :class="{ 'control': true }">
-                <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('jmbgMother') }" name="jmbgMother" type="text" v-model="formData.mother.jmbg" class="form-control" id="jmbgMother" placeholder="">
+                <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('jmbgMother') }" name="jmbgMother" type="text" v-model="formData.mother.jmbg" class="form-control" id="jmbgMother" placeholder="">
                 <span v-show="errors.has('jmbgMother')" class="help-block">{{ errors.first('jmbgMother') }}</span>
               </p>
             </div>
@@ -380,7 +380,6 @@
             </div>
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding">
               <label class="control-label label-check">Molimo pobrojati članove domaćinstva koji su u zajedničkom kućanstvu</label>
-              {{formData.family.familyMembers}}
               <table class="table table-bordered editable-table">
                 <thead>
                 <tr>
@@ -398,13 +397,13 @@
                     <td> {{member.name}} </td>
                     <td> {{member.jmbg}}</td>
                     <td> {{member.relationToChild}}</td>
-                    <td><button class="deleteMember"  v-on:click="getClickedResult(i)"><i class="fa fa-trash-o"></i></button></td>
+                    <td><button class="deleteMember"  v-on:click.prevent="getClickedResult(i)"><i class="fa fa-trash-o"></i></button></td>
                   </tr>
                 </template>
                 <tr>
                   <td scope="row"></td>
                   <td><input type="text" v-model="familyMember.name" class="inline-input"></td>
-                  <td><input type="text" v-model="familyMember.jmbg" class="inline-input"></td>
+                  <td><input type="number" v-model="familyMember.jmbg" class="inline-input"></td>
                   <td><input type="text" v-model="familyMember.relationToChild" class="inline-input"></td>
                 </tr>
                 </tbody>
@@ -575,8 +574,155 @@ export default{
           name: '',
           jmbg: null,
           relationToChild: ''
+        },
+      dict: {
+        custom: {
+          childName: {
+            required: 'The child name field is required.' // messages can be strings as well.
+          },
+          childJmbg: {
+            required: 'The child jmbg field is   required.',
+            numeric: 'The child jmbg field may only contain numeric characters.'
+          },
+          childDateOfBirth: {
+            required: 'The child date of birth field is required.' // messages can be strings as well.
+          },
+          childPlaceOfBirth: {
+            required: 'The child place of birth field is required.' // messages can be strings as well.
+          },
+          childAddress: {
+            required: 'The child address of birth field is required.' // messages can be strings as well.
+          },
+          childCity: {
+            required: 'The child city of birth field is required.' // messages can be strings as well.
+          },
+          childMunicipality: {
+            required: 'The child municipality of birth field is required.' // messages can be strings as well.
+          },
+          childPostNumber: {
+            required: 'The child post number field is required.',
+            numeric: 'The child post number field may only contain numeric characters.'
+          },
+          childDiagnose: {
+            required: 'The child diagnose field is required.' // messages can be strings as well.
+          },
+          childDateOfDiagnose: {
+            required: 'The child date of diagnose field is required.' // messages can be strings as well.
+          },
+          childNote: {
+            required: 'The child note of diagnose field is required.' // messages can be strings as well.
+          },
+          healthState: {
+            required: 'The child health state field is required.' // messages can be strings as well.
+          },
+          nameFather: {
+            required: 'The father name field is required.' // messages can be strings as well.
+          },
+          jmbgFather: {
+            required: 'The father jmbg field is required.',
+            numeric: 'The father jmbg field may only contain numeric characters.'
+          },
+          fatherCitizenId: {
+            required: 'The father citizen ID field is required.'
+          },
+          fatherIssuedBy: {
+            required: 'The father ID issued by field is required.'
+          },
+          fatherAddress: {
+            required: 'The father address field is required.'
+          },
+          fatherCity: {
+            required: 'The father city field is required.'
+          },
+          fatherMunicipality: {
+            required: 'The father municipality field is required.'
+          },
+          fatherPostNumber: {
+            required: 'The father post number field is required.',
+            numeric: 'The father post number field may only contain numeric characters.'
+          },
+          fatherTel: {
+            required: 'The father telephone number field is required.',
+            numeric: 'The father telephone number field may only contain numeric characters.'
+          },
+          fatherMob: {
+            required: 'The father mobile telephone number field is required.',
+            numeric: 'The father mobile telephone number field may only contain numeric characters.'
+          },
+          fatherPosition: {
+            required: 'The father position field is required.'
+          },
+          fatherQualifications: {
+            required: 'The father qualifications field is required.'
+          },
+          fatherNameOfEmployer: {
+            required: 'The name of father\'s employer field is required.'
+          },
+
+          nameMother: {
+            required: 'The mother name field is required.' // messages can be strings as well.
+          },
+          jmbgMother: {
+            required: 'The mother jmbg field is required.',
+            numeric: 'The mother jmbg field may only contain numeric characters.'
+          },
+          MotherCitizenId: {
+            required: 'The mother citizen ID field is required.'
+          },
+          MotherIssuedBy: {
+            required: 'The mother ID issued by field is required.'
+          },
+          MotherAddress: {
+            required: 'The mother address field is required.'
+          },
+          MotherCity: {
+            required: 'The mother city field is required.'
+          },
+          MotherMunicipality: {
+            required: 'The mother municipality field is required.'
+          },
+          MotherPostNumber: {
+            required: 'The mother post number field is required.',
+            numeric: 'The mother post number field may only contain numeric characters.'
+          },
+          MotherTel: {
+            required: 'The mother telephone number field is required.',
+            numeric: 'The mother telephone number field may only contain numeric characters.'
+          },
+          MotherMob: {
+            required: 'The mother mobile telephone number field is required.',
+            numeric: 'The mother mobile telephone number field may only contain numeric characters.'
+          },
+          MotherPosition: {
+            required: 'The mother position field is required.'
+          },
+          MotherQualifications: {
+            required: 'The mother qualifications field is required.'
+          },
+          MotherNameOfEmployer: {
+            required: 'The name of mother\'s employer field is required.'
+          },
+          meritalStatus: {
+            required: 'The merital status of parent\'s field is required.'
+          },
+          familyRelations: {
+            required: 'The family relations field is required.'
+          },
+          familyResidence: {
+            required: 'The family residence field is required.'
+          },
+          housingConditions: {
+            required: 'The family conditions field is required.'
+          },
+          residentialBuilding: {
+            required: 'The residental building field is required.'
+          }
         }
+      }
     }
+  },
+  mounted: function () {
+    this.$validator.localize('en', this.dict)
   },
   methods: {
     save () {

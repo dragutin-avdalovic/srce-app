@@ -1,10 +1,6 @@
 <template xmlns:v-popover="http://www.w3.org/1999/xhtml">
-  <div class="container">
+  <div>
     <div class="row">
-      <p>
-        Sorting By: <b>{{ sortBy }}</b>,
-        Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
-      </p>
       <b-table  show-empty :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 :items="items"
@@ -13,7 +9,9 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 :filter="filter"
-                @filtered="onFiltered">
+                :no-local-sorting="true"
+                @filtered="onFiltered"
+                @sort-changed="sortRoutine">
         <!-- A virtual composite column -->
         <template slot="actions" slot-scope="data">
           <div v-popover:list-dropdown.bottom v-on:click="select(data.item._id)">
@@ -52,7 +50,7 @@ export default {
       perPage: 10,
       totalRows: this.items.length,
       sortDesc: true,
-      sortBy: 'name',
+      sortBy: 'child.name',
       id: '',
       selectItems: [1, 2, 3],
       limits: ['Institucija', 'Pravno lice', 'Fizičko lice']
@@ -77,8 +75,11 @@ export default {
       this.$emit('onEditClicked', this.id)
     },
     onDelete () {
-      this.$emit('onConfirmDelete', this.id)
+      this.$emit('onConfirmDelete', { id: this.id, type: 'confirm_delete' })
       this.$refs.popoverRef.visible = false
+    },
+    sortRoutine (ctx) {
+      this.$emit('sortRoutine', ctx)
     }
   }
 }
@@ -250,6 +251,7 @@ export default {
     flex-direction: row;
     align-items: center;
     @include spacing-tb(m,1,em);
+    @include spacing-lr(m,0,em);
     .left-filter
     {
       display: flex;
