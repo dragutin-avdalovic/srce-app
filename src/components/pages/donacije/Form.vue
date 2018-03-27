@@ -1,9 +1,9 @@
 <template>
   <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
     <div slot="top-right">
-      <button @click="$modal.hide('modal_entry')" class="modal-close">
-        X
-      </button>
+      <div v-on:click="closeModal" class="modal-close">
+        x
+      </div>
     </div>
     <h3 class="form-header">Novi unos</h3>
     <div class="row">
@@ -92,14 +92,18 @@ export default{
   },
   methods: {
     save: function () {
-      this.$emit('onDataEmit', this.formData)
       console.log(this.formData)
+      this.$emit('onDataEmit', this.formData)
+    },
+    closeModal: function () {
+      this.$emit('onModalClose', this.formData)
     },
     validateBeforeSubmit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.save()
         } else {
+          this.$emit('clearForm', this.formData)
         }
       })
     }
@@ -163,8 +167,8 @@ export default{
     float: right;
     border: none;
     @include font(2, 500, $red);
-    margin-right: -2.5em;
     margin-top: -0.3em;
+    cursor: pointer;
     &:focus
     {
       border: none;

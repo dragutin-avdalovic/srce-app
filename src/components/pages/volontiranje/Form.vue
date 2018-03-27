@@ -77,8 +77,8 @@
         <label class="control-label" for="jobsToVolunteer">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
         <b-form-select v-validate="'required'"
                        :class="{'input': true, 'has-error': errors.has('jobsToVolunteer') }"
-                       v-model="formData.jobsToVolunteer"
-                       :options="types" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
+                       v-model="formData.type"
+                       :options="jobsToVolunteer" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
