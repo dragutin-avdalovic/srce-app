@@ -171,7 +171,7 @@ export default {
     },
     showDeleteModal (event, modalId) {
       this.show(modalId)
-      this.delitionId = event
+      this.delitionId = event.id
     },
     confirmDelete (event) {
       if (event) {
@@ -183,7 +183,6 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
-          console.log(this.formData)
           if (this.formData.dateOfBirth !== null) {
             this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
           }
@@ -212,7 +211,6 @@ export default {
         })
       } else {
         Main.methods.postModule(Main.data().accessCard, event, (data) => {
-          console.log(data)
           if (data.message === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
@@ -222,6 +220,7 @@ export default {
       }
     },
     deleteItem (event) {
+      console.log(this.deletionId)
       Main.methods.deleteModule(Main.data().accessCard + this.delitionId, (data) => {
         console.log(data)
         if (data.message === 'successfully removed') {
