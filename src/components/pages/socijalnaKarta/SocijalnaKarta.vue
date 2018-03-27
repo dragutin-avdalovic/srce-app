@@ -451,6 +451,10 @@ export default {
     getData () {
       Main.methods.getModule(Main.data().socialCard, (data) => {
         console.log(data)
+        data.forEach((item) => {
+          item.child.dateOfDiagnose = item.child.dateOfDiagnose.split('T')[0]
+          item.child.dateOfBirth = item.child.dateOfBirth.split('T')[0]
+        })
         this.items = data
       })
     },
