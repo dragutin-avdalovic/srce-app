@@ -33,7 +33,8 @@
                      @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :seen="seen"
-                     :filter="filter"></TableSortable>
+                     :filter="filter">
+      </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
