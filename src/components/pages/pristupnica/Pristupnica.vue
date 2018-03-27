@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="new">
-              <button v-on:click="show('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
+              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
               </button>
             </div>
           </div>
@@ -35,7 +35,7 @@
                      :seen="seen"
                      :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onModalClose="hide('modal_entry')" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -140,7 +140,7 @@ export default {
       return `${value.city} ${value.address}`
     },
     clearData () {
-      this.formData = Object.assign({}, this.formData, {
+      this.formData = {
         type: null,
         name: '',
         email: '',
@@ -152,13 +152,20 @@ export default {
         dateOfBirth: '',
         diagnose: '',
         dateOfDiagnose: ''
-      })
+      }
     },
     show (modalId) {
       this.$modal.show(modalId)
     },
     hide (modalId) {
       this.$modal.hide(modalId)
+    },
+    openModal (modalId) {
+      this.show(modalId)
+      this.clearData()
+    },
+    closeModal (modalId) {
+      this.hide(modalId)
       this.clearData()
     },
     showDeleteModal (event, modalId) {
@@ -199,6 +206,7 @@ export default {
           if (data.message === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       } else {

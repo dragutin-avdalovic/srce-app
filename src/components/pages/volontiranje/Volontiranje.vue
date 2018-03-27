@@ -182,7 +182,10 @@ export default {
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
-          this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          console.log(this.formData)
+          if (this.formData.dateOfBirth !== null) {
+            this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
+          }
         }
       })
       this.show('modal_entry')
@@ -197,7 +200,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().volunteers + event._id, event, (data) => {
           console.log(data)
-          if (data === 'successfully edited') {
+          if (data.message === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -206,7 +209,7 @@ export default {
       } else {
         Main.methods.postModule(Main.data().volunteers, event, (data) => {
           console.log(data)
-          if (data === 'successfully saved') {
+          if (data.message === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -217,7 +220,7 @@ export default {
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().volunteers + this.delitionId, (data) => {
         console.log(data)
-        if (data === 'successfully removed') {
+        if (data.message === 'successfully removed') {
           this.seen = false
           this.getData()
           this.clearData()
