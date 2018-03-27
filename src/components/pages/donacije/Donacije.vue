@@ -35,7 +35,7 @@
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" :formData="formData"></Form>
+        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -147,6 +147,9 @@ export default {
     },
     hide (modalId) {
       this.$modal.hide(modalId)
+    },
+    closeModal (modalId) {
+      this.hide(modalId)
       this.clearData()
     },
     showDeleteModal (event, modalId) {
