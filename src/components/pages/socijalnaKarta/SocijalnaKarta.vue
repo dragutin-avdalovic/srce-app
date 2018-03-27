@@ -2,14 +2,14 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="col-lg-6 col-md-6 col-12">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Socijalna Karta</div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="col-lg-6 col-md-6 col-12">
           <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
@@ -26,7 +26,7 @@
           </div>
         </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @clicked="fillFormData" @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onSetCheckBox="setCheckBox($event)"
@@ -42,10 +42,8 @@
               :healthState="healthState"
               :familyMembers="familyMembersEditable"></Form>
       </modal>
-      <modal class="confirmation" name="confirm_delete" height="auto">
-        <p>Da li ste sigurni da zelite izbrisati?</p>
-        <button v-on:click="hide('confirm_delete')">Nazad</button>
-        <button v-on:click="confirmDelete('confirm_delete')">Izbrisati</button>
+      <modal name="confirm_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmDeletion($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -53,6 +51,7 @@
 
 <script>
 import TableSortable from '@/components/partials/TableSortable'
+import Confirmation from '@/components/partials/Confirmation'
 import Form from './Form'
 import Main from '@/services/Main'
 import * as _ from 'lodash'
@@ -61,7 +60,8 @@ export default {
   name: 'HelloWorld',
   components: {
     TableSortable,
-    Form
+    Form,
+    Confirmation
   },
   data () {
     return {
@@ -476,22 +476,26 @@ export default {
     },
     showDeleteModal (event) {
       this.show(event.type)
-      console.log(event.type)
       this.deletionId = event.id
     },
+    confirmDeletion (event) {
+      if (event) {
+        this.deleteItem(this.deletionId)
+      }
+      this.hide('confirm_delete')
+    },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().socialCard + event, event, (data) => {
+      Main.methods.deleteModule(Main.data().socialCard + event, (data) => {
         console.log(data)
         if (data.data === 'successfully removed') {
+          this.getData()
           this.seen = false
         }
       })
     },
     confirmDelete (modalId) {
       this.deleteItem(this.deletionId)
-      console.log(this.deletionId)
       this.hide(modalId)
-      this.getData()
     },
     sort (event) {
       if (event.sortDesc) {
