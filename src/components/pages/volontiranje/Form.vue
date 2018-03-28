@@ -69,7 +69,7 @@
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('numberOfHours')}">
         <label class="control-label" for="numberOfHours">Navedite broj sati koji ste u mogucnosti mjesecno posvetiti radu Udruzenja:*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('numberOfHours') }" name="numberOfHours" type="number" v-model="formData.numberOfHours" class="form-control" id="numberOfHours" placeholder="">
+          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('numberOfHours') }" min="0" name="numberOfHours" type="number" v-model="formData.numberOfHours" class="form-control" id="numberOfHours" placeholder="">
           <span v-show="errors.has('numberOfHours')" class="help-block">{{ errors.first('numberOfHours') }}</span>
         </p>
       </div>
@@ -77,8 +77,8 @@
         <label class="control-label" for="jobsToVolunteer">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
         <b-form-select v-validate="'required'"
                        :class="{'input': true, 'has-error': errors.has('jobsToVolunteer') }"
-                       v-model="formData.jobsToVolunteer"
-                       :options="types" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
+                       v-model="formData.type"
+                       :options="jobsToVolunteer" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
