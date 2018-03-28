@@ -1,11 +1,9 @@
 <template>
   <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
-    <div slot="top-right">
-      <div v-on:click="closeModal" class="modal-close">
-        x
-      </div>
+    <div class="header-modal">
+      <h3 class="form-header">Novi unos</h3>
+      <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
     </div>
-    <h3 class="form-header">Novi unos</h3>
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
         <label class="control-label" >Vrsta donatora</label>

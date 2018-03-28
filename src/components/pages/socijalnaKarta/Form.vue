@@ -2,12 +2,10 @@
   <div>
       <div v-show="step === 1">
         <form class="newEntryForm heartForm">
-            <div slot="top-right">
-              <button @click="$modal.hide('modal_entry')" class="modal-close">
-                X
-              </button>
-            </div>
+          <div class="header-modal">
             <h3 class="form-header">Novi unos</h3>
+            <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
+          </div>
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
                 <p class="large_head">DIJETE</p>

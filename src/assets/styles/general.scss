@@ -22,3 +22,13 @@
     background-color: $red_focus;
   }
 }
+
+.header-modal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .modal-close {
+    width: 30px;
+  }
+}

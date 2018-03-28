@@ -1,11 +1,9 @@
 <template>
   <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
-    <div slot="top-right">
-      <div v-on:click="closeModal" class="modal-close">
-        x
-      </div>
+    <div class="header-modal">
+      <h3 class="form-header">Novi unos</h3>
+      <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
     </div>
-    <h3 class="form-header">Novi unos</h3>
     <div class="row">
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('name')}">
         <label class="control-label" >Ime i prezime*</label>
