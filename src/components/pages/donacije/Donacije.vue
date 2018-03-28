@@ -35,7 +35,7 @@
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -78,15 +78,13 @@ export default {
       },
       fields: [
         {
-          key: 'namemail',
+          key: 'name',
           label: 'OSNOVNI PODACI',
-          formatter: 'nameMail',
           sortable: true
         },
         {
-          key: 'cityaddress',
-          label: 'GRAD',
-          formatter: 'cityAddress',
+          key: 'email',
+          label: 'E-MAIL',
           sortable: true
         },
         {
@@ -124,12 +122,6 @@ export default {
     this.getData()
   },
   methods: {
-    nameMail (value) {
-      return `${value.name} ${value.email}`
-    },
-    cityAddress (value) {
-      return `${value.city} ${value.address}`
-    },
     clearData () {
       this.formData = {
         type: null,
@@ -172,11 +164,8 @@ export default {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
           console.log(this.formData)
-          if (this.formData.dateOfBirth !== null) {
-            this.formData.dateOfBirth = this.formData.dateOfBirth.split('T')[0]
-          }
-          if (this.formData.dateOfDiagnose !== null) {
-            this.formData.dateOfDiagnose = this.formData.dateOfDiagnose.split('T')[0]
+          if (this.formData.date !== null) {
+            this.formData.date = this.formData.date.split('T')[0]
           }
         }
       })
@@ -184,6 +173,9 @@ export default {
     },
     getData () {
       Main.methods.getModule(Main.data().donations, (data) => {
+        data.forEach((item) => {
+          item.date = item.date.split('T')[0]
+        })
         this.items = data
       })
     },
