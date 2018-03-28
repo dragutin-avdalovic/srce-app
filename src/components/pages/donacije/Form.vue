@@ -7,9 +7,9 @@
     </div>
     <h3 class="form-header">Novi unos</h3>
     <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('company')}">
         <label class="control-label" >Vrsta donatora</label>
-        <b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>
+        <b-form-select v-validate="'required'" :class="{'input': true, 'has-error': errors.has('type')}" v-model="formData.type" :options="type" id="type" name="type"></b-form-select>
         <i class="fa fa-chevron-down"></i>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('company')}">

@@ -85,8 +85,13 @@ export default {
         },
         {
           key: 'cityaddress',
-          label: 'ADRESA',
+          label: 'GRAD',
           formatter: 'cityAddress',
+          sortable: true
+        },
+        {
+          key: 'address',
+          label: 'ADRESA',
           sortable: true
         },
         {
@@ -97,12 +102,7 @@ export default {
         },
         {
           key: 'date',
-          label: 'DATUM',
-          sortable: true
-        },
-        {
-          key: 'address',
-          label: 'ADRESA',
+          label: 'DATUM DONACIJE',
           sortable: true
         },
         {
