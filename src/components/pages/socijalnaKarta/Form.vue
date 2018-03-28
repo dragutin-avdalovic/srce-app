@@ -115,12 +115,10 @@
 
       <div v-show="step === 2">
         <form class="newEntryForm heartForm">
-          <div slot="top-right">
-            <button @click="$modal.hide('modal_entry')" class="modal-close">
-              X
-            </button>
+          <div class="header-modal">
+            <h3 class="form-header">Novi unos</h3>
+            <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
           </div>
-          <h3 class="form-header">Novi unos</h3>
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">OTAC DJETETA</p>
@@ -237,12 +235,10 @@
 
       <div v-show="step === 3">
         <form class="newEntryForm heartForm">
-          <div slot="top-right">
-            <button @click="$modal.hide('modal_entry')" class="modal-close">
-              X
-            </button>
+          <div class="header-modal">
+            <h3 class="form-header">Novi unos</h3>
+            <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
           </div>
-          <h3 class="form-header">Novi unos</h3>
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">MAJKA DJETETA</p>
@@ -359,12 +355,10 @@
 
       <div v-show="step === 4">
         <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
-          <div slot="top-right">
-            <button @click="$modal.hide('modal_entry')" class="modal-close">
-              X
-            </button>
+          <div class="header-modal">
+            <h3 class="form-header">Novi unos</h3>
+            <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
           </div>
-          <h3 class="form-header">Novi unos</h3>
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
               <p class="large_head">PODACI O PORODICI</p>
@@ -754,6 +748,9 @@ export default{
         relationToChild: ''
       })
     },
+    closeModal: function () {
+      this.$emit('onModalClose', this.formData)
+    },
     getClickedResult (event) {
       this.$emit('onSliceFamilyMember', event)
     }
@@ -815,20 +812,6 @@ export default{
   {
     @extend .button_save;
     float: left;
-  }
-  .modal-close
-  {
-    background: transparent;
-    float: right;
-    border: none;
-    @include font(2, 500, $red);
-    margin-right: -2.5em;
-    margin-top: -0.3em;
-    &:focus
-    {
-      border: none;
-      outline: none;
-    }
   }
   .form-group-btns
   {
