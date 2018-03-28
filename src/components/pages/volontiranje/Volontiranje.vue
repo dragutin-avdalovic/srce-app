@@ -192,6 +192,9 @@ export default {
     },
     getData () {
       Main.methods.getModule(Main.data().volunteers, (data) => {
+        data.forEach((item) => {
+          item.dateOfBirth = item.dateOfBirth.split('T')[0]
+        })
         this.items = data
       })
     },
