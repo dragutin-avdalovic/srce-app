@@ -1,11 +1,9 @@
 <template>
   <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
-    <div slot="top-right">
-      <button @click="$modal.hide('modal_entry')" class="modal-close">
-        X
-      </button>
+    <div class="header-modal">
+      <h3 class="form-header">Novi unos</h3>
+      <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
     </div>
-    <h3 class="form-header">Novi unos</h3>
     <div class="row">
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height donators-group" v-bind:class="{'has-error':errors.has('type')}">
         <label class="control-label">Vrsta donatora</label>
@@ -95,14 +93,18 @@ export default{
   },
   methods: {
     save: function () {
-      this.$emit('onDataEmit', this.formData)
       console.log(this.formData)
+      this.$emit('onDataEmit', this.formData)
+    },
+    closeModal: function () {
+      this.$emit('onModalClose', this.formData)
     },
     validateBeforeSubmit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.save()
         } else {
+          this.$emit('clearForm', this.formData)
         }
       })
     }
@@ -157,20 +159,6 @@ export default{
     {
       font-size: 1em;
       @include spacing-tb(m, 0, em);
-    }
-  }
-  .modal-close
-  {
-    background: transparent;
-    float: right;
-    border: none;
-    @include font(2, 500, $red);
-    margin-right: -2.5em;
-    margin-top: -0.3em;
-    &:focus
-    {
-      border: none;
-      outline: none;
     }
   }
 }

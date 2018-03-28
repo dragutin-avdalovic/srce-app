@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="new">
-              <button v-on:click="show()" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
           </div>
         </div>
@@ -29,6 +29,7 @@
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
+              @onModalClose="closeModal('modal_entry')"
               @onSetCheckBox="setCheckBox($event)"
               @onSetInput="setInput($event)"
               @onSaveFamilyMember="saveFamilyMember($event)"
@@ -410,19 +411,19 @@ export default {
         }
       })
     },
-    show (modal) {
-      if (modal === 'confirm_delete') {
-        this.$modal.show('confirm_delete')
-      } else {
-        this.$modal.show('modal_entry')
-      }
+    show (modalId) {
+      this.$modal.show(modalId)
     },
-    hide (modal) {
-      if (modal === 'confirm_delete') {
-        this.$modal.hide('confirm_delete')
-      } else {
-        this.$modal.hide('modal_entry')
-      }
+    hide (modalId) {
+      this.$modal.hide(modalId)
+    },
+    openModal (modalId) {
+      this.show(modalId)
+      this.clearData()
+    },
+    closeModal (modalId) {
+      this.hide(modalId)
+      this.clearData()
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
@@ -451,11 +452,13 @@ export default {
       })
     },
     saveData (event) {
+      console.log(event)
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
           if (data.message === 'successfully edited') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       } else {
@@ -463,6 +466,7 @@ export default {
           if (data.message === 'successfully saved') {
             this.hide('modal_entry')
             this.getData()
+            this.clearData()
           }
         })
       }
