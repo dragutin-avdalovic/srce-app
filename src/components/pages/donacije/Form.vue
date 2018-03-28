@@ -7,10 +7,13 @@
     </div>
     <h3 class="form-header">Novi unos</h3>
     <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
-        <label class="control-label" >Vrsta donatora</label>
-        <b-form-select v-model="formData.type" :options="type" id="type" name="type"></b-form-select>
-        <i class="fa fa-chevron-down"></i>
+      <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height donators-group" v-bind:class="{'has-error':errors.has('type')}">
+        <label class="control-label">Vrsta donatora</label>
+        <p :class="{ 'control': true }">
+          <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type" :options="this.type" id="type" name="type"></b-form-select>
+          <i class="fa fa-chevron-down"></i>
+          <span v-show="errors.has('type')" class="help-block">{{ errors.first('type') }}</span>
+        </p>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('company')}">
         <label class="control-label" for="company">Naziv kompanije*</label>
@@ -50,14 +53,14 @@
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('amount')}">
         <label class="control-label" for="amount">Iznos donacije*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('amount') }" name="amount" type="number" v-model="formData.amount" class="form-control donation_amount" id="amount" placeholder="00">
+          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('amount') }" name="amount" type="number" min="1" v-model="formData.amount" class="form-control donation_amount" id="amount" placeholder="00">
           <span v-show="errors.has('amount')" class="help-block">{{ errors.first('amount') }}</span>
         </p>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('date')}">
         <label class="control-label" for="date">Datum*</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('date') }" name="date" type="date" v-model="formData.date" class="form-control" id="date" placeholder="">
+          <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('date') }" name="date" type="date" v-model="formData.date" class="form-control" id="date" placeholder="" max="9999-01-01">
           <span v-show="errors.has('date')" class="help-block">{{ errors.first('date') }}</span>
         </p>
       </div>
@@ -83,9 +86,9 @@ export default{
     return {
       type: [
         { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 'Institucija', text: 'Institucija' },
-        { value: 'Fizičko lice', text: 'Fizičko lice' },
-        { value: 'Pravno lice', text: 'Pravno lice' }
+        { value: 1, text: 'Institucija' },
+        { value: 2, text: 'Fizičko lice' },
+        { value: 3, text: 'Pravno lice' }
       ],
       selected: null
     }
@@ -131,7 +134,6 @@ export default{
       -moz-appearance: none;
     }
   }
-
   select + i.fa {
     float: right;
     margin-top: -30px;
@@ -139,7 +141,7 @@ export default{
     pointer-events: none;
     background-color: #fff;
     padding-right: 5px;
-    @include font(1.2, 500, blue);
+    @include font(1.2, 500, $red);
   }
   .donation_amount
   {
