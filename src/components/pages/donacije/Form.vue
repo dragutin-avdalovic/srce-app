@@ -94,11 +94,6 @@ export default{
   methods: {
     save: function () {
       console.log(this.formData)
-      if (this.formData.company === '') {
-        this.formData.company = null
-      } else if (this.formData.name === '') {
-        this.formData.name = null
-      }
       this.$emit('onDataEmit', this.formData)
     },
     closeModal: function () {
