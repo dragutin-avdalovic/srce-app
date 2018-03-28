@@ -159,19 +159,5 @@ export default{
       @include spacing-tb(m, 0, em);
     }
   }
-  .modal-close
-  {
-    background: transparent;
-    float: right;
-    border: none;
-    @include font(2, 500, $red);
-    margin-top: -0.3em;
-    cursor: pointer;
-    &:focus
-    {
-      border: none;
-      outline: none;
-    }
-  }
 }
 </style>
