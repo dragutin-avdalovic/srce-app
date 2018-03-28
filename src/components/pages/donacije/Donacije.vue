@@ -3,11 +3,11 @@
     <div class="content container">
       <div class="row row_interactive">
         <div class="col-lg-6 col-md-6 col-6">
-          <div class="left-filter">
-            <div class="donators-title">
-              <div class="donators-label">Donacije</div>
-            </div>
-          </div>
+          <!--<div class="left-filter">-->
+            <!--<div class="donators-title">-->
+              <!--<div class="donators-label">Donacije</div>-->
+            <!--</div>-->
+          <!--</div>-->
         </div>
         <div class="col-lg-6 col-md-6 col-6">
           <div class="right-filter">
