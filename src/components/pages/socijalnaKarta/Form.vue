@@ -1,6 +1,7 @@
 <template>
   <div>
       <div v-show="step === 1">
+        <!--<button v-on:click="fillMe()">FILL ME</button>-->
         <form class="newEntryForm heartForm">
           <div class="header-modal">
             <h3 class="form-header">Novi unos</h3>
@@ -739,6 +740,9 @@ export default{
     },
     next () {
       this.step++
+    },
+    fillMe () {
+      this.$emit('fillMe', true)
     },
     saveFamilyMember () {
       this.$emit('onSaveFamilyMember', _.cloneDeep(this.familyMember))
