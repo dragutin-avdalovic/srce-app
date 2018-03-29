@@ -34,6 +34,7 @@
               @onSetInput="setInput($event)"
               @onSaveFamilyMember="saveFamilyMember($event)"
               @onSliceFamilyMember="sliceFamilyMember($event)"
+              @fillMe="fillData($event)"
               :formData="formData"
               :meritalStatus="meritalStatus"
               :familyRelations="familyRelations"
@@ -129,8 +130,7 @@ export default {
           diagnose: '',
           dateOfDiagnose: '',
           note: '',
-          healthState: null,
-          _id: ''
+          healthState: null
         },
         mother: {
           name: '',
@@ -146,8 +146,7 @@ export default {
           working: false,
           position: '',
           qualifications: '',
-          nameOfEmployer: '',
-          _id: ''
+          nameOfEmployer: ''
         },
         father: {
           name: '',
@@ -163,8 +162,7 @@ export default {
           working: false,
           position: '',
           qualifications: '',
-          nameOfEmployer: '',
-          _id: ''
+          nameOfEmployer: ''
         },
         family: {
           meritalStatus: null,
@@ -331,7 +329,7 @@ export default {
       }
     },
     clearData () {
-      this.formData = Object.assign({}, this.formData, {
+      this.formData = {
         child: {
           name: '',
           jmbg: null,
@@ -347,8 +345,7 @@ export default {
           diagnose: '',
           dateOfDiagnose: '',
           note: '',
-          healthState: null,
-          _id: ''
+          healthState: null
         },
         mother: {
           name: '',
@@ -364,8 +361,7 @@ export default {
           working: false,
           position: '',
           qualifications: '',
-          nameOfEmployer: '',
-          _id: ''
+          nameOfEmployer: ''
         },
         father: {
           name: '',
@@ -381,8 +377,7 @@ export default {
           working: false,
           position: '',
           qualifications: '',
-          nameOfEmployer: '',
-          _id: ''
+          nameOfEmployer: ''
         },
         family: {
           meritalStatus: null,
@@ -409,7 +404,7 @@ export default {
           housingConditions: null,
           residentialBuilding: null
         }
-      })
+      }
     },
     show (modalId) {
       this.$modal.show(modalId)
@@ -424,6 +419,84 @@ export default {
     closeModal (modalId) {
       this.hide(modalId)
       this.clearData()
+    },
+    fillData () {
+      this.formData = {
+        child: {
+          name: 'Test',
+          jmbg: 123456,
+          dateOfBirth: '2018-01-01',
+          placeOfBirth: 'Test',
+          municipality: 'Test',
+          city: 'Test',
+          address: 'Test',
+          postNumber: '12345',
+          goingToSchool: true,
+          goingToKindergarden: true,
+          diagnosed: true,
+          diagnose: 'Test',
+          dateOfDiagnose: '2018-01-01',
+          note: 'Test',
+          healthState: 2
+        },
+        mother: {
+          name: 'Test',
+          jmbg: 123456,
+          citizenId: 'Test',
+          issuedBy: 'Test',
+          municipality: 'Test',
+          city: 'Test',
+          address: 'Test',
+          postNumber: '12345',
+          tel: '123456',
+          mob: '123456',
+          working: true,
+          position: 'Test',
+          qualifications: 'Test',
+          nameOfEmployer: 'Test'
+        },
+        father: {
+          name: 'Test',
+          jmbg: 123456,
+          citizenId: 'Test',
+          issuedBy: 'Test',
+          municipality: 'Test',
+          city: 'Test',
+          address: 'Test',
+          postNumber: '12345',
+          tel: '1234456',
+          mob: '123445',
+          working: true,
+          position: 'Test',
+          qualifications: 'Test',
+          nameOfEmployer: 'Test'
+        },
+        family: {
+          meritalStatus: 1,
+          familyMembers: [],
+          chronicalDecease: true,
+          chronicalDeceaseText: 'Test',
+          disability: true,
+          disabilityText: 'Test',
+          specialNeeds: true,
+          familyRelations: 1,
+          incomeBySalary: true,
+          incomeBySalaryText: 'Test',
+          familyPension: true,
+          familyPensionText: 'Test',
+          unemploymentBenefit: true,
+          unemploymentBenefitText: 'Test',
+          disabilityCompensation: true,
+          disabilityCompensationText: 'Test',
+          compensationForTheSocialProtectionSystem: true,
+          compensationForTheSocialProtectionSystemText: 'Test',
+          otherIncome: true,
+          otherIncomeText: 'Test',
+          familyResidence: 1,
+          housingConditions: 1,
+          residentialBuilding: 1
+        }
+      }
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
