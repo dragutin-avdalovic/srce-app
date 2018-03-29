@@ -9,7 +9,6 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 :filter="filter"
-                :no-local-sorting="true"
                 @filtered="onFiltered"
                 @sort-changed="sortRoutine">
         <!-- A virtual composite column -->

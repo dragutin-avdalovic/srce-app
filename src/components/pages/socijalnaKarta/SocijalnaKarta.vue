@@ -456,6 +456,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
           if (data.message === 'successfully edited') {
+            console.log('editovano')
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -464,6 +465,7 @@ export default {
       } else {
         Main.methods.postModule(Main.data().socialCard, event, (data) => {
           if (data.message === 'successfully saved') {
+            console.log('sacuvano')
             this.hide('modal_entry')
             this.getData()
             this.clearData()
