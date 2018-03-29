@@ -1,15 +1,18 @@
-<template>
+<template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="col-lg-6 col-md-6 col-6">
           <div class="left-filter">
-            <div class="donators-title">
-              <div class="donators-label">Donacije</div>
-            </div>
+            <button v-popover:list-dropdown-2.bottom class="donators-btn">
+              <div class="donators-label">Donatori</div>
+              <i class="fa fa-chevron-down donators-chevron"></i>
+            </button>
+            <popover name="list-dropdown-2" class="list-dropdown-2">
+              <div  v-bind:key="index" v-bind:item="item" v-for="(item, index) in types"  class="list_row" v-on:click.prevent="filterItems(index)">
+                <p>{{item}}</p>
+              </div>
+            </popover>
           </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-6">
           <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
@@ -24,7 +27,6 @@
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
           </div>
-        </div>
       </div>
       <TableSortable :items="items"
                      :fieldsA="fields"
@@ -61,10 +63,12 @@ export default {
     return {
       delitionId: null,
       msg: 'Srce za djecu',
-      filter: '',
+      filter: null,
+      filterByType: null,
       items: [],
       seen: 'true',
       stacked: 'md',
+      types: ['Institucija', 'Fizičko lice', 'Pravno lice'],
       formData: {
         type: null,
         company: '',
@@ -88,6 +92,11 @@ export default {
           sortable: true
         },
         {
+          key: 'address',
+          label: 'ADRESA',
+          sortable: true
+        },
+        {
           key: 'company',
           label: 'NAZIV KOMPANIJE',
           sortable: true,
@@ -95,12 +104,7 @@ export default {
         },
         {
           key: 'date',
-          label: 'DATUM',
-          sortable: true
-        },
-        {
-          key: 'address',
-          label: 'ADRESA',
+          label: 'DATUM DONACIJE',
           sortable: true
         },
         {
@@ -215,5 +219,32 @@ export default {
 }
 </script>
 <style lang="scss">
-
+  @import "../../../assets/styles/mixins";
+  @import "../../../assets/styles/form";
+  @import "../../../assets/styles/general";
+  .list-dropdown-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .list_row {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      cursor: pointer;
+      @include spacing-tb('p', 0.5, em);
+      @include spacing-l('p', 1.5, em);
+      p {
+        @include spacing-b('m', 0, em);
+        @include spacing-l('p', 1, em);
+        @include font(1.1, em, $text-dark);
+      }
+      i {
+        @include font(1.2, em, $text-dark);
+      }
+      &:hover {
+        background-color: $text-gray;
+      }
+    }
+  }
 </style>

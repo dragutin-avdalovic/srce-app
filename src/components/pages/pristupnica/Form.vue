@@ -41,7 +41,7 @@
         </p>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('types')}">
-        <label class="control-label" for="address">Vrsta clana*</label>
+        <label class="control-label" for="address">Vrsta člana*</label>
         <b-form-select v-validate="'required|'"
                        :class="{'input': true, 'has-error': errors.has('types') }"
                        v-model="formData.type"
@@ -61,7 +61,7 @@
         </p>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('dateOfBirth')}">
-        <label class="control-label" >Datum rodenja*</label>
+        <label class="control-label" >Datum rođenja*</label>
         <p :class="{ 'control': true }">
           <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('dateOfBirth') }" max="3000-01-01" min="2000-01-01" id="dateOfBirth" name="dateOfBirth" type="date" v-model="formData.dateOfBirth" class="form-control" placeholder="">
           <span v-show="errors.has('dateOfBirth')" class="help-block">{{ errors.first('dateOfBirth') }}</span>

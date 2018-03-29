@@ -121,7 +121,7 @@ export default {
         },
         {
           key: 'type',
-          label: 'VRSTA CLANA',
+          label: 'VRSTA ČLANA',
           sortable: true,
           formatter: (value) => { return this.types[value + 1] ? this.types[value + 1].text : '' }
         },
