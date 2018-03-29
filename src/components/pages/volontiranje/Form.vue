@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('dateOfBirth')}">
-        <label class="control-label" >Datum rodenja*</label>
+        <label class="control-label" >Datum rođenja*</label>
         <p :class="{ 'control': true }">
           <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('dateOfBirth') }" max="3000-01-01" min="2000-01-01" id="dateOfBirth" name="dateOfBirth" type="date" v-model="formData.dateOfBirth" class="form-control" placeholder="">
           <span v-show="errors.has('dateOfBirth')" class="help-block">{{ errors.first('dateOfBirth') }}</span>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('qualification')}">
-        <label class="control-label" for="qualification">Strucna sprema*</label>
+        <label class="control-label" for="qualification">Stručna sprema*</label>
         <p :class="{ 'control': true }">
           <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('qualification') }" name="qualification" type="text" v-model="formData.qualification" class="form-control" id="qualification" placeholder="">
           <span v-show="errors.has('qualification')" class="help-block">{{ errors.first('qualification') }}</span>
@@ -65,7 +65,7 @@
         <CompositeButton @onCheckedComposite="onCheckClicked($event)" :active="formData.volunteeredBefore"></CompositeButton>
       </div>
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('numberOfHours')}">
-        <label class="control-label" for="numberOfHours">Navedite broj sati koji ste u mogucnosti mjesecno posvetiti radu Udruzenja:*</label>
+        <label class="control-label" for="numberOfHours">Navedite broj sati koji ste u mogućnosti mjesečno posvetiti radu Udruženja:*</label>
         <p :class="{ 'control': true }">
           <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('numberOfHours') }" min="1" name="numberOfHours" type="number" v-model="formData.numberOfHours" class="form-control" id="numberOfHours" placeholder="">
           <span v-show="errors.has('numberOfHours')" class="help-block">{{ errors.first('numberOfHours') }}</span>

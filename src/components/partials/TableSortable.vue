@@ -50,9 +50,7 @@ export default {
       totalRows: this.items.length,
       sortDesc: true,
       sortBy: 'child.name',
-      id: '',
-      selectItems: [1, 2, 3],
-      limits: ['Institucija', 'Pravno lice', 'Fizičko lice']
+      id: ''
     }
   },
   methods: {
@@ -222,7 +220,7 @@ export default {
     color: $red;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
     @include font(1.7,600,$red);
@@ -247,8 +245,8 @@ export default {
   .row_interactive
   {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    /*flex-direction: row;*/
+    /*align-items: center;*/
     @include spacing-tb(m,1,em);
     @include spacing-lr(m,0,em);
     .left-filter
@@ -256,6 +254,7 @@ export default {
       display: flex;
       flex: 1;
       justify-content: flex-start;
+      margin-right: auto;
       .donators-title
       {
         color: $red;
@@ -269,6 +268,7 @@ export default {
       align-items: center;
       justify-content: flex-end;
       min-width: 25em;
+      margin-left: auto;
       .search-container
       {
         padding-right: 2em;

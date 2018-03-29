@@ -68,13 +68,13 @@ export default {
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Kreativne radionice sa djecom' },
         { value: 1, text: 'Okupacione radionice sa roditeljima oboljele djece' },
-        { value: 2, text: 'Psiholoska podrska roditeljima' },
-        { value: 3, text: 'Poslovi na unutrasnjem odrzavanju kuce' },
-        { value: 4, text: 'Poslovi na odrzavanju parka' },
-        { value: 5, text: 'Psiholoska podrska roditeljima' },
-        { value: 6, text: 'Marketinske usluge' },
-        { value: 7, text: 'Prevodilacke usluge' },
-        { value: 8, text: 'Usluge prevoza djece na lijecenje van BiH' },
+        { value: 2, text: 'Psihološka podrška roditeljima' },
+        { value: 3, text: 'Poslovi na unutrašnjem održavanju kuće' },
+        { value: 4, text: 'Poslovi na održavanju parka' },
+        { value: 5, text: 'Psihološka podrška roditeljima' },
+        { value: 6, text: 'Marketinške usluge' },
+        { value: 7, text: 'Prevodilačke usluge' },
+        { value: 8, text: 'Usluge prevoza djece na liječenje van BiH' },
         { value: 9, text: 'Rad na projektu "Moja kosa tvoja kosa"' },
         { value: 10, text: 'Rad na projektu "Rehabilitacioni kamp"' }
       ],
@@ -106,12 +106,12 @@ export default {
         },
         {
           key: 'dateOfBirth',
-          label: 'DATUM RODJENJA',
+          label: 'DATUM ROĐENJA',
           sortable: true
         },
         {
           key: 'qualification',
-          label: 'STRUCNA SPREMA',
+          label: 'STRUČNA SPREMA',
           sortable: true
         },
         {
