@@ -77,6 +77,7 @@
                        :class="{'input': true, 'has-error': errors.has('jobsToVolunteer') }"
                        v-model="formData.jobsToVolunteer"
                        :options="types" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
+        <span v-show="errors.has('jobsToVolunteer')" class="help-block">{{ errors.first('jobsToVolunteer') }}</span>
       </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
@@ -107,6 +108,9 @@ export default{
           },
           numberOfHours: {
             required: 'The number of hours field is required.' // messages can be strings as well.
+          },
+          jobsToVolunteer: {
+            required: 'The type of job field is required.' // messages can be strings as well.
           }
         }
       }
