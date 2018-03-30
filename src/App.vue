@@ -42,6 +42,8 @@ export default {
   .content {
     width: 100%;
     min-height: calc(100vh - 250px);
+    display: flex;
+    align-items: center;
   }
 }
 </style>
