@@ -44,6 +44,7 @@ export default {
     min-height: calc(100vh - 250px);
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 }
 </style>
