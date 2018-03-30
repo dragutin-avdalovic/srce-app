@@ -85,8 +85,8 @@ export default {
       familyRelations: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 0, text: 'Dobri' },
-        { value: 1, text: 'Odlicni' },
-        { value: 2, text: 'Problematicni' }
+        { value: 1, text: 'Odlični' },
+        { value: 2, text: 'Problematični' }
       ],
       familyResidence: [
         { value: null, text: 'Selektujte opciju', selected: true },

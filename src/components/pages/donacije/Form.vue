@@ -8,20 +8,20 @@
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height donators-group" v-bind:class="{'has-error':errors.has('type')}">
         <label class="control-label">Vrsta donatora</label>
         <p :class="{ 'control': true }">
-          <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type" :options="this.type" id="type" name="type"></b-form-select>
+          <b-form-select v-on:change="onChange" v-validate="'required'" :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type" :options="this.type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
           <span v-show="errors.has('type')" class="help-block">{{ errors.first('type') }}</span>
         </p>
       </div>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-show="formData.type!=2" v-bind:class="{'has-error':errors.has('company')}">
-        <label class="control-label" for="company">Naziv kompanije*</label>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-12 form-group min-row-height" v-show="showRequiredTypeCompany(formData.type)" v-bind:class="{'has-error':errors.has('company')}">
+        <label class="control-label" for="company">Naziv kompanije</label>
         <p :class="{ 'control': true }">
           <input v-validate="''" :class="{'input': true, 'has-error': errors.has('company') }" id="company" name="company" type="text" v-model="formData.company" class="form-control" placeholder="">
           <span v-show="errors.has('company')" class="help-block">{{ errors.first('company') }}</span>
         </p>
       </div>
-      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-show="formData.type===2" v-bind:class="{'has-error':errors.has('name')}">
-        <label class="control-label" for="name">Ime i prezime*</label>
+      <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-show="showRequiredTypePerson(formData.type)" v-bind:class="{'has-error':errors.has('name')}">
+        <label class="control-label" for="name">Ime i prezime</label>
         <p :class="{ 'control': true }">
           <input v-validate="''" :class="{'input': true, 'has-error': errors.has('name') }" name="name" type="text" v-model="formData.name" class="form-control" id="name" placeholder="">
           <span v-show="errors.has('name')" class="help-block">{{ errors.first('name') }}</span>
@@ -88,7 +88,8 @@ export default{
         { value: 2, text: 'Fizičko lice' },
         { value: 3, text: 'Pravno lice' }
       ],
-      selected: null
+      selected: null,
+      requiredType: null
     }
   },
   methods: {
@@ -107,6 +108,28 @@ export default{
           this.$emit('clearForm', this.formData)
         }
       })
+    },
+    showRequiredTypeCompany: function (event) {
+      if (event === 1 || event === 3) {
+        return true
+      } else if (event === 2) {
+        return false
+      } else if (event === null) {
+        return true
+      }
+    },
+    showRequiredTypePerson: function (event) {
+      if (event === 1 || event === 3) {
+        return false
+      } else if (event === 2) {
+        return true
+      } else if (event === null) {
+        return true
+      }
+    },
+    onChange: function () {
+      this.formData.name = ''
+      this.formData.company = ''
     }
   }
 }
