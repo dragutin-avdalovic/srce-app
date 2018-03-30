@@ -72,7 +72,7 @@
         </p>
       </div>
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('jobsToVolunteer')}">
-        <label class="control-label" for="jobsToVolunteer">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
+        <label class="control-label">Na kojem od dole navedenih poslova biste voljeli dati svoj doprinos?*</label>
         <b-form-select v-validate="'required'"
                        :class="{'input': true, 'has-error': errors.has('jobsToVolunteer') }"
                        v-model="formData.jobsToVolunteer"
@@ -110,7 +110,7 @@ export default{
             required: 'The number of hours field is required.' // messages can be strings as well.
           },
           jobsToVolunteer: {
-            required: 'The type of job field is required.' // messages can be strings as well.
+            required: 'The type of jobs field is required.' // messages can be strings as well.
           }
         }
       }

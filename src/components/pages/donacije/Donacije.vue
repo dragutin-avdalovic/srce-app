@@ -8,7 +8,7 @@
               <i class="fa fa-chevron-down donators-chevron"></i>
             </button>
             <popover name="list-dropdown-2" class="list-dropdown-2">
-              <div  v-bind:key="index" v-bind:item="item" v-for="(item, index) in types"  class="list_row" v-on:click.prevent="filterItems(index)">
+              <div class="list_row" v-for="(item, index) in types" :key="index" v-on:click="filterItems(index)">
                 <p>{{item}}</p>
               </div>
             </popover>
@@ -66,9 +66,10 @@ export default {
       filter: null,
       filterByType: null,
       items: [],
+      tempItems: [],
       seen: 'true',
       stacked: 'md',
-      types: ['Institucija', 'Fizičko lice', 'Pravno lice'],
+      types: ['Institucija', 'Fizičko lice', 'Pravno lice', 'Svi donatori'],
       formData: {
         type: null,
         company: '',
@@ -139,6 +140,15 @@ export default {
         cause: ''
       }
     },
+    filterItems (index) {
+      if (index < 2) {
+        this.items = this.tempItems.filter((el) => {
+          return el.type === index ? el : null
+        })
+      } else {
+        this.items = this.tempItems
+      }
+    },
     show (modalId) {
       this.$modal.show(modalId)
     },
@@ -181,6 +191,7 @@ export default {
           item.date = item.date.split('T')[0]
         })
         this.items = data
+        this.tempItems = data
       })
     },
     saveData (event) {
