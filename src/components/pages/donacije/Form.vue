@@ -8,7 +8,7 @@
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height donators-group" v-bind:class="{'has-error':errors.has('type')}">
         <label class="control-label">Vrsta donatora</label>
         <p :class="{ 'control': true }">
-          <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type" :options="this.type" id="type" name="type"></b-form-select>
+          <b-form-select v-on:change="onChange" v-validate="'required'" :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type" :options="this.type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
           <span v-show="errors.has('type')" class="help-block">{{ errors.first('type') }}</span>
         </p>
@@ -126,6 +126,10 @@ export default{
       } else if (event === null) {
         return true
       }
+    },
+    onChange: function () {
+      this.formData.name = ''
+      this.formData.company = ''
     }
   }
 }
