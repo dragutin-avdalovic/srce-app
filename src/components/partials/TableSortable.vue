@@ -14,7 +14,7 @@
         <!-- A virtual composite column -->
         <template slot="actions" slot-scope="data">
           <div v-popover:list-dropdown.bottom v-on:click="select(data.item._id)">
-            <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1"></i>
+            <i class="fa fa-ellipsis-h" style="font-size:25px; color: #A2A1A1; cursor: pointer"></i>
           </div>
         </template>
       </b-table>
