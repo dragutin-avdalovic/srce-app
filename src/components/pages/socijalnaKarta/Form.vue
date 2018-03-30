@@ -15,7 +15,7 @@
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childName')}">
                 <label class="control-label" for="childName">Ime i prezime*</label>
                 <p :class="{ 'control': true }">
-                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childName') }" name="childName" type="text" v-model="formData.child.name" class="form-control" id="childName" placeholder="">
+                  <input v-validate="'required'" :class="{'input': true, 'has-error': errors.has('childName') }" name="childName" type="text" id="childName" v-model="formData.child.name" class="form-control"  placeholder="">
                   <span v-show="errors.has('childName')" class="help-block">{{ errors.first('childName') }}</span>
                 </p>
               </div>
