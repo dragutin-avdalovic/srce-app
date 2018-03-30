@@ -2,7 +2,9 @@
   <footer>
     <div class="container">
       <div class="logo-container">
-        <img src="@/assets/images/logo-wide-white.png" class="logo-white">
+        <a target="_blank" href="http://srcezadjecu.ba/">
+          <img src="@/assets/images/logo-wide-white.png" class="logo-white">
+        </a>
         <p>{{title}}</p>
       </div>
     </div>
