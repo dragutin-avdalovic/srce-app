@@ -2,31 +2,39 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-6">
-        <div class="heart">
-          <img class="back-heart" src="@/assets/images/heart-1.svg" alt="">
-          <router-link :to="{ name: 'Pristupnica', params: {} }"><img class="mini-img" src="@/assets/images/paper-note.svg" alt=""></router-link>
-        </div>
+        <router-link :to="{ name: 'Pristupnica', params: {} }">
+          <div class="heart">
+            <img class="back-heart" src="@/assets/images/heart-1.svg" alt="">
+            <img class="mini-img" src="@/assets/images/paper-note.svg" alt="">
+          </div>
+        </router-link>
         <p class="text ">Pristupnica za članove</p>
       </div>
       <div class="col-lg-6 col-md-6 col-6">
+       <router-link :to="{ name: 'SocijalnaKarta', params: {} }">
         <div class="heart">
           <img class="back-heart two" src="@/assets/images/heart-1.svg" alt="">
-          <router-link :to="{ name: 'SocijalnaKarta', params: {} }"><img class="mini-img one" src="@/assets/images/blank-rounded-speech-balloon.svg" alt=""></router-link>
+         <img class="mini-img one" src="@/assets/images/blank-rounded-speech-balloon.svg" alt="">
         </div>
+        </router-link>
         <p class="text ">Socijalna karta</p>
       </div>
       <div class="col-lg-6 col-md-6 col-6">
+      <router-link :to="{ name: 'Volontiranje', params: {} }">
         <div class="heart">
           <img class="back-heart two" src="@/assets/images/heart-1.svg" alt="">
-          <router-link :to="{ name: 'Volontiranje', params: {} }"><img class="mini-img one" src="@/assets/images/hands-holding-heart-1.svg" alt=""></router-link>
+          <img class="mini-img one" src="@/assets/images/hands-holding-heart-1.svg" alt="">
         </div>
+        </router-link>
         <p class="text ">Aplikacija za volontiranje</p>
       </div>
       <div class="col-lg-6 col-md-6 col-6">
+       <router-link :to="{ name: 'Donacije', params: {} }">
         <div class="heart">
           <img class="back-heart two" src="@/assets/images/heart-1.svg" alt="">
-          <router-link :to="{ name: 'Donacije', params: {} }"><img class="mini-img one" src="@/assets/images/hands-holding-heart.svg" alt=""></router-link>
+         <img class="mini-img one" src="@/assets/images/hands-holding-heart.svg" alt="">
         </div>
+        </router-link>
         <p class="text ">Pristupnica za donatore</p>
       </div>
     </div>

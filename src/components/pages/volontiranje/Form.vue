@@ -65,7 +65,7 @@
         <CompositeButton @onCheckedComposite="onCheckClicked($event)" :active="formData.volunteeredBefore"></CompositeButton>
       </div>
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height" v-bind:class="{'has-error':errors.has('numberOfHours')}">
-        <label class="control-label" for="numberOfHours">Navedite broj sati koji ste u mogućnosti mjesečno posvetiti radu Udruženja:*</label>
+        <label class="control-label" for="numberOfHours">Navedite broj sati koji ste u mogućnosti mjesečno posvetiti radu u Udruženju:*</label>
         <p :class="{ 'control': true }">
           <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('numberOfHours') }" min="1" name="numberOfHours" type="number" v-model="formData.numberOfHours" class="form-control" id="numberOfHours" placeholder="">
           <span v-show="errors.has('numberOfHours')" class="help-block">{{ errors.first('numberOfHours') }}</span>
