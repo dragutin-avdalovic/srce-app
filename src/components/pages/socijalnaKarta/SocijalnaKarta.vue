@@ -421,7 +421,7 @@ export default {
       this.clearData()
     },
     fillData () {
-      this.formData = {
+      Object.assign({}, this.formData, {
         child: {
           name: 'Test',
           jmbg: 123456,
@@ -496,7 +496,7 @@ export default {
           housingConditions: 1,
           residentialBuilding: 1
         }
-      }
+      })
     },
     fillFormData (event) {
       this.items.forEach((obj) => {
