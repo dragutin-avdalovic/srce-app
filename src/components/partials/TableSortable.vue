@@ -42,7 +42,7 @@ import Checkbox from '@/components/partials/Checkbox'
 export default {
   components: {
     Checkbox},
-  props: ['items', 'fieldsA', 'stacked', 'seen', 'filter'],
+  props: ['items', 'fieldsA', 'stacked', 'seen', 'filter', 'backToStart'],
   data () {
     return {
       currentPage: 1,
@@ -54,16 +54,12 @@ export default {
     }
   },
   methods: {
-    show () {
-      this.$modal.show('modal_entry')
-    },
-    hide () {
-      this.$modal.hide('modal_entry')
-    },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
-      // this.currentPage = 1
+      if (this.backToStart) {
+        this.currentPage = 1
+      }
     },
     select (id) {
       this.id = id

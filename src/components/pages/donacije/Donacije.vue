@@ -88,6 +88,12 @@ export default {
           sortable: true
         },
         {
+          key: 'company',
+          label: 'NAZIV KOMPANIJE',
+          sortable: true,
+          variant: 'danger'
+        },
+        {
           key: 'email',
           label: 'E-MAIL',
           sortable: true
@@ -96,12 +102,6 @@ export default {
           key: 'address',
           label: 'ADRESA',
           sortable: true
-        },
-        {
-          key: 'company',
-          label: 'NAZIV KOMPANIJE',
-          sortable: true,
-          variant: 'danger'
         },
         {
           key: 'date',
