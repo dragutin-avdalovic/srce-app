@@ -31,6 +31,7 @@
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
+                     :backToStart="backToStart"
                      @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :seen="seen"
