@@ -19,33 +19,38 @@ export default {
     //         return moment(String(value)).format('dddd, MMMM Do YYYY, h:mm:ss a')
     //     }
     // },
-    getModule: function (route, cb) {
+    getModule (route, cb) {
       axios.get(route).then(response => {
         cb(response.data)
       }).catch(e => {
         console.log(e)
       })
     },
-    postModule: function (route, data, cb) {
+    postModule (route, data, cb) {
       axios.post(route, data).then(response => {
         cb(response.data)
       }).catch(e => {
         console.log(e)
       })
     },
-    putModule: function (route, data, cb) {
+    putModule (route, data, cb) {
       axios.put(route, data).then(response => {
         cb(response.data)
       }).catch(e => {
         console.log(e)
       })
     },
-    deleteModule: function (route, cb) {
+    deleteModule (route, cb) {
       axios.delete(route).then(response => {
         cb(response.data)
       }).catch(e => {
         console.log(e)
       })
+    },
+    remove (array, element) {
+      const index = array.indexOf(element)
+      array.splice(index, 1)
+      return array
     }
   }
 }
