@@ -46,11 +46,6 @@ export default {
       }).catch(e => {
         console.log(e)
       })
-    },
-    remove (array, element) {
-      const index = array.indexOf(element)
-      array.splice(index, 1)
-      return array
     }
   }
 }

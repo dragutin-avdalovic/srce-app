@@ -221,7 +221,6 @@ export default {
       }
     },
     deleteItem (event) {
-      // this.items = Main.methods.remove(this.items, this.items.filter(x => x._id === event)[0])
       Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
         if (data.message === 'successfully removed') {
           this.seen = false
