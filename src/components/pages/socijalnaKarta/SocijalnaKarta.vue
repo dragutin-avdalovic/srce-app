@@ -67,6 +67,7 @@ export default {
   },
   data () {
     return {
+      backToStart: false,
       deletionId: null,
       msg: 'Srce za djecu',
       filter: '',
@@ -531,7 +532,7 @@ export default {
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
           if (data.message === 'successfully edited') {
-            console.log('editovano')
+            this.backToStart = true
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -540,14 +541,16 @@ export default {
       } else {
         Main.methods.postModule(Main.data().socialCard, event, (data) => {
           if (data.message === 'successfully saved') {
-            console.log('sacuvano')
+            this.backToStart = true
             this.hide('modal_entry')
             this.getData()
             this.clearData()
           }
         })
       }
-      this.clearData()
+      setTimeout(() => {
+        this.backToStart = false
+      }, 1000)
     },
     showDeleteModal (event) {
       this.show(event.type)

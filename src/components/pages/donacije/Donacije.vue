@@ -61,6 +61,7 @@ export default {
   },
   data () {
     return {
+      backToStart: false,
       delitionId: null,
       msg: 'Srce za djecu',
       filter: null,
@@ -202,6 +203,7 @@ export default {
         Main.methods.putModule(Main.data().donations + event._id, event, (data) => {
           console.log(data)
           if (data.message === 'successfully edited') {
+            this.backToStart = true
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -211,12 +213,16 @@ export default {
         Main.methods.postModule(Main.data().donations, event, (data) => {
           console.log(data)
           if (data.message === 'successfully saved') {
+            this.backToStart = true
             this.hide('modal_entry')
             this.getData()
             this.clearData()
           }
         })
       }
+      setTimeout(() => {
+        this.backToStart = false
+      }, 1000)
     },
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().donations + this.delitionId, (data) => {
