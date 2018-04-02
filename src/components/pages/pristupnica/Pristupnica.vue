@@ -32,7 +32,6 @@
                      :stacked="stacked"
                      @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
-                     :seen="seen"
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
@@ -161,9 +160,11 @@ export default {
     hide (modalId) {
       this.$modal.hide(modalId)
     },
-    openModal (modalId) {
+    openModal (modalId, clear = false) {
       this.show(modalId)
-      this.clearData()
+      if (clear) {
+        this.clearData()
+      }
     },
     closeModal (modalId) {
       this.hide(modalId)
@@ -220,9 +221,7 @@ export default {
       }
     },
     deleteItem (event) {
-      console.log(this.deletionId)
-      Main.methods.deleteModule(Main.data().accessCard + this.delitionId, (data) => {
-        console.log(data)
+      Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
         if (data.message === 'successfully removed') {
           this.seen = false
           this.getData()

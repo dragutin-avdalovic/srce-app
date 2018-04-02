@@ -181,16 +181,16 @@
               </p>
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('fatherTel')}">
-              <label class="control-label" for="fatherTel">Telefon*</label>
+              <label class="control-label" for="fatherTel">Telefon</label>
               <p :class="{ 'control': true }">
-                <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('fatherTel') }" name="fatherTel" type="text" v-model="formData.father.tel" class="form-control" id="fatherTel" placeholder="">
+                <input :class="{'input': true, 'has-error': errors.has('fatherTel') }" name="fatherTel" type="text" v-model="formData.father.tel" class="form-control" id="fatherTel" placeholder="">
                 <span v-show="errors.has('fatherTel')" class="help-block">{{ errors.first('fatherTel') }}</span>
               </p>
             </div>
             <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('fatherMob')}">
-              <label class="control-label" for="fatherMob">Mobitel*</label>
+              <label class="control-label" for="fatherMob">Mobitel</label>
               <p :class="{ 'control': true }">
-                <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('fatherMob') }" name="fatherMob" type="text" v-model="formData.father.mob" class="form-control" id="fatherMob">
+                <input :class="{'input': true, 'has-error': errors.has('fatherMob') }" name="fatherMob" type="text" v-model="formData.father.mob" class="form-control" id="fatherMob">
                 <span v-show="errors.has('fatherMob')" class="help-block">{{ errors.first('fatherMob') }}</span>
               </p>
             </div>

@@ -412,9 +412,11 @@ export default {
     hide (modalId) {
       this.$modal.hide(modalId)
     },
-    openModal (modalId) {
+    openModal (modalId, clear = false) {
       this.show(modalId)
-      this.clearData()
+      if (clear) {
+        this.clearData()
+      }
     },
     closeModal (modalId) {
       this.hide(modalId)

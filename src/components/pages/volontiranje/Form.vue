@@ -31,9 +31,9 @@
         </p>
       </div>
       <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('phone')}">
-        <label class="control-label" for="phone">Kontakt telefon*</label>
+        <label class="control-label" for="phone">Kontakt telefon</label>
         <p :class="{ 'control': true }">
-          <input v-validate="'required|numeric'" :class="{'input': true, 'has-error': errors.has('phone') }" name="phone" type="text" v-model="formData.phone" class="form-control" id="phone" placeholder="">
+          <input :class="{'input': true, 'has-error': errors.has('phone') }" name="phone" type="text" v-model="formData.phone" class="form-control" id="phone" placeholder="">
           <span v-show="errors.has('phone')" class="help-block">{{ errors.first('phone') }}</span>
         </p>
       </div>
