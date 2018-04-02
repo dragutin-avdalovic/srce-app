@@ -30,6 +30,7 @@
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
+                     :backToStart="backToStart"
                      @onEditClicked="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :filter="filter">
@@ -59,6 +60,7 @@ export default {
   },
   data () {
     return {
+      backToStart: false,
       delitionId: null,
       msg: 'Srce za djecu',
       filter: '',
@@ -200,11 +202,11 @@ export default {
       })
     },
     saveData (event) {
-      console.log(event)
       if (event._id != null) {
         Main.methods.putModule(Main.data().accessCard + event._id, event, (data) => {
           console.log(data)
           if (data.message === 'successfully edited') {
+            this.backToStart = true
             this.hide('modal_entry')
             this.getData()
             this.clearData()
@@ -213,12 +215,16 @@ export default {
       } else {
         Main.methods.postModule(Main.data().accessCard, event, (data) => {
           if (data.message === 'successfully saved') {
+            this.backToStart = true
             this.hide('modal_entry')
             this.getData()
             this.clearData()
           }
         })
       }
+      setTimeout(() => {
+        this.backToStart = false
+      }, 1000)
     },
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
