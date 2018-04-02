@@ -36,6 +36,7 @@
               @onSliceFamilyMember="sliceFamilyMember($event)"
               @fillMe="fillData($event)"
               :formData="formData"
+              :backToStart="backToStart"
               :meritalStatus="meritalStatus"
               :familyRelations="familyRelations"
               :familyResidence="familyResidence"
