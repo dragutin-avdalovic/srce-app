@@ -48,6 +48,7 @@
 <script>
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
+import Notes from './Notes'
 import Main from '@/services/Main'
 import Confirmation from '@/components/partials/Confirmation'
 
@@ -56,7 +57,8 @@ export default {
   components: {
     Confirmation,
     TableSortable,
-    Form
+    Form,
+    Notes
   },
   data () {
     return {
