@@ -33,7 +33,7 @@
         <i class="fa fa-trash-o"></i>
         <p>Izbriši</p>
       </div>
-      <div class="list_row" id="notes" v-on:click="openModal('notes')">
+      <div class="list_row" id="notes" v-on:click="notes">
         <i class="far fa-sticky-note"></i>
         <p>Zabiljeske</p>
       </div>
@@ -58,9 +58,6 @@ export default {
     }
   },
   methods: {
-    show (modalId) {
-      this.$modal.show(modalId)
-    },
     openModal (modalId, clear = false) {
       this.show(modalId)
       if (clear) {
@@ -78,6 +75,9 @@ export default {
       this.id = id
     },
     edit () {
+      this.$emit('onEditClicked', this.id)
+    },
+    notes () {
       this.$emit('onEditClicked', this.id)
     },
     onDelete () {
