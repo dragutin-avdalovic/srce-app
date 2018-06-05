@@ -41,6 +41,9 @@
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
+      <modal name="notes" height="auto">
+        <Notes @modalClosed="closeModal()"></Notes>
+      </modal>
     </div>
   </div>
 </template>

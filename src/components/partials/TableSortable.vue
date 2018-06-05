@@ -33,7 +33,7 @@
         <i class="fa fa-trash-o"></i>
         <p>Izbriši</p>
       </div>
-      <div class="list_row" id="notes" v-on:click="notes">
+      <div class="list_row" id="notes" v-on:click="notes()">
         <i class="far fa-sticky-note"></i>
         <p>Zabiljeske</p>
       </div>
@@ -58,12 +58,13 @@ export default {
     }
   },
   methods: {
-    openModal (modalId, clear = false) {
-      this.show(modalId)
-      if (clear) {
-        this.clearData()
-      }
+    hide (modalId) {
+      this.$modal.hide(modalId)
     },
+    notes () {
+      this.$modal.show('notes')
+    },
+
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
@@ -75,9 +76,6 @@ export default {
       this.id = id
     },
     edit () {
-      this.$emit('onEditClicked', this.id)
-    },
-    notes () {
       this.$emit('onEditClicked', this.id)
     },
     onDelete () {
