@@ -90,7 +90,7 @@
 </template>
 <script>
 export default{
-  name: 'notes',
+  name: 'Notes',
   props: ['formData', 'types'],
   data () {
     return {

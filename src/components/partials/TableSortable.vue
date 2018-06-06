@@ -33,7 +33,7 @@
         <i class="fa fa-trash-o"></i>
         <p>Izbriši</p>
       </div>
-      <div class="list_row" id="notes" v-on:click="notes()">
+      <div class="list_row" id="notes" v-on:click="show()">
         <i class="far fa-sticky-note"></i>
         <p>Zabiljeske</p>
       </div>
@@ -45,7 +45,8 @@
 import Checkbox from '@/components/partials/Checkbox'
 export default {
   components: {
-    Checkbox},
+    Checkbox
+  },
   props: ['items', 'fieldsA', 'stacked', 'seen', 'filter', 'backToStart'],
   data () {
     return {
@@ -61,10 +62,9 @@ export default {
     hide (modalId) {
       this.$modal.hide(modalId)
     },
-    notes () {
+    show () {
       this.$modal.show('notes')
     },
-
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length

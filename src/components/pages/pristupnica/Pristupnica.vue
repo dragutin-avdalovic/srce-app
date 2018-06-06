@@ -32,6 +32,7 @@
                      :stacked="stacked"
                      :backToStart="backToStart"
                      @onEditClicked="fillFormData"
+                     @addNotes="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :filter="filter">
       </TableSortable>
@@ -41,8 +42,8 @@
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
-      <modal name="notes" height="auto">
-        <Notes @modalClosed="closeModal()"></Notes>
+      <modal id="notes" name="notes" height="auto">
+        <Notes @onDataEmit="saveData" @modalClosed="closeModal('notes')" :formData="formData" :types="types"></Notes>
       </modal>
     </div>
   </div>
@@ -199,7 +200,7 @@ export default {
           }
         }
       })
-      this.show('modal_entry')
+      this.show('modal_entry', 'notes')
     },
     getData () {
       Main.methods.getModule(Main.data().accessCard, (data) => {
