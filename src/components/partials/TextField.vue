@@ -28,7 +28,8 @@
   </md-card>
 </template>
 
-<script>import hljs from 'highlight.js'
+<script>
+import hljs from 'highlight.js'
 import VueQuillEditor, { Quill } from 'vue-quill-editor'
 import { ImageDrop } from 'quill-image-drop-module'
 import ImageResize from 'quill-image-resize-module'
@@ -36,13 +37,16 @@ Quill.register('modules/imageDrop', ImageDrop)
 Quill.register('modules/imageResize', ImageResize)
 
 export default {
-  name: 'VueQuillEditor',
+  components: {
+    VueQuillEditor
+  },
+  name: 'TextField',
   data () {
     return {
       name: 'register-modules-example',
-      content: `<p><img src="/vue-quill-editor/static/images/surmon-6.jpg" width="500"></p>
-                  <br>
-                  <p><strong><em>Or drag/paste an image here.</em></strong></p>`,
+      content:
+        `<p><img src="/vue-quill-editor/static/images/surmon-6.jpg" width="500"></p><br>
+         <p><strong><em>Or drag/paste an image here.</em></strong></p>`,
       editorOption: {
         modules: {
           toolbar: [

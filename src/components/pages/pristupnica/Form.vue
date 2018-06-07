@@ -84,6 +84,7 @@
       </span>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
+        <!--<TextField></TextField>-->
       </div>
     </div>
   </form>
@@ -91,6 +92,8 @@
 
 <script>
 export default{
+  components: {
+  },
   name: 'Form',
   props: ['formData', 'types'],
   data () {
