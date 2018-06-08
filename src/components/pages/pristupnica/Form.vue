@@ -82,10 +82,15 @@
         </p>
       </div>
       </span>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group align-buttons">
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group align-buttons">
+        <button v-on:click="addNotes('Add a note about the client',$event)" class="button_notes" type="submit"><p class="save-text">Add Notes</p></button>
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
         <!--<TextField></TextField>-->
       </div>
+    </div>
     </div>
   </form>
 </template>
@@ -118,6 +123,9 @@ export default{
     this.$validator.localize('en', this.dict)
   },
   methods: {
+    addNotes: function (message, event) {
+      alert(message)
+    },
     save: function () {
       console.log(this.formData)
       this.$emit('onDataEmit', this.formData)
@@ -176,8 +184,24 @@ export default{
   {
     text-align: center;
   }
-  .button_save
+  .button_notes
   {
+    visibility: hidden;
+    padding-left:0;
+    padding-right:0;
+    @extend .heart-button;
+    float: left;
+    display: flex;
+    justify-content: center;
+    .save-text
+    {
+      font-size: 1em;
+      @include spacing-tb(m, 0, em);
+    }
+  }
+  .button_save
+  {  padding-left:0;
+    padding-right:0;
     @extend .heart-button;
     float: right;
     display: flex;
@@ -197,5 +221,12 @@ export default{
   }
   .mt{
     margin-top: 20px;
+  }
+  .align-buttons{
+    margin-top: 0.8em!important;
+    display: flex;
+    justify-content: space-around;
+    float: right;
+    padding: 0;
   }
 </style>
