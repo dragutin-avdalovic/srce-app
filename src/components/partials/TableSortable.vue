@@ -25,17 +25,13 @@
       </div>
     </div>
     <popover ref="popoverRef" name="list-dropdown" class="list-dropdown">
-      <div class="list_row" id="edit"  v-on:click="edit(), showButton($event)">
+      <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
       </div>
       <div class="list_row" id="delete" v-on:click="onDelete()">
         <i class="fa fa-trash-o"></i>
         <p>Izbriši</p>
-      </div>
-      <div class="list_row" id="notes" v-on:click="show()">
-        <i class="far fa-sticky-note"></i>
-        <p>Zabiljeske</p>
       </div>
     </popover>
   </div>
@@ -63,9 +59,6 @@ export default {
     },
     hide (modalId) {
       this.$modal.hide(modalId)
-    },
-    show () {
-      this.$modal.show('notes')
     },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
