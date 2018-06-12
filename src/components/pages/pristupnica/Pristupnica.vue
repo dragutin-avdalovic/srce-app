@@ -42,9 +42,6 @@
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
       </modal>
-      <modal id="notes" name="notes" height="auto">
-        <Notes @onDataEmit="saveData" @modalClosed="closeModal('notes')" :formData="formData" :types="types"></Notes>
-      </modal>
     </div>
   </div>
 </template>
@@ -52,7 +49,6 @@
 <script>
 import TableSortable from '@/components/partials/TableSortable'
 import Form from './Form'
-import Notes from './Notes'
 import Main from '@/services/Main'
 import Confirmation from '@/components/partials/Confirmation'
 
@@ -61,8 +57,7 @@ export default {
   components: {
     Confirmation,
     TableSortable,
-    Form,
-    Notes
+    Form
   },
   data () {
     return {

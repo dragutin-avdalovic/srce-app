@@ -83,12 +83,12 @@
       </div>
       </span>
       <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group align-buttons">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  form-group align-buttons">
+          <TextField></TextField>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group align-buttons">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button v-on:click="addNotes('Add a note about the client',$event)" class="button_notes" type="submit"><p class="save-text">Add Notes</p></button>
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
-        <!--<TextField></TextField>-->
       </div>
     </div>
     </div>
@@ -96,8 +96,10 @@
 </template>
 
 <script>
+import TextField from '@/components/partials/TextField'
 export default{
   components: {
+    TextField
   },
   name: 'Form',
   props: ['formData', 'types'],
