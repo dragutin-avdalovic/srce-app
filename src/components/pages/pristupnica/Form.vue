@@ -186,7 +186,7 @@ export default{
   }
   .button_notes
   {
-    visibility: hidden;
+    /*visibility: hidden;*/
     padding-left:0;
     padding-right:0;
     @extend .heart-button;
