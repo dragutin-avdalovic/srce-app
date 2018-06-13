@@ -1,5 +1,5 @@
 <template>
-  <div v-show="addNotes" class="w-100">
+  <div class="w-100">
     <div>
       <pre class="mt-3 field">{{ text }}</pre>
     </div>
@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       text: '',
-      addNotes: true
+      clickOnEdit: true
     }
   }
 }

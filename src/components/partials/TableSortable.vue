@@ -25,7 +25,7 @@
       </div>
     </div>
     <popover ref="popoverRef" name="list-dropdown" class="list-dropdown">
-      <div class="list_row" id="edit"  v-on:click="edit(); addNotes = !addNotes">
+      <div class="list_row" id="edit"  v-on:click="edit()">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
       </div>
@@ -51,8 +51,7 @@ export default {
       totalRows: this.items.length,
       sortDesc: true,
       sortBy: 'child.name',
-      id: '',
-      addNotes: false
+      id: ''
     }
   },
   methods: {
