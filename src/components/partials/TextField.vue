@@ -1,9 +1,8 @@
 <template>
-  <div class="w-100">
+  <div v-show="addNotes" class="w-100">
     <div>
-      <span>{{ text }}</span>
+      <pre class="mt-3 field">{{ text }}</pre>
     </div>
-    <!--<pre class="mt-3 field">{{ text }}</pre>-->
     <b-form-textarea class="form-control text"
                      id="textarea1"
                      v-model="text"
@@ -19,7 +18,8 @@
 export default {
   data () {
     return {
-      text: ''
+      text: '',
+      addNotes: true
     }
   }
 }

@@ -32,7 +32,6 @@
                      :stacked="stacked"
                      :backToStart="backToStart"
                      @onEditClicked="fillFormData"
-                     @addNotes="fillFormData"
                      @onConfirmDelete="showDeleteModal($event, 'confirm_delete')"
                      :filter="filter">
       </TableSortable>
