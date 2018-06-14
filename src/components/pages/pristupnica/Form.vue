@@ -82,11 +82,11 @@
         </p>
       </div>
       </span>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12  form-group align-buttons">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
           <TextField></TextField>
         </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
-        <button v-on:click="addNotes('Add a note about the client',$event)" class="button_notes" type="submit"><p class="save-text">Add Notes</p></button>
+        <button v-show="false" class="button_notes" type="submit"><p class="save-text">Add Notes</p></button>
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
       </div>
     </div>
