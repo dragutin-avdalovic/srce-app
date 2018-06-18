@@ -82,13 +82,13 @@
         </p>
       </div>
       </span>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
-          <TextField></TextField>
-        </div>
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
-        <button v-show="false" class="button_notes" type="submit"><p class="save-text">Add Notes</p></button>
-        <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
+          <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)"></TextField>
+          <button class="button_notes" type="button" v-on:click="addNote(formData._id)"><p class="save-text">Add Notes</p></button>
       </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
+        <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
+        </div>
     </div>
   </form>
 </template>
@@ -100,9 +100,10 @@ export default{
     TextField
   },
   name: 'Form',
-  props: ['formData', 'types'],
+  props: ['formData', 'types', 'editing'],
   data () {
     return {
+      note: '',
       selected: null,
       dict: {
         custom: {
@@ -123,8 +124,11 @@ export default{
     this.$validator.localize('en', this.dict)
   },
   methods: {
-    addNotes: function (message, event) {
-      alert(message)
+    addNote: function (id) {
+      this.$emit('onAddNote', {
+        id: id,
+        note: this.note
+      })
     },
     save: function () {
       console.log(this.formData)
@@ -141,6 +145,9 @@ export default{
           this.$emit('clearForm', this.formData)
         }
       })
+    },
+    onNoteChanged (event) {
+      this.note = event
     }
   }
 }
@@ -190,7 +197,7 @@ export default{
     padding-left:0;
     padding-right:0;
     @extend .heart-button;
-    float: left;
+    float: right;
     display: flex;
     justify-content: center;
     .save-text
@@ -223,10 +230,9 @@ export default{
     margin-top: 20px;
   }
   .align-buttons{
-    margin-top: 0.8em!important;
+    /*margin-top: 0.8em!important;*/
     display: flex;
     justify-content: space-around;
-    float: right;
     padding: 0;
   }
 </style>

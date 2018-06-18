@@ -69,6 +69,10 @@
           <span v-show="errors.has('cause')" class="help-block">{{ errors.first('cause') }}</span>
         </p>
       </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons" v-if="editing">
+        <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)"></TextField>
+        <button class="button_notes" type="button" v-on:click="addNote(formData._id)"><p class="save-text">Add Notes</p></button>
+      </div>
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
       </div>
@@ -77,11 +81,16 @@
 </template>
 
 <script>
+import TextField from '@/components/partials/TextField'
 export default{
+  components: {
+    TextField
+  },
   name: 'Form',
-  props: ['formData'],
+  props: ['formData', 'editing'],
   data () {
     return {
+      note: '',
       type: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 1, text: 'Institucija' },
@@ -93,6 +102,12 @@ export default{
     }
   },
   methods: {
+    addNote: function (id) {
+      this.$emit('onAddNote', {
+        id: id,
+        note: this.note
+      })
+    },
     save: function () {
       console.log(this.formData)
       this.$emit('onDataEmit', this.formData)
@@ -108,6 +123,9 @@ export default{
           this.$emit('clearForm', this.formData)
         }
       })
+    },
+    onNoteChanged (event) {
+      this.note = event
     },
     showRequiredTypeCompany: function (event) {
       if (event === 1 || event === 3) {
@@ -171,6 +189,21 @@ export default{
   .donation_amount
   {
     text-align: center;
+  }
+  .button_notes
+  {
+    /*visibility: hidden;*/
+    padding-left:0;
+    padding-right:0;
+    @extend .heart-button;
+    float: left;
+    display: flex;
+    justify-content: center;
+    .save-text
+    {
+      font-size: 1em;
+      @include spacing-tb(m, 0, em);
+    }
   }
   .button_save
   {

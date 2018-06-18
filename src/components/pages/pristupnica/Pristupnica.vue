@@ -36,7 +36,7 @@
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types"></Form>
+        <Form @onDataEmit="saveData" @onAddNote="onAddNote" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types" :editing="editing"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -60,6 +60,7 @@ export default {
   },
   data () {
     return {
+      editing: false,
       backToStart: false,
       delitionId: null,
       msg: 'Srce za djecu',
@@ -135,6 +136,16 @@ export default {
     this.getData()
   },
   methods: {
+    onAddNote (obj) {
+      console.log(obj)
+      Main.methods.putModule(Main.data().accessCard + obj.id + '/notes', { text: obj.note }, (data) => {
+        console.log(data)
+        if (data.message === 'successfully added note') {
+          this.backToStart = true
+          this.getData()
+        }
+      })
+    },
     nameMail (value) {
       return `${value.name} ${value.email}`
     },
@@ -183,6 +194,7 @@ export default {
       this.hide('confirm_delete')
     },
     fillFormData (event) {
+      this.editing = true
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
@@ -202,6 +214,7 @@ export default {
       })
     },
     saveData (event) {
+      this.editing = false
       if (event._id != null) {
         Main.methods.putModule(Main.data().accessCard + event._id, event, (data) => {
           console.log(data)

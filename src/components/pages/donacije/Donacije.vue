@@ -38,7 +38,7 @@
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onModalClose="closeModal('modal_entry')" :formData="formData"></Form>
+        <Form @onDataEmit="saveData" @onAddNote="onAddNote" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types" :editing="editing"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
@@ -62,6 +62,7 @@ export default {
   },
   data () {
     return {
+      editing: false,
       backToStart: false,
       delitionId: null,
       msg: 'Srce za djecu',
@@ -129,6 +130,16 @@ export default {
     this.getData()
   },
   methods: {
+    onAddNote (obj) {
+      console.log(obj)
+      Main.methods.putModule(Main.data().donations + obj.id + '/notes', { text: obj.note }, (data) => {
+        console.log(data)
+        if (data.message === 'successfully added note') {
+          this.backToStart = true
+          this.getData()
+        }
+      })
+    },
     clearData () {
       this.formData = {
         type: null,
@@ -178,6 +189,7 @@ export default {
       this.hide('confirm_delete')
     },
     fillFormData (event) {
+      this.editing = true
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
@@ -187,7 +199,7 @@ export default {
           }
         }
       })
-      this.show('modal_entry')
+      this.show('modal_entry', 'notes')
     },
     getData () {
       Main.methods.getModule(Main.data().donations, (data) => {
@@ -199,6 +211,7 @@ export default {
       })
     },
     saveData (event) {
+      this.editing = false
       console.log(event)
       if (event._id != null) {
         Main.methods.putModule(Main.data().donations + event._id, event, (data) => {
@@ -226,8 +239,7 @@ export default {
       }, 1000)
     },
     deleteItem (event) {
-      Main.methods.deleteModule(Main.data().donations + this.delitionId, (data) => {
-        console.log(data)
+      Main.methods.deleteModule(Main.data().donations + event, (data) => {
         if (data.message === 'successfully removed') {
           this.seen = false
           this.getData()

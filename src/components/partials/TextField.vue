@@ -1,7 +1,12 @@
 <template>
   <div class="w-100">
     <div>
-      <pre class="mt-3 field">{{ text }}</pre>
+      <ul>
+        <li v-for="(note, index) in notes" :key="index">
+          {{note.text}}
+        </li>
+        <li v-if="text !== ''">{{text}}</li>
+      </ul>
     </div>
     <b-form-textarea class="form-control text"
                      id="textarea1"
@@ -16,10 +21,16 @@
 
 <script>
 export default {
+  props: ['notes'],
   data () {
     return {
       text: '',
       clickOnEdit: true
+    }
+  },
+  watch: {
+    text: function (newVal, oldVal) {
+      this.$emit('onNoteChanged', newVal)
     }
   }
 }
@@ -33,5 +44,9 @@ export default {
   }
   .field{
     background-color: #ffffff;
+  }
+  ul{
+    list-style-type: none;
+    padding: 0;
   }
 </style>
