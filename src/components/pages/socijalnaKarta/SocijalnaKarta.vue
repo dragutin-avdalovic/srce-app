@@ -45,6 +45,9 @@
               :healthState="healthState"
               :familyMembers="familyMembersEditable"></Form>
       </modal>
+      <modal name="modal_entry" height="auto" :scrollable="true">
+        <Form @onDataEmit="saveData" @onAddNote="onAddNote" @onModalClose="closeModal('modal_entry')" :formData="formData" :editing="editing"></Form>
+      </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDeletion($event)"></Confirmation>
       </modal>
@@ -68,6 +71,7 @@ export default {
   },
   data () {
     return {
+      editing: false,
       backToStart: false,
       deletionId: null,
       msg: 'Srce za djecu',
@@ -231,6 +235,16 @@ export default {
     this.getData()
   },
   methods: {
+    onAddNote (obj) {
+      console.log(obj)
+      Main.methods.putModule(Main.data().socialCard + obj.id + '/notes', { text: obj.note }, (data) => {
+        console.log(data)
+        if (data.message === 'successfully added note') {
+          this.backToStart = true
+          this.getData()
+        }
+      })
+    },
     setCheckBox (event) {
       switch (event.field) {
         case 'goingToSchool':
@@ -503,6 +517,7 @@ export default {
       })
     },
     fillFormData (event) {
+      this.editing = true
       this.items.forEach((obj) => {
         if (obj._id === event) {
           this.formData = Object.assign({}, this.formData, obj)
@@ -511,7 +526,7 @@ export default {
           this.familyMembersEditable = this.formData.family.familyMembers
         }
       })
-      this.show('modal_entry')
+      this.show('modal_entry', 'notes')
     },
     saveFamilyMember (event) {
       this.formData.family.familyMembers.push(event)
@@ -529,6 +544,7 @@ export default {
       })
     },
     saveData (event) {
+      this.editing = false
       console.log(event)
       if (event._id != null) {
         Main.methods.putModule(Main.data().socialCard + event._id, event, (data) => {
@@ -566,8 +582,9 @@ export default {
     deleteItem (event) {
       Main.methods.deleteModule(Main.data().socialCard + event, (data) => {
         if (data.message === 'successfully removed') {
-          this.getData()
           this.seen = false
+          this.clearData()
+          this.getData()
         }
       })
     },
@@ -586,5 +603,23 @@ export default {
 }
 </script>
 <style lang="scss">
-
+  @import "../../../assets/styles/mixins";
+  @import "../../../assets/styles/form";
+  @import "../../../assets/styles/general";
+  .confirmation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .confirmation-title{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  .confirmation-button{
+    @extend .heart-button;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
 </style>

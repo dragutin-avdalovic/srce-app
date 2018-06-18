@@ -83,8 +83,7 @@
       </div>
       </span>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
-          <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)"></TextField>
-          <button class="button_notes" type="button" v-on:click="addNote(formData._id)"><p class="save-text">Add Notes</p></button>
+          <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onAddNote="onAddNote($event, formData._id)"></TextField>
       </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
@@ -103,7 +102,6 @@ export default{
   props: ['formData', 'types', 'editing'],
   data () {
     return {
-      note: '',
       selected: null,
       dict: {
         custom: {
@@ -124,10 +122,10 @@ export default{
     this.$validator.localize('en', this.dict)
   },
   methods: {
-    addNote: function (id) {
+    onAddNote: function (event, id) {
       this.$emit('onAddNote', {
         id: id,
-        note: this.note
+        note: event
       })
     },
     save: function () {
@@ -207,7 +205,8 @@ export default{
     }
   }
   .button_save
-  {  padding-left:0;
+  {
+    padding-left:0;
     padding-right:0;
     @extend .heart-button;
     float: right;
@@ -233,6 +232,5 @@ export default{
     /*margin-top: 0.8em!important;*/
     display: flex;
     justify-content: space-around;
-    padding: 0;
   }
 </style>

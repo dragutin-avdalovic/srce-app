@@ -69,11 +69,10 @@
           <span v-show="errors.has('cause')" class="help-block">{{ errors.first('cause') }}</span>
         </p>
       </div>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons" v-if="editing">
-        <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)"></TextField>
-        <button class="button_notes" type="button" v-on:click="addNote(formData._id)"><p class="save-text">Add Notes</p></button>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
+        <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onAddNote="onAddNote($event, formData._id)"></TextField>
       </div>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
       </div>
     </div>
@@ -102,10 +101,10 @@ export default{
     }
   },
   methods: {
-    addNote: function (id) {
+    onAddNote: function (event, id) {
       this.$emit('onAddNote', {
         id: id,
-        note: this.note
+        note: event
       })
     },
     save: function () {
@@ -196,7 +195,7 @@ export default{
     padding-left:0;
     padding-right:0;
     @extend .heart-button;
-    float: left;
+    float: right;
     display: flex;
     justify-content: center;
     .save-text
@@ -207,6 +206,9 @@ export default{
   }
   .button_save
   {
+    margin-top: 0.5em;
+    padding-left:0;
+    padding-right:0;
     @extend .heart-button;
     float: right;
     display: flex;
@@ -216,6 +218,11 @@ export default{
       font-size: 1em;
       @include spacing-tb(m, 0, em);
     }
+  }
+  .align-buttons{
+    /*margin-top: 0.8em!important;*/
+    display: flex;
+    justify-content: space-around;
   }
 }
 </style>

@@ -521,6 +521,9 @@
                 <span v-show="errors.has('residentialBuilding')" class="help-block">{{ errors.first('residentialBuilding') }}</span>
               </p>
             </div>
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
+              <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onAddNote="onAddNote($event, formData._id)"></TextField>
+            </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
                 <button @click.prevent="prev()" class="button_save_left" type="submit"><p class="save-text">Nazad</p></button>
@@ -539,15 +542,17 @@
 import Checkbox from '@/components/partials/Checkbox'
 import CompositeButton from '@/components/partials/CompositeButton'
 import CheckInput from '@/components/partials/CheckInput'
+import TextField from '@/components/partials/TextField'
 import * as _ from 'lodash'
 export default{
   name: 'Form',
   components: {
     Checkbox,
     CompositeButton,
-    CheckInput
+    CheckInput,
+    TextField
   },
-  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState'],
+  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState', 'types', 'editing'],
   data () {
     return {
       selected: null,
@@ -718,7 +723,14 @@ export default{
     this.$validator.localize('en', this.dict)
   },
   methods: {
-    save () {
+    onAddNote: function (event, id) {
+      this.$emit('onAddNote', {
+        id: id,
+        note: event
+      })
+    },
+    save: function () {
+      console.log(this.formData)
       this.$emit('onDataEmit', this.formData)
     },
     validateBeforeSubmit: function () {
@@ -764,6 +776,9 @@ export default{
         return false
       }
       return true
+    },
+    onNoteChanged (event) {
+      this.note = event
     }
   }
 }
@@ -807,8 +822,26 @@ export default{
   {
     text-align: center;
   }
+  .button_notes
+  {
+    /*visibility: hidden;*/
+    padding-left:0;
+    padding-right:0;
+    @extend .heart-button;
+    float: right;
+    display: flex;
+    justify-content: center;
+    .save-text
+    {
+      font-size: 1em;
+      @include spacing-tb(m, 0, em);
+    }
+  }
   .button_save
   {
+    margin-top: 0.5em;
+    padding-left:0;
+    padding-right:0;
     @extend .heart-button;
     float: right;
     display: flex;
