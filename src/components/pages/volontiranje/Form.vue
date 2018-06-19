@@ -82,7 +82,7 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
         <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onAddNote="onAddNote($event, formData._id)"></TextField>
       </div>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
       </div>
     </div>
@@ -233,5 +233,10 @@ export default{
   height: 1px;
   @include spacing-tb(m,1,em);
   width: 100%;
+}
+.align-buttons{
+  /*margin-top: 0.8em!important;*/
+  display: flex;
+  justify-content: space-around;
 }
 </style>

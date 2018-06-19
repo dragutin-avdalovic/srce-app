@@ -2,9 +2,12 @@
   <div class="w-100">
     <div>
       <ul>
-        <li v-for="(note, index) in notes" :key="index">
+        <div>
+        <li class="fix-card" v-for="(note, index) in notes" :key="index">
           {{note.text}}
+          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="">
         </li>
+        </div>
         <li v-if="text !== ''">{{text}}</li>
       </ul>
     </div>
@@ -36,12 +39,12 @@ export default {
     }
   },
   methods: {
-    resetForm: function (e) {
-      e.preventDefault()
-      this.text = ''
-    },
     addNote () {
+      this.notes.push({
+        text: this.text
+      })
       this.$emit('onAddNote', this.text)
+      this.text = ''
     }
   }
 }
@@ -66,5 +69,18 @@ export default {
     width: 80px;
     font-size: 1em;
   }
-
+  .fix-card{
+    word-wrap: break-word;
+    border: 1px solid #cccc;
+    font-size: 14px;
+    border-radius: 0.2em;
+    padding: 0.5em;
+    margin: 0.2em;
+  }
+  .fix-close{
+    top: 0;
+    right: 0;
+    height: 15px;
+    cursor: pointer;
+  }
 </style>
