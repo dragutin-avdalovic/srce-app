@@ -2,12 +2,16 @@
   <div class="w-100">
     <div>
       <ul>
-        <div>
         <li class="fix-card" v-for="(note, index) in notes" :key="index">
+          <div class="row">
+            <div class="text-li col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
           {{note.text}}
-          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="">
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
+          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="" v-on:click="deleteNote()">
+            </div>
+          </div>
         </li>
-        </div>
         <li v-if="text !== ''">{{text}}</li>
       </ul>
     </div>
@@ -45,6 +49,9 @@ export default {
       })
       this.$emit('onAddNote', this.text)
       this.text = ''
+    },
+    deleteNote () {
+      this.$emit.delete(this.note)
     }
   }
 }
@@ -78,9 +85,10 @@ export default {
     margin: 0.2em;
   }
   .fix-close{
-    top: 0;
-    right: 0;
     height: 15px;
     cursor: pointer;
+  }
+  .text-li{
+    padding-right: 0;
   }
 </style>
