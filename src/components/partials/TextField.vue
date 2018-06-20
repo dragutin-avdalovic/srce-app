@@ -8,7 +8,7 @@
           {{note.text}}
             </div>
             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="" v-on:click="deleteNote()">
+          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="" id="delete" v-on:click="onDelete()">
             </div>
           </div>
         </li>
@@ -23,23 +23,32 @@
                      placeholder="Add notes"
                      :no-resize="true"
                      :rows="3"
-                     :max-rows="6">
+                     :max-rows="6"
+                     @onConfirmDelete="showDeleteModal($event, 'confirm_delete')">
     </b-form-textarea>
       </div>
       <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
     <button class="button_notes fix-note" type="button" @click="addNote()"><p class="save-text">Add</p></button>
       </div>
     </div>
+    <modal name="confirm_delete" height="auto">
+      <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
+    </modal>
   </div>
 </template>
 
 <script>
+import Confirmation from '@/components/partials/Confirmation'
 export default {
+  components: {
+    Confirmation
+  },
   props: ['notes'],
   data () {
     return {
       text: '',
-      clickOnEdit: true
+      clickOnEdit: true,
+      id: ''
     }
   },
   methods: {
@@ -50,8 +59,22 @@ export default {
       this.$emit('onAddNote', this.text)
       this.text = ''
     },
-    deleteNote () {
-      this.$emit.delete(this.note)
+    onDelete () {
+      this.$emit('onConfirmDelete', { id: this.id, type: 'confirm_delete' })
+      this.$refs.popoverRef.visible = false
+    },
+    select (id) {
+      this.id = id
+    },
+    confirmDelete (event) {
+      if (event) {
+        this.deleteItem(this.delitionId)
+      }
+      this.hide('confirm_delete')
+    },
+    showDeleteModal (event, modalId) {
+      this.show(modalId)
+      this.delitionId = event.id
     }
   }
 }
