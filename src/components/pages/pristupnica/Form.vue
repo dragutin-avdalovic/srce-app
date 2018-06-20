@@ -83,7 +83,7 @@
       </div>
       </span>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
-          <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onAddNote="onAddNote($event, formData._id)"></TextField>
+          <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onDelete="onDeleteNote($event, formData._id)" @onAddNote="onAddNote($event, formData._id)"></TextField>
       </div>
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
@@ -146,6 +146,12 @@ export default{
     },
     onNoteChanged (event) {
       this.note = event
+    },
+    onDeleteNote (event, id) {
+      this.$emit('onDelete', {
+        noteId: event,
+        id: id
+      })
     }
   }
 }

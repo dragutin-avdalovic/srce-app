@@ -36,10 +36,16 @@
                      :filter="filter">
       </TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onAddNote="onAddNote" @onModalClose="closeModal('modal_entry')" :formData="formData" :types="types" :editing="editing"></Form>
+        <Form @onDataEmit="saveData"
+              @onAddNote="onAddNote"
+              @onModalClose="closeModal('modal_entry')"
+              @onDelete="showDeleteNoteModal($event, 'confirm_note_delete')" :formData="formData" :types="types" :editing="editing"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
+      </modal>
+      <modal name="confirm_note_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmNoteDelete($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -63,6 +69,7 @@ export default {
       editing: false,
       backToStart: false,
       delitionId: null,
+      delitionNoteId: null,
       msg: 'Srce za djecu',
       filter: '',
       items: [{
@@ -187,11 +194,22 @@ export default {
       this.show(modalId)
       this.delitionId = event.id
     },
+    showDeleteNoteModal (event, modalId) {
+      this.show(modalId)
+      this.delitionId = event.id
+      this.delitionNoteId = event.noteId
+    },
     confirmDelete (event) {
       if (event) {
         this.deleteItem(this.delitionId)
       }
       this.hide('confirm_delete')
+    },
+    confirmNoteDelete (event) {
+      if (event) {
+        this.deleteItemNote(this.delitionId, this.delitionNoteId)
+      }
+      this.hide('confirm_note_delete')
     },
     fillFormData (event) {
       this.editing = true
@@ -220,7 +238,7 @@ export default {
           console.log(data)
           if (data.message === 'successfully edited') {
             this.backToStart = true
-            this.hide('modal_entry')
+            this.show('modal_entry')
             this.getData()
             this.clearData()
           }
@@ -243,6 +261,16 @@ export default {
       Main.methods.deleteModule(Main.data().accessCard + event, (data) => {
         if (data.message === 'successfully removed') {
           this.seen = false
+          this.getData()
+          this.clearData()
+        }
+      })
+    },
+    deleteItemNote (id, noteId) {
+      Main.methods.deleteModule(Main.data().accessCard + id + '/notes/' + noteId, (data) => {
+        if (data.message === 'successfully removed item') {
+          this.seen = false
+          this.hide('modal_entry')
           this.getData()
           this.clearData()
         }

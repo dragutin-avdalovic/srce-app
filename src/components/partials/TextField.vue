@@ -8,7 +8,7 @@
           {{note.text}}
             </div>
             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
-          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="" id="delete" v-on:click="onDelete()">
+          <img class="modal-close fix-close" src="@/assets/images/close.png" alt="" id="delete" @click="onDelete(note._id)">
             </div>
           </div>
         </li>
@@ -17,23 +17,19 @@
     </div>
     <div class="row align">
       <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
-    <b-form-textarea class="form-control text"
-                     id="textarea1"
-                     v-model="text"
-                     placeholder="Add notes"
-                     :no-resize="true"
-                     :rows="3"
-                     :max-rows="6"
-                     @onConfirmDelete="showDeleteModal($event, 'confirm_delete')">
-    </b-form-textarea>
+        <b-form-textarea class="form-control text"
+                         id="textarea1"
+                         v-model="text"
+                         placeholder="Add notes"
+                         :no-resize="true"
+                         :rows="3"
+                         :max-rows="6">
+        </b-form-textarea>
       </div>
       <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-    <button class="button_notes fix-note" type="button" @click="addNote()"><p class="save-text">Add</p></button>
+        <button class="button_notes fix-note" type="button" @click="addNote()"><p class="save-text">Add</p></button>
       </div>
     </div>
-    <modal name="confirm_delete" height="auto">
-      <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
-    </modal>
   </div>
 </template>
 
@@ -59,22 +55,11 @@ export default {
       this.$emit('onAddNote', this.text)
       this.text = ''
     },
-    onDelete () {
-      this.$emit('onConfirmDelete', { id: this.id, type: 'confirm_delete' })
-      this.$refs.popoverRef.visible = false
+    onDelete (id) {
+      this.$emit('onDelete', id)
     },
     select (id) {
       this.id = id
-    },
-    confirmDelete (event) {
-      if (event) {
-        this.deleteItem(this.delitionId)
-      }
-      this.hide('confirm_delete')
-    },
-    showDeleteModal (event, modalId) {
-      this.show(modalId)
-      this.delitionId = event.id
     }
   }
 }
