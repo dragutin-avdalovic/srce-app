@@ -522,7 +522,10 @@
               </p>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
-              <TextField :notes="formData.notes" @onNoteChanged="onNoteChanged($event)" @onAddNote="onAddNote($event, formData._id)"></TextField>
+              <TextField :notes="formData.notes"
+                         @onNoteChanged="onNoteChanged($event)"
+                         @onDelete="onDeleteNote($event, formData._id)"
+                         @onAddNote="onAddNote($event, formData._id)"></TextField>
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group form-group-btns">
               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 form-group">
@@ -770,15 +773,14 @@ export default{
     getClickedResult (event) {
       this.$emit('onSliceFamilyMember', event)
     },
-    isNumberKey (event) {
-      var charCode = (event.which) ? event.which : event.keyCode
-      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false
-      }
-      return true
-    },
     onNoteChanged (event) {
       this.note = event
+    },
+    onDeleteNote (event, id) {
+      this.$emit('onDelete', {
+        noteId: event,
+        id: id
+      })
     }
   }
 }

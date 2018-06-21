@@ -71,10 +71,6 @@ export default {
     edit () {
       this.$emit('onEditClicked', this.id)
     },
-    onDelete () {
-      this.$emit('onConfirmDelete', { id: this.id, type: 'confirm_delete' })
-      this.$refs.popoverRef.visible = false
-    },
     sortRoutine (ctx) {
       this.$emit('sortRoutine', ctx)
     }

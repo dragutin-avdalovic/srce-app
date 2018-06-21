@@ -1,5 +1,4 @@
 <script>
-// import moment from 'moment'
 import axios from 'axios'
 const api = 'http://45.76.90.178:3000/api/v1'
 

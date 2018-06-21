@@ -46,10 +46,17 @@
               :familyMembers="familyMembersEditable"></Form>
       </modal>
       <modal name="modal_entry" height="auto" :scrollable="true">
-        <Form @onDataEmit="saveData" @onAddNote="onAddNote" @onModalClose="closeModal('modal_entry')" :formData="formData" :editing="editing"></Form>
+        <Form @onDataEmit="saveData"
+              @onAddNote="onAddNote"
+              @onModalClose="closeModal('modal_entry')"
+              @onDelete="showDeleteNoteModal($event, 'confirm_note_delete')"
+              :formData="formData" :editing="editing"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDeletion($event)"></Confirmation>
+      </modal>
+      <modal name="confirm_note_delete" height="auto">
+        <Confirmation @onConfirmDelete="confirmNoteDelete($event)"></Confirmation>
       </modal>
     </div>
   </div>
@@ -60,7 +67,6 @@ import TableSortable from '@/components/partials/TableSortable'
 import Confirmation from '@/components/partials/Confirmation'
 import Form from './Form'
 import Main from '@/services/Main'
-import * as _ from 'lodash'
 // Load the full build.
 export default {
   name: 'HelloWorld',
@@ -528,6 +534,12 @@ export default {
       })
       this.show('modal_entry', 'notes')
     },
+    confirmNoteDelete (event) {
+      if (event) {
+        this.deleteItemNote(this.delitionId, this.delitionNoteId)
+      }
+      this.hide('confirm_note_delete')
+    },
     saveFamilyMember (event) {
       this.formData.family.familyMembers.push(event)
     },
@@ -573,6 +585,11 @@ export default {
       this.show(event.type)
       this.deletionId = event.id
     },
+    showDeleteNoteModal (event, modalId) {
+      this.show(modalId)
+      this.delitionId = event.id
+      this.delitionNoteId = event.noteId
+    },
     confirmDeletion (event) {
       if (event) {
         this.deleteItem(this.deletionId)
@@ -588,16 +605,19 @@ export default {
         }
       })
     },
+    deleteItemNote (id, noteId) {
+      Main.methods.deleteModule(Main.data().socialCard + id + '/notes/' + noteId, (data) => {
+        if (data.message === 'successfully removed item') {
+          this.seen = false
+          this.hide('modal_entry')
+          this.getData()
+          this.clearData()
+        }
+      })
+    },
     confirmDelete (modalId) {
       this.deleteItem(this.deletionId)
       this.hide(modalId)
-    },
-    sort (event) {
-      if (event.sortDesc) {
-        this.items = _.sortBy(this.items, [event.sortBy]).reverse()
-      } else {
-        this.items = _.sortBy(this.items, [event.sortBy])
-      }
     }
   }
 }

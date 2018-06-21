@@ -6,6 +6,7 @@
           <div class="row">
             <div class="text-li col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
           {{note.text}}
+              <p class="date">{{formatData(note.createdAt)}}</p>
             </div>
             <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1">
           <img class="modal-close fix-close" src="@/assets/images/close.png" alt="" id="delete" @click="onDelete(note._id)">
@@ -35,6 +36,8 @@
 
 <script>
 import Confirmation from '@/components/partials/Confirmation'
+import moment from 'moment'
+
 export default {
   components: {
     Confirmation
@@ -60,6 +63,9 @@ export default {
     },
     select (id) {
       this.id = id
+    },
+    formatData (date) {
+      return moment(date).format('MMMM Do YYYY, h:mm:ss a')
     }
   }
 }
@@ -98,5 +104,10 @@ export default {
   }
   .text-li{
     padding-right: 0;
+  }
+  .date{
+    color: #bfbfbf;
+    font-size: 10px;
+    margin: 0;
   }
 </style>
