@@ -144,7 +144,7 @@ export default {
   methods: {
     onAddNote (obj) {
       console.log(obj)
-      Main.methods.putModule(Main.data().volunteers + obj.id + '/notes', { text: obj.note }, (data) => {
+      Main.methods.putModule(Main.data().accessCard + obj.id + '/notes', { text: obj.note }, (data) => {
         console.log(data)
         if (data.message === 'successfully added note') {
           this.backToStart = true
@@ -238,7 +238,7 @@ export default {
           console.log(data)
           if (data.message === 'successfully edited') {
             this.backToStart = true
-            this.show('modal_entry')
+            this.hide('modal_entry')
             this.getData()
             this.clearData()
           }

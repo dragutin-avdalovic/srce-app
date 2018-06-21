@@ -235,7 +235,7 @@ export default {
           console.log(data)
           if (data.message === 'successfully edited') {
             this.backToStart = true
-            this.show('modal_entry')
+            this.hide('modal_entry')
             this.getData()
             this.clearData()
           }
