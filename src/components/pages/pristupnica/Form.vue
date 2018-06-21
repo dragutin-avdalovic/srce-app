@@ -1,5 +1,5 @@
 <template>
-  <form class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
+  <form method="post" action="#" id="printJS-form" class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
     <div class="header-modal">
       <h3 class="form-header">Novi unos</h3>
       <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
