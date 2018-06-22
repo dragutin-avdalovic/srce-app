@@ -508,7 +508,12 @@
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group" v-bind:class="{'has-error':errors.has('housingConditions')}">
                   <label class="control-label label-check">Uslovi stanovanja*</label>
                   <p :class="{ 'control': true }">
-                    <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('housingConditions') }" v-model="formData.family.housingConditions" :options="this.housingConditions" id="housingConditions" name="housingConditions"></b-form-select>
+                    <b-form-select v-validate="'required'"
+                                   :class="{'select': true, 'has-error': errors.has('housingConditions') }"
+                                   v-model="formData.family.housingConditions"
+                                   :options="this.housingConditions"
+                                   id="housingConditions"
+                                   name="housingConditions"></b-form-select>
                     <span v-show="errors.has('housingConditions')" class="help-block">{{ errors.first('housingConditions') }}</span>
                   </p>
                 </div>
@@ -741,6 +746,7 @@ export default{
         if (result) {
           this.save()
         } else {
+          this.$emit('clearForm', this.formData)
         }
       })
     },

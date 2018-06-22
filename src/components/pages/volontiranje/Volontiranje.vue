@@ -40,7 +40,8 @@
         <Form @onDataEmit="saveData"
               @onAddNote="onAddNote"
               @onModalClose="closeModal('modal_entry')"
-              @onDelete="showDeleteNoteModal($event, 'confirm_note_delete')" :formData="formData" :types="types" :editing="editing"></Form>
+              @onDelete="showDeleteNoteModal($event, 'confirm_note_delete')"
+              :formData="formData" :types="types" :editing="editing"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDelete($event)"></Confirmation>
