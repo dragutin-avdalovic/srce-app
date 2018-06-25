@@ -250,9 +250,12 @@ export default {
       display: flex;
       flex: 1;
       justify-content: flex-start;
+      align-items: center;
       margin-right: auto;
       .donators-title
       {
+        display: flex;
+        align-items: center;
         color: $red;
         @include font(1.7,600,$red);
       }

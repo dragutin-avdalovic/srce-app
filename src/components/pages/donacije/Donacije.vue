@@ -12,6 +12,7 @@
                 <p>{{item}}</p>
               </div>
             </popover>
+            <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
           <div class="right-filter">
             <div class="search-container">
@@ -304,5 +305,47 @@ export default {
         background-color: $text-gray;
       }
     }
+  }
+  .heart-button-new
+  {
+    &:hover
+    {
+      text-decoration: none;
+      text-underline: none;
+      color: #ffffff;
+    }
+    &:active
+    {
+      text-decoration: none;
+      text-underline: none;
+      color: #ffffff;
+    }
+    @extend .heart-button;
+    width: 10em;
+    @include spacing-tb('p',1, em);
+    @include spacing-lr('p',0, em);
+    .new-text
+    {
+      width: 100%;
+      &:hover
+      {
+        text-decoration: none;
+        text-underline: none;
+        color: #ffffff;
+      }
+      &:active
+      {
+        text-decoration: none;
+        text-underline: none;
+        color: #ffffff;
+      }
+    }
+  }
+  .left{
+    display: flex;
+  }
+  .text-fix{
+    display: flex;
+    justify-content: center;
   }
 </style>

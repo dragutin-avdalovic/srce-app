@@ -2,12 +2,13 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="left col-lg-6 col-md-6 col-6">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Volontiranje</div>
             </div>
           </div>
+          <a href="http://45.76.90.178:3000/api/v1/download/volunteers/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
         </div>
         <div class="col-lg-6 col-md-6 col-6">
           <div class="right-filter">
@@ -284,6 +285,7 @@ export default {
   @import "../../../assets/styles/mixins";
   @import "../../../assets/styles/form";
   @import "../../../assets/styles/general";
+  @import "../../../assets/styles/variables";
   .confirmation{
     display: flex;
     justify-content: center;
@@ -299,5 +301,47 @@ export default {
     display: flex;
     justify-content: center;
     margin: 30px;
+  }
+  .heart-button-new
+  {
+    &:hover
+    {
+      text-decoration: none;
+      text-underline: none;
+      color: #ffffff;
+    }
+    &:active
+    {
+      text-decoration: none;
+      text-underline: none;
+      color: #ffffff;
+    }
+    @extend .heart-button;
+    width: 10em;
+    @include spacing-tb('p',1, em);
+    @include spacing-lr('p',0, em);
+    .new-text
+    {
+      width: 100%;
+      &:hover
+      {
+        text-decoration: none;
+        text-underline: none;
+        color: #ffffff;
+      }
+      &:active
+      {
+        text-decoration: none;
+        text-underline: none;
+        color: #ffffff;
+      }
+    }
+  }
+  .left{
+    display: flex;
+  }
+  .text-fix{
+    display: flex;
+    justify-content: center;
   }
 </style>
