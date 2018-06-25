@@ -323,25 +323,23 @@ export default {
     .new-text
     {
       width: 100%;
-      &:hover
-      {
-        text-decoration: none;
-        text-underline: none;
-        color: #ffffff;
-      }
-      &:active
-      {
-        text-decoration: none;
-        text-underline: none;
-        color: #ffffff;
-      }
     }
   }
   .left{
     display: flex;
+    color: #FFFFFF;
+    text-decoration: none;
   }
   .text-fix{
     display: flex;
     justify-content: center;
+  }
+  .export{
+    &:focus
+    {
+      text-decoration: none;
+      text-underline: none;
+      color: #ffffff;
+    }
   }
 </style>
