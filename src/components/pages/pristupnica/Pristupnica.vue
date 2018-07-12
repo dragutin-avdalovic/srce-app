@@ -2,15 +2,15 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="left col-lg-2 col-md-2 col-2">
+        <div class="left col-lg-2 col-md-6 col-6">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Pristupnica</div>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-3">
-            <form ref="form" action="" method="post" enctype="multipart/form-data">
+        <div class="col-lg-3 col-md-6 col-6">
+            <form ref="form" action="http://45.76.90.178:3000/api/v1/uploads/acces-card" method="post">
               <label for="file-upload" class="custom-file-upload">
                 <i class="fa fa-cloud-upload"></i> Upload excel file
               </label>
@@ -18,7 +18,7 @@
               <label>{{fileName}}</label>
             </form>
         </div>
-        <div class="col-lg-7 col-md-7 col-7">
+        <div class="col-lg-7 col-md-12 col-12">
           <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
@@ -186,7 +186,7 @@ export default {
       }
     },
     submitForm (file) {
-      // this.$refs['form'].submit()
+      this.$refs['form'].submit()
       this.fileName = this.$refs['file'].files.item(0).name
     },
     show (modalId) {

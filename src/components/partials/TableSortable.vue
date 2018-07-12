@@ -71,6 +71,9 @@ export default {
     edit () {
       this.$emit('onEditClicked', this.id)
     },
+    onDelete () {
+      this.$emit('onConfirmDelete', this.id)
+    },
     sortRoutine (ctx) {
       this.$emit('sortRoutine', ctx)
     }
