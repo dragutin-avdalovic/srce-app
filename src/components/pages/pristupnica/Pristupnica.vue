@@ -2,13 +2,21 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="left col-lg-6 col-md-6 col-6">
+        <div class="left col-lg-3 col-md-3 col-3">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Pristupnica</div>
             </div>
           </div>
-          <a href="http://45.76.90.178:3000/api/v1/download/access-card/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-3">
+            <form ref="form" action="" method="post" enctype="multipart/form-data">
+              <label for="file-upload" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i> Upload excel file
+              </label>
+              <input id="file-upload" ref="file" type="file" v-on:change="submitForm()" />
+              <label>{{this.fileName}}</label>
+            </form>
         </div>
         <div class="col-lg-6 col-md-6 col-6">
           <div class="right-filter">
@@ -24,6 +32,9 @@
             <div class="new">
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
               </button>
+            </div>
+            <div>
+              <a href="http://45.76.90.178:3000/api/v1/download/access-card/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
             </div>
           </div>
         </div>
@@ -67,6 +78,7 @@ export default {
   },
   data () {
     return {
+      fileName: '',
       editing: false,
       backToStart: false,
       delitionId: null,
@@ -174,6 +186,10 @@ export default {
         diagnose: '',
         dateOfDiagnose: ''
       }
+    },
+    submitForm (file) {
+      // this.$refs['form'].submit()
+      this.fileName = this.$refs['file'].files.item(0).name
     },
     show (modalId) {
       this.$modal.show(modalId)
@@ -342,5 +358,18 @@ export default {
       text-underline: none;
       color: #ffffff;
     }
+  }
+  #file-upload {
+    display: none;
+    visibility: hidden;
+  }
+  .custom-file-upload {
+    @include font(1.1,600,$white);
+    border-radius: 0.5em;
+    background-color: $red;
+    border: none;
+    display: inline-block;
+    padding: 1em 1em;
+    cursor: pointer;
   }
 </style>
