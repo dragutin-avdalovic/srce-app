@@ -9,13 +9,11 @@ import BootstrapVue from 'bootstrap-vue'
 import Popover from 'vue-js-popover'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Element from 'element-ui'
 
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
 Vue.use(Popover)
 Vue.use(VModal)
 Vue.use(BootstrapVue)
-Vue.use(Element)
 
 Vue.config.productionTip = false
 
