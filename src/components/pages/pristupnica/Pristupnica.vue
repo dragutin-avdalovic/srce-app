@@ -2,7 +2,7 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="left col-lg-3 col-md-3 col-3">
+        <div class="left col-lg-2 col-md-2 col-2">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Pristupnica</div>
@@ -15,10 +15,10 @@
                 <i class="fa fa-cloud-upload"></i> Upload excel file
               </label>
               <input id="file-upload" ref="file" type="file" v-on:change="submitForm()" />
-              <label>{{this.fileName}}</label>
+              <label>{{fileName}}</label>
             </form>
         </div>
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="col-lg-7 col-md-7 col-7">
           <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
@@ -33,9 +33,7 @@
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span>
               </button>
             </div>
-            <div>
-              <a href="http://45.76.90.178:3000/api/v1/download/access-card/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
-            </div>
+            <a href="http://45.76.90.178:3000/api/v1/download/access-card/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
         </div>
       </div>
@@ -352,6 +350,7 @@ export default {
     justify-content: center;
   }
   .export{
+    margin-left: 1em;
     &:focus
     {
       text-decoration: none;
