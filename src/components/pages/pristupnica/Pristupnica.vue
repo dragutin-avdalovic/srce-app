@@ -10,13 +10,11 @@
           </div>
         </div>
         <div class="col-lg-3 col-md-6 col-6">
-            <form ref="form" action="http://45.76.90.178:3000/api/v1/uploads/access-card" method="post" enctype="multipart/form-data">
-              <label for="file-upload" class="custom-file-upload">
-                <i class="fa fa-cloud-upload"></i> Upload excel file
-              </label>
-              <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
-              <label>{{fileName}}</label>
-            </form>
+            <label for="file-upload" class="custom-file-upload">
+              <i class="fa fa-cloud-upload"></i> Upload excel file
+            </label>
+            <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
+            <label>{{fileName}}</label>
         </div>
         <div class="col-lg-7 col-md-12 col-12">
           <div class="right-filter">
