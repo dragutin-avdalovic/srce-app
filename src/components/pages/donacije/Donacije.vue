@@ -217,6 +217,27 @@ export default {
       }
       this.hide('confirm_note_delete')
     },
+    submitForm () {
+      let file = this.$refs['file'].files[0]
+      this.fileName = file.name
+      const data = new FormData()
+      data.append('data', file)
+      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/donation', data, (res) => {
+        if (res === 'Valid file format is .xlsx format') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else if (res === 'Wrong .xlsx file selected.') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        }
+      })
+    },
     fillFormData (event) {
       this.editing = true
       this.items.forEach((obj) => {
