@@ -1,7 +1,7 @@
 <template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div>
     <div class="row">
-      <b-table  show-empty :sort-by.sync="sortBy"
+      <b-table  show-empty :sort-by="sortBy"
                 :sort-desc.sync="sortDesc"
                 :items="items"
                 :fields="fieldsA"
@@ -50,7 +50,7 @@ export default {
       perPage: 10,
       totalRows: this.items.length,
       sortDesc: true,
-      sortBy: 'child.name',
+      sortBy: '',
       id: ''
     }
   },

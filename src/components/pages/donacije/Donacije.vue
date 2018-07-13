@@ -2,6 +2,7 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
+        <div class="left">
           <div class="left-filter">
             <button v-popover:list-dropdown-2.bottom class="donators-btn">
               <div class="donators-label">Donatori</div>
@@ -12,9 +13,16 @@
                 <p>{{item}}</p>
               </div>
             </popover>
-            <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
-          <div class="right-filter">
+        </div>
+        <div class="left">
+            <label for="file-upload" class="custom-file-upload">
+              <i class="fa fa-cloud-upload"></i> Upload excel file
+            </label>
+            <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
+            <label>{{fileName}}</label>
+        </div>
+        <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
                 <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
@@ -27,8 +35,9 @@
             <div class="new">
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
-          </div>
-      </div>
+            <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
+        </div>
+        </div>
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
@@ -70,12 +79,13 @@ export default {
   },
   data () {
     return {
+      fileName: '',
       editing: false,
       backToStart: false,
       delitionId: null,
       msg: 'Srce za djecu',
-      filter: null,
-      filterByType: null,
+      filter: '',
+      filterByType: '',
       items: [],
       tempItems: [],
       seen: 'true',
@@ -345,5 +355,22 @@ export default {
       text-underline: none;
       color: #ffffff;
     }
+  }
+  .new{
+    margin-right: 1em;
+  }
+  #file-upload {
+    display: none;
+    visibility: hidden;
+  }
+  .custom-file-upload {
+    @include font(1.1,600,$white);
+    border-radius: 0.5em;
+    background-color: $red;
+    border: none;
+    display: inline-block;
+    padding: 1em 1em;
+    cursor: pointer;
+    margin-right: 1em;
   }
 </style>

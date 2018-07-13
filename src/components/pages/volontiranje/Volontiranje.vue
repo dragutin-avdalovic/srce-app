@@ -246,7 +246,7 @@ export default {
       this.fileName = file.name
       const data = new FormData()
       data.append('data', file)
-      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/access-card', data, (res) => {
+      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/volunteer', data, (res) => {
         if (res === 'Valid file format is .xlsx format') {
           console.log(res)
           this.getData()
