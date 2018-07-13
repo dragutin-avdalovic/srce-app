@@ -20,7 +20,7 @@
               <i class="fa fa-cloud-upload"></i> Upload excel file
             </label>
             <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
-            <label>{{fileName}}</label>
+            <label class="file-label">{{fileName}}</label>
         </div>
         <div class="right-filter">
             <div class="search-container">
@@ -392,6 +392,11 @@ export default {
     display: inline-block;
     padding: 1em 1em;
     cursor: pointer;
+    margin-right: 0.5em;
+  }
+  .file-label {
+    color: #333333;
+    margin-top: 1em;
     margin-right: 1em;
   }
 </style>
