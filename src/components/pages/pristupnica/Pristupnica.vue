@@ -365,13 +365,15 @@ export default {
     justify-content: center;
   }
   .export{
-    margin-left: 1em;
     &:focus
     {
       text-decoration: none;
       text-underline: none;
       color: #ffffff;
     }
+  }
+  .new{
+    margin-right: 1em;
   }
   #file-upload {
     display: none;

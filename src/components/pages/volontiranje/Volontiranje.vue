@@ -2,15 +2,21 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="left col-lg-6 col-md-6 col-6">
+        <div class="left col-lg-2 col-md-6 col-6">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Volontiranje</div>
             </div>
           </div>
-          <a href="http://45.76.90.178:3000/api/v1/download/volunteers/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
         </div>
-        <div class="col-lg-6 col-md-6 col-6">
+        <div class="col-lg-3 col-md-6 col-6">
+          <label for="file-upload" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> Upload excel file
+          </label>
+          <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
+          <label>{{fileName}}</label>
+        </div>
+        <div class="col-lg-7 col-md-12 col-12">
           <div class="right-filter">
             <div class="search-container">
               <div class="input-group search">
@@ -24,6 +30,7 @@
             <div class="new">
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
+            <a href="http://45.76.90.178:3000/api/v1/download/volunteers/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
         </div>
       </div>
@@ -69,6 +76,7 @@ export default {
   },
   data () {
     return {
+      fileName: '',
       editing: false,
       backToStart: false,
       delitionId: null,
@@ -233,6 +241,27 @@ export default {
         this.items = data
       })
     },
+    submitForm () {
+      let file = this.$refs['file'].files[0]
+      this.fileName = file.name
+      const data = new FormData()
+      data.append('data', file)
+      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/access-card', data, (res) => {
+        if (res === 'Valid file format is .xlsx format') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else if (res === 'Wrong .xlsx file selected.') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        }
+      })
+    },
     saveData (event) {
       this.editing = false
       if (event._id != null) {
@@ -341,5 +370,21 @@ export default {
       text-underline: none;
       color: #ffffff;
     }
+  }
+  .new{
+    margin-right: 1em;
+  }
+  #file-upload {
+    display: none;
+    visibility: hidden;
+  }
+  .custom-file-upload {
+    @include font(1.1,600,$white);
+    border-radius: 0.5em;
+    background-color: $red;
+    border: none;
+    display: inline-block;
+    padding: 1em 1em;
+    cursor: pointer;
   }
 </style>
