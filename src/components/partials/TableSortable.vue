@@ -1,7 +1,7 @@
 <template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div>
     <div class="row">
-      <b-table  show-empty :sort-by="sortBy"
+      <b-table  show-empty :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 :items="items"
                 :fields="fieldsA"
@@ -9,8 +9,7 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 :filter="filter"
-                @filtered="onFiltered"
-                @sort-changed="sortRoutine">
+                @filtered="onFiltered">
         <!-- A virtual composite column -->
         <template slot="actions" slot-scope="data">
           <div v-popover:list-dropdown.bottom v-on:click="select(data.item._id)">
@@ -50,7 +49,7 @@ export default {
       perPage: 10,
       totalRows: this.items.length,
       sortDesc: true,
-      sortBy: '',
+      sortBy: 'child.name',
       id: ''
     }
   },

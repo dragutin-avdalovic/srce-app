@@ -546,6 +546,7 @@ export default {
           this.getData()
           data.delete('data')
         } else {
+          this.getData()
           console.log(res)
           data.delete('data')
         }
