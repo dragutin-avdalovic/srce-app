@@ -184,11 +184,17 @@ export default {
       }
     },
     submitForm () {
-      this.fileName = this.$refs['file'].files.item(0).name
       let file = this.$refs['file'].files[0]
+      this.fileName = file.name
       const data = new FormData()
       data.append('data', file)
-      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/access-card', data, (res) => { console.log(res) })
+      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/access-card', data, (res) => {
+        if (res !== null) {
+          console.log('upload successfull')
+        } else {
+          console.log('upload went wrong')
+        }
+      })
     },
     show (modalId) {
       this.$modal.show(modalId)
