@@ -189,16 +189,19 @@ export default {
       const data = new FormData()
       data.append('data', file)
       Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/access-card', data, (res) => {
-        console.log(res)
-      //        if (res) {
-      //          console.log('upload successfull')
-      //          this.getData()
-      //          console.log(res)
-      //        } else {
-      //          console.log('upload went wrong')
-      //          console.log(res)
-      //          this.getData()
-      //        }
+        if (res === 'Valid file format is .xlsx format') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else if (res === 'Wrong .xlsx file selected.') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        }
       })
     },
     show (modalId) {
