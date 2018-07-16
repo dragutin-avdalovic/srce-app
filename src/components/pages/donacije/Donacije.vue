@@ -112,7 +112,6 @@ export default {
           key: 'company',
           label: 'NAZIV KOMPANIJE',
           sortable: true,
-          variant: 'danger'
         },
         {
           key: 'email',
