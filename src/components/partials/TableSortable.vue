@@ -270,27 +270,6 @@ export default {
       justify-content: flex-end;
       min-width: 25em;
       margin-left: auto;
-      .search-container
-      {
-        padding-right: 2em;
-        .search
-        {
-          max-width: 20em;
-          min-width: 15em;
-          .btn-search
-          {
-            max-width: 3.5em;
-            min-width: 3em;
-            background-color: $red;
-            i{
-              text-align: center;
-              font-size: 1em;
-              color:$white;
-
-            }
-          }
-        }
-      }
       .new
       {
         .heart-button-new
@@ -302,6 +281,28 @@ export default {
           .new-text
           {
             width: 100%;
+          }
+        }
+      }
+    }
+    .search-container
+    {
+      vertical-align: center;
+      padding-right: 2em;
+      .search
+      {
+        max-width: 20em;
+        min-width: 15em;
+        .btn-search
+        {
+          max-width: 3.5em;
+          min-width: 3em;
+          background-color: $red;
+          i{
+            text-align: center;
+            font-size: 1em;
+            color:$white;
+
           }
         }
       }
