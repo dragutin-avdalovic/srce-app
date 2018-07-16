@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event, 'confirm_delete')" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onModalClose="closeModal('modal_entry')"
@@ -612,8 +612,8 @@ export default {
         this.backToStart = false
       }, 1000)
     },
-    showDeleteModal (event) {
-      this.show(event.type)
+    showDeleteModal (event, modalType) {
+      this.show(modalType)
       this.deletionId = event
     },
     showDeleteNoteModal (event, modalId) {
