@@ -9,26 +9,27 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-6">
-          <label for="file-upload" class="custom-file-upload">
-            <i class="fa fa-cloud-upload"></i> Upload excel file
-          </label>
-          <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
-          <label>{{fileName}}</label>
-        </div>
-        <div class="col-lg-7 col-md-12 col-12">
-          <div class="right-filter">
-            <div class="search-container">
-              <div class="input-group search">
-                <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
-                <span class="input-group-btn">
+        <div class="col-lg-3 col-md-6 col-6 search-center">
+          <div class="search-container">
+            <div class="input-group search">
+              <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+              <span class="input-group-btn">
                 <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
                   class="fa fa-times"></i></button>
               </span>
-              </div>
             </div>
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-12 col-12">
+          <div class="right-filter">
             <div class="new">
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+            </div>
+            <div class="new">
+              <label for="file-upload" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i> {{fileName}}
+              </label>
+              <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
             </div>
             <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/social-card/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
@@ -85,7 +86,7 @@ export default {
   },
   data () {
     return {
-      fileName: '',
+      fileName: 'Upload excel file',
       editing: false,
       backToStart: false,
       deletionId: null,
@@ -714,6 +715,9 @@ export default {
   }
   .new{
     margin-right: 1em;
+    label {
+      margin-bottom: 0;
+    }
   }
   #file-upload {
     display: none;
@@ -727,5 +731,11 @@ export default {
     display: inline-block;
     padding: 1em 1em;
     cursor: pointer;
+  }
+  .search-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>
