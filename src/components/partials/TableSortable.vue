@@ -270,6 +270,10 @@ export default {
       justify-content: flex-end;
       min-width: 25em;
       margin-left: auto;
+      @media (max-width: 1024px) {
+        margin-top: 2em;
+        justify-content: center;
+      }
       .new
       {
         .heart-button-new
