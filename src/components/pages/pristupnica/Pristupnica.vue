@@ -223,7 +223,7 @@ export default {
     },
     showDeleteModal (event, modalId) {
       this.show(modalId)
-      this.delitionId = event.id
+      this.delitionId = event
     },
     showDeleteNoteModal (event, modalId) {
       this.show(modalId)

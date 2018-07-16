@@ -614,7 +614,7 @@ export default {
     },
     showDeleteModal (event) {
       this.show(event.type)
-      this.deletionId = event.id
+      this.deletionId = event
     },
     showDeleteNoteModal (event, modalId) {
       this.show(modalId)
