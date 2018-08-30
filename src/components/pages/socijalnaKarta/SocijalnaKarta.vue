@@ -31,7 +31,7 @@
               </label>
               <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
             </div>
-            <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/social-card/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
+            <a target="_blank" href="http://localhost:3000/api/v1/download/social-card/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@
               </label>
               <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
             </div>
-            <a href="http://45.76.90.178:3000/api/v1/download/access-card/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
+            <a href="http://localhost:3000/api/v1/download/access-card/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
         </div>
       </div>
