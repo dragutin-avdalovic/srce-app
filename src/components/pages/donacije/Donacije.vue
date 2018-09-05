@@ -30,13 +30,13 @@
             <div class="new">
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
-          <div class="new">
-            <label for="file-upload" class="custom-file-upload">
-              <i class="fa fa-cloud-upload"></i> {{fileName}}
-            </label>
-            <input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />
-          </div>
-          <a target="_blank" href="http://localhost:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
+          <!--<div class="new">-->
+            <!--<label for="file-upload" class="custom-file-upload">-->
+              <!--<i class="fa fa-cloud-upload"></i> {{fileName}}-->
+            <!--</label>-->
+            <!--<input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />-->
+          <!--</div>-->
+          <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
         </div>
         </div>
       <TableSortable :items="items"
