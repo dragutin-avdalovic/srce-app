@@ -31,7 +31,7 @@
               <!--</label>-->
               <!--<input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />-->
             <!--</div>-->
-            <a href="http://45.76.90.178:3000/api/v1/download/volunteers/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
+            <a href="http://45.76.90.178:3000/api/v1/download/volunteers/pdf" target="_blank" class="heart-button-new export"><span class="new-text text-fix"><i class="fa fa-file-o"></i><span class="exp">Export</span></span></a>
           </div>
         </div>
       </div>
@@ -353,6 +353,16 @@ export default {
     .new-text
     {
       width: 100%;
+      .exp {
+        margin: auto 0;
+        font-size: 15.4px;
+        font-weight: 600;
+      }
+      .fa-file-o {
+        font-size: 1.5em;
+        color: white;
+        padding: 0 0.5em;
+      }
     }
   }
   .left{
