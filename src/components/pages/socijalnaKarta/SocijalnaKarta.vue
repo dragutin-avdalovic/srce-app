@@ -60,7 +60,21 @@
               @onAddNote="onAddNote"
               @onModalClose="closeModal('modal_entry')"
               @onDelete="showDeleteNoteModal($event, 'confirm_note_delete')"
-              :formData="formData" :editing="editing"></Form>
+              @onSetCheckBox="setCheckBox($event)"
+              @onCheckedComposite="setCheckBox($event)"
+              @onSetInput="setInput($event)"
+              @onSaveFamilyMember="saveFamilyMember($event)"
+              @onSliceFamilyMember="sliceFamilyMember($event)"
+              @fillMe="fillData($event)"
+              :formData="formData" :editing="editing"
+              :backToStart="backToStart"
+              :meritalStatus="meritalStatus"
+              :familyRelations="familyRelations"
+              :familyResidence="familyResidence"
+              :housingConditions="housingConditions"
+              :residentialBuilding="residentialBuilding"
+              :healthState="healthState"
+              :familyMembers="familyMembersEditable"></Form>
       </modal>
       <modal name="confirm_delete" height="auto">
         <Confirmation @onConfirmDelete="confirmDeletion($event)"></Confirmation>
