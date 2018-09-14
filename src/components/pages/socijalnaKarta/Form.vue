@@ -103,7 +103,7 @@
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding" v-bind:class="{'has-error':errors.has('healthState')}">
                 <label class="control-label">Zdravstveno stanje djeteta*<span class="grey"> (trenutno)</span> </label>
                 <p :class="{ 'control': true }">
-                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('healthState') }" v-model="formData.child.healthState" :options="healthState" id="healthState" name="healthState"></b-form-select>
+                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('healthState') }" v-model="formData.child.healthState" :options="this.healthState" id="healthState" name="healthState"></b-form-select>
                   <span v-show="errors.has('healthState')" class="help-block">{{ errors.first('healthState') }}</span>
                 </p>
               </div>
@@ -560,7 +560,7 @@ export default{
     CheckInput,
     TextField
   },
-  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState', 'types', 'editing'],
+  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'types', 'editing'],
   data () {
     return {
       selected: null,
@@ -724,7 +724,14 @@ export default{
             required: 'The residental building field is required.'
           }
         }
-      }
+      },
+      healthState: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Izliječeno' },
+        { value: 1, text: 'Završilo sa liječenjem i održavanjem' },
+        { value: 2, text: 'Na održavanju' },
+        { value: 3, text: 'Ostalo' }
+      ]
     }
   },
   mounted: function () {
