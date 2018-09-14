@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios'
 const api = 'http://45.76.90.178:3000/api/v1'
+// const localhost = 'http://localhost:3000/api/v1'
 
 export default {
   data () {

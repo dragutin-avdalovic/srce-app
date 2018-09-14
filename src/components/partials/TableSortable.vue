@@ -9,8 +9,7 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 :filter="filter"
-                @filtered="onFiltered"
-                @sort-changed="sortRoutine">
+                @filtered="onFiltered">
         <!-- A virtual composite column -->
         <template slot="actions" slot-scope="data">
           <div v-popover:list-dropdown.bottom v-on:click="select(data.item._id)">
@@ -70,6 +69,9 @@ export default {
     },
     edit () {
       this.$emit('onEditClicked', this.id)
+    },
+    onDelete () {
+      this.$emit('onConfirmDelete', this.id)
     },
     sortRoutine (ctx) {
       this.$emit('sortRoutine', ctx)
@@ -268,26 +270,9 @@ export default {
       justify-content: flex-end;
       min-width: 25em;
       margin-left: auto;
-      .search-container
-      {
-        padding-right: 2em;
-        .search
-        {
-          max-width: 20em;
-          min-width: 15em;
-          .btn-search
-          {
-            max-width: 3.5em;
-            min-width: 3em;
-            background-color: $red;
-            i{
-              text-align: center;
-              font-size: 1em;
-              color:$white;
-
-            }
-          }
-        }
+      @media (max-width: 1024px) {
+        margin-top: 2em;
+        justify-content: center;
       }
       .new
       {
@@ -300,6 +285,28 @@ export default {
           .new-text
           {
             width: 100%;
+          }
+        }
+      }
+    }
+    .search-container
+    {
+      vertical-align: center;
+      padding-right: 2em;
+      .search
+      {
+        max-width: 20em;
+        min-width: 15em;
+        .btn-search
+        {
+          max-width: 3.5em;
+          min-width: 3em;
+          background-color: $red;
+          i{
+            text-align: center;
+            font-size: 1em;
+            color:$white;
+
           }
         }
       }

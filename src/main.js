@@ -7,6 +7,8 @@ import VModal from 'vue-js-modal'
 import VeeValidate from 'vee-validate'
 import BootstrapVue from 'bootstrap-vue'
 import Popover from 'vue-js-popover'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
 Vue.use(Popover)
@@ -19,6 +21,6 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

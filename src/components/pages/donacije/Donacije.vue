@@ -2,6 +2,7 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
+        <div class="left">
           <div class="left-filter">
             <button v-popover:list-dropdown-2.bottom class="donators-btn">
               <div class="donators-label">Donatori</div>
@@ -12,23 +13,32 @@
                 <p>{{item}}</p>
               </div>
             </popover>
-            <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
           </div>
-          <div class="right-filter">
-            <div class="search-container">
-              <div class="input-group search">
-                <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
-                <span class="input-group-btn">
+        </div>
+        <div class="left search-center">
+          <div class="search-container">
+            <div class="input-group search">
+              <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+              <span class="input-group-btn">
                 <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
                   class="fa fa-times"></i></button>
               </span>
-              </div>
             </div>
+          </div>
+        </div>
+        <div class="right-filter">
             <div class="new">
               <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
-          </div>
-      </div>
+          <!--<div class="new">-->
+            <!--<label for="file-upload" class="custom-file-upload">-->
+              <!--<i class="fa fa-cloud-upload"></i> {{fileName}}-->
+            <!--</label>-->
+            <!--<input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />-->
+          <!--</div>-->
+          <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/donations/pdf" class="heart-button-new export"><span class="new-text text-fix"><i class="fa fa-file-o"></i><span class="exp">Export</span></span></a>
+        </div>
+        </div>
       <TableSortable :items="items"
                      :fieldsA="fields"
                      :stacked="stacked"
@@ -70,12 +80,13 @@ export default {
   },
   data () {
     return {
+      fileName: 'Upload excel file',
       editing: false,
       backToStart: false,
       delitionId: null,
       msg: 'Srce za djecu',
-      filter: null,
-      filterByType: null,
+      filter: '',
+      filterByType: '',
       items: [],
       tempItems: [],
       seen: 'true',
@@ -101,8 +112,7 @@ export default {
         {
           key: 'company',
           label: 'NAZIV KOMPANIJE',
-          sortable: true,
-          variant: 'danger'
+          sortable: true
         },
         {
           key: 'email',
@@ -188,7 +198,7 @@ export default {
     },
     showDeleteModal (event, modalId) {
       this.show(modalId)
-      this.delitionId = event.id
+      this.delitionId = event
     },
     showDeleteNoteModal (event, modalId) {
       this.show(modalId)
@@ -206,6 +216,27 @@ export default {
         this.deleteItemNote(this.delitionId, this.delitionNoteId)
       }
       this.hide('confirm_note_delete')
+    },
+    submitForm () {
+      let file = this.$refs['file'].files[0]
+      this.fileName = file.name
+      const data = new FormData()
+      data.append('data', file)
+      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/donation', data, (res) => {
+        if (res === 'Valid file format is .xlsx format') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else if (res === 'Wrong .xlsx file selected.') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        }
+      })
     },
     fillFormData (event) {
       this.editing = true
@@ -327,6 +358,16 @@ export default {
     .new-text
     {
       width: 100%;
+      .exp {
+        margin: auto 0;
+        font-size: 15.4px;
+        font-weight: 600;
+      }
+      .fa-file-o {
+        font-size: 1.5em;
+        color: white;
+        padding: 0 0.5em;
+      }
     }
   }
   .left{
@@ -345,5 +386,38 @@ export default {
       text-underline: none;
       color: #ffffff;
     }
+  }
+  .new{
+    margin-right: 1em;
+  }
+  #file-upload {
+    display: none;
+    visibility: hidden;
+  }
+  .custom-file-upload {
+    @include font(1.1,600,$white);
+    border-radius: 0.5em;
+    background-color: $red;
+    border: none;
+    display: inline-block;
+    padding: 1em 1em;
+    cursor: pointer;
+    margin-right: 0.5em;
+  }
+  .file-label {
+    color: #333333;
+    margin-top: 1em;
+    margin-right: 1em;
+  }
+  .new {
+    label {
+      margin-bottom: 0;
+    }
+  }
+  .search-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>

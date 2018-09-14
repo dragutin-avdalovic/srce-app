@@ -2,32 +2,40 @@
   <div>
     <div class="content container">
       <div class="row row_interactive">
-        <div class="left col-lg-6 col-md-6 col-12">
+        <div class="left col-lg-2 col-md-6 col-6">
           <div class="left-filter">
             <div class="donators-title">
               <div class="donators-label">Socijalna Karta</div>
             </div>
           </div>
-          <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/social-card/pdf" class="heart-button-new export"><span class="new-text text-fix">Export</span></a>
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
-          <div class="right-filter">
-            <div class="search-container">
-              <div class="input-group search">
-                <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
-                <span class="input-group-btn">
+        <div class="col-lg-3 col-md-6 col-6 search-center">
+          <div class="search-container">
+            <div class="input-group search">
+              <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
+              <span class="input-group-btn">
                 <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
                   class="fa fa-times"></i></button>
               </span>
-              </div>
-            </div>
-            <div class="new">
-              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
           </div>
         </div>
+        <div class="col-lg-7 col-md-12 col-12">
+          <div class="right-filter">
+            <div class="new">
+              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+            </div>
+            <!--<div class="new">-->
+              <!--<label for="file-upload" class="custom-file-upload">-->
+                <!--<i class="fa fa-cloud-upload"></i> {{fileName}}-->
+              <!--</label>-->
+              <!--<input id="file-upload" ref="file" type="file" name="data" v-on:change="submitForm()" />-->
+            <!--</div>-->
+            <a target="_blank" href="http://45.76.90.178:3000/api/v1/download/social-card/pdf" class="heart-button-new export"><span class="new-text text-fix"><i class="fa fa-file-o"></i><span class="exp">Export</span></span></a>
+          </div>
+        </div>
       </div>
-      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event)" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
+      <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event, 'confirm_delete')" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
       <modal name="modal_entry" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
               @onModalClose="closeModal('modal_entry')"
@@ -78,6 +86,7 @@ export default {
   },
   data () {
     return {
+      fileName: 'Upload excel file',
       editing: false,
       backToStart: false,
       deletionId: null,
@@ -523,6 +532,27 @@ export default {
         }
       })
     },
+    submitForm () {
+      let file = this.$refs['file'].files[0]
+      this.fileName = file.name
+      const data = new FormData()
+      data.append('data', file)
+      Main.methods.postModule('http://45.76.90.178:3000/api/v1/uploads/social-card', data, (res) => {
+        if (res === 'Valid file format is .xlsx format') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else if (res === 'Wrong .xlsx file selected.') {
+          console.log(res)
+          this.getData()
+          data.delete('data')
+        } else {
+          this.getData()
+          console.log(res)
+          data.delete('data')
+        }
+      })
+    },
     fillFormData (event) {
       this.editing = true
       this.items.forEach((obj) => {
@@ -582,9 +612,9 @@ export default {
         this.backToStart = false
       }, 1000)
     },
-    showDeleteModal (event) {
-      this.show(event.type)
-      this.deletionId = event.id
+    showDeleteModal (event, modalType) {
+      this.show(modalType)
+      this.deletionId = event
     },
     showDeleteNoteModal (event, modalId) {
       this.show(modalId)
@@ -664,6 +694,16 @@ export default {
     .new-text
     {
       width: 100%;
+      .exp {
+        margin: auto 0;
+        font-size: 15.4px;
+        font-weight: 600;
+      }
+      .fa-file-o {
+        font-size: 1.5em;
+        color: white;
+        padding: 0 0.5em;
+      }
     }
   }
   .left{
@@ -682,5 +722,30 @@ export default {
       text-underline: none;
       color: #ffffff;
     }
+  }
+  .new{
+    margin-right: 1em;
+    label {
+      margin-bottom: 0;
+    }
+  }
+  #file-upload {
+    display: none;
+    visibility: hidden;
+  }
+  .custom-file-upload {
+    @include font(1.1,600,$white);
+    border-radius: 0.5em;
+    background-color: $red;
+    border: none;
+    display: inline-block;
+    padding: 1em 1em;
+    cursor: pointer;
+  }
+  .search-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>
