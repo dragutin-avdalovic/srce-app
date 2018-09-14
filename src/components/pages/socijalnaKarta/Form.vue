@@ -2,7 +2,7 @@
   <div>
       <div v-show="step === 1">
         <!--<button v-on:click="fillMe()">FILL ME</button>-->
-        <form method="post" action="#" id="printJS-form" class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
+        <form class="newEntryForm heartForm">
           <div class="header-modal">
             <h3 class="form-header">Novi unos</h3>
             <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
@@ -10,7 +10,6 @@
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
                 <p class="large_head">DIJETE</p>
-                <span>{{ lala }}</span>
                 <label class="large_head_label">Liječeno na Hematoonkološkom odjelu Pedijatrijske klinike KCUS</label>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childName')}">
@@ -103,12 +102,10 @@
               </div>
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding" v-bind:class="{'has-error':errors.has('healthState')}">
                 <label class="control-label">Zdravstveno stanje djeteta*<span class="grey"> (trenutno)</span> </label>
-                  <b-form-select v-validate="'required'"
-                                 :class="{'select': true, 'has-error': errors.has('healthState') }"
-                                 v-model="formData.healthState"
-                                 :options="healthState" id="healthState" name="healthState">
-                  </b-form-select>
+                <p :class="{ 'control': true }">
+                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('healthState') }" v-model="formData.child.healthState" :options="this.healthState" id="healthState" name="healthState"></b-form-select>
                   <span v-show="errors.has('healthState')" class="help-block">{{ errors.first('healthState') }}</span>
+                </p>
               </div>
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group-btns form-group">
                 <button @click.prevent="next()" class="button_save" type="submit"><p class="save-text">Dalje</p></button>
@@ -116,6 +113,7 @@
             </div>
         </form>
       </div>
+
       <div v-show="step === 2">
         <form class="newEntryForm heartForm">
           <div class="header-modal">
@@ -562,7 +560,7 @@ export default{
     CheckInput,
     TextField
   },
-  props: ['lala', 'familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState', 'types', 'editing'],
+  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'types', 'editing'],
   data () {
     return {
       selected: null,
@@ -726,7 +724,14 @@ export default{
             required: 'The residental building field is required.'
           }
         }
-      }
+      },
+      healthState: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Izliječeno' },
+        { value: 1, text: 'Završilo sa liječenjem i održavanjem' },
+        { value: 2, text: 'Na održavanju' },
+        { value: 3, text: 'Ostalo' }
+      ]
     }
   },
   mounted: function () {
