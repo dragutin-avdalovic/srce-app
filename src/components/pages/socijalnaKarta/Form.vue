@@ -791,7 +791,7 @@ export default{
       })
     },
     setCheckBox (event, field) {
-        this.form.field = event
+      this.form.field = event
     },
     setInput (event, field) {
       this.$emit('onSetInput', { event: event, field: field })
