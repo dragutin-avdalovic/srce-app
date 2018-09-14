@@ -23,7 +23,7 @@
         <div class="col-lg-7 col-md-12 col-12">
           <div class="right-filter">
             <div class="new">
-              <button v-on:click="openModal('modal_entry')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
+              <button v-on:click="openModal('modal_entry_add')" class="heart-button-new"><span class="new-text">Novi unos</span></button>
             </div>
             <!--<div class="new">-->
               <!--<label for="file-upload" class="custom-file-upload">-->
@@ -36,9 +36,9 @@
         </div>
       </div>
       <TableSortable :items="items" :fieldsA="fields" :stacked="stacked" :seen="seen" @onEditClicked="fillFormData"  @onConfirmDelete="showDeleteModal($event, 'confirm_delete')" @sortRoutine="sort($event)" :filter="filter"></TableSortable>
-      <modal name="modal_entry" height="auto" :scrollable="true">
+      <modal name="modal_entry_add" height="auto" :scrollable="true">
         <Form @onDataEmit="saveData"
-              @onModalClose="closeModal('modal_entry')"
+              @onModalClose="closeModal('modal_entry_add')"
               @onSetCheckBox="setCheckBox($event)"
               @onCheckedComposite="setCheckBox($event)"
               @onSetInput="setInput($event)"
@@ -603,7 +603,7 @@ export default {
         Main.methods.postModule(Main.data().socialCard, event, (data) => {
           if (data.message === 'successfully saved') {
             this.backToStart = true
-            this.hide('modal_entry')
+            this.hide('modal_entry_add')
             this.getData()
             this.clearData()
           }

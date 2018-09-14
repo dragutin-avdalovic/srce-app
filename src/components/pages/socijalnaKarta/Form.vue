@@ -103,7 +103,7 @@
               <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group no-padding" v-bind:class="{'has-error':errors.has('healthState')}">
                 <label class="control-label">Zdravstveno stanje djeteta*<span class="grey"> (trenutno)</span> </label>
                 <p :class="{ 'control': true }">
-                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('healthState') }" v-model="formData.child.healthState" :options="this.healthState" id="healthState" name="healthState"></b-form-select>
+                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('healthState') }" v-model="formData.child.healthState" :options="healthState" id="healthState" name="healthState"></b-form-select>
                   <span v-show="errors.has('healthState')" class="help-block">{{ errors.first('healthState') }}</span>
                 </p>
               </div>
@@ -367,7 +367,7 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('meritalStatus')}">
                 <label class="control-label label-check">Bračni status roditelja*</label>
                 <p :class="{ 'control': true }">
-                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }"  v-model="formData.family.meritalStatus" :options="this.meritalStatus" id="meritalStatus" name="meritalStatus"></b-form-select>
+                  <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }"  v-model="formData.family.meritalStatus" :options="meritalStatus" id="meritalStatus" name="meritalStatus"></b-form-select>
                   <span v-show="errors.has('meritalStatus')" class="help-block">{{ errors.first('meritalStatus') }}</span>
                 </p>
             </div>
@@ -437,7 +437,7 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('familyRelations')}">
               <label class="control-label label-check">Odnosi u porodici*</label>
               <p :class="{ 'control': true }">
-                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }" v-model="formData.family.familyRelations" :options="this.familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
+                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }" v-model="formData.family.familyRelations" :options="familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
                 <span v-show="errors.has('familyRelations')" class="help-block">{{ errors.first('familyRelations') }}</span>
               </p>
             </div>
@@ -501,7 +501,7 @@
                 <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group" v-bind:class="{'has-error':errors.has('familyResidence')}">
                   <label class="control-label label-check">Porodica stanuje u*</label>
                   <p :class="{ 'control': true }">
-                    <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('familyResidence') }" v-model="formData.family.familyResidence" :options="this.familyResidence" id="familyResidence" name="familyResidence"></b-form-select>
+                    <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('familyResidence') }" v-model="formData.family.familyResidence" :options="familyResidence" id="familyResidence" name="familyResidence"></b-form-select>
                     <span v-show="errors.has('familyResidence')" class="help-block">{{ errors.first('familyResidence') }}</span>
                   </p>
                 </div>
@@ -511,7 +511,7 @@
                     <b-form-select v-validate="'required'"
                                    :class="{'select': true, 'has-error': errors.has('housingConditions') }"
                                    v-model="formData.family.housingConditions"
-                                   :options="this.housingConditions"
+                                   :options="housingConditions"
                                    id="housingConditions"
                                    name="housingConditions"></b-form-select>
                     <span v-show="errors.has('housingConditions')" class="help-block">{{ errors.first('housingConditions') }}</span>
@@ -522,7 +522,7 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('residentialBuilding')}">
               <label class="control-label label-check">Stambeni objekat je*</label>
               <p :class="{ 'control': true }">
-                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('residentialBuilding') }" v-model="formData.family.residentialBuilding" :options="this.residentialBuilding" id="residentialBuilding" name="residentialBuilding"></b-form-select>
+                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('residentialBuilding') }" v-model="formData.family.residentialBuilding" :options="residentialBuilding" id="residentialBuilding" name="residentialBuilding"></b-form-select>
                 <span v-show="errors.has('residentialBuilding')" class="help-block">{{ errors.first('residentialBuilding') }}</span>
               </p>
             </div>
@@ -560,7 +560,7 @@ export default{
     CheckInput,
     TextField
   },
-  props: ['familyMembers', 'formData', 'types', 'editing'],
+  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'healthState', 'types', 'editing'],
   data () {
     return {
       selected: null,
@@ -576,11 +576,11 @@ export default{
       textEight: 'Naknada iz sistema socijalne zaštite',
       textNine: 'Ostali prihodi',
       familyMember:
-      {
-        name: '',
-        jmbg: null,
-        relationToChild: ''
-      },
+        {
+          name: '',
+          jmbg: null,
+          relationToChild: ''
+        },
       dict: {
         custom: {
           childName: {
@@ -724,47 +724,7 @@ export default{
             required: 'The residental building field is required.'
           }
         }
-      },
-      healthState: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 0, text: 'Izliječeno' },
-        { value: 1, text: 'Završilo sa liječenjem i održavanjem' },
-        { value: 2, text: 'Na održavanju' },
-        { value: 3, text: 'Ostalo' }
-      ],
-      meritalStatus: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 0, text: 'Neoženjen/Neudata' },
-        { value: 1, text: 'Oženjen/Udata' },
-        { value: 2, text: 'Udovac/ica' },
-        { value: 3, text: 'Razveden/a' },
-        { value: 4, text: 'Ostalo' }
-      ],
-      familyRelations: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 0, text: 'Dobri' },
-        { value: 1, text: 'Odlični' },
-        { value: 2, text: 'Problematični' }
-      ],
-      familyResidence: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 0, text: 'Kući' },
-        { value: 1, text: 'Stanu' },
-        { value: 2, text: 'Ostalo' }
-      ],
-      housingConditions: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 0, text: 'Dobri' },
-        { value: 1, text: 'Odlični' },
-        { value: 2, text: 'Zadovoljavajući' }
-      ],
-      residentialBuilding: [
-        { value: null, text: 'Selektujte opciju', selected: true },
-        { value: 0, text: 'U sopstvenom vlasništvu' },
-        { value: 1, text: 'Iznajmljen' },
-        { value: 2, text: 'Vlasništvu roditelja/srodnika' },
-        { value: 3, text: 'Ostalo' }
-      ]
+      }
     }
   },
   mounted: function () {
