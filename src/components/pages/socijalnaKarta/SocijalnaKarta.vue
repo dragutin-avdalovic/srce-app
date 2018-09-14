@@ -52,6 +52,7 @@
               :housingConditions="housingConditions"
               :residentialBuilding="residentialBuilding"
               :healthState="healthState"
+              :lala="lala"
               :familyMembers="familyMembersEditable"></Form>
       </modal>
       <modal name="modal_entry" height="auto" :scrollable="true">
@@ -136,6 +137,7 @@ export default {
         { value: 2, text: 'Na održavanju' },
         { value: 3, text: 'Ostalo' }
       ],
+      lala: {ime: 'peko'},
       formData: {
         child: {
           name: '',

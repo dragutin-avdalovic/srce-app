@@ -2,7 +2,7 @@
   <div>
       <div v-show="step === 1">
         <!--<button v-on:click="fillMe()">FILL ME</button>-->
-        <form class="newEntryForm heartForm">
+        <form method="post" action="#" id="printJS-form" class="newEntryForm heartForm" @submit.prevent="validateBeforeSubmit">
           <div class="header-modal">
             <h3 class="form-header">Novi unos</h3>
             <img class="modal-close" v-on:click="closeModal" src="@/assets/images/close.png" alt="">
@@ -10,6 +10,7 @@
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group min-row-height">
                 <p class="large_head">DIJETE</p>
+                <span>{{ lala }}</span>
                 <label class="large_head_label">Liječeno na Hematoonkološkom odjelu Pedijatrijske klinike KCUS</label>
               </div>
               <div class="col-12 col-xl-6 col-md-6 col-xs-6 col-lg-6 form-group min-row-height" v-bind:class="{'has-error':errors.has('childName')}">
