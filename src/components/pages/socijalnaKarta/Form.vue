@@ -437,7 +437,7 @@
             <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group" v-bind:class="{'has-error':errors.has('familyRelations')}">
               <label class="control-label label-check">Odnosi u porodici*</label>
               <p :class="{ 'control': true }">
-                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }" v-model="formData.family.familyRelations" :options="familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
+                <b-form-select v-validate="'required'" :class="{'select': true, 'has-error': errors.has('meritalStatus') }" v-model="formData.family.familyRelations" :options="this.familyRelations" id="familyRelations" name="familyRelations"></b-form-select>
                 <span v-show="errors.has('familyRelations')" class="help-block">{{ errors.first('familyRelations') }}</span>
               </p>
             </div>
@@ -560,7 +560,7 @@ export default{
     CheckInput,
     TextField
   },
-  props: ['familyMembers', 'formData', 'familyRelations', 'meritalStatus', 'familyResidence', 'housingConditions', 'residentialBuilding', 'types', 'editing'],
+  props: ['familyMembers', 'formData', 'types', 'editing'],
   data () {
     return {
       selected: null,
@@ -576,11 +576,11 @@ export default{
       textEight: 'Naknada iz sistema socijalne zaštite',
       textNine: 'Ostali prihodi',
       familyMember:
-        {
-          name: '',
-          jmbg: null,
-          relationToChild: ''
-        },
+      {
+        name: '',
+        jmbg: null,
+        relationToChild: ''
+      },
       dict: {
         custom: {
           childName: {
@@ -731,6 +731,39 @@ export default{
         { value: 1, text: 'Završilo sa liječenjem i održavanjem' },
         { value: 2, text: 'Na održavanju' },
         { value: 3, text: 'Ostalo' }
+      ],
+      meritalStatus: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Neoženjen/Neudata' },
+        { value: 1, text: 'Oženjen/Udata' },
+        { value: 2, text: 'Udovac/ica' },
+        { value: 3, text: 'Razveden/a' },
+        { value: 4, text: 'Ostalo' }
+      ],
+      familyRelations: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Dobri' },
+        { value: 1, text: 'Odlični' },
+        { value: 2, text: 'Problematični' }
+      ],
+      familyResidence: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Kući' },
+        { value: 1, text: 'Stanu' },
+        { value: 2, text: 'Ostalo' }
+      ],
+      housingConditions: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'Dobri' },
+        { value: 1, text: 'Odlični' },
+        { value: 2, text: 'Zadovoljavajući' }
+      ],
+      residentialBuilding: [
+        { value: null, text: 'Selektujte opciju', selected: true },
+        { value: 0, text: 'U sopstvenom vlasništvu' },
+        { value: 1, text: 'Iznajmljen' },
+        { value: 2, text: 'Vlasništvu roditelja/srodnika' },
+        { value: 3, text: 'Ostalo' }
       ]
     }
   },
@@ -758,7 +791,7 @@ export default{
       })
     },
     setCheckBox (event, field) {
-      this.$emit('onSetCheckBox', { event: event, field: field })
+        this.form.field = event
     },
     setInput (event, field) {
       this.$emit('onSetInput', { event: event, field: field })
