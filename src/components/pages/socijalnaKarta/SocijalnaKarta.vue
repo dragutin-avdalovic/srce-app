@@ -14,8 +14,8 @@
             <div class="input-group search">
               <input type="search" v-model="filter" class="form-control input_search" placeholder="Type to Search">
               <span class="input-group-btn">
-                <button class="btn btn-search" :disabled="!filter" @click="filter = ''"><i
-                  class="fa fa-times"></i></button>
+                <button class="btn btn-search" :disabled="!filter" @click="filter = ''">
+                  <i class="fa fa-times"></i></button>
               </span>
             </div>
           </div>
@@ -40,6 +40,7 @@
         <Form @onDataEmit="saveData"
               @onModalClose="closeModal('modal_entry')"
               @onSetCheckBox="setCheckBox($event)"
+              @onCheckedComposite="setCheckBox($event)"
               @onSetInput="setInput($event)"
               @onSaveFamilyMember="saveFamilyMember($event)"
               @onSliceFamilyMember="sliceFamilyMember($event)"
@@ -52,7 +53,6 @@
               :housingConditions="housingConditions"
               :residentialBuilding="residentialBuilding"
               :healthState="healthState"
-              :lala="lala"
               :familyMembers="familyMembersEditable"></Form>
       </modal>
       <modal name="modal_entry" height="auto" :scrollable="true">
@@ -137,7 +137,6 @@ export default {
         { value: 2, text: 'Na održavanju' },
         { value: 3, text: 'Ostalo' }
       ],
-      lala: {ime: 'peko'},
       formData: {
         child: {
           name: '',
