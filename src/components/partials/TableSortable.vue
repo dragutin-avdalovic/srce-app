@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       currentPage: 1,
-      perPage: 10,
+      perPage: 5,
       totalRows: this.items.length,
       sortDesc: true,
       sortBy: 'child.name',
