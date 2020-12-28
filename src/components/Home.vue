@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 col-md-6 col-6">
+    <div class="col-lg-6 col-md-6 col-6">
         <router-link :to="{ name: 'Pristupnica', params: {} }">
           <div class="heart">
             <img class="back-heart" src="@/assets/images/heart-1.svg" alt="">
@@ -43,6 +43,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      show: false
+    }
+  }
 }
 </script>
 

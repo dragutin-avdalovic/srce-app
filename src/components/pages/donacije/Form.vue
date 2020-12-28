@@ -8,7 +8,9 @@
       <div class="col-12 col-xl-12 col-md-12 col-xs-12 col-lg-12 form-group min-row-height donators-group" v-bind:class="{'has-error':errors.has('type')}">
         <label class="control-label">Vrsta donatora</label>
         <p :class="{ 'control': true }">
-          <b-form-select v-on:change="onChange" v-validate="'required'" :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type" :options="this.type" id="type" name="type"></b-form-select>
+          <b-form-select v-validate="'required'"
+                         :class="{'select': true, 'has-error': errors.has('type') }"  v-model="formData.type"
+                         :options="this.type" id="type" name="type"></b-form-select>
           <i class="fa fa-chevron-down"></i>
           <span v-show="errors.has('type')" class="help-block">{{ errors.first('type') }}</span>
         </p>
@@ -69,7 +71,13 @@
           <span v-show="errors.has('cause')" class="help-block">{{ errors.first('cause') }}</span>
         </p>
       </div>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
+        <TextField :notes="formData.notes"
+                   @onNoteChanged="onNoteChanged($event)"
+                   @onDelete="onDeleteNote($event, formData._id)"
+                   @onAddNote="onAddNote($event, formData._id)"></TextField>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
       </div>
     </div>
@@ -77,11 +85,16 @@
 </template>
 
 <script>
+import TextField from '@/components/partials/TextField'
 export default{
+  components: {
+    TextField
+  },
   name: 'Form',
-  props: ['formData'],
+  props: ['formData', 'types', 'editing'],
   data () {
     return {
+      note: '',
       type: [
         { value: null, text: 'Selektujte opciju', selected: true },
         { value: 1, text: 'Institucija' },
@@ -93,6 +106,12 @@ export default{
     }
   },
   methods: {
+    onAddNote: function (event, id) {
+      this.$emit('onAddNote', {
+        id: id,
+        note: event
+      })
+    },
     save: function () {
       console.log(this.formData)
       this.$emit('onDataEmit', this.formData)
@@ -127,9 +146,14 @@ export default{
         return true
       }
     },
-    onChange: function () {
-      this.formData.name = ''
-      this.formData.company = ''
+    onNoteChanged (event) {
+      this.note = event
+    },
+    onDeleteNote (event, id) {
+      this.$emit('onDelete', {
+        noteId: event,
+        id: id
+      })
     }
   }
 }
@@ -172,8 +196,11 @@ export default{
   {
     text-align: center;
   }
-  .button_save
+  .button_notes
   {
+    /*visibility: hidden;*/
+    padding-left:0;
+    padding-right:0;
     @extend .heart-button;
     float: right;
     display: flex;
@@ -183,6 +210,26 @@ export default{
       font-size: 1em;
       @include spacing-tb(m, 0, em);
     }
+  }
+  .button_save
+  {
+    margin-top: 0.5em;
+    padding-left:0;
+    padding-right:0;
+    @extend .heart-button;
+    float: right;
+    display: flex;
+    justify-content: center;
+    .save-text
+    {
+      font-size: 1em;
+      @include spacing-tb(m, 0, em);
+    }
+  }
+  .align-buttons{
+    /*margin-top: 0.8em!important;*/
+    display: flex;
+    justify-content: space-around;
   }
 }
 </style>

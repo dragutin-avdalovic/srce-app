@@ -76,10 +76,17 @@
         <b-form-select v-validate="'required'"
                        :class="{'input': true, 'has-error': errors.has('jobsToVolunteer') }"
                        v-model="formData.jobsToVolunteer"
-                       :options="types" id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
+                       :options="types"
+                       id="jobsToVolunteer" name="jobsToVolunteer"></b-form-select>
         <span v-show="errors.has('jobsToVolunteer')" class="help-block">{{ errors.first('jobsToVolunteer') }}</span>
       </div>
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group" v-if="editing">
+        <TextField :notes="formData.notes"
+                   @onNoteChanged="onNoteChanged($event)"
+                   @onDelete="onDeleteNote($event, formData._id)"
+                   @onAddNote="onAddNote($event, formData._id)"></TextField>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 form-group align-buttons">
         <button class="button_save" type="submit"><p class="save-text">Spremi</p></button>
       </div>
     </div>
@@ -88,10 +95,11 @@
 
 <script>
 import CompositeButton from '@/components/partials/CompositeButton.vue'
+import TextField from '@/components/partials/TextField'
 export default{
-  components: {CompositeButton},
+  components: {CompositeButton, TextField},
   name: 'Form',
-  props: ['formData', 'types'],
+  props: ['formData', 'types', 'editing'],
   data () {
     return {
       selected: null,
@@ -120,6 +128,12 @@ export default{
     this.$validator.localize('en', this.dict)
   },
   methods: {
+    onAddNote: function (event, id) {
+      this.$emit('onAddNote', {
+        id: id,
+        note: event
+      })
+    },
     save: function () {
       console.log(this.formData)
       this.$emit('onDataEmit', this.formData)
@@ -138,6 +152,15 @@ export default{
     },
     closeModal: function () {
       this.$emit('onModalClose', this.formData)
+    },
+    onNoteChanged (event) {
+      this.note = event
+    },
+    onDeleteNote (event, id) {
+      this.$emit('onDelete', {
+        noteId: event,
+        id: id
+      })
     }
   }
 }
@@ -181,8 +204,26 @@ export default{
   {
     text-align: center;
   }
+  .button_notes
+  {
+    /*visibility: hidden;*/
+    padding-left:0;
+    padding-right:0;
+    @extend .heart-button;
+    float: right;
+    display: flex;
+    justify-content: center;
+    .save-text
+    {
+      font-size: 1em;
+      @include spacing-tb(m, 0, em);
+    }
+  }
   .button_save
   {
+    margin-top: 0.5em;
+    padding-left:0;
+    padding-right:0;
     @extend .heart-button;
     float: right;
     display: flex;
@@ -202,5 +243,10 @@ export default{
   height: 1px;
   @include spacing-tb(m,1,em);
   width: 100%;
+}
+.align-buttons{
+  /*margin-top: 0.8em!important;*/
+  display: flex;
+  justify-content: space-around;
 }
 </style>

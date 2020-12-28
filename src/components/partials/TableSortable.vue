@@ -9,8 +9,7 @@
                 :current-page="currentPage"
                 :per-page="perPage"
                 :filter="filter"
-                @filtered="onFiltered"
-                @sort-changed="sortRoutine">
+                @filtered="onFiltered">
         <!-- A virtual composite column -->
         <template slot="actions" slot-scope="data">
           <div v-popover:list-dropdown.bottom v-on:click="select(data.item._id)">
@@ -25,7 +24,7 @@
       </div>
     </div>
     <popover ref="popoverRef" name="list-dropdown" class="list-dropdown">
-      <div class="list_row" id="edit"  v-on:click="edit()">
+      <div class="list_row" id="edit"  v-on:click="edit();">
         <i class="fa fa-pencil"></i>
         <p>Uredi</p>
       </div>
@@ -41,12 +40,13 @@
 import Checkbox from '@/components/partials/Checkbox'
 export default {
   components: {
-    Checkbox},
+    Checkbox
+  },
   props: ['items', 'fieldsA', 'stacked', 'seen', 'filter', 'backToStart'],
   data () {
     return {
       currentPage: 1,
-      perPage: 10,
+      perPage: 5,
       totalRows: this.items.length,
       sortDesc: true,
       sortBy: 'child.name',
@@ -54,6 +54,9 @@ export default {
     }
   },
   methods: {
+    hide (modalId) {
+      this.$modal.hide(modalId)
+    },
     onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
@@ -68,8 +71,7 @@ export default {
       this.$emit('onEditClicked', this.id)
     },
     onDelete () {
-      this.$emit('onConfirmDelete', { id: this.id, type: 'confirm_delete' })
-      this.$refs.popoverRef.visible = false
+      this.$emit('onConfirmDelete', this.id)
     },
     sortRoutine (ctx) {
       this.$emit('sortRoutine', ctx)
@@ -250,9 +252,12 @@ export default {
       display: flex;
       flex: 1;
       justify-content: flex-start;
+      align-items: center;
       margin-right: auto;
       .donators-title
       {
+        display: flex;
+        align-items: center;
         color: $red;
         @include font(1.7,600,$red);
       }
@@ -265,26 +270,9 @@ export default {
       justify-content: flex-end;
       min-width: 25em;
       margin-left: auto;
-      .search-container
-      {
-        padding-right: 2em;
-        .search
-        {
-          max-width: 20em;
-          min-width: 15em;
-          .btn-search
-          {
-            max-width: 3.5em;
-            min-width: 3em;
-            background-color: $red;
-            i{
-              text-align: center;
-              font-size: 1em;
-              color:$white;
-
-            }
-          }
-        }
+      @media (max-width: 1024px) {
+        margin-top: 2em;
+        justify-content: center;
       }
       .new
       {
@@ -297,6 +285,28 @@ export default {
           .new-text
           {
             width: 100%;
+          }
+        }
+      }
+    }
+    .search-container
+    {
+      vertical-align: center;
+      padding-right: 2em;
+      .search
+      {
+        max-width: 20em;
+        min-width: 15em;
+        .btn-search
+        {
+          max-width: 3.5em;
+          min-width: 3em;
+          background-color: $red;
+          i{
+            text-align: center;
+            font-size: 1em;
+            color:$white;
+
           }
         }
       }
